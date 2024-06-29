@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@qwikest/icons':
+        specifier: ^0.0.13
+        version: 0.0.13(@builder.io/qwik@1.5.7(@types/node@20.14.9)(undici@6.19.2))
     devDependencies:
       '@builder.io/qwik':
         specifier: ^1.5.7
@@ -1407,6 +1411,12 @@ packages:
 
   '@prisma/get-platform@5.16.0':
     resolution: {integrity: sha512-ynp2jAYfYdd7OObX+uWaFRpvhPVmpF0nsRMhbrWdVVUj39q3Zr8dGz5WDj2g+BTUE++u1T1Am3RyM3PBQdDZXA==}
+
+  '@qwikest/icons@0.0.13':
+    resolution: {integrity: sha512-e0wY8vmx0nDSUiuCATlk+ojTvdBV4txIGHHWjZW5SRkv4XB8H9+3WSDcLPz0ItUdRyzcrohE9k2jtQI/98aRPA==}
+    engines: {node: '>=15.0.0'}
+    peerDependencies:
+      '@builder.io/qwik': '>=1.0.0'
 
   '@radix-ui/number@1.0.1':
     resolution: {integrity: sha512-T5gIdVO2mmPW3NNhjNgEP3cqMXjXL9UbO0BzWcXfvdBs+BohbQxvd/K5hSVKmn9/lbTdsQVKbUcP5WLCwvUbBg==}
@@ -6545,6 +6555,10 @@ snapshots:
   '@prisma/get-platform@5.16.0':
     dependencies:
       '@prisma/debug': 5.16.0
+
+  '@qwikest/icons@0.0.13(@builder.io/qwik@1.5.7(@types/node@20.14.9)(undici@6.19.2))':
+    dependencies:
+      '@builder.io/qwik': 1.5.7(@types/node@20.14.9)(undici@6.19.2)
 
   '@radix-ui/number@1.0.1':
     dependencies:

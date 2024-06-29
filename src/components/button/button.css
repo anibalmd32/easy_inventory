@@ -1,3 +1,63 @@
 .button {
-    
+    padding: 8px 16px;
+    font-weight: 700;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: #EEEEE0;
+    }
+
+}
+
+/* Sizes */
+.sm {
+    font-size: 10px;
+}
+
+.md {
+    font-size: 14px;
+}
+
+.lg {
+    font-size: 18px;
+}
+
+/* Variants */
+.solid {
+    background-color: #FFF;
+    color: #222;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.80);
+    }
+}
+
+.subtle {
+    background-color: #222;
+    color: #FFF;
+
+    &:hover {
+        background-color: rgba(34, 34, 34, 0.80);
+    }
+}
+
+.outline {
+    background-color: #333333;
+    color: #EEEEE0;
+    border: 1px solid #EEEEE0;
+
+    &:hover {
+        background-color: rgba(34, 34, 34, 0.80);
+    }
+}
+
+.button-icon {
+    margin-top: 6px;
 }

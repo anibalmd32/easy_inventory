@@ -1,0 +1,28 @@
+.alert {
+    min-width: 400px;
+    max-width: 600px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 0.75px solid #AFAFAF;
+    background-color: #191919;
+    color: #EEEEE0;
+    display: flex;
+    gap: 14px;
+}
+
+.alert-icon {
+    font-size: 24px;
+    margin: 0;
+}
+
+.alert-body {
+    & .alert-title {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    & .alert-content {
+        margin-top: 4px;
+        color: #AFAFAF;
+    }
+}

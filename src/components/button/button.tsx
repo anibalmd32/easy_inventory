@@ -1,28 +1,33 @@
 import { component$, useStylesScoped$, Slot } from "@builder.io/qwik";
+import buttonStyles from './button.css?inline'
+import type { IconType, ComponentSize, ComponentVariant, ButtonType } from "~/definitions";
 
 export interface ButtonProps {
-  size?: "small" | "medium" | "large";
+  variant: ComponentVariant;
+  size: ComponentSize;
+  type: ButtonType;
+  Icon?: IconType;
 }
+export const Button = component$<ButtonProps>(({
+  size,
+  type,
+  variant,
+  Icon
+}) => {
 
-export const Button = component$<ButtonProps>(({ size = "medium" }) => {
-  useStylesScoped$(`
-    .size-small {
-      font-size: 10px;
-    }
-    .size-medium {
-      font-size: 14px;
-    }
-    .size-large {
-      font-size: 18px;
-    }
-  `);
+  useStylesScoped$(buttonStyles)
+  
   return (
-    <button
-      class={{
-        [`size-${size}`]: true,
-      }}
-    >
-      <Slot></Slot>
+    <button class={`button ${variant} ${size}`} type={type}>
+      <div class="button-text">
+        <Slot />
+      </div>
+
+      {Icon && (
+        <div class="button-icon">
+          <Icon />
+        </div>
+      )}
     </button>
   );
 });
