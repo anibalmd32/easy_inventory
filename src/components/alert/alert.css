@@ -1,51 +1,59 @@
-/* BASE STAYLES FOR ALERT COMPOENT (mobile first) */
-/* Small Mobile 320x568 */
+/*
+    =============================================
+    | STYLES FOR ALERT COMPONENT (mobile firts) |
+    =============================================
+*/
+/* Small Mobile */
 .alert {
-    /* Dimensions */
+    /*
+        ========
+        | BASE |
+        ========
+    */
     padding: 16px;
     max-width: 600px;
-
-    /* Decoration */
     color: #EEEEE0;
     border-radius: 8px;
     border: 0.75px solid #AFAFAF;
     background-color: #191919;
-
-    /* Displaying */
     display: flex;
     gap: 14px;
     margin: 0 auto;
 
-    /* Nested elements */
-    & .alert-icon {
+    /*
+        ===================
+        | NESTED ELEMENTS |
+        ===================
+    */
+    .alert-icon {
         font-size: 24px;
         margin: 0;
     }
 
-    & .alert-body {
-        & .alert-title {
+    .alert-body {
+        .alert-title {
             margin: 0;
             font-size: 18px;
         }
 
-        & .alert-content {
+        .alert-content {
             margin-top: 4px;
             color: #AFAFAF;
         }
     }
+
+    /*
+        =================
+        | MEDIA QUERIES |
+        =================
+    */
+    /* Large Mobile  */
+    @media (414px <= width <= 833px) {}
+    
+    /* Table */
+    @media (834px <= width <= 1119px) { }
+    
+    /* Desktop */
+    @media (width >= 1120px) {}
 }
 
-/* Large Mobile (412x896)  */
-@media (412px <= width <= 896px) {
-    /* .alert {} */
-}
-
-/* Table (834x1112) */
-@media (834px <= width <= 1112px) {
-    /* .alert {} */
-}
-
-/* Desktop (all over table dimensions) */
-@media (width > 1112px) {
-    /* .alert {} */
-}

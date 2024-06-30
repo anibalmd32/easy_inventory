@@ -1,84 +1,82 @@
 /*
-====================================
-| BASE STYLES FOR BUTTON COMPONENT |
-====================================
+    ===============================
+    | STYLES FOR BUTTON COMPONENT |
+    ===============================
 */
 .button {
-    /* Dimensions */
+
+    /*
+        ========
+        | BASE |
+        ========
+    */
     padding: 8px 16px;
     font-weight: 700;
-
-    /* Deconrations */
     border-radius: 4px;
     border: none;
     cursor: pointer;
-
-    /* Displaying */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 6px;
-
-    /* Efects */
     transition: all 0.2s ease;
-
-    /* States */
     &:hover {
         background-color: #EEEEE0;
     }
 
-    /* Nested elements */
-    & .button-icon {
+     /*
+        =================
+        | BUTTONS SIZES |
+        =================
+    */
+    &.sm {
+        font-size: 10px;
+    }
+    
+    &.md {
+        font-size: 14px;
+    }
+    
+    &.lg {
+        font-size: 18px;
+    }
+
+    /*
+        ===================
+        | BUTTON VARIANTS |
+        ===================
+    */
+    &.solid {
+        background-color: #FFF;
+        color: #222;
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.80);
+        }
+    }
+    
+    &.subtle {
+        background-color: #222;
+        color: #FFF;
+        &:hover {
+            background-color: rgba(34, 34, 34, 0.80);
+        }
+    }
+    
+    &.outline {
+        background-color: #333333;
+        color: #EEEEE0;
+        border: 1px solid #EEEEE0;
+        &:hover {
+            background-color: rgba(34, 34, 34, 0.80);
+        }
+    }
+
+    /*
+        ===================
+        | NESTED ELEMENTS |
+        ===================
+    */
+    .button-icon {
         margin-top: 6px;
-    }
-}
-
-/*
-=================
-| BUTTONS SIZES |
-=================
-*/
-.sm {
-    font-size: 10px;
-}
-
-.md {
-    font-size: 14px;
-}
-
-.lg {
-    font-size: 18px;
-}
-
-/*
-===================
-| BUTTON VARIANTS |
-===================
-*/
-.solid {
-    background-color: #FFF;
-    color: #222;
-
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.80);
-    }
-}
-
-.subtle {
-    background-color: #222;
-    color: #FFF;
-
-    &:hover {
-        background-color: rgba(34, 34, 34, 0.80);
-    }
-}
-
-.outline {
-    background-color: #333333;
-    color: #EEEEE0;
-    border: 1px solid #EEEEE0;
-
-    &:hover {
-        background-color: rgba(34, 34, 34, 0.80);
     }
 }
