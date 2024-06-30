@@ -11,6 +11,10 @@ type Story = StoryObj<ButtonProps>;
 
 export default meta;
 
+/**
+ * BUTTON STORIES
+ */
+
 export const Solid: Story = {
   args: {
     size: "md",
@@ -20,6 +24,7 @@ export const Solid: Story = {
   },
   render: (props) => <Button {...props}>Button</Button>,
 };
+
 
 export const Subtle: Story = {
   args: {

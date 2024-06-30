@@ -12,6 +12,10 @@ type Story = StoryObj<AlertProps>
 
 export default meta;
 
+/**
+ * ALERT STORIES
+ */
+
 export const Base: Story = {
     args: {
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor cursus risus, ac facilisis odio ultricies a. Ut quis lacus facilisis, vehicula ipsum vitae, porta enim. Maecenas a scelerisque nulla.',

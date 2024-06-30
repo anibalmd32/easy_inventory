@@ -1,28 +1,51 @@
+/* BASE STAYLES FOR ALERT COMPOENT (mobile first) */
+/* Small Mobile 320x568 */
 .alert {
-    min-width: 400px;
-    max-width: 600px;
+    /* Dimensions */
     padding: 16px;
+    max-width: 600px;
+
+    /* Decoration */
+    color: #EEEEE0;
     border-radius: 8px;
     border: 0.75px solid #AFAFAF;
     background-color: #191919;
-    color: #EEEEE0;
+
+    /* Displaying */
     display: flex;
     gap: 14px;
-}
+    margin: 0 auto;
 
-.alert-icon {
-    font-size: 24px;
-    margin: 0;
-}
-
-.alert-body {
-    & .alert-title {
+    /* Nested elements */
+    & .alert-icon {
+        font-size: 24px;
         margin: 0;
-        font-size: 18px;
     }
 
-    & .alert-content {
-        margin-top: 4px;
-        color: #AFAFAF;
+    & .alert-body {
+        & .alert-title {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        & .alert-content {
+            margin-top: 4px;
+            color: #AFAFAF;
+        }
     }
+}
+
+/* Large Mobile (412x896)  */
+@media (412px <= width <= 896px) {
+    /* .alert {} */
+}
+
+/* Table (834x1112) */
+@media (834px <= width <= 1112px) {
+    /* .alert {} */
+}
+
+/* Desktop (all over table dimensions) */
+@media (width > 1112px) {
+    /* .alert {} */
 }

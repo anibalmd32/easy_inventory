@@ -2,7 +2,7 @@ import { createDOM } from "@builder.io/qwik/testing";
 import { describe, it, test, expect, vi } from "vitest";
 import { Button } from "./Button";
 import { HiArrowRightSolid } from '@qwikest/icons/heroicons'
-import { $, inlinedQrl } from "@builder.io/qwik";
+import { $ } from "@builder.io/qwik";
 
 describe('[Button component]', () => {
     it('Should call to console.log on click event', async () => {

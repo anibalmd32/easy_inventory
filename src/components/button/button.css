@@ -1,22 +1,43 @@
+/*
+====================================
+| BASE STYLES FOR BUTTON COMPONENT |
+====================================
+*/
 .button {
+    /* Dimensions */
     padding: 8px 16px;
     font-weight: 700;
+
+    /* Deconrations */
     border-radius: 4px;
     border: none;
     cursor: pointer;
+
+    /* Displaying */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 6px;
+
+    /* Efects */
     transition: all 0.2s ease;
 
+    /* States */
     &:hover {
         background-color: #EEEEE0;
     }
 
+    /* Nested elements */
+    & .button-icon {
+        margin-top: 6px;
+    }
 }
 
-/* Sizes */
+/*
+=================
+| BUTTONS SIZES |
+=================
+*/
 .sm {
     font-size: 10px;
 }
@@ -29,7 +50,11 @@
     font-size: 18px;
 }
 
-/* Variants */
+/*
+===================
+| BUTTON VARIANTS |
+===================
+*/
 .solid {
     background-color: #FFF;
     color: #222;
@@ -56,8 +81,4 @@
     &:hover {
         background-color: rgba(34, 34, 34, 0.80);
     }
-}
-
-.button-icon {
-    margin-top: 6px;
 }
