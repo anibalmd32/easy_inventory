@@ -1,0 +1,66 @@
+/*
+    ======================================
+    | STYLES FOR CHECKBOX (mobile firts) |
+    ======================================
+*/
+.checkbox {
+    /*
+        ========
+        | BASE |
+        ========
+    */
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    vertical-align: center;
+    align-items: center;
+    gap: 4px;
+    color: #eee;
+   
+   /*
+        =========
+        | SIZES |
+        =========
+   */
+   
+   /*
+        =============
+        | VARIANTES |
+        =============
+   */
+   
+   /*
+        =========
+        | THEME |
+        =========
+   */
+   
+   /*
+        ===================
+        | NESTED ELEMENTS |
+        ===================
+    */
+    .checkbox-input {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+
+        &::marker {
+            background-color: red;
+        }
+    }
+    
+   /*
+        =================
+        | MEDIA QUERIES |
+        =================
+   */
+   /* Large Mobile  */
+    @media (414px <= width <= 833px) {}
+    
+    /* Table */
+    @media (834px <= width <= 1119px) {}
+    
+    /* Desktop */
+    @media (width >= 1120px) {}
+}
