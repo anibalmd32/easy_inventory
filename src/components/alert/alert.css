@@ -33,12 +33,13 @@
     .alert-body {
         .alert-title {
             margin: 0;
-            font-size: 18px;
+            font-weight: 600;
         }
 
         .alert-content {
             margin-top: 4px;
             color: #AFAFAF;
+            font-size: 14px;
         }
     }
 

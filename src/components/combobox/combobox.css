@@ -1,0 +1,164 @@
+/*
+    ======================================
+    | STYLES FOR COMBOBOX (mobile firts) |
+    ======================================
+*/
+
+.combobox {
+    /*
+        ========
+        | BASE |
+        ========
+  */
+    width: 200px;
+    color: #eee;
+    transition: all 1s ease;
+    position: relative;
+
+   /*
+        =========
+        | SIZES |
+        =========
+   */
+    /* &.sm {} */
+    /* &.md {} */
+    /* &.lg {} */
+   
+   /*
+        =============
+        | VARIANTES |
+        =============
+   */
+   
+    /*
+        =========
+        | THEME |
+        =========
+    */
+    /* &.dark {} */
+    /* &.light {} */
+   
+   /*
+        ===================
+        | NESTED ELEMENTS |
+        ===================
+    */
+
+    .label {
+        font-weight: 600;
+        width: inherit;
+        margin-bottom: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .input {
+            width: inherit;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .label-text {
+                font-weight: 300;
+            }
+    
+            .label-input {
+                width: inherit;
+                height: 28px;
+                border-radius: 4px;
+                border: 1px solid rgba(238, 238, 238, 0.50);
+                outline: none;
+                padding: 16px 8px;
+                font-family: inherit;
+                background-color: transparent;
+                color: #eee;
+                font-size: 14px;
+    
+                &:focus {
+                    border: 1px solid rgba(238, 238, 238, 1);
+                }
+
+                &::placeholder {
+                    font-size: 14px;
+                }
+            }
+    
+            .label-icon {
+                display: inline-block;
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                color: #eee;
+                right: 4px;
+                cursor: pointer;
+            }
+    
+    
+        }
+    }
+
+    .options {
+        background-color: #222;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 4px;
+        transition: all 1s ease;
+        font-size: 14px;
+        
+        .option-item {
+            cursor: pointer;
+            padding: 8px;
+            transition: background-color 0.1s ease-in;
+
+            &:hover {
+                background-color: rgba(44, 44, 44, 1);
+            }
+        }
+
+        &.hide {
+            display: none;
+        }
+
+        &.display {
+            animation: optionsDropDawn 0.1s forwards;
+            display: block;
+        }
+    }
+
+   
+   /*
+        =================
+        | MEDIA QUERIES |
+        =================
+   */
+   /* Large Mobile  */
+    /* @media (414px <= width <= 833px) {} */
+    
+    /* Table */
+    /* @media (834px <= width <= 1119px) {} */
+    
+    /* Desktop */
+    /* @media (width >= 1120px) {} */
+}
+
+/*
+    =============
+    | ANIMATION |
+    =============
+*/
+
+@keyframes optionsDropDawn {
+    0% {
+        opacity: 0;
+        translate: 0 -20px;
+    }
+
+    50% {
+        opacity: 0.5;
+        translate: 0 -10;
+    }
+
+    100% {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
