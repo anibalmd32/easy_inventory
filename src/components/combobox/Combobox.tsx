@@ -44,7 +44,22 @@ interface OptionsStore {
  */
 /**
  * @component
- * @description - A single input field that combinate
+ * @description - A single input field that combines the functionality of a select and input
+ * 
+ * @param {string} label - Text to names the component
+ * @param {string} placeholder - Helper text for user
+ * @param {ComboboxOptions[]} options - List of items that can be select
+ * @param {QRL<(optionSelectd: ComboboxOptions) => void>} selectHandler - Handler function that wili execute when a option item has been selected
+ * 
+ * @example
+ * <Combobox
+ *  label='Users',
+ *  placeholder='Select an user'
+ *  options={[] as ComboboxOptions[]}
+ *  selectHandler={$((selected) => {
+ *      console.log(selected)
+ *  })}
+ * />
  */
 export const Combobox = component$<ComboboxProps>(({
     label,
