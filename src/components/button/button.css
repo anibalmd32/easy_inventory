@@ -63,11 +63,11 @@
     }
     
     &.outline {
-        background-color: #333333;
+        background-color: transparent;
         color: #EEEEE0;
         border: 1px solid #EEEEE0;
         &:hover {
-            background-color: rgba(34, 34, 34, 0.80);
+            background-color: rgba(34, 34, 34, 1);
         }
     }
 
