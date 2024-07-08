@@ -14,6 +14,9 @@ importers:
       '@builder.io/qwik-city':
         specifier: ^1.5.7
         version: 1.5.7(@types/node@20.14.9)(rollup@4.18.0)
+      '@chromatic-com/storybook':
+        specifier: 1.6.1
+        version: 1.6.1(react@18.3.1)
       '@prisma/client':
         specifier: 5.3.1
         version: 5.3.1(prisma@5.16.0)
@@ -731,6 +734,10 @@ packages:
     hasBin: true
     peerDependencies:
       undici: '*'
+
+  '@chromatic-com/storybook@1.6.1':
+    resolution: {integrity: sha512-x1x1NB3j4xpfeSWKr96emc+7ZvfsvH+/WVb3XCjkB24PPbT8VZXb3mJSAQMrSzuQ8+eQE9kDogYHH9Fj3tb/Cw==}
+    engines: {node: '>=16.0.0', yarn: '>=1.22.18'}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -2676,6 +2683,18 @@ packages:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
 
+  chromatic@11.5.4:
+    resolution: {integrity: sha512-+J+CopeUSyGUIQJsU6X7CfvSmeVBs0j6LZ9AgF4+XTjI4pFmUiUXsTc00rH9x9W1jCppOaqDXv2kqJJXGDK3mA==}
+    hasBin: true
+    peerDependencies:
+      '@chromatic-com/cypress': ^0.*.* || ^1.0.0
+      '@chromatic-com/playwright': ^0.*.* || ^1.0.0
+    peerDependenciesMeta:
+      '@chromatic-com/cypress':
+        optional: true
+      '@chromatic-com/playwright':
+        optional: true
+
   ci-info@3.9.0:
     resolution: {integrity: sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==}
     engines: {node: '>=8'}
@@ -3200,6 +3219,10 @@ packages:
 
   filelist@1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
+
+  filesize@10.1.2:
+    resolution: {integrity: sha512-Dx770ai81ohflojxhU+oG+Z2QGvKdYxgEr9OSA8UVrqhwNHjfH9A8f5NKfg83fEH8ZFA5N5llJo5T3PIoZ4CRA==}
+    engines: {node: '>= 10.4.0'}
 
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
@@ -4452,6 +4475,12 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
+  react-confetti@6.1.0:
+    resolution: {integrity: sha512-7Ypx4vz0+g8ECVxr88W9zhcQpbeujJAVqL14ZnXJ3I23mOI9/oBVTQ3dkJhUmB0D6XOtCZEM6N0Gm9PMngkORw==}
+    engines: {node: '>=10.18'}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.1 || ^18.0.0
+
   react-docgen-typescript@2.2.2:
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
     peerDependencies:
@@ -4963,6 +4992,9 @@ packages:
 
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+
+  tween-functions@1.2.0:
+    resolution: {integrity: sha512-PZBtLYcCLtEcjL14Fzb1gSxPBeL7nWvGhO5ZFPGqziCcr8uvHp0NDmdjBchp6KHL+tExcg0m3NISmKxhU394dA==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -6240,6 +6272,18 @@ snapshots:
       - stylus
       - sugarss
       - terser
+
+  '@chromatic-com/storybook@1.6.1(react@18.3.1)':
+    dependencies:
+      chromatic: 11.5.4
+      filesize: 10.1.2
+      jsonfile: 6.1.0
+      react-confetti: 6.1.0(react@18.3.1)
+      strip-ansi: 7.1.0
+    transitivePeerDependencies:
+      - '@chromatic-com/cypress'
+      - '@chromatic-com/playwright'
+      - react
 
   '@colors/colors@1.5.0':
     optional: true
@@ -8469,6 +8513,8 @@ snapshots:
 
   chownr@2.0.0: {}
 
+  chromatic@11.5.4: {}
+
   ci-info@3.9.0: {}
 
   citty@0.1.6:
@@ -9184,6 +9230,8 @@ snapshots:
   filelist@1.0.4:
     dependencies:
       minimatch: 5.1.6
+
+  filesize@10.1.2: {}
 
   fill-range@7.1.1:
     dependencies:
@@ -10651,6 +10699,11 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  react-confetti@6.1.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      tween-functions: 1.2.0
+
   react-docgen-typescript@2.2.2(typescript@5.4.5):
     dependencies:
       typescript: 5.4.5
@@ -11279,6 +11332,8 @@ snapshots:
   tslib@1.14.1: {}
 
   tslib@2.6.3: {}
+
+  tween-functions@1.2.0: {}
 
   type-check@0.4.0:
     dependencies:

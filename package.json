@@ -37,6 +37,7 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.5.7",
     "@builder.io/qwik-city": "^1.5.7",
+    "@chromatic-com/storybook": "1.6.1",
     "@prisma/client": "5.3.1",
     "@qwikest/icons": "^0.0.13",
     "@storybook/addon-essentials": "^7.4.6",
