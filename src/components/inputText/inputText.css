@@ -1,0 +1,68 @@
+/* ### STYLES FOR INPUT TEXT (mobile firts) ### */
+
+.input-text {
+	/* ## BASE ### */
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	color: #eee;
+	max-width: 200px;
+	font-size: 14px;
+
+	/* ### UTILS ### */
+	/* ** State ** */
+	/* &.open {} */
+	/* &.close {} */
+	/* &.visible {} */
+	/* &.hiden {} */
+
+	/* ** Sizes ** */
+	/* &.sm {} */
+	/* &.md {} */
+	/* &.lg {} */
+
+	/* ** Variants ** */
+	/* &.outline {} */
+	/* &.containe {} */
+
+	/* ** Theme ** */
+	/* &.light {} */
+	/* &.dark {} */
+
+	/* ### NESTED ELEMENTS ### */
+	.input {
+		width: inherit;
+		height: 28px;
+		border-radius: 4px;
+		border: 1px solid rgba(238, 238, 238, 0.50);
+		outline: none;
+		padding: 16px 8px;
+		font-family: inherit;
+		background-color: transparent;
+		color: #eee;
+		font-size: 14px;
+
+		&:focus {
+			border: 1px solid rgba(238, 238, 238, 1);
+		}
+
+		&::placeholder {
+			font-size: 14px;
+		}
+	}
+
+	.error {
+		font-size: 12px;
+		color: rgb(255, 199, 199);
+	}
+
+	/* ### MEDIA QUERIES ### */
+	/* ** Large Mobile **  */
+	/* @media (width > 413px) {} */
+
+	/* ** Table ** */
+	/* @media (width > 833px) {} */
+
+	/* ** Desktop ** */
+	/* @media (width > 1119px) {} */
+}
