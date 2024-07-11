@@ -27,7 +27,7 @@ export interface ButtonProps {
  */
 /**
  * @component
- * @description An interactive element used to trigger actions
+ * @description - An interactive element used to trigger actions
  * 
  * @param {ComponentVariant} variant - Style variant: 'solid' | 'subtle' | 'outline'
  * @param {ComponentSize} size - Size of element: 'sm' | 'md' | 'lg'

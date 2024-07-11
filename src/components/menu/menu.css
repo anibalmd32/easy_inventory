@@ -1,0 +1,64 @@
+/* ### STYLES FOR MENU (mobile firts) ### */
+
+.menu {
+	/* ## BASE ### */
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	color: #eee;
+
+	/* ### UTILS ### */
+	/* ** State ** */
+	/* &.open {} */
+	/* &.close {} */
+	/* &.visible {} */
+	/* &.hiden {} */
+
+	/* ** Sizes ** */
+	/* &.sm {} */
+	/* &.md {} */
+	/* &.lg {} */
+
+	/* ** Variants ** */
+	/* &.outline {} */
+	/* &.containe {} */
+
+	/* ** Theme ** */
+	/* &.light {} */
+	/* &.dark {} */
+
+	/* ### NESTED ELEMENTS ### */
+	.options {
+		background-color: #191919;
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+		padding: 4px;
+		gap: 8px;
+		font-size: 14px;
+		
+		.item {
+			padding: 8px;
+			cursor: pointer;
+			transition: all 0.1s ease-in;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+
+			&:hover {
+				background-color: rgba(148, 148, 148, 0.5);
+			}
+		}
+	}
+
+	/* ### MEDIA QUERIES ### */
+	/* ** Large Mobile **  */
+	/* @media (414px <= width 833px) {} */
+
+	/* ** Table ** */
+	/* @media (834px <= width <= 1119px) {} */
+
+	/* ** Desktop ** */
+	/* @media (width >= 1120px) {} */
+}
