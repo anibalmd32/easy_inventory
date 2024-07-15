@@ -2,11 +2,10 @@
 
 .menu {
 	/* ## BASE ### */
-	width: 200px;
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
+	width: 100vw;
 	color: #eee;
+	height: 32px;
+	margin: auto;
 
 	/* ### UTILS ### */
 	/* ** State ** */
@@ -31,34 +30,85 @@
 	/* ### NESTED ELEMENTS ### */
 	.options {
 		background-color: #191919;
+		border: 1px solid rgba(255, 255, 255, 0.125);
 		list-style-type: none;
 		display: flex;
-		flex-direction: column;
+		justify-content: space-around;
+		font-size: 28px;
 		padding: 4px;
-		gap: 8px;
-		font-size: 14px;
+		position: absolute;
+		bottom: 0;
+		width: inherit;
 		
 		.item {
-			padding: 8px;
 			cursor: pointer;
-			transition: all 0.1s ease-in;
+			transition: all 0.2s linear;
 			display: flex;
 			align-items: center;
 			gap: 8px;
+			position: relative;
 
-			&:hover {
-				background-color: rgba(148, 148, 148, 0.5);
+			a {
+				text-decoration: none;
+				color: #eee;
+
+				&.active {
+					color: cornflowerblue;
+				}
+			}
+
+			.tooltip {
+				display: none;
 			}
 		}
 	}
 
 	/* ### MEDIA QUERIES ### */
 	/* ** Large Mobile **  */
-	/* @media (414px <= width 833px) {} */
+	/* @media (width > 413px) {} */
 
 	/* ** Table ** */
-	/* @media (834px <= width <= 1119px) {} */
+	@media (width > 833px) {
+		width: fit-content;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		.options {
+			padding: 8px 32px;
+			bottom: 32px;
+			border-radius: 12px;
+			gap: 32px;
+			background-color: rgba(19, 19, 19, 0.80);
+			backdrop-filter: blur(13px) saturate(180%);
+
+			.item {
+				padding: 0;
+
+				&:hover {
+					scale: 1.2;
+				}
+
+				.tooltip {
+					display: none;
+					position: absolute;
+					background-color: #191919;
+					padding: 4px 8px;
+					font-size: 12px;
+					bottom: 48px;
+					border-radius: 16px;
+					left: 50%;
+					transform: translateX(-50%);
+					margin: auto;
+	
+					&.is-hovergin {
+						display: block;
+					}
+				}
+			}
+		}
+	}
 
 	/* ** Desktop ** */
-	/* @media (width >= 1120px) {} */
+	/* @media (width > 1119px) {} */
 }
