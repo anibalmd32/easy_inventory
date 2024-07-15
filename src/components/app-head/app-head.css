@@ -1,0 +1,73 @@
+/* ### STYLES FOR APP HEAD (mobile firts) ### */
+
+.app-head {
+	/* ## BASE ### */
+    padding: 8px 12px;
+    background-color: #222;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+	/* ### UTILS ### */
+	/* ** State ** */
+	/* &.open {} */
+	/* &.close {} */
+	/* &.visible {} */
+	/* &.hiden {} */
+
+	/* ** Sizes ** */
+	/* &.sm {} */
+	/* &.md {} */
+	/* &.lg {} */
+
+	/* ** Variants ** */
+	/* &.outline {} */
+	/* &.containe {} */
+
+	/* ** Theme ** */
+	/* &.light {} */
+	/* &.dark {} */
+
+	/* ### NESTED ELEMENTS ### */
+    .container {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1024px;
+
+        .name {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+
+            a {
+                text-decoration: none;
+                color: #EEEEE0;
+            }
+        }
+
+        .image {
+            border-radius: 100%;
+            overflow: hidden;
+
+            img {
+                display: block;
+                border-radius: 100%;
+            }
+        }
+    }
+
+	/* ### MEDIA QUERIES ### */
+	/* ** Large Mobile **  */
+	/* @media (width > 413px) {} */
+
+	/* ** Table ** */
+	/* @media (width > 833px) {} */
+
+	/* ** Desktop ** */
+	@media (width > 1119px) {
+        padding: 8px 0;
+    }
+}

@@ -2,7 +2,7 @@
 
 .menu {
 	/* ## BASE ### */
-	width: 100vw;
+	width: 100%;
 	color: #eee;
 	height: 32px;
 	margin: auto;
@@ -36,10 +36,12 @@
 		justify-content: space-around;
 		font-size: 28px;
 		padding: 4px;
-		position: absolute;
+		position: fixed;
 		bottom: 0;
+		left: 0;
+		right: 0;
 		width: inherit;
-		
+
 		.item {
 			cursor: pointer;
 			transition: all 0.2s linear;
@@ -73,7 +75,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
+
 		.options {
 			padding: 8px 32px;
 			bottom: 32px;
@@ -81,6 +83,8 @@
 			gap: 32px;
 			background-color: rgba(19, 19, 19, 0.80);
 			backdrop-filter: blur(13px) saturate(180%);
+			left: initial;
+			right: initial;
 
 			.item {
 				padding: 0;
@@ -100,7 +104,7 @@
 					left: 50%;
 					transform: translateX(-50%);
 					margin: auto;
-	
+
 					&.is-hovergin {
 						display: block;
 					}
