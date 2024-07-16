@@ -32,7 +32,7 @@ export const Menu = component$(() => {
 					onMouseEnter$={createHoverHandler(isHoveringHome)}
 					onMouseLeave$={createHoverHandler(isHoveringHome)}
 				>
-					<NavLink href="/" activeClass="active">
+					<NavLink href="/" activeClass="active" class='link'>
 						<span>
 							<HiHomeSolid />
 						</span>
@@ -46,7 +46,7 @@ export const Menu = component$(() => {
 					onMouseEnter$={createHoverHandler(isHoveringInventory)}
 					onMouseLeave$={createHoverHandler(isHoveringInventory)}
 				>
-					<NavLink href="/inventory" activeClass="active">
+					<NavLink href="/inventory" activeClass="active" class='link'>
 						<span>
 							<HiTableCellsSolid />
 						</span>
@@ -60,7 +60,7 @@ export const Menu = component$(() => {
 					onMouseEnter$={createHoverHandler(isHoveringInvoices)}
 					onMouseLeave$={createHoverHandler(isHoveringInvoices)}
 				>
-					<NavLink href="/invoices" activeClass="active">
+					<NavLink href="/invoices" activeClass="active" class='link'>
 						<span>
 							<HiCurrencyDollarOutline />
 						</span>
@@ -74,7 +74,7 @@ export const Menu = component$(() => {
 					onMouseEnter$={createHoverHandler(isHoveringSettings)}
 					onMouseLeave$={createHoverHandler(isHoveringSettings)}
 				>
-					<NavLink href="/settings" activeClass="active">
+					<NavLink href="/settings" activeClass="active" class='link'>
 						<span>
 							<HiCog6ToothSolid />
 						</span>

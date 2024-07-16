@@ -50,15 +50,6 @@
 			gap: 8px;
 			position: relative;
 
-			a {
-				text-decoration: none;
-				color: #eee;
-
-				/* &.active {
-					color: cornflowerblue;
-				} */
-			}
-
 			.tooltip {
 				display: none;
 			}
