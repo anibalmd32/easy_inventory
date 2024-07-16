@@ -1,6 +1,6 @@
 /** IMPORTS */
 import { component$, type QRL, Slot, useStylesScoped$ } from "@builder.io/qwik";
-import { Button } from "../button/Button";
+// import { Button } from "../button/Button";
 import { HiXMarkOutline } from '@qwikest/icons/heroicons'
 import drawerStyles from './drawer.css?inline'
 
@@ -62,7 +62,7 @@ export const Drawer = component$<DrawerProps>(({
 					<Slot />
 				</div>
 
-				<div class={`drawer-footer ${direction}`}>
+				{/* <div class={`drawer-footer ${direction}`}>
 					<Button
 						size="md"
 						type="button"
@@ -78,7 +78,7 @@ export const Drawer = component$<DrawerProps>(({
 					>
 						Confirm
 					</Button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

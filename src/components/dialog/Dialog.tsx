@@ -5,7 +5,7 @@
  */
 import { component$, useStylesScoped$, type QRL } from '@builder.io/qwik'
 import dialogStyles from './dialog.css?inline'
-import { Button } from '../button/Button'
+// import { Button } from '../button/Button'
 
 /**
  * ===================
@@ -44,7 +44,7 @@ export const Dialog = component$<DialogProps>(({
 				<h2>{title}</h2>
 				<p>{description}</p>
 
-				<div class='dialog-btns'>
+				{/* <div class='dialog-btns'>
 					<Button
 						size='sm'
 						type='button'
@@ -61,7 +61,7 @@ export const Dialog = component$<DialogProps>(({
 					>
 						Confirm
 					</Button>
-				</div>
+				</div> */}
 			</dialog>
 		</div>
 	)
