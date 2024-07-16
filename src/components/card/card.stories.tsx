@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "storybook-framework-qwik";
 import { Card, type CardProps } from "./Card";
-import { Button } from "../button/Button";
+// import { Button } from "../button/Button";
 
 const meta: Meta<CardProps> = {
     component: Card
@@ -25,9 +25,9 @@ export const smallCard: Story = {
             <p>Esta card define un container o seccion de contenido</p>
 
             <div>
-                <Button size="md" type="button" variant="solid">
+                {/* <Button size="md" type="button" variant="solid">
                     Action 1
-                </Button>
+                </Button> */}
             </div>
         </Card>
     )

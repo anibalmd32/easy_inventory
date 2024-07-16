@@ -30,10 +30,8 @@ export interface DialogProps {
  * @description - A modal window that appears on top of the main content.
  */
 export const Dialog = component$<DialogProps>(({
-	onConfirm,
 	show,
 	title,
-	toggle,
 	description
 }) => {
 
