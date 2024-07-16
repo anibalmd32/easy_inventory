@@ -23,7 +23,6 @@
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
     "lint": "eslint \"src/**/*.ts*\"",
-    "postinstall": "prisma generate",
     "preview": "qwik build preview && vite preview --open",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
