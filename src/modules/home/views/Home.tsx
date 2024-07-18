@@ -1,13 +1,17 @@
-import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import { component$, useStylesScoped$, useContext } from "@builder.io/qwik";
 import homeStyles from '../styles/home.css?inline'
+import { HomeCtxId } from "~/routes";
+import { Notification } from "../components/Notification";
 
 export const Home = component$(() => {
+
+    const { notifications } = useContext(HomeCtxId)
 
     useStylesScoped$(homeStyles)
     return (
         <section class='home'>
             <article class='notifications'>
-                <p>Notificaciones</p>
+                <Notification notifications={notifications} />
             </article>
             <article class='stacks'>
                 <p>Estidisticas</p>
