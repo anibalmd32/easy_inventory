@@ -4,3 +4,11 @@ export interface NotificationData {
     date: string;
     text: string;
 }
+
+export interface InvoiceItem {
+    id: number | string;
+    customerName: string;
+    date: string;
+    status: 'paid' | 'pending' | 'canceled';
+    total: string;
+}

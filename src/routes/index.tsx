@@ -3,8 +3,8 @@ import { component$, createContextId, useContextProvider } from "@builder.io/qwi
 import { routeLoader$, type DocumentHead } from '@builder.io/qwik-city'
 
 /** DEFINITIONS */
-import type { HomeCtxProps, HomeLoaderProps } from "~/modules/home/definitions";
-import type { NotificationData } from "~/modules/home/definitions";
+import type { HomeCtxProps, HomeLoaderProps } from "~/modules/home/definitions/root";
+import type { NotificationData, InvoiceItem } from "~/modules/home/definitions/data";
 
 /** VIEWS */
 import { Home } from "~/modules/home/views";
@@ -38,8 +38,40 @@ export const useHomeData = routeLoader$(async (): Promise<HomeLoaderProps> => {
         },
     ]
 
+    const lastInvoices: InvoiceItem[] = [
+        {
+            id: 1,
+            customerName: 'Jhon Doe',
+            date: '01/02/2024',
+            status: 'paid',
+            total: '99.99'
+        },
+        {
+            id: 2,
+            customerName: 'Sam Smith',
+            date: '01/02/2024',
+            status: 'canceled',
+            total: '99.99'
+        },
+        {
+            id: 3,
+            customerName: 'Noe Goodman',
+            date: '01/02/2024',
+            status: 'pending',
+            total: '99.99'
+        },
+        {
+            id: 4,
+            customerName: 'George Castle',
+            date: '01/02/2024',
+            status: 'paid',
+            total: '99.99'
+        },
+    ]
+
     return {
-        notificationsData: notifications
+        notificationsData: notifications,
+        lastInvoicesData: lastInvoices,
     }
 })
 
@@ -51,7 +83,8 @@ export default component$(() => {
     const { value: homeData } = useHomeData()
 
     useContextProvider(HomeCtxId, {
-        notifications: homeData.notificationsData
+        notifications: homeData.notificationsData,
+        lastInvoices: homeData.lastInvoicesData,
     })
 
     return <Home />

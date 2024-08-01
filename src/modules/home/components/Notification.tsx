@@ -1,5 +1,5 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
-import type { NotificationData } from "../definitions";
+import type { NotificationData } from "../definitions/data";
 import notificationStyles from '../styles/notification.css?inline'
 import {
     HiFolderPlusSolid,
@@ -45,12 +45,13 @@ export const Notification = component$<NotificationProps>(({ notifications }) =>
                         <li
                             key={notification.id}
                             class='item'
-                            style={{
-                                color: `${notificationDesign[notification.typeAction].color}`
-                            }}
                         >
                             <div class='icon'>
-                                <span>
+                                <span
+                                    style={{
+                                        color: `${notificationDesign[notification.typeAction].color}`
+                                    }}
+                                >
                                     {notificationDesign[notification.typeAction].icon}
                                 </span>
                             </div>

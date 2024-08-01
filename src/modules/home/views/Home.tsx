@@ -2,10 +2,11 @@ import { component$, useStylesScoped$, useContext } from "@builder.io/qwik";
 import homeStyles from '../styles/home.css?inline'
 import { HomeCtxId } from "~/routes";
 import { Notification } from "../components/Notification";
+import { LastInvoices } from '../components/LastInvoices';
 
 export const Home = component$(() => {
 
-    const { notifications } = useContext(HomeCtxId)
+    const { notifications, lastInvoices } = useContext(HomeCtxId)
 
     useStylesScoped$(homeStyles)
     return (
@@ -17,7 +18,7 @@ export const Home = component$(() => {
                 <p>Estidisticas</p>
             </article>
             <article class='last-invoices'>
-                <p>Ultimas facturas</p>
+                <LastInvoices lastInvoices={lastInvoices} />
             </article>
             <article class='stock-alert'>
                 <p>Alerta de stock</p>

@@ -1,6 +1,6 @@
-/* ### STYLES FOR NOTIFICATION (mobile firts) ### */
+/* ### STYLES FOR LAST-INVOICES (mobile firts) ### */
 
-.notifications {
+.last-invoices {
 	/* ## BASE ### */
     font-size: 12px;
     text-align: center;
@@ -30,7 +30,7 @@
 	/* &.dark {} */
 
 	/* ### NESTED ELEMENTS ### */
-    .container {
+    .items-container {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -42,8 +42,9 @@
 
         .item {
             display: flex;
+            flex-direction: column;
             justify-content: flex-start;
-            align-items: center;
+            align-items: start;
             gap: 10px;
             width: 100%;
             border-radius: 4px;
@@ -53,21 +54,37 @@
             transition: all 0.2s linear;
             /* border: 0.25px solid #b6ddff; */
 
-            .icon {
-                font-size: 32px;
-            }
-
-            .description {
+            :first-child {
+                width: 100%;
                 display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
+                justify-content: space-between;
 
-                :last-child {
-                    font-size: 10px;
-                    font-weight: 200;
+                .total {
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+
+                .status {
+                    text-align: right;
+                    display: block;
                 }
             }
+
+            :last-child {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                
+                .customer {
+                    font-weight: 600;
+                }
+
+                .date {
+                    text-align: right;
+                    display: block;
+                }
+            }
+
 
             &:hover {
                 scale: 1.025;

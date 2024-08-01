@@ -56,22 +56,22 @@
 
     .notifications {
         grid-row: 1/12;
-        grid-column: 1/6;
+        grid-column: 1/4;
     }
 
     .stacks {
         grid-row: 1/6;
-        grid-column: 6/12;
+        grid-column: 4/12;
     }
 
     .last-invoices {
         grid-row: 6/12;
-        grid-column: 6/9;
+        grid-column: 4/8;
     }
 
     .stock-alert {
         grid-row: 6/12;
-        grid-column: 9/12;
+        grid-column: 8/12;
     }
 
 	/* ### MEDIA QUERIES ### */
