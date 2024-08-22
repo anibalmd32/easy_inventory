@@ -1,18 +1,23 @@
 'use client'
 
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 export const NavLink = ({ href, children }: {
 	href: string;
-
 	children: React.ReactNode;
 }) => {
-	const router = useRouter();
+	const pathname = usePathname();
+	const isActiveLink = (href: string) => pathname === href;
 
 	return (
-		<Link href={href} className={router.pathname === href ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}>
-		{children}
+		<Link
+			href={href}
+			className={isActiveLink(href)
+				? 'bg-gray-100/20 block p-2 md:rounded-md'
+				: 'block p-2'}
+		>
+			{children}
 		</Link>
-	)
+	);
 }

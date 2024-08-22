@@ -1,4 +1,4 @@
-import Menu from "@/components/shared/AppMenu/AppMenu";
+import { AppMenu } from '@/components/shared/AppMenu';
 
 export default function HomeLayout({
   children,
@@ -10,7 +10,7 @@ export default function HomeLayout({
 			<h1>Home layot</h1>
 			{children}
 
-			<Menu />
+			<AppMenu />
 		</div>
 	)
 }
