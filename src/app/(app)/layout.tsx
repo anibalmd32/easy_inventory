@@ -1,4 +1,5 @@
 import { AppMenu } from '@/components/shared/AppMenu';
+import { AppHeader } from '@/components/shared/AppHeader';
 
 export default function HomeLayout({
   children,
@@ -7,7 +8,8 @@ export default function HomeLayout({
 }>) {
 	return (
 		<div className="relative">
-			<h1>Home layot</h1>
+			<AppHeader appName="Next.js + Tailwind CSS" appLogo="/logo.png" />
+			
 			{children}
 
 			<AppMenu />
