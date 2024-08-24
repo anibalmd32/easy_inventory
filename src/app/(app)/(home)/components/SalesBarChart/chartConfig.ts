@@ -1,6 +1,6 @@
 import { ChartConfig } from "@/components/ui/chart"
 
-const chartConfig = {
+export const barChartConfig = {
   payed: {
     label: "Pagadas",
     color: "#2563eb",
@@ -15,4 +15,17 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export default chartConfig
+export const areaChartConfig = {
+  payed: {
+    label: "Pagadas",
+    color: "#2563eb",
+  },
+  canceled: {
+    label: "Canceladas",
+    color: "#ef4444",
+  },
+  pending: {
+    label: "Pendientes",
+    color: "#f59e0b",
+  },
+} satisfies ChartConfig

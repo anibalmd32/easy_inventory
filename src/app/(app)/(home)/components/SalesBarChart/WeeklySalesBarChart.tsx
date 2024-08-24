@@ -7,13 +7,13 @@ import {
   ChartTooltip,
   ChartTooltipContent
 } from "@/components/ui/chart"
-import chartData from './chartData'
-import chartConfig from './chartConfig'
+import { weeklyInvoicesData } from './chartData'
+import {barChartConfig} from './chartConfig'
 
 export function WeeklySalesBarChart() {
 	return (
-    <ChartContainer config={chartConfig} className="h-[300px] w-full">
-      <BarChart accessibilityLayer data={chartData}>
+    <ChartContainer config={barChartConfig} className="h-[300px] w-full">
+      <BarChart accessibilityLayer data={weeklyInvoicesData}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="day"
