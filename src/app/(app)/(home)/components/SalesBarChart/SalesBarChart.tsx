@@ -10,7 +10,7 @@ import { WeeklySalesBarChart } from "./WeeklySalesBarChart"
 
 export function SalesBarChart() {
   return (
-    <Card className="bg-gray-900 text-gray-200 flex-1">
+    <Card className="bg-gray-900 text-gray-200">
       <CardHeader>
         <CardTitle>Facturacion semanal</CardTitle>
         <CardDescription>Estadisticas de facturas por semana</CardDescription>
