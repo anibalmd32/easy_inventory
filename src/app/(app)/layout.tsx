@@ -10,7 +10,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
 	return (
-		<main className='w-full text-slate-300 bg-gray-700 min-h-screen h-full'>
+		<main className='w-full text-slate-300 bg-gray-700 min-h-screen h-full overflow-auto'>
 			<AppHeader appName="Next.js + Tailwind CSS" appLogo="/next-logo.png" />
 			<div className='w-full md:container px-2 py-16'>
 				{children}

@@ -14,7 +14,7 @@ export function StockAlert() {
     <Card className="bg-gray-900 text-gray-200 flex-1">
       <CardHeader>
         <CardTitle>Alerta de inventario</CardTitle>
-        <CardDescription>Lista de productos que debes comprar para abastecer tu inventario</CardDescription>
+        <CardDescription>Lista de productos que debes comprar</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
 		{alertStockMock.map((product) => (
