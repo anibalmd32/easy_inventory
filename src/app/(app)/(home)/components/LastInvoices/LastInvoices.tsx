@@ -14,7 +14,7 @@ export function LastInvoices() {
 		<Card className="bg-gray-900 text-gray-200 flex-1">
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
-					<Calculator className="w-8 h-8" />
+					<Calculator className="w-8 h-8 text-green-500" />
 					Ultimas facturas
 				</CardTitle>
 				<CardDescription>Ultimas facturas pagadas</CardDescription>
@@ -23,7 +23,7 @@ export function LastInvoices() {
 				{lastInvoicesMock.map((invoice, index) => (
 					<div key={index} className="flex flex-col gap-2 justify-start items-center bg-gray-950 p-4 rounded-lg hover:bg-gray-800 transition-all duration-300 cursor-pointer">
 						<div className="flex justify-between w-full">
-							<p className="text-xl font-bold">
+							<p className="font-bold">
 								${invoice.total}
 							</p>
 							<p className="font-bold">
