@@ -6,16 +6,23 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { lastInvoicesMock } from "./lastInvoicesMock"
-import { BanknoteIcon, Check, Calculator } from 'lucide-react'
+import { ArrowRight, Check, Calculator } from 'lucide-react'
 import { InvoiceStatus } from "@/definitions/enums";
 
 export function LastInvoices() {
 	return (
 		<Card className="bg-gray-900 text-gray-200 flex-1">
 			<CardHeader>
-				<CardTitle className="flex items-center gap-2">
-					<Calculator className="w-8 h-8 text-green-500" />
-					Ultimas facturas
+				<CardTitle className="flex items-center justify-between gap-2">
+					<div className="flex items-center gap-2">
+						<Calculator className="w-8 h-8 text-green-500" />
+						Ultimas facturas
+					</div>
+					<div>
+						<div className="rounded-md hover:bg-gray-600 p-2 cursor-pointer transition-all duration-300">
+							<ArrowRight className="w-8 h-8" />
+						</div>
+					</div>
 				</CardTitle>
 				<CardDescription>Ultimas facturas pagadas</CardDescription>
 			</CardHeader>
