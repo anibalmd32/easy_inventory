@@ -1,7 +1,15 @@
+"use client";
+import { SalesBarChart } from "./components/SalesBarChart";
+
 export default function Home() {
   return (
     <div>
-      Home page
+      <div>
+        <SalesBarChart />
+      </div>
+      <div>
+        
+      </div>
     </div>
   );
 }
