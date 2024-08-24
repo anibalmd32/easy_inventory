@@ -10,12 +10,15 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
 	return (
-		<main className='w-full text-slate-300 bg-gray-700 min-h-screen h-full overflow-auto'>
-			<AppHeader appName="Next.js + Tailwind CSS" appLogo="/next-logo.png" />
-			<div className='w-full md:container px-2 py-16'>
-				{children}
+		<main>
+			<AppHeader appName="Easy Inventory" appLogo="/billing.svg" />
+			<div className='w-full mt-[56px] pt-8 md:pt-10 text-slate-300 bg-gray-700 min-h-screen h-full overflow-auto'>
+				<div className='w-full md:container px-2'>
+					{children}
+				</div>
+				<AppMenu />
+
 			</div>
-			<AppMenu />
 			<DotPattern
 				className={cn(
 				"[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
