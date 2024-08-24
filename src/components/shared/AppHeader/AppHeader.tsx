@@ -1,5 +1,6 @@
 import NextImage from 'next/image';
 import { HeaderMenu } from './HeaderMenu';
+import { Notifications } from './Notifications';
 
 export interface AppHeaderProps {
 	appName: string;
@@ -15,7 +16,10 @@ export function AppHeader(props: AppHeaderProps) {
 					<span className="text-sm md:text-xl font-bold ml-2">{props.appName}</span>
 				</div>
 
-				<HeaderMenu />
+				<div className='flex items-center gap-4'>
+					<Notifications />
+					<HeaderMenu />
+				</div>
 			</div>
 		</header>
 	);

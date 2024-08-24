@@ -1,0 +1,58 @@
+import { Bell, ShoppingBag, ShoppingCart, User, Pencil } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import { Notification } from '@/definitions/entities';
+import { ActionTypes } from '@/definitions/enums';
+
+const NotificationsMockData: Notification[] = [
+	{
+		id: 1,
+		action: ActionTypes.SELL,
+		description: 'Se ha añadido un nuevo pedido',
+		emitedAt: '2022-01-03',
+	},
+	{
+		id: 2,
+		action: ActionTypes.ADD,
+		description: 'Se ha añadido un nuevo pedido',
+		emitedAt: '2022-01-03',
+	},
+];
+
+export function Notifications() {
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<div className="cursor-pointer relative hover:bg-gray-800 transition-all duration-300 rounded-md p-2 flex items-center">
+					<span className='absolute top-1 right-1 h-2 w-2 rounded-full bg-gray-200 text-white flex items-center justify-center'></span>
+					<Bell className="h-6 w-6" />
+				</div>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="bg-gray-950 text-gray-200">
+				<DropdownMenuLabel>Notificaciones</DropdownMenuLabel>
+				{NotificationsMockData.map((notification, index) => (
+					<DropdownMenuItem key={index} className="cursor-pointer">
+						<div className="flex items-center justify-between">
+							<div className="flex items-center">
+								<span className="ml-2 text-sm">{notification.description}</span>
+							</div>
+						</div>
+						<p className="text-sm">{notification.description}</p>
+					</DropdownMenuItem>
+				))}
+
+				<DropdownMenuSeparator />
+				<DropdownMenuItem className="cursor-pointer text-[12px]">
+					Marcar como leído <Pencil className="ml-2 h-4 w-4" />
+				</DropdownMenuItem>
+			</DropdownMenuContent>
+		</DropdownMenu>
+	)
+}
