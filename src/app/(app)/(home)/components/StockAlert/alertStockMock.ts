@@ -37,4 +37,13 @@ export const alertStockMock: Product[] = [
 		createdAt: "2023-03-01T00:00:00.000Z",
 		updatedAt: "2023-03-01T00:00:00.000Z",
 	},
+	{
+		id: 5,
+		name: "Jugo de tomate",
+		price: "7.49",
+		quantity: 4,
+		categoryId: 1,
+		createdAt: "2023-03-01T00:00:00.000Z",
+		updatedAt: "2023-03-01T00:00:00.000Z",
+	}
 ]
