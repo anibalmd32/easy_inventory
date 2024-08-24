@@ -25,7 +25,7 @@ export function HeaderMenu() {
 					</Button>
 				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="bg-gray-950 text-gray-200">
+			<DropdownMenuContent className="bg-gray-950 text-gray-200 overflow-hidden min-w-10">
 				<DropdownMenuLabel>Empresa</DropdownMenuLabel>
 				<DropdownMenuItem className="cursor-pointer">Facturación</DropdownMenuItem>
 				<DropdownMenuItem className="cursor-pointer">Lista de compras</DropdownMenuItem>
