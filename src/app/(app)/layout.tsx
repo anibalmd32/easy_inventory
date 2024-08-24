@@ -1,5 +1,8 @@
+"use client";
 import { AppMenu } from '@/components/shared/AppMenu';
 import { AppHeader } from '@/components/shared/AppHeader';
+import { cn } from "@/lib/utils";
+import DotPattern from "@/components/magicui/dot-pattern";
 
 export default function HomeLayout({
   children,
@@ -13,6 +16,11 @@ export default function HomeLayout({
 				{children}
 			</div>
 			<AppMenu />
+			<DotPattern
+				className={cn(
+				"[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
+				)}
+			/>
 		</main>
 	)
 }

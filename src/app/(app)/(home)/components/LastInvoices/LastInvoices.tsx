@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { lastInvoicesMock } from "./lastInvoicesMock"
-import { InvoiceStatus } from "@/definitions/enums";
 import { BanknoteIcon } from 'lucide-react'
 
 export function LastInvoices() {
