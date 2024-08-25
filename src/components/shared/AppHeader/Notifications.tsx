@@ -35,7 +35,7 @@ export function Notifications() {
 					<Bell className="h-6 w-6" />
 				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="bg-gray-950 text-gray-200 max-w-40">
+			<DropdownMenuContent className="bg-gray-950 text-gray-200">
 				<DropdownMenuLabel>Notificaciones</DropdownMenuLabel>
 				{NotificationsMockData.map((notification, index) => (
 					<DropdownMenuItem key={index} className="cursor-pointer">

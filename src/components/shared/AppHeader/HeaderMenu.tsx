@@ -25,13 +25,14 @@ export function HeaderMenu() {
 					</Button>
 				</div>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="bg-gray-950 text-gray-200 overflow-hidden min-w-10">
+			<DropdownMenuContent className="bg-gray-950 text-gray-200">
 				<DropdownMenuLabel>Empresa</DropdownMenuLabel>
 				<DropdownMenuItem className="cursor-pointer">Facturación</DropdownMenuItem>
 				<DropdownMenuItem className="cursor-pointer">Lista de compras</DropdownMenuItem>
 				<DropdownMenuItem className="cursor-pointer">Reportes</DropdownMenuItem>
 
 				<DropdownMenuSeparator />
+				
 				<DropdownMenuLabel>Aplicación</DropdownMenuLabel>
 				<DropdownMenuItem className="cursor-pointer">Cerrar Sesión</DropdownMenuItem>
 			</DropdownMenuContent>
