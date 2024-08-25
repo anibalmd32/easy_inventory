@@ -1,16 +1,23 @@
+'use client'
+
 import { InvoicesCharts } from './components/InvoicesCharts'
 import { CountEntites } from './components/CountEntities'
-import { PrismaClient } from '@prisma/client'
+import { useEffect } from 'react'
+import { testPrisma } from './actions/testPrisma'
 
-const prisma = new PrismaClient()
+export default function Home() {
 
-export default async function Home() {
+  useEffect(() => {
+    testPrisma()
+      .then(res => {
+        console.log('Esta es la respuesta del server action:', res)
+      })
+
+  }, [])
   
-  const result = await prisma.customer.findMany()
-
   return (
     <div className="flex flex-col md:flex-col-reverse gap-4">
-        <InvoicesCharts message={result} />
+        <InvoicesCharts />
         <CountEntites />
     </div>
   );
