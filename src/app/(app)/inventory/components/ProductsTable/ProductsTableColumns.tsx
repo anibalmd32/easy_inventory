@@ -1,6 +1,6 @@
 "use client"
 import { ColumnDef } from "@tanstack/react-table"
-import { ProductMock } from "./productsMock"
+import { ProductData } from '../../definitions/inventoryData'
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export const columns: ColumnDef<ProductMock>[] = [
+export const ProductsTableColumns: ColumnDef<ProductData>[] = [
 	{
 		accessorKey: 'name',
 		header: () => <div className="text-gray-200 font-bold">Nombre</div>,
