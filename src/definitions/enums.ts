@@ -10,3 +10,21 @@ export enum InvoiceStatus {
 	PENDING,
 	CANCELED
 }
+
+export enum LoadingDataStates {
+    LOADING,
+    SUCCESS,
+    ERROR
+}
+
+export enum ReducerActionTypes {
+    ADD,
+    REMOVE,
+    UPDATE,
+    SELL
+}
+
+export enum SortOrder {
+    ASC,
+    DESC
+}
