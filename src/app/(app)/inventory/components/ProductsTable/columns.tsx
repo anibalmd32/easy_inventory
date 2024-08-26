@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ProductMock } from "./productsMock"
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,7 +40,6 @@ export const columns: ColumnDef<ProductMock>[] = [
 		cell: ({ row }) => {
 			const original = row.original;
 			const quantity = original.quantity;
-
 			const quantityClass = quantity > 5 ? 'text-green-500' : 'text-red-500';
 
 			return <div className={quantityClass}>{ row.getValue('quantity')}</div>
@@ -51,7 +51,9 @@ export const columns: ColumnDef<ProductMock>[] = [
 		enableSorting: true,
 		enableColumnFilter: true,
 		cell: ({ row }) => {
-			return <div>{ row.original.category.name }</div>
+			return <Badge variant={'secondary'}>
+				{row.original.category.name}
+			</Badge>
 		}
 	},
 	

@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { ProductsForm } from "@/app/(app)/inventory/components/ProductsForm"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -47,7 +48,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Buscar productos..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -56,6 +57,8 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm bg-gray-950 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-gray-800"
         />
+
+        <ProductsForm />
       </div>
 
       <div className="rounded-md border bg-gray-950">
@@ -96,7 +99,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  Sin resultados.
                 </TableCell>
               </TableRow>
             )}
