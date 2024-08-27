@@ -8,6 +8,7 @@ export function productsReducer(state: ProductData[] = [], action: ReducerAction
 	}
 
 	const onRemoveData = () => {
+		console.log(action.payload.data);
 		state = state.filter(item => item.id !== action.payload.data.id);
 	}
 
@@ -19,7 +20,6 @@ export function productsReducer(state: ProductData[] = [], action: ReducerAction
 		[ActionTypes.ADD]: onSaveData,
 		[ActionTypes.REMOVE]: onRemoveData,
 		[ActionTypes.UPDATE]: onUpdateData,
-		[ActionTypes.SELL]: onUpdateData,
 	}
 
 	if (actionIndex[action.type]) {

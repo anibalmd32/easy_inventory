@@ -5,13 +5,14 @@ import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+	DropdownMenuItem
 } from "@/components/ui/dropdown-menu"
+import { EditProductBtn, DeletProductBtn } from "./PorductsTableActions"
 
 export const ProductsTableColumns: ColumnDef<ProductData>[] = [
 	{
@@ -52,7 +53,7 @@ export const ProductsTableColumns: ColumnDef<ProductData>[] = [
 		enableColumnFilter: true,
 		cell: ({ row }) => {
 			return <Badge variant={'secondary'}>
-				{row.original.category.name}
+				{row.original.category ? row.original.category.name : 'Sin categoria'}
 			</Badge>
 		}
 	},
@@ -74,7 +75,8 @@ export const ProductsTableColumns: ColumnDef<ProductData>[] = [
 	},
 	{
     id: "actions",
-    cell: ({ row }) => { 
+    cell: ({ row }) => {
+		
 		return (
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
@@ -84,9 +86,11 @@ export const ProductsTableColumns: ColumnDef<ProductData>[] = [
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end" className="bg-gray-800 text-gray-200">
 					<DropdownMenuLabel>Acciones</DropdownMenuLabel>
+
 					<DropdownMenuSeparator />
-					<DropdownMenuItem className="cursor-pointer">Eliminar</DropdownMenuItem>
-					<DropdownMenuItem className="cursor-pointer">Editar</DropdownMenuItem>
+
+					<EditProductBtn rowData={row.original} />
+					<DeletProductBtn rowData={row.original} />
 				</DropdownMenuContent>
 			</DropdownMenu>
 			)

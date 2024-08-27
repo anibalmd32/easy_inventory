@@ -21,7 +21,6 @@ export enum ReducerActionTypes {
     ADD,
     REMOVE,
     UPDATE,
-    SELL
 }
 
 export enum SortOrder {

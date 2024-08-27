@@ -36,8 +36,10 @@ class ProductsOperations {
 		}
 	}
 
-	public remove(product: ProductData) {
+	public async remove(product: ProductData) {
 		this._dependency.loader.trigger();
+
+		console.log(product);
 
 		try {
 			// TODO: Llamada a la API
@@ -56,7 +58,7 @@ class ProductsOperations {
 		}
 	}
 
-	public update(product: ProductData) {
+	public async update(product: ProductData) {
 		this._dependency.loader.trigger();
 		
 		try {

@@ -19,10 +19,10 @@ import useInventory from "../../context/useInventory"
 import { ProductsTableColumns } from "./ProductsTableColumns"
 import { ProductsTablePagination } from "./ProductsTablePagination"
 import { ProductFilter, useProductsFilter } from "../ProductFilter"
-import { ProductsForm } from "../ProductsForm"
+import { ProductsForm, useProductForm } from "../ProductsForm"
 
 export function ProductsTable() {
-  const { products, productsOperations } = useInventory()
+  const { products } = useInventory()
   const { columnFilters, setColumnFilters } = useProductsFilter()
   const table = useReactTable({
     data: products,
@@ -65,19 +65,22 @@ export function ProductsTable() {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className="hover:bg-gray-800/20"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="whitespace-nowrap">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table.getRowModel().rows.map((row) => {
+
+                return (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className="hover:bg-gray-800/20"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id} className="whitespace-nowrap">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                )
+              })
             ) : (
               <TableRow>
                 <TableCell colSpan={ProductsTableColumns.length} className="h-24 text-center">
