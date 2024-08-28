@@ -2,6 +2,18 @@ import { InvoiceData } from "../../definitions/data";
 import { InvoiceStatus } from "@/definitions/enums";
 import { Prisma } from "@prisma/client";
 
+export interface Item {
+	id: number;
+	name: string;
+	price: number;
+	quantity: number;
+	category: {
+		id: number;
+		name: string;
+	};
+	createdAt: string;
+}
+
 const items: Prisma.JsonValue[] = [
 	{
 		id: 1,

@@ -12,6 +12,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { InvoiceDetails } from "./InvoicesTableActions"
 
 export const InvoicesTableColumns: ColumnDef<InvoiceData>[] = [
 	{
@@ -99,8 +100,7 @@ export const InvoicesTableColumns: ColumnDef<InvoiceData>[] = [
 
 					<DropdownMenuSeparator />
 
-					{/* <EditProductBtn rowData={row.original} />
-					<DeletProductBtn rowData={row.original} /> */}
+					<InvoiceDetails rowData={row.original} />
 				</DropdownMenuContent>
 			</DropdownMenu>
 			)
