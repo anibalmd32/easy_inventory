@@ -47,7 +47,10 @@ export function ProductsForm() {
 			setValue("")
 		}}>
 			<SheetTrigger asChild>
-				<Button onClick={() => setOpenForm(true)} className="bg-gray-950 hover:bg-gray-800 text-gray-200 hover:text-gray-200 transition-all duration-300">
+				<Button
+					onClick={() => setOpenForm(true)}
+					className="bg-gray-950 hover:bg-gray-800 text-gray-200 hover:text-gray-200 transition-all duration-300"
+				>
 					Agregar
 				</Button>
 			</SheetTrigger>
@@ -69,14 +72,14 @@ export function ProductsForm() {
 								name="name"
 								render={({ field }) => (
 									<FormItem>
-									<FormLabel>Nombre</FormLabel>
-									<FormControl>
-										<Input
-											className="bg-gray-900 text-gray-200"
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
+										<FormLabel>Nombre</FormLabel>
+										<FormControl>
+											<Input
+												className="bg-gray-900 text-gray-200"
+												{...field}
+											/>
+										</FormControl>
+										<FormMessage />
 									</FormItem>
 								)}
 							/>
