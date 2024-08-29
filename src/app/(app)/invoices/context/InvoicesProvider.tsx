@@ -2,7 +2,7 @@
 
 import React from 'react';	
 import { InvoiceCtx } from '../definitions/invoicesContext';
-import { InvoiceData } from '../definitions/data';
+import { InvoiceData } from '../definitions/invoicesData';
 
 export const InvoicesContext = React.createContext<InvoiceCtx>({} as InvoiceCtx);
 

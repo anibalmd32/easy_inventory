@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button"
-import { Table } from "@tanstack/react-table"
-import { InvoiceData } from "../../definitions/data"
+import { DataTableComponentsProps } from "./types"
 
-interface ProductsTablePaginationProps {
-	table: Table<InvoiceData>
-}
-
-export function InvoicesTablePagination({ table }: ProductsTablePaginationProps) {
+export function DataTablePagination<TData>({
+	table,
+}: DataTableComponentsProps<TData>) {
 	return (
 		<div className="flex items-center justify-end space-x-2 py-4">
 			<Button

@@ -1,4 +1,4 @@
-import { InvoiceData } from "./data"
+import { InvoiceData } from "./invoicesData"
 import { Table } from "@tanstack/react-table";
 
 export interface InvoiceCtx {

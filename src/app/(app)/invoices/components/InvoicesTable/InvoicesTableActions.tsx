@@ -1,4 +1,4 @@
-import { InvoiceData } from "../../definitions/data"
+import { InvoiceData } from "../../definitions/invoicesData"
 import { Calendar, User, Loader, Printer} from 'lucide-react'
 import { Badge } from "@/components/ui/badge"
 import {

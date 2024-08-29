@@ -1,4 +1,4 @@
-import { InvoiceData } from "../../definitions/data";
+import { InvoiceData } from "../../definitions/invoicesData";
 import { InvoiceStatus } from "@/definitions/enums";
 import { Prisma } from "@prisma/client";
 

@@ -1,6 +1,6 @@
 "use client"
 import { ColumnDef } from "@tanstack/react-table"
-import { InvoiceData } from '../../definitions/data'
+import { InvoiceData } from '../definitions/invoicesData'
 import { InvoiceStatus } from "@/definitions/enums"
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -12,9 +12,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { InvoiceDetails } from "./InvoicesTableActions"
+import { InvoiceDetails } from "../components/InvoicesTable/InvoicesTableActions"
 
-export const InvoicesTableColumns: ColumnDef<InvoiceData>[] = [
+export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
 	{
 		accessorKey: 'id',
 		header: () => <div className="text-gray-200 font-bold">ID</div>,

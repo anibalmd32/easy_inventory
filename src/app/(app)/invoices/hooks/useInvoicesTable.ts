@@ -1,7 +1,7 @@
 'use client'
 
 import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-import { InvoicesTableColumns } from "../components/InvoicesTable/InvoicesTableColumn";
+import { invoicesTableColumns } from '../utils/invoicesTableColumns'
 import { useInvoices } from "../context/useInvoices";
 import { useInvoicesFilter } from "./useInvoicesFilter";
 
@@ -11,7 +11,7 @@ export const useInvoicesTable = () => {
 
 	const table = useReactTable({
 		data: invoices,
-		columns: InvoicesTableColumns,
+		columns: invoicesTableColumns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
 		onColumnFiltersChange: setColumnFilters,
