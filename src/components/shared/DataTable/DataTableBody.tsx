@@ -1,11 +1,15 @@
 import { TableBody, TableCell, TableRow } from '@/components/ui/table'
-import { DataTableProps } from './types'
-import { flexRender } from '@tanstack/react-table'
+import { ColumnDef, flexRender, Table } from '@tanstack/react-table'
+
+type DataTableBodyProps<TData, TValue> = {
+	table: Table<TData>;
+	columns: ColumnDef<TData, TValue>[]
+}
 
 export function DataTableBody<TData, TValue>({
-	tableHook: table,
+	table,
 	columns,
-}: DataTableProps<TData, TValue>) {
+}: DataTableBodyProps<TData, TValue>) {
 	return (
 		<>
 			<TableBody>

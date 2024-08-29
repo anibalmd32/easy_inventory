@@ -1,17 +1,17 @@
 'use client'
 
 import { DataTable } from "@/components/shared/DataTable";
-import { useInvoicesTable } from "../../hooks/useInvoicesTable";
 import { invoicesTableColumns } from '../../utils/invoicesTableColumns'
+import { useInvoices } from "../../context/useInvoices";
 
 export function InvoicesTable() {
-	const { table } = useInvoicesTable();
+	const { invoices } = useInvoices();
 
 	return (
 		<div>
 			<DataTable
 				columns={invoicesTableColumns}
-				tableHook={table}
+				data={invoices}
 				filterColumn="customer"
 			/>
 		</div>

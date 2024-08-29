@@ -1,10 +1,13 @@
 import { TableHeader, TableHead, TableRow } from "@/components/ui/table"
-import { DataTableComponentsProps } from "./types"
-import { flexRender } from "@tanstack/react-table"
+import { flexRender, Table } from "@tanstack/react-table"
+
+type DataTableHeaderProps<TData> = {
+	table: Table<TData>;
+}
 
 export function DataTableHeader<TData>({
 	table,
-}: DataTableComponentsProps<TData>) {
+}: DataTableHeaderProps<TData>) {
 	return (
 		<TableHeader>
 			{table.getHeaderGroups().map((headerGroup) => (

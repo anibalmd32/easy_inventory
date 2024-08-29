@@ -1,10 +1,15 @@
-import { DataTableProps } from "./types"
 import { Input } from "@/components/ui/input"
+import { Table } from "@tanstack/react-table";
 
-export function DataTableFilter<TData, TValue>({
-	tableHook: table,
+type DataTableFilterProps<TData> = {
+	table: Table<TData>;
+	filterColumn?: string;
+}
+
+export function DataTableFilter<TData>({
+	table,
 	filterColumn
-}: Omit<DataTableProps<TData, TValue>, "columns">) {
+}: Omit<DataTableFilterProps<TData>, "columns">) {
 	return (
 		<div className="flex items-center justify-between py-4">
 			<Input
