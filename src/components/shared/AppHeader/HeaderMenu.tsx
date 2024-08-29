@@ -29,7 +29,7 @@ export function HeaderMenu() {
 				<DropdownMenuLabel>Empresa</DropdownMenuLabel>
 				<DropdownMenuItem className="cursor-pointer">Facturación</DropdownMenuItem>
 				<DropdownMenuItem className="cursor-pointer">Lista de compras</DropdownMenuItem>
-				<DropdownMenuItem className="cursor-pointer">Reportes</DropdownMenuItem>
+				<DropdownMenuItem className="cursor-pointer">Agregar producto</DropdownMenuItem>
 
 				<DropdownMenuSeparator />
 				

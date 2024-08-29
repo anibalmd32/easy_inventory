@@ -1,6 +1,6 @@
 "use client"
 import { ColumnDef } from "@tanstack/react-table"
-import { ProductData } from '../../definitions/inventoryData'
+import { ProductData } from '../definitions/inventoryData'
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -11,32 +11,34 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { EditProductBtn, DeletProductBtn } from "./PorductsTableActions"
+import { EditProductBtn, DeletProductBtn } from "../components/ProductsTable/ProductsTableActions"
+import { DataTableColumnHeader } from "@/components/shared/DataTable"
+import { formatDate	} from "@/lib/utils"
 
-export const ProductsTableColumns: ColumnDef<ProductData>[] = [
+export const productsTableColumns: ColumnDef<ProductData>[] = [
 	{
 		accessorKey: 'name',
-		header: () => <div className="text-gray-200 font-bold">Nombre</div>,
-		enableSorting: true,
+		enableSorting: false,
 		enableColumnFilter: true,
+		header: ({column}) => <DataTableColumnHeader column={column} title="Nombre" />,
 		cell: ({ row }) => {
 			return <div>{ row.getValue('name')}</div>
 		}
 	},
 	{
 		accessorKey: 'price',
-		header: () => <div className="text-gray-200 font-bold">Precio</div>,
 		enableSorting: true,
-		enableColumnFilter: true,
+		enableColumnFilter: false,
+		header: ({column}) => <DataTableColumnHeader column={column} title="Precio" />,
 		cell: ({ row }) => {
 			return <div>${ row.getValue('price')}</div>
 		}
 	},
 	{
 		accessorKey: 'quantity',
-		header: () => <div className="text-gray-200 font-bold">Cantidad</div>,
 		enableSorting: true,
-		enableColumnFilter: true,
+		enableColumnFilter: false,
+		header: ({column}) => <DataTableColumnHeader column={column} title="Cantidad" />,
 		cell: ({ row }) => {
 			const original = row.original;
 			const quantity = original.quantity;
@@ -47,11 +49,11 @@ export const ProductsTableColumns: ColumnDef<ProductData>[] = [
 	},
 	{
 		accessorKey: 'category',
-		header: () => <div className="text-gray-200 font-bold">Categoria</div>,
-		enableSorting: true,
-		enableColumnFilter: true,
+		enableSorting: false,
+		enableColumnFilter: false,
+		header: ({column}) => <DataTableColumnHeader column={column} title="Categoria" />,
 		cell: ({ row }) => {
-			return <Badge variant={'secondary'}>
+			return <Badge variant={'default'}>
 				{row.original.category ? row.original.category.name : 'Sin categoria'}
 			</Badge>
 		}
@@ -59,17 +61,12 @@ export const ProductsTableColumns: ColumnDef<ProductData>[] = [
 	
 	{
 		accessorKey: 'createdAt',
-		header: () => <div className="text-gray-200 font-bold">Creado</div>,
 		enableSorting: true,
-		enableColumnFilter: true,
+		enableColumnFilter: false,
+		header: ({column}) => <DataTableColumnHeader column={column} title="Agregado" />,
 		cell: ({ row }) => {
 			const date = new Date(row.getValue('createdAt'));
-			return <div>{date.toLocaleDateString('es-ES', {
-				weekday: 'long',
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric',
-			}) }</div>
+			return <div>{formatDate(date)}</div>
 		}
 	},
 	{
