@@ -11,9 +11,9 @@ export function DataTableBody<TData, TValue>({
 			<TableBody>
 				{table.getRowModel().rows?.length ? (
 					table.getRowModel().rows.map((row) => (
-						<TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+						<TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className='hover:bg-gray-800'>
 							{row.getVisibleCells().map((cell) => (
-								<TableCell key={cell.id}>
+								<TableCell key={cell.id} className='min-w-16'>
 									{flexRender(cell.column.columnDef.cell, cell.getContext())}
 								</TableCell>
 							))}

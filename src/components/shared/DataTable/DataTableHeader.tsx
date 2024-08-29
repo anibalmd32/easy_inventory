@@ -8,7 +8,7 @@ export function DataTableHeader<TData>({
 	return (
 		<TableHeader>
 			{table.getHeaderGroups().map((headerGroup) => (
-				<TableRow key={headerGroup.id}>
+				<TableRow key={headerGroup.id} className="hover:bg-gray-800/20">
 					{headerGroup.headers.map((header) => {
 						return (
 							<TableHead key={header.id}>

@@ -1,13 +1,23 @@
 'use client'
 
-import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import {
+	ColumnFiltersState,
+	getCoreRowModel,
+	getFilteredRowModel,
+	getPaginationRowModel,
+	useReactTable,
+	SortingState,
+	getSortedRowModel,
+} from "@tanstack/react-table";
 import { invoicesTableColumns } from '../utils/invoicesTableColumns'
 import { useInvoices } from "../context/useInvoices";
-import { useInvoicesFilter } from "./useInvoicesFilter";
+import React from "react";
 
 export const useInvoicesTable = () => {
+	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+	const [sorting, setSorting] = React.useState<SortingState>([])
+
 	const { invoices } = useInvoices();
-	const { setColumnFilters, columnFilters } = useInvoicesFilter();
 
 	const table = useReactTable({
 		data: invoices,
@@ -16,8 +26,11 @@ export const useInvoicesTable = () => {
 		getPaginationRowModel: getPaginationRowModel(),
 		onColumnFiltersChange: setColumnFilters,
 		getFilteredRowModel: getFilteredRowModel(),
+		onSortingChange: setSorting,
+    	getSortedRowModel: getSortedRowModel(),
 		state: {
-		  columnFilters,
+			columnFilters,
+			sorting,
 		}
 	});
 

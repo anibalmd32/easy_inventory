@@ -14,7 +14,7 @@ export default function HomeLayout({
 			<AppHeader appName="Easy Inventory" appLogo="/billing.svg" />
 			<PageContainer>{ children }</PageContainer>
 			<AppMenu />
-			<AppBackground />
+			{/* <AppBackground /> */}
 		</main>
 	)
 }

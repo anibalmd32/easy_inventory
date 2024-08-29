@@ -13,32 +13,31 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { InvoiceDetails } from "../components/InvoicesTable/InvoicesTableActions"
+import { DataTableColumnHeader } from "@/components/shared/DataTable"
 
 export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
 	{
 		accessorKey: 'id',
-		header: () => <div className="text-gray-200 font-bold">ID</div>,
 		enableSorting: true,
-		enableColumnFilter: true,
+		header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />,
 		cell: ({ row }) => {
-			return <div>{ row.getValue('id')}</div>
+			return <div className="min-w-16">{ row.getValue('id')}</div>
 		}
 	},
 	{
 		accessorKey: 'customer',
-		header: () => <div className="text-gray-200 font-bold">Cliente</div>,
-		enableSorting: true,
+		enableSorting: false,
 		enableColumnFilter: true,
+		header: ({ column }) => <DataTableColumnHeader column={column} title="Cliente" />,
 		cell: ({ row }) => {
 			const customer = row.original.customer;
-			return <div>{ customer.name }</div>
+			return <div className="min-w-16">{ customer.name }</div>
 		}
 	},
 	{
 		accessorKey: 'status',
-		header: () => <div className="text-gray-200 font-bold">Estado</div>,
-		enableSorting: true,
-		enableColumnFilter: true,
+		enableSorting: false,
+		header: ({ column }) => <DataTableColumnHeader column={column} title="Estado" />,
 		cell: ({ row }) => {
 			const original = row.original;
 			const status = original.status;
@@ -55,19 +54,17 @@ export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
 	},
 	{
 		accessorKey: 'total',
-		header: () => <div className="text-gray-200 font-bold">Total</div>,
 		enableSorting: true,
-		enableColumnFilter: true,
+		header: ({ column }) => <DataTableColumnHeader column={column} title="Total" />,
 		cell: ({ row }) => {
 			const total = row.original.total
-			return <div>${ total }</div>
+			return <div className="min-w-16">${ total }</div>
 		}
 	},
 	{
 		accessorKey: 'generatedAt',
-		header: () => <div className="text-gray-200 font-bold">Fecha</div>,
-		enableSorting: true,
-		enableColumnFilter: true,
+		enableSorting: false,
+		header: ({ column }) => <DataTableColumnHeader column={column} title="Fecha" />,
 		cell: ({ row }) => {
 			const date = row.original.generatedAt
 			const formatedDate = date.toLocaleDateString('es-ES', {
@@ -78,7 +75,7 @@ export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
 			})
 
 			return (
-				<div className="text-gray-200">
+				<div className="min-w-16">
 					{formatedDate}
 				</div>
 			)
