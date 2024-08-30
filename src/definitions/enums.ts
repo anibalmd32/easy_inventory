@@ -27,3 +27,8 @@ export enum SortOrder {
     ASC,
     DESC
 }
+
+export enum TRENDING {
+	UP = 1,
+	DOWN = 2,
+}
