@@ -1,4 +1,4 @@
-import { COUNT_TENDENCY, LoadingDataStates,  ReducerActionTypes } from './enums';
+import { CHART_FOR, TRENDING, LoadingDataStates,  MONTHS,  ReducerActionTypes } from './enums';
 
 export type LoadingData = {
 	state: LoadingDataStates;
@@ -18,7 +18,13 @@ export type EntityCountItem = {
 	totalCount: number;
 	percentage: {
 		rate: string;
-		tendency: COUNT_TENDENCY;
+		tendency: TRENDING;
 	},
 	isCash?: boolean;
+}
+
+export type MonthlyChartItem = {
+	month: MONTHS,
+	[CHART_FOR.PAID]: number;
+	[CHART_FOR.CANCELED]: number
 }
