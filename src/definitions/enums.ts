@@ -1,4 +1,4 @@
-export enum ActionTypes {
+export enum APP_ACTIONS {
     ADD,
     REMOVE,
     SELL,
@@ -11,27 +11,22 @@ export enum ActionTypes {
     DELETE,
 }
 
-export enum InvoiceStatus {
-	PAID,
-	PENDING,
-	CANCELED
+export enum INVOICE_STATUS {
+	PAID = 1,
+	PENDING = 2,
+	CANCELED = 3,
 }
 
-export enum LoadingDataStates {
+export enum FETCH_STATUS {
     LOADING,
     SUCCESS,
     ERROR
 }
 
-export enum ReducerActionTypes {
-    ADD,
-    REMOVE,
-    UPDATE,
-}
 
-export enum SortOrder {
-    ASC,
-    DESC
+export enum SORT_ORDER {
+    ASC = 'asc',
+    DESC = 'desc'
 }
 
 export enum TRENDING {
@@ -52,6 +47,16 @@ export enum MONTHS {
 	OBTUBRE = 'obtubre',
 	NOMVIEMBRE = 'noviembre',
 	DICIEMBRE = 'diciembre'
+}
+
+export enum DAYS {
+	LUNES = 'lunes',
+	MARTES = 'martes',
+	MIERCOLES = 'miercoles',
+	JUEVES = 'jueves',
+	VIERNES = 'viernes',
+	SABADO = 'sabado',
+	DOMINGO = 'domingo'
 }
 
 export enum CHART_FOR {

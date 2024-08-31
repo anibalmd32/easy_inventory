@@ -1,5 +1,4 @@
 'use client'
-
 import { MonthAreaChart } from './MonthAreaChart'
 import { WeekBarChar } from './WeekBarChar'
 

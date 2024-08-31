@@ -1,24 +1,32 @@
-'use client'
+/** PROVIDERS */
+import { HomeProvider } from './HomeProvider'
 
+/** SERVER ACTIONS */
+import { ChartsServer } from './actions/charts/ChartsServer'
+import { CountsServer } from './actions/counts/CountsServer'
+
+/** COMPONENTS */
 import { InvoicesCharts } from './components/InvoicesCharts'
 import { CountEntites } from './components/CountEntities'
-import { useEffect } from 'react'
-import { testPrisma } from './actions/testPrisma'
 
-export default function Home() {
+export default async function Home() {
+	const chartsServer = new ChartsServer()
+	const countsServer = new CountsServer()
 
-  useEffect(() => {
-    testPrisma()
-      .then(res => {
-        console.log('Esta es la respuesta del server action:', res)
-      })
-
-  }, [])
+	const entityCountData = await countsServer.getEntityCountData()
+	const monthlyChartData = await chartsServer.getMonthlyChartData()
+	const weeklyChartData = await chartsServer.getWeeklyChartData()
   
-  return (
-    <div className="flex flex-col md:flex-col-reverse gap-4">
-        <InvoicesCharts />
-        <CountEntites />
-    </div>
-  );
+	return (
+		<HomeProvider initialData={{
+			entityCountData,
+			monthlyChartData,
+			weeklyChartData
+		}}>
+			<div className="flex flex-col md:flex-col-reverse gap-4">
+				<InvoicesCharts />
+				<CountEntites />
+			</div>
+		</HomeProvider>
+	);
 }

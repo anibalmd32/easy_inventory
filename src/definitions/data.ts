@@ -1,4 +1,4 @@
-import type { ActionTypes, InvoiceStatus } from "./enums";
+import type { APP_ACTIONS, INVOICE_STATUS } from "./enums";
 
 export interface Category {
 	id: number;
@@ -13,18 +13,21 @@ export interface Product {
 	categoryId?: number;
 	createdAt: string;
 	updatedAt: string;
+	category?: Category;
 }
 
 export interface ShopingList {
 	id: number;
 	productId: number;
 	isPurchased: boolean;
+	product: Product;
 }
 
 export interface Sale {
 	id: number;
 	productId: number;
 	productQuantity: number;
+	product: Product;
 }
 
 export interface Customer {
@@ -38,13 +41,15 @@ export interface SaleToCustomer {
 	id: number;
 	customerId: number;
 	saleId: number;
+	customer: Customer;
+	sale: Sale;
 }
 
 export interface Invoice {
 	id: number;
 	items: SaleToCustomer[];
 	total: string;
-	status: InvoiceStatus;
+	status: INVOICE_STATUS;
 	generatedAt: string;
 	paidAt?: string;
 	canceledAt?: string;
@@ -63,11 +68,12 @@ export interface Setting {
 	logoUrl: string;
 	minimumStock: number;
 	invoiceTemplateId: number;
+	invoiceTemplate?: InvoiceTemplate;
 }
 
 export interface Notification {
 	id: number;
-	action: ActionTypes;
+	action: APP_ACTIONS;
 	description: string;
 	emitedAt: string;
 }

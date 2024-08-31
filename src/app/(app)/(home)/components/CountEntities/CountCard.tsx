@@ -1,12 +1,8 @@
-import { EntityCountItem, TRENDING } from "@/definitions"
-import { TrendingDown, TrendingUp } from 'lucide-react'
+'use client'
+import * as ShadCard from '@/components/ui/card'
 import NumberTicker from "@/components/magicui/number-ticker";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
+import { TrendingDown, TrendingUp } from 'lucide-react'
+import { EntityCountItem, TRENDING } from "@/definitions"
 
 interface CountCardProps {
 	item: EntityCountItem;
@@ -16,14 +12,14 @@ export const CountCard = ({ item }: CountCardProps) => {
 	const { icon: Icon, percentage, title, totalCount, isCash } = item;
 
 	return (
-		<Card className="bg-gray-900 text-gray-200">
-			<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-				<CardTitle className="text-sm font-medium">
+		<ShadCard.Card className="bg-gray-900 text-gray-200">
+			<ShadCard.CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+				<ShadCard.CardTitle className="text-sm font-medium">
 					{title}
-				</CardTitle>
+				</ShadCard.CardTitle>
 				<Icon className="h-4 w-4 text-muted" />
-			</CardHeader>
-			<CardContent className="space-y-2">
+			</ShadCard.CardHeader>
+			<ShadCard.CardContent className="space-y-2">
 				<div className="text-2xl font-bold">
 					{isCash && '$'}<NumberTicker className="text-gray-100" value={totalCount} />
 				</div>
@@ -33,13 +29,11 @@ export const CountCard = ({ item }: CountCardProps) => {
 				>
 					{percentage.tendency === TRENDING.UP ? '+' : '-'}
 					{percentage.rate}%
-					{
-						percentage.tendency === TRENDING.UP
-							? <TrendingUp className="h-4 w-4" />
-							: <TrendingDown className="h-4 w-4" />
-					}
+					{percentage.tendency === TRENDING.UP
+						? <TrendingUp className="h-4 w-4" />
+						: <TrendingDown className="h-4 w-4" />}
 				</p>
-			</CardContent>
-		</Card>
+			</ShadCard.CardContent>
+		</ShadCard.Card>
 	)
 }

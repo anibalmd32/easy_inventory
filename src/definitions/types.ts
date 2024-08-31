@@ -1,15 +1,8 @@
-import { CHART_FOR, TRENDING, LoadingDataStates,  MONTHS,  ReducerActionTypes } from './enums';
+import { CHART_FOR, TRENDING, FETCH_STATUS, MONTHS, DAYS } from './enums';
 
 export type LoadingData = {
-	state: LoadingDataStates;
+	state: FETCH_STATUS;
 	message: string;
-}
-
-export type ReducerAction<T> = {
-	type: ReducerActionTypes;
-	payload: {
-		data: T;
-	};
 }
 
 export type EntityCountItem = {
@@ -25,6 +18,12 @@ export type EntityCountItem = {
 
 export type MonthlyChartItem = {
 	month: MONTHS,
+	[CHART_FOR.PAID]: number;
+	[CHART_FOR.CANCELED]: number
+}
+
+export type WeeklyChartItem = {
+	day: DAYS,
 	[CHART_FOR.PAID]: number;
 	[CHART_FOR.CANCELED]: number
 }

@@ -1,36 +1,27 @@
 "use client"
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
-import {
-	ChartContainer,
-	ChartLegend,
-	ChartLegendContent,
-	ChartTooltip,
-	ChartTooltipContent,
-} from "@/components/ui/chart"
-import { monthlyChartData } from './charts.data'
+import * as Reacharts from "recharts"
+import * as ShadCard from '@/components/ui/card'
+import * as ShadChart from '@/components/ui/chart'
 import { chartConfig } from './chartConfig'
 import { CHART_FOR } from '@/definitions'
+import { useHome } from "@/app/(app)/(home)/hooks/useHome"
 
 export function MonthAreaChart() {
+	const { monthlyChartData } = useHome()
+
 	return (
-		<Card className="bg-gray-900 text-gray-200">
-			<CardHeader>
-				<CardTitle>Facturas de los ultimos meses</CardTitle>
-				<CardDescription>
+		<ShadCard.Card className="bg-gray-900 text-gray-200">
+			<ShadCard.CardHeader>
+				<ShadCard.CardTitle>
+					Facturas de los ultimos meses
+				</ShadCard.CardTitle>
+				<ShadCard.CardDescription>
 					Graficos comparativo de las facturas pagadas y canceladas de los ultimos 6 meses
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<ChartContainer config={chartConfig}>
-					<AreaChart
+				</ShadCard.CardDescription>
+			</ShadCard.CardHeader>
+			<ShadCard.CardContent>
+				<ShadChart.ChartContainer config={chartConfig}>
+					<Reacharts.AreaChart
 						accessibilityLayer
 						data={monthlyChartData}
 						margin={{
@@ -38,20 +29,20 @@ export function MonthAreaChart() {
 							right: 12,
 						}}
 					>
-						<CartesianGrid vertical={false} />
-						<XAxis
+						<Reacharts.CartesianGrid vertical={false} />
+						<Reacharts.XAxis
 							dataKey="month"
 							tickLine={false}
 							axisLine={false}
 							tickMargin={8}
 							tickFormatter={(value) => value.slice(0, 3)}
 						/>
-						<ChartTooltip
+						<ShadChart.ChartTooltip
 							cursor={false}
-							content={<ChartTooltipContent className="bg-gray-900" indicator="dot" />}
+							content={<ShadChart.ChartTooltipContent className="bg-gray-900" indicator="dot" />}
 						/>
 						
-						<Area
+						<Reacharts.Area
 							dataKey={CHART_FOR.CANCELED}
 							type="natural"
 							fill="var(--color-canceled)"
@@ -59,7 +50,7 @@ export function MonthAreaChart() {
 							stroke="var(--color-canceled)"
 							stackId="a"
 						/>
-						<Area
+						<Reacharts.Area
 							dataKey={CHART_FOR.PAID}
 							type="natural"
 							fill="var(--color-paid)"
@@ -67,10 +58,10 @@ export function MonthAreaChart() {
 							stroke="var(--color-paid)"
 							stackId="a"
 						/>
-						<ChartLegend content={<ChartLegendContent />} />
-					</AreaChart>
-				</ChartContainer>
-			</CardContent>
-		</Card>
+						<ShadChart.ChartLegend content={<ShadChart.ChartLegendContent />} />
+					</Reacharts.AreaChart>
+				</ShadChart.ChartContainer>
+			</ShadCard.CardContent>
+		</ShadCard.Card>
 	)
 }
