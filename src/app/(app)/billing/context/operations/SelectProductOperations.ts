@@ -1,4 +1,4 @@
-import { Product } from "@/definitions/entities";
+import { Product } from "@/definitions";
 import { ICart } from '@/app/(app)/billing/definitions/context';
 import { CartReducerAction, CART_ACTIONS } from "../../reducers/cartReducer";
 import { generateCartId } from "@/lib/utils";

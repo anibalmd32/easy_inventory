@@ -1,4 +1,6 @@
-import { EntityCountItem,  TRENDING } from '@/definitions'
+'use client'
+
+import { EntityCountItem, TRENDING } from '@/definitions'
 import { Receipt, DollarSign, Users, Calculator, ShoppingCart } from 'lucide-react'
 
 export const entityCountData: EntityCountItem[] = [

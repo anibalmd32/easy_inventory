@@ -40,7 +40,7 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
 					<div className="flex gap-2 items-center">
 						<User />
 						<span>
-							{rowData.items[0].customer.name}
+							{rowData.cutomerName}
 						</span>
 					</div>
 					<div className="flex gap-2 items-center">
@@ -49,7 +49,7 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
 					</div>
 					<div className="flex gap-2 items-center">
 						<Loader />
-						<Badge className={statusClass[status]}>
+						<Badge variant={'default'} className={statusClass[status]}>
 							{status === INVOICE_STATUS.PAID && "Pagada"}
 							{status === INVOICE_STATUS.CANCELED && "Cancelada"}
 							{status === INVOICE_STATUS.PENDING && "Por pagar"}

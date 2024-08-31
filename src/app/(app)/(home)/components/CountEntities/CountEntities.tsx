@@ -1,3 +1,4 @@
+'use client'
 import { CountCard } from './CountCard'
 import { useHome } from '@/app/(app)/(home)/hooks/useHome'
 

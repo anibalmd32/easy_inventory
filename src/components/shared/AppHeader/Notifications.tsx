@@ -8,19 +8,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import { Notification } from '@/definitions/entities';
-import { ActionTypes } from '@/definitions/enums';
-
+import { Notification, APP_ACTIONS } from '@/definitions';
+ 
 const NotificationsMockData: Notification[] = [
 	{
 		id: 1,
-		action: ActionTypes.SELL,
+		action: APP_ACTIONS.SELL,
 		description: 'Se ha añadido un nuevo pedido',
 		emitedAt: '2022-01-03',
 	},
 	{
 		id: 2,
-		action: ActionTypes.ADD,
+		action: APP_ACTIONS.ADD,
 		description: 'Se ha añadido un nuevo pedido',
 		emitedAt: '2022-01-03',
 	},

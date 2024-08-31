@@ -1,5 +1,5 @@
 'use client'
-import { Product } from '@/definitions/entities';
+import { Product } from '@/definitions';
 import React from 'react';
 import { BillingCtx, ICart } from '@/app/(app)/billing/definitions/context';
 import SelectProductOperations from './operations/SelectProductOperations';

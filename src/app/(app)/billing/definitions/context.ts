@@ -1,4 +1,4 @@
-import { Product } from "@/definitions/entities";
+import { Product } from "@/definitions";
 import SelectProductOperations from "../context/operations/SelectProductOperations";
 
 export interface BillingCtx {

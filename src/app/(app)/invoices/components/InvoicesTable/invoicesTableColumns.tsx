@@ -24,8 +24,8 @@ export const invoicesTableColumns: ColumnDef<Invoice>[] = [
 		enableColumnFilter: true,
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Cliente" />,
 		cell: ({ row }) => {
-			const customer = row.original.items[0].customer;
-			return <div className="min-w-16">{ customer.name }</div>
+			const customer = row.original.cutomerName;
+			return <div className="min-w-16">{ customer }</div>
 		}
 	},
 	{
@@ -35,10 +35,14 @@ export const invoicesTableColumns: ColumnDef<Invoice>[] = [
 		cell: ({ row }) => {
 			const original = row.original;
 			const status = original.status;
-			const quantityClass = status === INVOICE_STATUS.PAID ? 'text-green-500' : 'text-red-500';
+			const statusClass = {
+				[INVOICE_STATUS.PAID]: 'bg-green-500',
+				[INVOICE_STATUS.CANCELED]: 'bg-red-500',
+				[INVOICE_STATUS.PENDING]: 'bg-yellow-500',
+			};
 
 			return (
-				<Badge className={quantityClass}>
+				<Badge variant={'default'} className={`${statusClass[status]}`}>
 					{status === INVOICE_STATUS.PAID && "Pagada"}
 					{status === INVOICE_STATUS.CANCELED && "Cancelada"}
 					{status === INVOICE_STATUS.PENDING && "Por pagar"}

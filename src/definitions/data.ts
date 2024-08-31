@@ -52,6 +52,7 @@ export interface Invoice {
 	total: string;
 	status: INVOICE_STATUS;
 	generatedAt: string;
+	cutomerName: string;
 	paidAt?: string;
 	canceledAt?: string;
 }

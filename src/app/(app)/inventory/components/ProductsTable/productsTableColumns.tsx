@@ -49,7 +49,7 @@ export const productsTableColumns: ColumnDef<Product>[] = [
 		cell: ({ row }) => {
 			const category = row.original.category;
 			return (
-				<Badge variant={'default'} className={`bg-[${category?.color}]`}>
+				<Badge variant={'default'} style={{ backgroundColor: category?.color }}>
 					{category ? category.name : 'Sin categoria'}
 				</Badge>
 			)

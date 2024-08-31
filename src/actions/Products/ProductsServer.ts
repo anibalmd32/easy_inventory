@@ -1,8 +1,6 @@
 'use server'
 import { productsMock } from './products.mock'
 
-export class ProductsServer {
-	async getProducts() {
-		return productsMock
-	}
+export async function getProducts() {
+	return productsMock
 }

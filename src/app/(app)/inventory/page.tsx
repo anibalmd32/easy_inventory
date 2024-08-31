@@ -2,15 +2,14 @@
 import { InventoryProvider } from './InventoryProvider'
 
 /** SERVER ACTIONS */
-import { ProductsServer } from '../../../actions/Products/ProductsServer'
+import { getProducts } from '@/actions/Products/ProductsServer'
 
 /** COMPONENTS */
 import { ProductsTable } from './components/ProductsTable'
 import { PageTitle } from '@/components/shared/PageTitle'
 
 export default async function InventoryPage() {
-	const productsServer = new ProductsServer()
-	const products = await productsServer.getProducts()
+	const products = await getProducts()
 
 	return (
 		<InventoryProvider initialData={{

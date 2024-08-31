@@ -1,3 +1,4 @@
+'use client'
 import React from "react"
 import * as ShadAlert from "@/components/ui/alert-dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
