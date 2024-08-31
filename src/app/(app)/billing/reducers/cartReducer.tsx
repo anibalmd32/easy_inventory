@@ -13,7 +13,6 @@ export type CartReducerAction = {
 	};
 }
 
-
 export function cartReducer(state: ICart = {} as ICart, action: CartReducerAction) {
 	const onAddToCart = () => {		
 		state.products = action.payload.data.products;

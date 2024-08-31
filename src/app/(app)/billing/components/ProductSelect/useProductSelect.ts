@@ -3,7 +3,7 @@
 import React from 'react'
 import { useBilling } from '../../context/useBilling'
 import { ComboboxItem } from '@/components/shared/Combobox'
-import { productItemsMapper } from '../utils/productItemsMapper'
+import { productItemsMapper } from '../../utils/productItemsMapper'
 
 export function useProductSelect() {
 	const [productItems, setProductItems] = React.useState<ComboboxItem[]>([])
