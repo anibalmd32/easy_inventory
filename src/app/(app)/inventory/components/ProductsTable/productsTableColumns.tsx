@@ -1,21 +1,15 @@
 "use client"
-import { ColumnDef } from "@tanstack/react-table"
-import { ProductData } from '../definitions/inventoryData'
-import { MoreHorizontal } from "lucide-react"
+import { DataTableColumnHeader } from "@/components/shared/DataTable"
+import * as ShadDropdown from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { EditProductBtn, DeletProductBtn } from "../components/ProductsTable/ProductsTableActions"
-import { DataTableColumnHeader } from "@/components/shared/DataTable"
+import { EditProductBtn, DeletProductBtn } from "./ProductsTableActions"
+import { MoreHorizontal } from "lucide-react"
+import { ColumnDef } from "@tanstack/react-table"
+import { Product } from '@/definitions'
 import { formatDate	} from "@/lib/utils"
 
-export const productsTableColumns: ColumnDef<ProductData>[] = [
+export const productsTableColumns: ColumnDef<Product>[] = [
 	{
 		accessorKey: 'name',
 		enableSorting: false,
@@ -53,12 +47,14 @@ export const productsTableColumns: ColumnDef<ProductData>[] = [
 		enableColumnFilter: false,
 		header: ({column}) => <DataTableColumnHeader column={column} title="Categoria" />,
 		cell: ({ row }) => {
-			return <Badge variant={'default'}>
-				{row.original.category ? row.original.category.name : 'Sin categoria'}
-			</Badge>
+			const category = row.original.category;
+			return (
+				<Badge variant={'default'} className={`bg-[${category?.color}]`}>
+					{category ? category.name : 'Sin categoria'}
+				</Badge>
+			)
 		}
 	},
-	
 	{
 		accessorKey: 'createdAt',
 		enableSorting: true,
@@ -72,24 +68,22 @@ export const productsTableColumns: ColumnDef<ProductData>[] = [
 	{
     id: "actions",
     cell: ({ row }) => {
-		
 		return (
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
+			<ShadDropdown.DropdownMenu>
+				<ShadDropdown.DropdownMenuTrigger asChild>
 				<Button variant="ghost" className="h-8 w-8 p-0">
 					<MoreHorizontal className="h-4 w-4" />
 				</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent align="end" className="bg-gray-800 text-gray-200">
-					<DropdownMenuLabel>Acciones</DropdownMenuLabel>
+				</ShadDropdown.DropdownMenuTrigger>
+				<ShadDropdown.DropdownMenuContent align="end" className="bg-gray-800 text-gray-200">
+					<ShadDropdown.DropdownMenuLabel>Acciones</ShadDropdown.DropdownMenuLabel>
 
-					<DropdownMenuSeparator />
+					<ShadDropdown.DropdownMenuSeparator />
 
 					<EditProductBtn rowData={row.original} />
 					<DeletProductBtn rowData={row.original} />
-				</DropdownMenuContent>
-			</DropdownMenu>
-			)
-		},
+				</ShadDropdown.DropdownMenuContent>
+			</ShadDropdown.DropdownMenu>	
+		)},
 	},
 ]

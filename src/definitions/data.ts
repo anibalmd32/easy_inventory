@@ -3,6 +3,7 @@ import type { APP_ACTIONS, INVOICE_STATUS } from "./enums";
 export interface Category {
 	id: number;
 	name: string;
+	color: string;
 }
 
 export interface Product {

@@ -1,8 +1,16 @@
-import { ProductData } from "../definitions/inventoryData";
-import { ActionTypes } from "@/definitions/enums";
-import { ReducerAction } from "@/definitions/types";
+import { Product } from "@/definitions";
+import { ReducerAction } from "@/definitions";
 
-export function productsReducer(state: ProductData[] = [], action: ReducerAction<ProductData>) {
+export enum PRODUCTS_ACTIONS {
+	ADD,
+	REMOVE,
+	UPDATE,
+}
+
+export function productsReducer(
+	state: Product[] = [],
+	action: ReducerAction<Product, PRODUCTS_ACTIONS>
+) {
 	const onSaveData = () => {
 		state = [action.payload.data, ...state];
 	}
@@ -16,15 +24,12 @@ export function productsReducer(state: ProductData[] = [], action: ReducerAction
 	}
 
 	const actionIndex = {
-		[ActionTypes.ADD]: onSaveData,
-		[ActionTypes.REMOVE]: onRemoveData,
-		[ActionTypes.UPDATE]: onUpdateData,
+		[PRODUCTS_ACTIONS.ADD]: onSaveData,
+		[PRODUCTS_ACTIONS.REMOVE]: onRemoveData,
+		[PRODUCTS_ACTIONS.UPDATE]: onUpdateData,
 	}
 
-	if (actionIndex[action.type]) {
-		actionIndex[action.type]();
-		return state;
-	}
+	actionIndex[action.type]();
 
 	return state;
 }

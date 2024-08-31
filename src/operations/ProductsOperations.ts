@@ -1,10 +1,9 @@
-import { ReducerActionTypes } from "@/definitions/enums";
-import { ProductData } from "../../definitions";
-import LoaderOperations from "./LoaderOperations";
-import { ReducerAction as ProductReducerAction } from "@/definitions/types";
+import { Product, ReducerAction } from '@/definitions'
+import { PRODUCTS_ACTIONS } from "@/app/(app)/inventory/reducers";
+import LoaderOperations from "@/operations/LoaderOperations";
 
 type ProductOperationsDependency = {
-	dispatcher: React.Dispatch<ProductReducerAction<ProductData>>;
+	productsDispatcher: React.Dispatch<ReducerAction<Product, PRODUCTS_ACTIONS>>;
 	loader: LoaderOperations;
 }
 
@@ -15,15 +14,15 @@ class ProductsOperations {
 		this._dependency = dependency;
 	}
 
-	public async add(product: ProductData) {
+	public async add(product: Product) {
 		this._dependency.loader.trigger();
 
 		try {
 			// TODO: Llamada a la API
 
 			// Para refrescar la UI de forma optimista
-			this._dependency.dispatcher({
-				type: ReducerActionTypes.ADD,
+			this._dependency.productsDispatcher({
+				type: PRODUCTS_ACTIONS.ADD,
 				payload: {
 					data: product,
 				},
@@ -36,16 +35,14 @@ class ProductsOperations {
 		}
 	}
 
-	public async remove(product: ProductData) {
+	public async remove(product: Product) {
 		this._dependency.loader.trigger();
-
-		console.log(product);
 
 		try {
 			// TODO: Llamada a la API
 
-			this._dependency.dispatcher({
-				type: ReducerActionTypes.REMOVE,
+			this._dependency.productsDispatcher({
+				type: PRODUCTS_ACTIONS.REMOVE,
 				payload: {
 					data: product,
 				},
@@ -58,14 +55,14 @@ class ProductsOperations {
 		}
 	}
 
-	public async update(product: ProductData) {
+	public async update(product: Product) {
 		this._dependency.loader.trigger();
 		
 		try {
 			// TODO: Llamada a la API	
 
-			this._dependency.dispatcher({
-				type: ReducerActionTypes.UPDATE,
+			this._dependency.productsDispatcher({
+				type: PRODUCTS_ACTIONS.UPDATE,
 				payload: {
 					data: product,
 				},

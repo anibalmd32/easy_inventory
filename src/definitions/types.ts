@@ -1,5 +1,12 @@
 import { CHART_FOR, TRENDING, FETCH_STATUS, MONTHS, DAYS } from './enums';
 
+export type ReducerAction<TData, TAction> = {
+	type: TAction;
+	payload: {
+		data: TData;
+	};
+}
+
 export type LoadingData = {
 	state: FETCH_STATUS;
 	message: string;

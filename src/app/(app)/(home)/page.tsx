@@ -2,8 +2,8 @@
 import { HomeProvider } from './HomeProvider'
 
 /** SERVER ACTIONS */
-import { ChartsServer } from './actions/charts/ChartsServer'
-import { CountsServer } from './actions/counts/CountsServer'
+import { ChartsServer } from '@/actions/charts/ChartsServer'
+import { CountsServer } from '@/actions/counts/CountsServer'
 
 /** COMPONENTS */
 import { InvoicesCharts } from './components/InvoicesCharts'

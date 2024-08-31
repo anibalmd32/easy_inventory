@@ -1,11 +1,10 @@
 'use client'
-
 import { createContext, useState } from 'react'
-import { EntityCountItem, MonthlyChartItem, WeeklyChartItem, LoadingData, FETCH_STATUS } from '@/definitions'
-import LoaderOperations from '@/lib/operations/LoaderOperations'
+import { EntityCountItem, MonthlyChartItem, WeeklyChartItem, LoadingData } from '@/definitions'
+import LoaderOperations from '@/operations/LoaderOperations'
 import { loaderInitialState } from '@/lib/utils'
 
-interface IHomeCtx {
+interface HomeCtx {
 	loaderOperations: LoaderOperations;
 	entityCountData: EntityCountItem[];
 	monthlyChartData: MonthlyChartItem[];
@@ -14,10 +13,10 @@ interface IHomeCtx {
 
 interface ProviderProps {
 	children: React.ReactNode;
-	initialData: Omit<IHomeCtx, 'loaderOperations'>;
+	initialData: Omit<HomeCtx, 'loaderOperations'>;
 }
 
-export const HomeCtx = createContext<IHomeCtx>({} as IHomeCtx)
+export const HomeContext = createContext<HomeCtx>({} as HomeCtx)
 
 export function HomeProvider({ children, initialData }: ProviderProps) {
 	/** STATES */
@@ -31,13 +30,13 @@ export function HomeProvider({ children, initialData }: ProviderProps) {
 
 	/** RETURN CONTEXT VALUES */
 	return (
-		<HomeCtx.Provider value={{
+		<HomeContext.Provider value={{
 			loaderOperations,
 			entityCountData,
 			monthlyChartData,
 			weeklyChartData
 		}}>
 			{children}
-		</HomeCtx.Provider>
+		</HomeContext.Provider>
 	)	
 }

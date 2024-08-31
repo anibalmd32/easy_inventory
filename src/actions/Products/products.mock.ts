@@ -1,10 +1,12 @@
-import { Product, Category } from '@/definitions/entities'
+import { Product, Category } from '@/definitions'
 
-export interface ProductMock extends Product {
-	category: Category;
-}
+export const cateogryMock: Category[] = [
+	{ id: 1, name: 'auto', color: '#839dd1' },
+	{ id: 2, name: 'bicicleta', color: '#e25151' },
+	{ id: 3, name: 'moto', color: '#1bacb1' },
+]
 
-export const productsMock: ProductMock[] = [
+export const productsMock: Product[] = [
 	{
 		id: 1,
 		name: 'Product 1',
@@ -13,10 +15,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 10,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 1,
-			name: 'Category 1'
-		}
+		category: cateogryMock[0]
 	},
 	{
 		id: 2,
@@ -26,10 +25,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 20,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 2,
-			name: 'Category 2'
-		}
+		category: cateogryMock[1]
 	},
 	{
 		id: 3,
@@ -39,10 +35,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 30,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 3,
-			name: 'Category 3'
-		}
+		category: cateogryMock[2]
 	},
 	{
 		id: 4,
@@ -52,10 +45,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 0,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 4,
-			name: 'Category 4'
-		}
+		category: cateogryMock[2]
 	},
 	{
 		id: 5,
@@ -65,10 +55,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 50,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 5,
-			name: 'Category 5'
-		}
+		category: cateogryMock[1]
 	},
 	{
 		id: 6,
@@ -78,10 +65,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 60,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 6,
-			name: 'Category 6'
-		}
+		category: cateogryMock[0]
 	},
 	{
 		id: 7,
@@ -91,10 +75,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 70,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 7,
-			name: 'Category 7'
-		}
+		category: cateogryMock[0]
 	},
 	{
 		id: 8,
@@ -104,10 +85,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 2,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 8,
-			name: 'Category 8'
-		}
+		category: cateogryMock[1]
 	},
 	{
 		id: 9,
@@ -117,10 +95,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 90,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 9,
-			name: 'Category 9'
-		}
+		category: cateogryMock[2]
 	},
 	{
 		id: 10,
@@ -130,10 +105,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 100,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 10,
-			name: 'Category 10'
-		}
+		category: cateogryMock[1]
 	},
 	{
 		id: 11,
@@ -143,10 +115,7 @@ export const productsMock: ProductMock[] = [
 		quantity: 5,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 11,
-			name: 'Category 11'
-		}
+		category: cateogryMock[2]
 	},
 	{
 		id: 12,
@@ -156,9 +125,6 @@ export const productsMock: ProductMock[] = [
 		quantity: 120,
 		createdAt: new Date().toDateString(),
 		updatedAt: new Date().toDateString(),
-		category: {
-			id: 12,
-			name: 'Category 12'
-		}
+		category: cateogryMock[0]
 	}
 ]

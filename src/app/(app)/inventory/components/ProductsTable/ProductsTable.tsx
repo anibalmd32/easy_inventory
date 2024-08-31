@@ -1,7 +1,7 @@
 "use client"
-import useInventory from "../../context/useInventory"
+import { useInventory } from "../../hooks/useInventory"
 import { DataTable } from "@/components/shared/DataTable"
-import { productsTableColumns } from '../../utils/productsTableColumns'
+import { productsTableColumns } from './productsTableColumns'
 
 export function ProductsTable() {
 	const { products } = useInventory()

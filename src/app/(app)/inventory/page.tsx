@@ -1,18 +1,24 @@
-import InventoryProvider from './context/InventoryProvider'
+/** PROVIDERS */
+import { InventoryProvider } from './InventoryProvider'
+
+/** SERVER ACTIONS */
+import { ProductsServer } from '../../../actions/Products/ProductsServer'
+
+/** COMPONENTS */
 import { ProductsTable } from './components/ProductsTable'
-import { productsMock } from './components/ProductsTable/productsMock'
-import { ProductsForm } from './components/ProductsForm'
+import { PageTitle } from '@/components/shared/PageTitle'
 
-export default function InventoryPage() {
+export default async function InventoryPage() {
+	const productsServer = new ProductsServer()
+	const products = await productsServer.getProducts()
+
 	return (
-		<InventoryProvider initialProducts={productsMock}>
+		<InventoryProvider initialData={{
+			products,
+		}}>
 			<div>
-				<h2 className='text-gray-200 font-bold text-3xl'>Inventario</h2>
-
-				<div className='mt-4'>
-					<ProductsForm />
-					<ProductsTable />
-				</div>
+				<PageTitle>Inventario</PageTitle>
+				<ProductsTable />
 			</div>
 		</InventoryProvider>
 	)
