@@ -13,3 +13,7 @@ export function formatDate(date: Date) {
     day: 'numeric',
   });
 }
+
+export function generateCartId() {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}

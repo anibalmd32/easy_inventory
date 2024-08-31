@@ -1,8 +1,14 @@
 export enum ActionTypes {
     ADD,
     REMOVE,
+    SELL,
     UPDATE,
-    SELL
+    SELECT,
+    UNSELECT,
+    BUY,
+    CANCEL,
+    PAY,
+    DELETE,
 }
 
 export enum InvoiceStatus {

@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from '@/components/ui/button';
 import { AlignJustify } from 'lucide-react';
+import Link from 'next/link';
 
 export function HeaderMenu() {
 	return (
@@ -27,7 +28,9 @@ export function HeaderMenu() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="bg-gray-950 text-gray-200">
 				<DropdownMenuLabel>Empresa</DropdownMenuLabel>
-				<DropdownMenuItem className="cursor-pointer">Facturación</DropdownMenuItem>
+				<DropdownMenuItem className="cursor-pointer">
+					<Link href="/billing">Facturacion</Link>
+				</DropdownMenuItem>
 				<DropdownMenuItem className="cursor-pointer">Lista de compras</DropdownMenuItem>
 				<DropdownMenuItem className="cursor-pointer">Agregar producto</DropdownMenuItem>
 

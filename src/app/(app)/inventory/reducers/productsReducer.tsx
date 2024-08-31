@@ -8,7 +8,6 @@ export function productsReducer(state: ProductData[] = [], action: ReducerAction
 	}
 
 	const onRemoveData = () => {
-		console.log(action.payload.data);
 		state = state.filter(item => item.id !== action.payload.data.id);
 	}
 
