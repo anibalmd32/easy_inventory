@@ -1,13 +1,16 @@
-import { InvoicesProvider } from "./context/InvoicesProvider"
-import { invoicesMock } from "./components/InvoicesTable/invoicesMock"
+import { InvoicesProvider } from "./InvoicesProvider"
 import { InvoicesTable } from "./components/InvoicesTable/InvoicesTable"
+import { InvoicesServer } from "@/actions/invoices/InvoicesServer"
+import { PageTitle } from "@/components/shared/PageTitle"
 
-export default function InvoicesPage() {
+export default async function InvoicesPage() {
+	const invoicesServer = new InvoicesServer()
+	const invoices = await invoicesServer.getInvoices()
+
 	return (
-		<InvoicesProvider initialInvoices={invoicesMock}>
+		<InvoicesProvider initialInvoices={invoices}>
 			<div>
-				<h2 className='text-gray-200 font-bold text-3xl'>Facturas</h2>
-
+				<PageTitle>Facturas</PageTitle>
 				<InvoicesTable />
 			</div>
 		</InvoicesProvider>

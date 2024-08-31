@@ -1,21 +1,15 @@
 "use client"
 import { ColumnDef } from "@tanstack/react-table"
-import { InvoiceData } from '../definitions/invoicesData'
-import { InvoiceStatus } from "@/definitions/enums"
+import { Invoice, INVOICE_STATUS } from '@/definitions'
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { InvoiceDetails } from "../components/InvoicesTable/InvoicesTableActions"
+import * as ShadDropdown from "@/components/ui/dropdown-menu"
+import { InvoiceDetails } from "./InvoicesTableActions"
 import { DataTableColumnHeader } from "@/components/shared/DataTable"
+import { formatDate } from '@/lib/utils'
 
-export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
+export const invoicesTableColumns: ColumnDef<Invoice>[] = [
 	{
 		accessorKey: 'id',
 		enableSorting: true,
@@ -30,7 +24,7 @@ export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
 		enableColumnFilter: true,
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Cliente" />,
 		cell: ({ row }) => {
-			const customer = row.original.customer;
+			const customer = row.original.items[0].customer;
 			return <div className="min-w-16">{ customer.name }</div>
 		}
 	},
@@ -41,13 +35,13 @@ export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
 		cell: ({ row }) => {
 			const original = row.original;
 			const status = original.status;
-			const quantityClass = status === InvoiceStatus.PAID ? 'text-green-500' : 'text-red-500';
+			const quantityClass = status === INVOICE_STATUS.PAID ? 'text-green-500' : 'text-red-500';
 
 			return (
 				<Badge className={quantityClass}>
-					{status === InvoiceStatus.PAID && "Pagada"}
-					{status === InvoiceStatus.CANCELED && "Cancelada"}
-					{status === InvoiceStatus.PENDING && "Por pagar"}
+					{status === INVOICE_STATUS.PAID && "Pagada"}
+					{status === INVOICE_STATUS.CANCELED && "Cancelada"}
+					{status === INVOICE_STATUS.PENDING && "Por pagar"}
 				</Badge>
 			)
 		}
@@ -66,13 +60,8 @@ export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
 		enableSorting: false,
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Fecha" />,
 		cell: ({ row }) => {
-			const date = row.original.generatedAt
-			const formatedDate = date.toLocaleDateString('es-ES', {
-				weekday: 'long',
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric',
-			})
+			const date = new Date(row.original.generatedAt)
+			const formatedDate = formatDate(date)
 
 			return (
 				<div className="min-w-16">
@@ -86,21 +75,22 @@ export const invoicesTableColumns: ColumnDef<InvoiceData>[] = [
     cell: ({ row }) => {
 		
 		return (
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="h-8 w-8 p-0">
-					<MoreHorizontal className="h-4 w-4" />
-				</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent align="end" className="bg-gray-800 text-gray-200">
-					<DropdownMenuLabel>Acciones</DropdownMenuLabel>
+			<ShadDropdown.DropdownMenu>
+				<ShadDropdown.DropdownMenuTrigger asChild>
+					<Button variant="ghost" className="h-8 w-8 p-0">
+						<MoreHorizontal className="h-4 w-4" />
+					</Button>
+				</ShadDropdown.DropdownMenuTrigger>
+				<ShadDropdown.DropdownMenuContent align="end" className="bg-gray-800 text-gray-200">
+					<ShadDropdown.DropdownMenuLabel>
+						Acciones
+					</ShadDropdown.DropdownMenuLabel>
 
-					<DropdownMenuSeparator />
+					<ShadDropdown.DropdownMenuSeparator />
 
 					<InvoiceDetails rowData={row.original} />
-				</DropdownMenuContent>
-			</DropdownMenu>
-			)
-		},
+				</ShadDropdown.DropdownMenuContent>
+			</ShadDropdown.DropdownMenu>	
+		)},
 	},
 ]
