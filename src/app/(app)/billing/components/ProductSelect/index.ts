@@ -1,1 +1,1 @@
-export { ProductSelect } from './ProductSelect'
+export * from './ProductSelect'

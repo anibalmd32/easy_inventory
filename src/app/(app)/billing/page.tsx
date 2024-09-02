@@ -1,13 +1,20 @@
-import BillingProvider from './context/BillingProvider'
+/** PROVIDERS */
+import { BillingProvider } from './BillingProvider'
+
+/** SERVER ACTIONS */
+import { getProductsAsCartItems } from '@/actions/Products/ProductsServer'
+
+/** COMPONENTS */
 import { ProductSelect } from './components/ProductSelect'
-import { productsMock } from './components/ProductSelect/productsMock'
 import { ProductDetails } from './components/ProductDetails'
 import { Cart } from './components/Cart'
 import { CustomerForm } from './components/CustomerForm'
 
-export default function BillingPage() {
+export default async function BillingPage() {
+	const products = await getProductsAsCartItems()
+
 	return (
-		<BillingProvider initialProducts={productsMock}>
+		<BillingProvider initialProducts={products}>
 			<div>
 				<h2 className='text-gray-200 font-bold text-3xl'>Facturacion</h2>
 

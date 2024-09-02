@@ -1,5 +1,5 @@
 import { ComboboxItem } from "@/components/shared/Combobox";
-import { Product } from "@/definitions/entities";
+import { Product } from "@/definitions";
 
 export function productItemsMapper(products: Product[]): ComboboxItem[] {
 	return products.map((product) => ({

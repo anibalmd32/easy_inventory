@@ -1,7 +1,6 @@
 'use client'
-
 import React from 'react'
-import { useBilling } from '../../context/useBilling'
+import { useBilling } from '../../hooks/useBilling'
 import { ComboboxItem } from '@/components/shared/Combobox'
 import { productItemsMapper } from '../../utils/productItemsMapper'
 

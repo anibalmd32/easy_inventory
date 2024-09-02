@@ -6,14 +6,13 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card"
-import { useBilling } from "../../context/useBilling"
+import { useBilling } from "../../hooks/useBilling"
 import { Plus, ShoppingCart, ShoppingBag, DollarSign, Minus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from "@/components/ui/badge"
 
-
 export function ProductDetails() {
-	const { selectedProduct, selectProductCounter, selectProductOperations } = useBilling()
+	const { selectedProduct, selectProductOperations } = useBilling()
 
 	return (
 		<Card className="bg-gray-950 p-4 text-gray-200 w-full">
@@ -25,7 +24,9 @@ export function ProductDetails() {
 								{selectedProduct.name}
 							</span>
 							<span>
-								<Badge variant="default">Categoria</Badge>
+								<Badge variant="default" style={{ backgroundColor: selectedProduct.category?.color }}>
+									{selectedProduct.category?.name}
+								</Badge>
 							</span>
 						</CardTitle>
 					</CardHeader>
@@ -37,11 +38,11 @@ export function ProductDetails() {
 							</p>
 							<p className="flex gap-2 items-center">
 								<ShoppingCart className="h-4 w-4" />
-								<span>{selectProductCounter}</span>
+								<span>{selectedProduct.amount}</span>
 							</p>
 							<p className="flex gap-2 items-center">
 								<ShoppingBag className="h-4 w-4" />
-								<span>${ (selectProductCounter * Number(selectedProduct.price)).toFixed(2) }</span>
+								<span>${selectedProduct.amount * Number(selectedProduct.price)}</span>
 							</p>
 						</div>
 						<div className="flex gap-4 items-center">

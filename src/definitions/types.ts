@@ -1,3 +1,4 @@
+import { Product } from './data';
 import { CHART_FOR, TRENDING, FETCH_STATUS, MONTHS, DAYS } from './enums';
 
 export type ReducerAction<TData, TAction> = {
@@ -33,4 +34,14 @@ export type WeeklyChartItem = {
 	day: DAYS,
 	[CHART_FOR.PAID]: number;
 	[CHART_FOR.CANCELED]: number
+}
+
+export interface CartItem extends Product {
+	amount: number;
+}
+
+export type Cart = {
+	items: CartItem[];
+	total: number;
+	customerName: string;
 }

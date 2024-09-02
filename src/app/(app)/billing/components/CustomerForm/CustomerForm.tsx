@@ -25,7 +25,7 @@ export function CustomerForm() {
 	return (
 		<Card className="bg-gray-950 p-4 text-gray-200 w-full">
 			<CardHeader>
-				<CardTitle>Datos del client</CardTitle>
+				<CardTitle>Datos del cliente</CardTitle>
 				<CardDescription>Rellene los datos del cliente para completar la facturacion</CardDescription>
 			</CardHeader>
 			<CardContent>
