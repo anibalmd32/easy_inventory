@@ -8,3 +8,10 @@ export const formSchema = z.object({
   price: z.string(),
   category: z.string().nullable(),
 })
+
+export const formSchemaDefaultValues: z.infer<typeof formSchema> = {
+  category: null,
+  name: '',
+  price: '',
+  quantity: ''
+}
