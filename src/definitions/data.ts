@@ -52,7 +52,7 @@ export interface Invoice {
   total: string;
   status: INVOICE_STATUS;
   generatedAt: string;
-  cutomerName: string;
+  customerName: string;
   paidAt?: string;
   canceledAt?: string;
 }
@@ -77,5 +77,5 @@ export interface Notification {
   id: number;
   action: APP_ACTIONS;
   description: string;
-  emitedAt: string;
+  emittedAt: string;
 }
