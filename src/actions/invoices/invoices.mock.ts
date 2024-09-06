@@ -1,5 +1,5 @@
 import { Invoice, INVOICE_STATUS, SaleToCustomer, Customer, Sale } from "@/definitions/";
-import { productsMock } from "../Products/products.mock";
+import { productsMock } from "../products/products.mock";
 
 export const customersMock: Customer[] = [
   { id: 1, name: "Phillip Smith", phone: "555-123-4567", dni: "12345678" },

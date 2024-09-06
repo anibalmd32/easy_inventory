@@ -8,27 +8,24 @@ datasource db {
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
-  products Product[]
+  id       Int      @id @default(autoincrement())
+  name     String   @unique
+  products Product?
 
   @@map("categories")
 }
 
 model Product {
-  id         Int      @id @default(autoincrement())
-  name       String   @unique
-  price      String
-  quantity   Int
-  categoryId Int?     @unique @map("category_id")
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @default(now()) @map("updated_at")
-
-  category Category? @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-
-  shopingList ShopingList[]
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  price       String
+  quantity    Int
+  categoryId  Int?          @unique @map("category_id")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @default(now()) @map("updated_at")
+  category    Category?     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   sales       Sale[]
+  shopingList ShopingList[]
 
   @@map("products")
 }
@@ -37,43 +34,38 @@ model ShopingList {
   id          Int     @id @default(autoincrement())
   productId   Int     @map("product_id")
   isPurchased Boolean @map("is_purchased")
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  product     Product @relation(fields: [productId], references: [id])
 
   @@map("shopping_list")
 }
 
 model Sale {
-  id              Int @id @default(autoincrement())
-  productId       Int @map("product_id")
-  productQuantity Int @map("product_quantity")
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-
+  id               Int              @id @default(autoincrement())
+  productId        Int              @map("product_id")
+  productQuantity  Int              @map("product_quantity")
+  product          Product          @relation(fields: [productId], references: [id])
   salesToCustomers SaleToCustomer[]
 
   @@map("sales")
 }
 
 model Customer {
-  id    Int    @id @default(autoincrement())
-  name  String
-  dni   String @unique
-  phone String
-
-  salesToCustomers SaleToCustomer[]
+  id               Int              @id @default(autoincrement())
+  name             String
+  dni              String           @unique
+  phone            String
   invoices         Invoice[]
+  salesToCustomers SaleToCustomer[]
 
   @@map("customers")
 }
 
 model SaleToCustomer {
-  id         Int @id @default(autoincrement())
-  customerId Int @map("customer_id")
-  saleId     Int @map("sale_id")
-
-  customer Customer @relation(fields: [customerId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  sale     Sale     @relation(fields: [saleId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  id         Int      @id @default(autoincrement())
+  customerId Int      @map("customer_id")
+  saleId     Int      @map("sale_id")
+  customer   Customer @relation(fields: [customerId], references: [id])
+  sale       Sale     @relation(fields: [saleId], references: [id])
 
   @@map("sales_to_customers")
 }
@@ -83,12 +75,11 @@ model Invoice {
   items       Json
   total       String
   status      Int
-  customerId  Int       @map("customer_id")
   generatedAt DateTime  @default(now()) @map("generated_at")
   paidAt      DateTime? @map("paid_at")
   canceledAt  DateTime? @map("canceled_at")
-
-  customer Customer @relation(fields: [customerId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  customerId  Int       @map("customer_id")
+  customer    Customer  @relation(fields: [customerId], references: [id])
 
   @@map("invoices")
 }
@@ -98,20 +89,18 @@ model InvoiceTemplate {
   name      String   @unique
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
-
-  setting Setting?
+  setting   Setting?
 
   @@map("invoice_templates")
 }
 
 model Setting {
-  id                Int    @id @default(autoincrement())
-  businessName      String @default("Easy Inventory") @map("business_name")
-  logoUrl           String @default("/favicon.svg") @map("logo_url")
-  minimumStock      Int    @default(5) @map("minimum_stock")
-  invoiceTemplateId Int    @unique
-
-  invoiceTemplate InvoiceTemplate @relation(fields: [invoiceTemplateId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  id                Int             @id @default(autoincrement())
+  businessName      String          @default("Easy Inventory") @map("business_name")
+  logoUrl           String          @default("/favicon.svg") @map("logo_url")
+  minimumStock      Int             @default(5) @map("minimum_stock")
+  invoiceTemplateId Int             @unique
+  invoiceTemplate   InvoiceTemplate @relation(fields: [invoiceTemplateId], references: [id])
 
   @@map("settings")
 }
