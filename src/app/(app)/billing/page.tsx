@@ -2,7 +2,7 @@
 import { BillingProvider } from './BillingProvider'
 
 /** SERVER ACTIONS */
-import { getProductsAsCartItems } from '@/actions/products/ProductsServer'
+import { getProductsAsCartItems } from '@/actions/Products/ProductsServer'
 
 /** COMPONENTS */
 import { ProductSelect } from './components/ProductSelect'
@@ -16,7 +16,7 @@ export default async function BillingPage() {
   return (
     <BillingProvider initialProducts={products}>
       <div>
-        <h2 className='text-gray-200 font-bold text-3xl'>Facturacion</h2>
+        <h2 className='text-gray-200 font-bold text-3xl'>Facturación</h2>
 
         <div className='grid grid-cols-1 gap-4 space-y-4 md:space-y-0 md:grid-cols-3 mt-4'>
           <div className='md:space-y-4 md:col-span-1'>
