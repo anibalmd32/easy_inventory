@@ -2,7 +2,7 @@
 import { InventoryProvider } from './InventoryProvider'
 
 /** SERVER ACTIONS */
-import { getProducts, getProductCategoryItems } from '@/actions/products/ProductsServer'
+import { getProducts, getProductCategoryItems } from '../../../actions/products/ProductsServer'
 
 /** COMPONENTS */
 import { ProductsTable } from './components/ProductsTable'
