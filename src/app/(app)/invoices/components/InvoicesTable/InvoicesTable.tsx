@@ -4,15 +4,15 @@ import { invoicesTableColumns } from './invoicesTableColumns'
 import { useInvoices } from "../../hooks/useInvoices";
 
 export function InvoicesTable() {
-	const { invoices } = useInvoices();
+  const { invoices } = useInvoices();
 
-	return (
-		<div>
-			<DataTable
-				columns={invoicesTableColumns}
-				data={invoices}
-				filterColumn="customer"
-			/>
-		</div>
-	)
+  return (
+    <div>
+      <DataTable
+        columns={invoicesTableColumns}
+        data={invoices}
+        filterColumn="customerName"
+      />
+    </div>
+  )
 }

@@ -19,7 +19,7 @@ export const invoicesTableColumns: ColumnDef<Invoice>[] = [
     }
   },
   {
-    accessorKey: 'customer',
+    accessorKey: 'customerName',
     enableSorting: false,
     enableColumnFilter: true,
     header: ({ column }) => <DataTableColumnHeader column={column} title="Cliente" />,
