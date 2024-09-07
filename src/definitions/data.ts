@@ -11,9 +11,9 @@ export interface Product {
   name: string;
   price: string;
   quantity: number;
-  categoryId?: number;
-  createdAt: string;
-  updatedAt: string;
+  categoryId: number | null;
+  createdAt: Date;
+  updatedAt: Date;
   category: Category | null;
 }
 
