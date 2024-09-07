@@ -45,7 +45,7 @@ export function ProductDetails() {
                 <span>${selectedProduct.amount * Number(selectedProduct.price)}</span>
               </p>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 flex-wrap justify-center items-center">
               <Button
                 onClick={() => selectProductOperations.onUnselectProduct()}
                 className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"

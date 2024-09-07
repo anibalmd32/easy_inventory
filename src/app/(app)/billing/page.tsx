@@ -18,8 +18,8 @@ export default async function BillingPage() {
       <div>
         <h2 className='text-gray-200 font-bold text-3xl'>Facturación</h2>
 
-        <div className='grid grid-cols-1 gap-4 space-y-4 md:space-y-0 md:grid-cols-3 mt-4'>
-          <div className='md:space-y-4 md:col-span-1'>
+        <div className='grid grid-cols-1 gap-4 space-y-4 md:space-y-0 md:grid-cols-4 lg:grid-cols-3 mt-4'>
+          <div className='space-y-4 md:col-span-2 lg:col-span-1'>
             <ProductSelect />
             <ProductDetails />
             <CustomerForm />
