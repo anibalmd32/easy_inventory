@@ -13,8 +13,8 @@ export const productsMock: Product[] = [
     price: "100",
     categoryId: 1,
     quantity: 10,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[0]
   },
   {
@@ -23,8 +23,8 @@ export const productsMock: Product[] = [
     price: "200",
     categoryId: 2,
     quantity: 20,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[1]
   },
   {
@@ -33,8 +33,8 @@ export const productsMock: Product[] = [
     price: "300",
     categoryId: 3,
     quantity: 30,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[2]
   },
   {
@@ -43,8 +43,8 @@ export const productsMock: Product[] = [
     price: "400",
     categoryId: 4,
     quantity: 0,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[2]
   },
   {
@@ -53,8 +53,8 @@ export const productsMock: Product[] = [
     price: "500",
     categoryId: 5,
     quantity: 50,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[1]
   },
   {
@@ -63,8 +63,8 @@ export const productsMock: Product[] = [
     price: "600",
     categoryId: 6,
     quantity: 60,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[0]
   },
   {
@@ -73,8 +73,8 @@ export const productsMock: Product[] = [
     price: "700",
     categoryId: 7,
     quantity: 70,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[0]
   },
   {
@@ -83,8 +83,8 @@ export const productsMock: Product[] = [
     price: "800",
     categoryId: 8,
     quantity: 2,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[1]
   },
   {
@@ -93,8 +93,8 @@ export const productsMock: Product[] = [
     price: "900",
     categoryId: 9,
     quantity: 90,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[2]
   },
   {
@@ -103,8 +103,8 @@ export const productsMock: Product[] = [
     price: "1000",
     categoryId: 10,
     quantity: 100,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[1]
   },
   {
@@ -113,8 +113,8 @@ export const productsMock: Product[] = [
     price: "1100",
     categoryId: 11,
     quantity: 5,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[2]
   },
   {
@@ -123,8 +123,8 @@ export const productsMock: Product[] = [
     price: "1200",
     categoryId: 12,
     quantity: 120,
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     category: categoryMock[0]
   }
 ]

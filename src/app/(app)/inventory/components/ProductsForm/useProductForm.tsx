@@ -48,9 +48,9 @@ export function useProductForm() {
         price: values.price,
         quantity: parseInt(values.quantity),
         category: categoryToAssign ? categoryToAssign : null,
-        createdAt: new Date().toDateString(),
-        updatedAt: new Date().toDateString(),
-        categoryId: categoryToAssign ? categoryToAssign.id : undefined,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        categoryId: categoryToAssign ? categoryToAssign.id : null,
       })
     } else {
       await productsOperations.add({
@@ -58,10 +58,10 @@ export function useProductForm() {
         price: values.price,
         quantity: parseInt(values.quantity),
         category: categoryToAssign ? categoryToAssign : null,
-        createdAt: new Date().toDateString(),
+        createdAt: new Date(),
         id: 0,
-        updatedAt: new Date().toDateString(),
-        categoryId: categoryToAssign ? categoryToAssign.id : undefined,
+        updatedAt: new Date(),
+        categoryId: categoryToAssign ? categoryToAssign.id : null,
       })
     }
 
