@@ -1,4 +1,4 @@
-import { Invoice, INVOICE_STATUS, SaleToCustomer, Customer, Sale } from "@/definitions/";
+import { Invoice, INVOICE_STATUS, SaleToCustomer, Customer, Sale } from "@/definitions";
 import { productsMock } from '../products/products.mock';
 
 export const customersMock: Customer[] = [
