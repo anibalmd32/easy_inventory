@@ -1,5 +1,6 @@
 import { CartItem, Cart, Customer } from "@/definitions";
 import { Dispatch, SetStateAction } from "react";
+import { generateInvoice } from '@/actions/invoices/InvoicesServer'
 
 interface SelectProductOperationsDeps {
   products: CartItem[];
@@ -8,38 +9,26 @@ interface SelectProductOperationsDeps {
   cart: Cart;
   setCart: Dispatch<SetStateAction<Cart>>;
   customer: Customer;
+  router: any;
 }
 
 export default class SelectProductOperations {
-  private products: CartItem[];
-  private selectedProduct: CartItem | null;
-  private setSelectedProduct: React.Dispatch<React.SetStateAction<CartItem | null>>;
-  private cart: Cart;
-  private setCart: Dispatch<SetStateAction<Cart>>;
-  private customer: Customer;
 
-  constructor(deps: SelectProductOperationsDeps) {
-    this.products = deps.products;
-    this.selectedProduct = deps.selectedProduct;
-    this.setSelectedProduct = deps.setSelectedProduct;
-    this.cart = deps.cart;
-    this.setCart = deps.setCart;
-    this.customer = deps.customer;
-  }
+  constructor(private readonly deps: SelectProductOperationsDeps) { }
 
   onSelectProduct = (productId: number) => {
-    const product = this.products.find((product) => product.id === productId);
+    const product = this.deps.products.find((product) => product.id === productId);
 
     if (!product) {
       return;
     }
 
-    this.setSelectedProduct(product);
+    this.deps.setSelectedProduct(product);
   }
 
   onUnselectProduct = (productId?: number) => {
     if (productId) {
-      this.setCart(prev => {
+      this.deps.setCart(prev => {
         const product = prev.items.find(item => item.id === productId)
         const totalProduct = product!.amount * Number(product!.price)
         const newTotal = prev.total - totalProduct
@@ -52,13 +41,13 @@ export default class SelectProductOperations {
         };
       });
     } else {
-      this.setSelectedProduct(null);
+      this.deps.setSelectedProduct(null);
     }
   }
 
   onSelectProductCounterIncrement = (productId?: number) => {
     if (productId) {
-      this.setCart(prev => {
+      this.deps.setCart(prev => {
         const product = prev.items.find(item => item.id === productId)
         const newTotal = prev.total + Number(product!.price)
         const updatedItems = prev.items.map(item => {
@@ -78,10 +67,10 @@ export default class SelectProductOperations {
         };
       });
     } else {
-      if (this.selectedProduct) {
-        this.setSelectedProduct({
-          ...this.selectedProduct,
-          amount: this.selectedProduct.amount + 1,
+      if (this.deps.selectedProduct) {
+        this.deps.setSelectedProduct({
+          ...this.deps.selectedProduct,
+          amount: this.deps.selectedProduct.amount + 1,
         })
       }
     }
@@ -89,7 +78,7 @@ export default class SelectProductOperations {
 
   onSelectProductCounterDecrement = (productId?: number) => {
     if (productId) {
-      this.setCart(prev => {
+      this.deps.setCart(prev => {
         const product = prev.items.find(item => item.id === productId)
         const newTotal = prev.total - Number(product!.price)
         const updatedItems = prev.items.map(item => {
@@ -109,34 +98,34 @@ export default class SelectProductOperations {
         };
       });
     } else {
-      if (this.selectedProduct) {
-        this.setSelectedProduct({
-          ...this.selectedProduct,
-          amount: this.selectedProduct.amount - 1,
+      if (this.deps.selectedProduct) {
+        this.deps.setSelectedProduct({
+          ...this.deps.selectedProduct,
+          amount: this.deps.selectedProduct.amount - 1,
         })
       }
     }
   }
 
   onAddProductToCart = () => {
-    const product = this.selectedProduct;
-    const customerName = this.customer.name;
+    const product = this.deps.selectedProduct;
+    const customerName = this.deps.customer.name;
 
     if (product) {
       const totalPerProduct = Number(product.amount) * Number(product.price)
-      this.setCart({
-        items: [...this.cart.items, product],
-        total: Number(this.cart.total) + Number(totalPerProduct),
+      this.deps.setCart({
+        items: [...this.deps.cart.items, product],
+        total: Number(this.deps.cart.total) + Number(totalPerProduct),
         customerName,
       })
 
-      this.setSelectedProduct(null);
+      this.deps.setSelectedProduct(null);
     }
   }
 
   onGenerateInvoice = async () => {
-    this.cart.customerName = this.customer.name
-    console.log(this.cart)
-    console.log(this.customer)
+    this.deps.cart.customerName = this.deps.customer.name
+    const newInvoice = await generateInvoice(this.deps.cart, this.deps.customer);
+    this.deps.router.push(`/billing/${newInvoice.id}`)
   }
 }

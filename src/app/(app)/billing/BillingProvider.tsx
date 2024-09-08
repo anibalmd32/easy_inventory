@@ -2,6 +2,7 @@
 import { Cart, CartItem, Customer } from '@/definitions';
 import { useState, createContext, Dispatch, SetStateAction } from 'react';
 import SelectProductOperations from '@/operations/SelectProductOperations';
+import { useTransitionRouter } from 'next-view-transitions'
 
 interface BillingCtx {
   products: CartItem[];
@@ -38,6 +39,8 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
   const [cart, setCart] = useState<Cart>(cartDefaultValue);
   const [customer, setCustomer] = useState<Customer>(customerDefaultValue);
 
+  const router = useTransitionRouter()
+
   const selectProductOperations = new SelectProductOperations({
     products,
     selectedProduct,
@@ -45,6 +48,7 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
     setCart,
     cart,
     customer,
+    router,
   });
 
   return (
