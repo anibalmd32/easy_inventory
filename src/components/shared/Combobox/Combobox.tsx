@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
-import { useCombobox } from "./useCombobox"
+import * as React from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { useCombobox } from './useCombobox';
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -13,12 +13,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from '@/components/ui/popover';
 
 export interface ComboboxItem {
   value: string | number;
@@ -32,7 +32,7 @@ interface ComboboxProps {
 }
 
 export function Combobox({ items, placeholder, onSelectItem }: ComboboxProps) {
-  const { open, setOpen, value, setValue } = useCombobox()
+  const { open, setOpen, value, setValue } = useCombobox();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -60,17 +60,17 @@ export function Combobox({ items, placeholder, onSelectItem }: ComboboxProps) {
                   key={item.value}
                   value={String(item.value)}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
+                    setValue(currentValue === value ? '' : currentValue);
+                    setOpen(false);
                     if (onSelectItem) {
-                      onSelectItem(item)
+                      onSelectItem(item);
                     }
                   }}
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
-                      value === item.value ? "opacity-100" : "opacity-0"
+                      'mr-2 h-4 w-4',
+                      value === item.value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
                   {item.label}
@@ -81,5 +81,5 @@ export function Combobox({ items, placeholder, onSelectItem }: ComboboxProps) {
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

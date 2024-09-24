@@ -1,10 +1,10 @@
-'use server'
-import { monthlyChartData, weeklyChartData } from './charts.mock'
+'use server';
+import { monthlyChartData, weeklyChartData } from './charts.mock';
 
 export async function getMonthlyChartData() {
-	return monthlyChartData
+  return monthlyChartData;
 }
 
 export async function getWeeklyChartData() {
-	return weeklyChartData
+  return weeklyChartData;
 }

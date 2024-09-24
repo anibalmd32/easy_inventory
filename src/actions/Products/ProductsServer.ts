@@ -1,8 +1,8 @@
-'use server'
-import { CartItem, Category, Product } from '@/definitions'
-import { productsMock, categoryMock } from './products.mock'
-import cartItemMapper from '@/lib/mappers/cartItemMapper'
-import { prisma } from '@/lib/prisma'
+'use server';
+import { CartItem, Category, Product } from '@/definitions';
+import { productsMock, categoryMock } from './products.mock';
+import cartItemMapper from '@/lib/mappers/cartItemMapper';
+import { prisma } from '@/lib/prisma';
 
 export async function getProducts(): Promise<Product[]> {
   // try {
@@ -37,4 +37,4 @@ export async function getProductsAsCartItems(): Promise<CartItem[]> {
 
 export async function getProductCategoryItems(): Promise<Category[]> {
   return categoryMock;
-} 
+}

@@ -1,5 +1,5 @@
-'use client'
-import { useContext } from 'react'
-import { BillingContext } from '../BillingProvider'
+'use client';
+import { useContext } from 'react';
+import { BillingContext } from '../BillingProvider';
 
-export const useBilling = () => useContext(BillingContext)
+export const useBilling = () => useContext(BillingContext);

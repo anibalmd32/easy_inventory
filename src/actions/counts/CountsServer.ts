@@ -1,6 +1,6 @@
-'use server'
-import { entityCountData } from './counts.mock'
+'use server';
+import { entityCountData } from './counts.mock';
 
 export async function getEntityCountData() {
-	return entityCountData
+  return entityCountData;
 }

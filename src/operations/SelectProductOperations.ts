@@ -1,6 +1,6 @@
-import { CartItem, Cart, Customer } from "@/definitions";
-import { Dispatch, SetStateAction } from "react";
-import { generateInvoice } from '@/actions/invoices/InvoicesServer'
+import { CartItem, Cart, Customer } from '@/definitions';
+import { Dispatch, SetStateAction } from 'react';
+import { generateInvoice } from '@/actions/invoices/InvoicesServer';
 
 interface SelectProductOperationsDeps {
   products: CartItem[];
@@ -13,48 +13,49 @@ interface SelectProductOperationsDeps {
 }
 
 export default class SelectProductOperations {
-
-  constructor(private readonly deps: SelectProductOperationsDeps) { }
+  constructor(private readonly deps: SelectProductOperationsDeps) {}
 
   onSelectProduct = (productId: number) => {
-    const product = this.deps.products.find((product) => product.id === productId);
+    const product = this.deps.products.find(
+      (product) => product.id === productId
+    );
 
     if (!product) {
       return;
     }
 
     this.deps.setSelectedProduct(product);
-  }
+  };
 
   onUnselectProduct = (productId?: number) => {
     if (productId) {
-      this.deps.setCart(prev => {
-        const product = prev.items.find(item => item.id === productId)
-        const totalProduct = product!.amount * Number(product!.price)
-        const newTotal = prev.total - totalProduct
-        const updatedItems = prev.items.filter(item => item.id !== productId);
+      this.deps.setCart((prev) => {
+        const product = prev.items.find((item) => item.id === productId);
+        const totalProduct = product!.amount * Number(product!.price);
+        const newTotal = prev.total - totalProduct;
+        const updatedItems = prev.items.filter((item) => item.id !== productId);
 
         return {
           ...prev,
           total: newTotal,
-          items: updatedItems
+          items: updatedItems,
         };
       });
     } else {
       this.deps.setSelectedProduct(null);
     }
-  }
+  };
 
   onSelectProductCounterIncrement = (productId?: number) => {
     if (productId) {
-      this.deps.setCart(prev => {
-        const product = prev.items.find(item => item.id === productId)
-        const newTotal = prev.total + Number(product!.price)
-        const updatedItems = prev.items.map(item => {
+      this.deps.setCart((prev) => {
+        const product = prev.items.find((item) => item.id === productId);
+        const newTotal = prev.total + Number(product!.price);
+        const updatedItems = prev.items.map((item) => {
           if (item.id === productId) {
             return {
               ...item,
-              amount: item.amount + 1
+              amount: item.amount + 1,
             };
           }
           return item;
@@ -63,7 +64,7 @@ export default class SelectProductOperations {
         return {
           ...prev,
           total: newTotal,
-          items: updatedItems
+          items: updatedItems,
         };
       });
     } else {
@@ -71,21 +72,21 @@ export default class SelectProductOperations {
         this.deps.setSelectedProduct({
           ...this.deps.selectedProduct,
           amount: this.deps.selectedProduct.amount + 1,
-        })
+        });
       }
     }
-  }
+  };
 
   onSelectProductCounterDecrement = (productId?: number) => {
     if (productId) {
-      this.deps.setCart(prev => {
-        const product = prev.items.find(item => item.id === productId)
-        const newTotal = prev.total - Number(product!.price)
-        const updatedItems = prev.items.map(item => {
+      this.deps.setCart((prev) => {
+        const product = prev.items.find((item) => item.id === productId);
+        const newTotal = prev.total - Number(product!.price);
+        const updatedItems = prev.items.map((item) => {
           if (item.id === productId) {
             return {
               ...item,
-              amount: item.amount - 1
+              amount: item.amount - 1,
             };
           }
           return item;
@@ -94,7 +95,7 @@ export default class SelectProductOperations {
         return {
           ...prev,
           total: newTotal,
-          items: updatedItems
+          items: updatedItems,
         };
       });
     } else {
@@ -102,30 +103,33 @@ export default class SelectProductOperations {
         this.deps.setSelectedProduct({
           ...this.deps.selectedProduct,
           amount: this.deps.selectedProduct.amount - 1,
-        })
+        });
       }
     }
-  }
+  };
 
   onAddProductToCart = () => {
     const product = this.deps.selectedProduct;
     const customerName = this.deps.customer.name;
 
     if (product) {
-      const totalPerProduct = Number(product.amount) * Number(product.price)
+      const totalPerProduct = Number(product.amount) * Number(product.price);
       this.deps.setCart({
         items: [...this.deps.cart.items, product],
         total: Number(this.deps.cart.total) + Number(totalPerProduct),
         customerName,
-      })
+      });
 
       this.deps.setSelectedProduct(null);
     }
-  }
+  };
 
   onGenerateInvoice = async () => {
-    this.deps.cart.customerName = this.deps.customer.name
-    const newInvoice = await generateInvoice(this.deps.cart, this.deps.customer);
-    this.deps.router.push(`/billing/${newInvoice.id}`)
-  }
+    this.deps.cart.customerName = this.deps.customer.name;
+    const newInvoice = await generateInvoice(
+      this.deps.cart,
+      this.deps.customer
+    );
+    this.deps.router.push(`/billing/${newInvoice.id}`);
+  };
 }

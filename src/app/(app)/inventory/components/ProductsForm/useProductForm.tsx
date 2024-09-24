@@ -1,15 +1,15 @@
-'use client'
-import * as React from "react"
-import { useForm } from "react-hook-form"
-import { useInventory } from "../../hooks/useInventory"
-import { formSchema } from "./schema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import comboboxCategoryMapper from "@/lib/mappers/comboboxCategoryMapper"
+'use client';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { useInventory } from '../../hooks/useInventory';
+import { formSchema } from './schema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import comboboxCategoryMapper from '@/lib/mappers/comboboxCategoryMapper';
 
 export function useProductForm() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState('');
 
   const {
     productsOperations,
@@ -19,26 +19,28 @@ export function useProductForm() {
     setOpenForm,
     productId,
     setProductId,
-  } = useInventory()
+  } = useInventory();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultFormValues,
-  })
+  });
 
   React.useEffect(() => {
-    form.setValue('name', defaultFormValues.name)
-    form.setValue('price', defaultFormValues.price)
-    form.setValue('quantity', defaultFormValues.quantity)
-    form.setValue('category', defaultFormValues.category)
-    setValue(defaultFormValues.category ?? "")
-  }, [defaultFormValues, form])
+    form.setValue('name', defaultFormValues.name);
+    form.setValue('price', defaultFormValues.price);
+    form.setValue('quantity', defaultFormValues.quantity);
+    form.setValue('category', defaultFormValues.category);
+    setValue(defaultFormValues.category ?? '');
+  }, [defaultFormValues, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    let categoryToAssign = undefined
+    let categoryToAssign = undefined;
 
     if (values.category !== null) {
-      categoryToAssign = categories.find(category => category.id === Number(values.category))
+      categoryToAssign = categories.find(
+        (category) => category.id === Number(values.category)
+      );
     }
 
     if (productId !== null) {
@@ -51,7 +53,7 @@ export function useProductForm() {
         createdAt: new Date(),
         updatedAt: new Date(),
         categoryId: categoryToAssign ? categoryToAssign.id : null,
-      })
+      });
     } else {
       await productsOperations.add({
         name: values.name,
@@ -62,12 +64,12 @@ export function useProductForm() {
         id: 0,
         updatedAt: new Date(),
         categoryId: categoryToAssign ? categoryToAssign.id : null,
-      })
+      });
     }
 
-    setOpenForm(false)
-    form.reset()
-  }
+    setOpenForm(false);
+    form.reset();
+  };
 
   return {
     onSubmit,
@@ -80,5 +82,5 @@ export function useProductForm() {
     setProductId,
     setDefaultValues,
     setOpenForm,
-  }
+  };
 }

@@ -1,1 +1,1 @@
-export * from './CustomerForm'
+export * from './CustomerForm';

@@ -1,1 +1,1 @@
-export * from './AppBackground'
+export * from './AppBackground';

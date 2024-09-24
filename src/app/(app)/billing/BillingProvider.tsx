@@ -1,8 +1,8 @@
-'use client'
+'use client';
 import { Cart, CartItem, Customer } from '@/definitions';
 import { useState, createContext, Dispatch, SetStateAction } from 'react';
 import SelectProductOperations from '@/operations/SelectProductOperations';
-import { useTransitionRouter } from 'next-view-transitions'
+import { useTransitionRouter } from 'next-view-transitions';
 
 interface BillingCtx {
   products: CartItem[];
@@ -15,21 +15,21 @@ interface BillingCtx {
 
 interface ProviderProps {
   children: React.ReactNode;
-  initialProducts: CartItem[]
+  initialProducts: CartItem[];
 }
 
 const cartDefaultValue: Cart = {
   items: [],
   total: 0,
-  customerName: ''
+  customerName: '',
 };
 
 const customerDefaultValue: Customer = {
   id: 0,
   dni: '',
   name: '',
-  phone: ''
-}
+  phone: '',
+};
 
 export const BillingContext = createContext<BillingCtx>({} as BillingCtx);
 
@@ -39,7 +39,7 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
   const [cart, setCart] = useState<Cart>(cartDefaultValue);
   const [customer, setCustomer] = useState<Customer>(customerDefaultValue);
 
-  const router = useTransitionRouter()
+  const router = useTransitionRouter();
 
   const selectProductOperations = new SelectProductOperations({
     products,
@@ -52,14 +52,16 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
   });
 
   return (
-    <BillingContext.Provider value={{
-      products,
-      selectedProduct,
-      selectProductOperations,
-      cart,
-      setCustomer,
-      customer,
-    }}>
+    <BillingContext.Provider
+      value={{
+        products,
+        selectedProduct,
+        selectProductOperations,
+        cart,
+        setCustomer,
+        customer,
+      }}
+    >
       {children}
     </BillingContext.Provider>
   );

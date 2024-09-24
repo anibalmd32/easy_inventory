@@ -5,11 +5,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { AlignJustify } from 'lucide-react';
 // import Link from 'next/link';
-import { Link } from 'next-view-transitions'
+import { Link } from 'next-view-transitions';
 
 export function HeaderMenu() {
   return (
@@ -32,12 +32,16 @@ export function HeaderMenu() {
         <DropdownMenuItem className="cursor-pointer">
           <Link href="/billing">Facturación</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">Lista de compras</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          Lista de compras
+        </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuLabel>Aplicación</DropdownMenuLabel>
-        <DropdownMenuItem className="cursor-pointer">Cerrar Sesión</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          Cerrar Sesión
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

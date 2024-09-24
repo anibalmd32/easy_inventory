@@ -1,32 +1,40 @@
-'use server'
-import { Invoice, Cart, Customer, INVOICE_STATUS } from "@/definitions";
-import { invoicesMock, customersMock, saleToCustomersMock, salesMock } from "../invoices/invoices.mock"
+'use server';
+import { Invoice, Cart, Customer, INVOICE_STATUS } from '@/definitions';
+import {
+  invoicesMock,
+  customersMock,
+  saleToCustomersMock,
+  salesMock,
+} from '../invoices/invoices.mock';
 
 export async function getInvoices() {
-  return invoicesMock
+  return invoicesMock;
 }
 
 export async function getInvoiceById(id: number): Promise<Invoice> {
   try {
-    const foundInvoice = invoicesMock.find(invoice => invoice.id === id);
+    const foundInvoice = invoicesMock.find((invoice) => invoice.id === id);
 
     if (!foundInvoice) {
-      throw new Error(`La factura con ${id} no existe`)
+      throw new Error(`La factura con ${id} no existe`);
     }
 
     return foundInvoice;
   } catch (err) {
-    return {} as Invoice
+    return {} as Invoice;
   }
 }
 
-export async function generateInvoice(cart: Cart, customer: Customer): Promise<Invoice> {
+export async function generateInvoice(
+  cart: Cart,
+  customer: Customer
+): Promise<Invoice> {
   try {
     const newInvoice: Invoice = {
       id: invoicesMock.length + 1,
       customerName: cart.customerName,
       generatedAt: new Date().toLocaleDateString(),
-      items: cart.items.map(item => ({
+      items: cart.items.map((item) => ({
         id: customersMock.length + 1,
         customer,
         customerId: customer.id,
@@ -40,7 +48,7 @@ export async function generateInvoice(cart: Cart, customer: Customer): Promise<I
       })),
       status: INVOICE_STATUS.PENDING,
       total: String(cart.total),
-    }
+    };
 
     invoicesMock.push(newInvoice);
 

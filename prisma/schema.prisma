@@ -101,6 +101,8 @@ model Setting {
   logoUrl           String          @default("/favicon.svg") @map("logo_url")
   minimumStock      Int             @default(5) @map("minimum_stock")
   invoiceTemplateId Int             @unique
+  email             String          @unique
+  password          String
   invoiceTemplate   InvoiceTemplate @relation(fields: [invoiceTemplateId], references: [id])
 
   @@map("settings")

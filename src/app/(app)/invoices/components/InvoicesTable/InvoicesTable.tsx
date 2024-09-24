@@ -1,7 +1,7 @@
-'use client'
-import { DataTable } from "@/components/shared/DataTable";
-import { invoicesTableColumns } from './invoicesTableColumns'
-import { useInvoices } from "../../hooks/useInvoices";
+'use client';
+import { DataTable } from '@/components/shared/DataTable';
+import { invoicesTableColumns } from './invoicesTableColumns';
+import { useInvoices } from '../../hooks/useInvoices';
 
 export function InvoicesTable() {
   const { invoices } = useInvoices();
@@ -14,5 +14,5 @@ export function InvoicesTable() {
         filterColumn="customerName"
       />
     </div>
-  )
+  );
 }

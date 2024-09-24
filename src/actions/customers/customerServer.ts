@@ -1,11 +1,11 @@
-'use server'
+'use server';
 
-import { customersMock } from './customer.mock'
+import { customersMock } from './customer.mock';
 
 export async function getCustomers() {
-  return customersMock
+  return customersMock;
 }
 
 export async function getCustomerByDni(dni: string) {
-  return customersMock.find(customer => customer.dni === dni)
+  return customersMock.find((customer) => customer.dni === dni);
 }

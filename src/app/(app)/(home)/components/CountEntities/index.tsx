@@ -1,1 +1,1 @@
-export * from './CountEntities'
+export * from './CountEntities';

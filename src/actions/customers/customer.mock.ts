@@ -1,4 +1,4 @@
-import { Customer } from "@/definitions";
+import { Customer } from '@/definitions';
 
 export const customersMock: Customer[] = [
   {
@@ -18,5 +18,5 @@ export const customersMock: Customer[] = [
     name: 'John Smith',
     phone: '1234567890',
     dni: 'v-3',
-  }
-]
+  },
+];

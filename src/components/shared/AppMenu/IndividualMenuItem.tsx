@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { MenuItem } from "./menu.data";
+import { MenuItem } from './menu.data';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 // import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Link } from 'next-view-transitions'
+import { Link } from 'next-view-transitions';
 
 export function IndividualMenuItem({ href, name, icon: Icon }: MenuItem) {
   const pathname = usePathname();
@@ -21,11 +21,13 @@ export function IndividualMenuItem({ href, name, icon: Icon }: MenuItem) {
         <TooltipTrigger asChild>
           <Link
             href={href}
-            className={isActiveLink(href)
-              ? 'bg-gray-100/20 block p-2 md:rounded-md'
-              : 'block p-2'}
+            className={
+              isActiveLink(href)
+                ? 'bg-gray-100/20 block p-2 md:rounded-md'
+                : 'block p-2'
+            }
           >
-            <Icon className={`w-6 h-6 hover:scale-150 transition-transform duration-300`} />
+            <Icon className="w-6 h-6 hover:scale-150 transition-transform duration-300" />
           </Link>
         </TooltipTrigger>
         <TooltipContent>

@@ -1,17 +1,17 @@
-'use client'
-import React from "react"
-import * as ShadAlert from "@/components/ui/alert-dialog"
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { useInventory } from '../../hooks/useInventory'
-import { Product } from "@/definitions";
-import { useProductForm } from '../ProductsForm'
+'use client';
+import React from 'react';
+import * as ShadAlert from '@/components/ui/alert-dialog';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { useInventory } from '../../hooks/useInventory';
+import { Product } from '@/definitions';
+import { useProductForm } from '../ProductsForm';
 
 interface ProductsTableActionsProps {
   rowData: Product;
 }
 
 export const EditProductBtn = ({ rowData }: ProductsTableActionsProps) => {
-  const { setOpenForm, setDefaultValues, setProductId } = useProductForm()
+  const { setOpenForm, setDefaultValues, setProductId } = useProductForm();
 
   const handleEdit = () => {
     setProductId(rowData.id);
@@ -19,23 +19,20 @@ export const EditProductBtn = ({ rowData }: ProductsTableActionsProps) => {
       name: rowData.name,
       price: rowData.price,
       quantity: String(rowData.quantity),
-      category: rowData.category?.id ? String(rowData.category.id) : null
+      category: rowData.category?.id ? String(rowData.category.id) : null,
     });
     setOpenForm(true);
-  }
+  };
 
   return (
-    <DropdownMenuItem
-      className="cursor-pointer"
-      onClick={handleEdit}
-    >
+    <DropdownMenuItem className="cursor-pointer" onClick={handleEdit}>
       Editar
     </DropdownMenuItem>
   );
-}
+};
 
 export const DeleteProductBtn = ({ rowData }: ProductsTableActionsProps) => {
-  const { productsOperations } = useInventory()
+  const { productsOperations } = useInventory();
 
   return (
     <ShadAlert.AlertDialog>
@@ -44,9 +41,7 @@ export const DeleteProductBtn = ({ rowData }: ProductsTableActionsProps) => {
       </ShadAlert.AlertDialogTrigger>
       <ShadAlert.AlertDialogContent className="bg-gray-950 text-gray-200">
         <ShadAlert.AlertDialogHeader>
-          <ShadAlert.AlertDialogTitle>
-            Estas seguro?
-          </ShadAlert.AlertDialogTitle>
+          <ShadAlert.AlertDialogTitle>Estas seguro?</ShadAlert.AlertDialogTitle>
           <ShadAlert.AlertDialogDescription>
             Esta acción eliminara el producto del inventario
           </ShadAlert.AlertDialogDescription>
@@ -57,7 +52,7 @@ export const DeleteProductBtn = ({ rowData }: ProductsTableActionsProps) => {
           </ShadAlert.AlertDialogCancel>
           <ShadAlert.AlertDialogAction
             onClick={async () => {
-              await productsOperations.remove(rowData)
+              await productsOperations.remove(rowData);
             }}
             className="bg-gray-900 hover:bg-gray-800 text-gray-200 transition-all duration-300"
           >
@@ -67,4 +62,4 @@ export const DeleteProductBtn = ({ rowData }: ProductsTableActionsProps) => {
       </ShadAlert.AlertDialogContent>
     </ShadAlert.AlertDialog>
   );
-}
+};

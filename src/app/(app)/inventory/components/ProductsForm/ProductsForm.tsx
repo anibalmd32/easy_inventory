@@ -1,34 +1,30 @@
-'use client'
-import * as React from "react"
-import * as ShadSheet from "@/components/ui/sheet"
-import * as ShadForm from "@/components/ui/form"
-import * as ShadCommand from "@/components/ui/command"
-import * as ShadPopover from "@/components/ui/popover"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useInventory } from '../../hooks/useInventory'
-import { useProductForm } from "./useProductForm"
+'use client';
+import * as React from 'react';
+import * as ShadSheet from '@/components/ui/sheet';
+import * as ShadForm from '@/components/ui/form';
+import * as ShadCommand from '@/components/ui/command';
+import * as ShadPopover from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useInventory } from '../../hooks/useInventory';
+import { useProductForm } from './useProductForm';
 
 export function ProductsForm() {
-  const {
-    form,
-    value,
-    setValue,
-    categories,
-    onSubmit,
-    open,
-    setOpen
-  } = useProductForm()
-  const { openForm, setOpenForm } = useInventory()
+  const { form, value, setValue, categories, onSubmit, open, setOpen } =
+    useProductForm();
+  const { openForm, setOpenForm } = useInventory();
 
   return (
-    <ShadSheet.Sheet open={openForm} onOpenChange={() => {
-      setOpenForm(!openForm)
-      form.reset()
-      setValue("")
-    }}>
+    <ShadSheet.Sheet
+      open={openForm}
+      onOpenChange={() => {
+        setOpenForm(!openForm);
+        form.reset();
+        setValue('');
+      }}
+    >
       <ShadSheet.SheetTrigger asChild>
         <Button
           onClick={() => setOpenForm(true)}
@@ -57,10 +53,7 @@ export function ProductsForm() {
                   <ShadForm.FormItem>
                     <ShadForm.FormLabel>Nombre</ShadForm.FormLabel>
                     <ShadForm.FormControl>
-                      <Input
-                        className="bg-gray-900 text-gray-200"
-                        {...field}
-                      />
+                      <Input className="bg-gray-900 text-gray-200" {...field} />
                     </ShadForm.FormControl>
                     <ShadForm.FormMessage />
                   </ShadForm.FormItem>
@@ -118,8 +111,10 @@ export function ProductsForm() {
                             className="justify-between w-full bg-gray-900 text-gray-200"
                           >
                             {value
-                              ? categories.find((category) => String(category.value) === value)?.label
-                              : "Seleccione una categoría..."}
+                              ? categories.find(
+                                  (category) => String(category.value) === value
+                                )?.label
+                              : 'Seleccione una categoría...'}
                             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                           </Button>
                         </ShadPopover.PopoverTrigger>
@@ -130,7 +125,9 @@ export function ProductsForm() {
                               className="bg-gray-900 text-gray-200"
                             />
                             <ShadCommand.CommandList className="bg-gray-900 text-gray-200">
-                              <ShadCommand.CommandEmpty>Categoría no encontrada.</ShadCommand.CommandEmpty>
+                              <ShadCommand.CommandEmpty>
+                                Categoría no encontrada.
+                              </ShadCommand.CommandEmpty>
                               <ShadCommand.CommandGroup className="max-h-40 overflow-y-auto">
                                 {categories.map((category) => (
                                   <ShadCommand.CommandItem
@@ -138,17 +135,25 @@ export function ProductsForm() {
                                     key={category.value}
                                     value={String(category.value)}
                                     onSelect={(currentValue) => {
-                                      setValue(currentValue === value ? "" : currentValue)
-                                      setOpen(false)
-                                      field.onChange(currentValue === value ? null : currentValue)
+                                      setValue(
+                                        currentValue === value
+                                          ? ''
+                                          : currentValue
+                                      );
+                                      setOpen(false);
+                                      field.onChange(
+                                        currentValue === value
+                                          ? null
+                                          : currentValue
+                                      );
                                     }}
                                   >
                                     <Check
                                       className={cn(
-                                        "mr-2 h-4 w-4",
+                                        'mr-2 h-4 w-4',
                                         value === String(category.value)
-                                          ? "opacity-100"
-                                          : "opacity-0"
+                                          ? 'opacity-100'
+                                          : 'opacity-0'
                                       )}
                                     />
                                     {category.label}
@@ -176,5 +181,5 @@ export function ProductsForm() {
         </div>
       </ShadSheet.SheetContent>
     </ShadSheet.Sheet>
-  )
+  );
 }

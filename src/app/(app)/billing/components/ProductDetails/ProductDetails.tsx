@@ -1,18 +1,19 @@
-'use client'
+'use client';
 
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useBilling } from '../../hooks/useBilling';
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { useBilling } from "../../hooks/useBilling"
-import { Plus, ShoppingCart, ShoppingBag, DollarSign, Minus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Badge } from "@/components/ui/badge"
+  Plus,
+  ShoppingCart,
+  ShoppingBag,
+  DollarSign,
+  Minus,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 export function ProductDetails() {
-  const { selectedProduct, selectProductOperations } = useBilling()
+  const { selectedProduct, selectProductOperations } = useBilling();
 
   return (
     <Card className="bg-gray-950 p-4 text-gray-200 w-full">
@@ -20,11 +21,12 @@ export function ProductDetails() {
         <>
           <CardHeader>
             <CardTitle className="flex gap-2 items-center justify-between">
+              <span>{selectedProduct.name}</span>
               <span>
-                {selectedProduct.name}
-              </span>
-              <span>
-                <Badge variant="default" style={{ backgroundColor: selectedProduct.category?.color }}>
+                <Badge
+                  variant="default"
+                  style={{ backgroundColor: selectedProduct.category?.color }}
+                >
                   {selectedProduct.category?.name}
                 </Badge>
               </span>
@@ -42,7 +44,9 @@ export function ProductDetails() {
               </p>
               <p className="flex gap-2 items-center">
                 <ShoppingBag className="h-4 w-4" />
-                <span>${selectedProduct.amount * Number(selectedProduct.price)}</span>
+                <span>
+                  ${selectedProduct.amount * Number(selectedProduct.price)}
+                </span>
               </p>
             </div>
             <div className="flex gap-4 flex-wrap justify-center items-center">
@@ -54,14 +58,18 @@ export function ProductDetails() {
                 Remover
               </Button>
               <Button
-                onClick={() => selectProductOperations.onSelectProductCounterDecrement()}
+                onClick={() =>
+                  selectProductOperations.onSelectProductCounterDecrement()
+                }
                 className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                 size={'sm'}
               >
                 <Minus className="h-4 w-4" />
               </Button>
               <Button
-                onClick={() => selectProductOperations.onSelectProductCounterIncrement()}
+                onClick={() =>
+                  selectProductOperations.onSelectProductCounterIncrement()
+                }
                 className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                 size={'sm'}
               >
@@ -83,5 +91,5 @@ export function ProductDetails() {
         </CardContent>
       )}
     </Card>
-  )
+  );
 }

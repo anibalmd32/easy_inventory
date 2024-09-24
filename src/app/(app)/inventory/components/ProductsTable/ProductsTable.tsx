@@ -1,18 +1,18 @@
-"use client"
-import { useInventory } from "../../hooks/useInventory"
-import { DataTable } from "@/components/shared/DataTable"
-import { productsTableColumns } from './productsTableColumns'
+'use client';
+import { useInventory } from '../../hooks/useInventory';
+import { DataTable } from '@/components/shared/DataTable';
+import { productsTableColumns } from './productsTableColumns';
 
 export function ProductsTable() {
-	const { products } = useInventory()
+  const { products } = useInventory();
 
-	return (
-		<div>
-			<DataTable
-				columns={productsTableColumns}
-				data={products}
-				filterColumn="name"
-			/>
-		</div>
-	)
+  return (
+    <div>
+      <DataTable
+        columns={productsTableColumns}
+        data={products}
+        filterColumn="name"
+      />
+    </div>
+  );
 }

@@ -1,4 +1,4 @@
-import { Bell, ShoppingBag, ShoppingCart, User, Pencil } from 'lucide-react'
+import { Bell, ShoppingBag, ShoppingCart, User, Pencil } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,7 +6,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/ui/dropdown-menu';
 
 import { Notification, APP_ACTIONS } from '@/definitions';
 
@@ -30,7 +30,7 @@ export function Notifications() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="cursor-pointer relative hover:bg-gray-800 transition-all duration-300 rounded-md p-2 flex items-center">
-          <span className='absolute top-1 right-1 h-2 w-2 rounded-full bg-gray-200 text-white flex items-center justify-center'></span>
+          <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-gray-200 text-white flex items-center justify-center"></span>
           <Bell className="h-6 w-6" />
         </div>
       </DropdownMenuTrigger>
@@ -52,5 +52,5 @@ export function Notifications() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

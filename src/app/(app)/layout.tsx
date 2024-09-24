@@ -1,9 +1,9 @@
-"use client";
+'use client';
 import { AppMenu } from '@/components/shared/AppMenu';
 import { AppHeader } from '@/components/shared/AppHeader';
-import { PageContainer } from '@/components/shared/PageContainer'
-import { Toaster } from "@/components/ui/toaster"
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
+import { PageContainer } from '@/components/shared/PageContainer';
+import { Toaster } from '@/components/ui/toaster';
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 
 export default function HomeLayout({
   children,
@@ -11,7 +11,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className='relative'>
+    <main className="relative">
       <AppHeader appName="Easy Inventory" appLogo="/billing.svg" />
       <PageContainer>{children}</PageContainer>
       <AppMenu />
@@ -23,5 +23,5 @@ export default function HomeLayout({
         shallowRouting
       />
     </main>
-  )
+  );
 }

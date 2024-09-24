@@ -1,35 +1,37 @@
-import { Product } from "@/definitions";
-import { ReducerAction } from "@/definitions";
+import { Product } from '@/definitions';
+import { ReducerAction } from '@/definitions';
 
 export enum PRODUCTS_ACTIONS {
-	ADD,
-	REMOVE,
-	UPDATE,
+  ADD,
+  REMOVE,
+  UPDATE,
 }
 
 export function productsReducer(
-	state: Product[] = [],
-	action: ReducerAction<Product, PRODUCTS_ACTIONS>
+  state: Product[] = [],
+  action: ReducerAction<Product, PRODUCTS_ACTIONS>
 ) {
-	const onSaveData = () => {
-		state = [action.payload.data, ...state];
-	}
+  const onSaveData = () => {
+    state = [action.payload.data, ...state];
+  };
 
-	const onRemoveData = () => {
-		state = state.filter(item => item.id !== action.payload.data.id);
-	}
+  const onRemoveData = () => {
+    state = state.filter((item) => item.id !== action.payload.data.id);
+  };
 
-	const onUpdateData = () => {
-		state = state.map(item => item.id === action.payload.data.id ? action.payload.data : item);
-	}
+  const onUpdateData = () => {
+    state = state.map((item) =>
+      item.id === action.payload.data.id ? action.payload.data : item
+    );
+  };
 
-	const actionIndex = {
-		[PRODUCTS_ACTIONS.ADD]: onSaveData,
-		[PRODUCTS_ACTIONS.REMOVE]: onRemoveData,
-		[PRODUCTS_ACTIONS.UPDATE]: onUpdateData,
-	}
+  const actionIndex = {
+    [PRODUCTS_ACTIONS.ADD]: onSaveData,
+    [PRODUCTS_ACTIONS.REMOVE]: onRemoveData,
+    [PRODUCTS_ACTIONS.UPDATE]: onUpdateData,
+  };
 
-	actionIndex[action.type]();
+  actionIndex[action.type]();
 
-	return state;
+  return state;
 }
