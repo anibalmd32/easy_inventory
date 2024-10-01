@@ -7,9 +7,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Link } from 'next-view-transitions';
 
 export function IndividualMenuItem({ href, name, icon: Icon }: MenuItem) {
   const pathname = usePathname();
