@@ -2,10 +2,8 @@
 import { InventoryProvider } from './InventoryProvider';
 
 /** SERVER ACTIONS */
-import {
-  getProducts,
-  getProductCategoryItems,
-} from '@/actions/Products/ProductsServer';
+import { getAllProducts } from '@/core/frameworks/server-actions/products.actions';
+import { getAllCategories } from '@/core/frameworks/server-actions/categories.actions';
 
 /** COMPONENTS */
 import { ProductsTable } from './components/ProductsTable';
@@ -14,8 +12,8 @@ import { ProductsForm } from './components/ProductsForm';
 import { PageTitle } from '@/components/shared/PageTitle';
 
 export default async function InventoryPage() {
-  const products = await getProducts();
-  const categories = await getProductCategoryItems();
+  const products = await getAllProducts();
+  const categories = await getAllCategories();
 
   return (
     <InventoryProvider

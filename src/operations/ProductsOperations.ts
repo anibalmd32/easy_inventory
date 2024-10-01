@@ -1,6 +1,11 @@
 import { Product, ReducerAction } from '@/definitions';
 import { PRODUCTS_ACTIONS } from '@/app/(app)/inventory/reducers';
 import LoaderOperations from '@/operations/LoaderOperations';
+import {
+  createProduct,
+  removeProduct,
+  updateProduct,
+} from '@/core/frameworks/server-actions/products.actions';
 
 type ProductOperationsDependency = {
   productsDispatcher: React.Dispatch<ReducerAction<Product, PRODUCTS_ACTIONS>>;
@@ -18,7 +23,8 @@ class ProductsOperations {
     this._dependency.loader.trigger();
 
     try {
-      // TODO: Llamada a la API
+      // TODO: Llamada a la API ✔
+      await createProduct(product);
 
       // Para refrescar la UI de forma optimista
       this._dependency.productsDispatcher({
@@ -40,6 +46,7 @@ class ProductsOperations {
 
     try {
       // TODO: Llamada a la API
+      await removeProduct(product.id);
 
       this._dependency.productsDispatcher({
         type: PRODUCTS_ACTIONS.REMOVE,
@@ -60,6 +67,7 @@ class ProductsOperations {
 
     try {
       // TODO: Llamada a la API
+      await updateProduct(product.id, product);
 
       this._dependency.productsDispatcher({
         type: PRODUCTS_ACTIONS.UPDATE,
