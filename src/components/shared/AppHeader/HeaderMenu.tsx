@@ -8,8 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { AlignJustify } from 'lucide-react';
-// import Link from 'next/link';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 
 export function HeaderMenu() {
   return (
