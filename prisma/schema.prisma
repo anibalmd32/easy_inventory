@@ -11,7 +11,7 @@ model Category {
   id       Int      @id @default(autoincrement())
   name     String   @unique
   color    String
-  products Product?
+  products Product[]
 
   @@map("categories")
 }
@@ -21,7 +21,7 @@ model Product {
   name        String        @unique
   price       String
   quantity    Int
-  categoryId  Int?          @unique @map("category_id")
+  categoryId  Int?          @map("category_id")
   createdAt   DateTime      @default(now()) @map("created_at")
   updatedAt   DateTime      @default(now()) @map("updated_at")
   category    Category?     @relation(fields: [categoryId], references: [id], onDelete: Restrict)

@@ -8,8 +8,9 @@ import { getAllCategories } from '@/core/frameworks/server-actions/categories.ac
 /** COMPONENTS */
 import { ProductsTable } from './components/ProductsTable';
 import { ProductsForm } from './components/ProductsForm';
-// import {  } from './components/ProductsForm'
 import { PageTitle } from '@/components/shared/PageTitle';
+
+export const revalidate = 0;
 
 export default async function InventoryPage() {
   const products = await getAllProducts();

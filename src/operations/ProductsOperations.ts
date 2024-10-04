@@ -24,13 +24,13 @@ class ProductsOperations {
 
     try {
       // TODO: Llamada a la API ✔
-      await createProduct(product);
+      const newProduct = await createProduct(product);
 
       // Para refrescar la UI de forma optimista
       this._dependency.productsDispatcher({
         type: PRODUCTS_ACTIONS.ADD,
         payload: {
-          data: product,
+          data: newProduct,
         },
       });
 

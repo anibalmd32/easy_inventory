@@ -60,11 +60,6 @@ export function InventoryProvider({ children, initialData }: ProviderProps) {
     loader: loaderOperations,
   });
 
-  // React.useEffect(() => {
-  //   console.log('Datos iniciales:', initialData);
-  //   console.log('Productos:', productsState);
-  // }, [initialData, productsState]);
-
   return (
     <InventoryContext.Provider
       value={{

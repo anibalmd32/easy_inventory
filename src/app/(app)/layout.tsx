@@ -5,7 +5,7 @@ import { PageContainer } from '@/components/shared/PageContainer';
 import { Toaster } from '@/components/ui/toaster';
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 
-export default function HomeLayout({
+export default function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
