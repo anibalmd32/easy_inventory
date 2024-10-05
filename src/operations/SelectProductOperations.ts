@@ -1,6 +1,6 @@
 import { CartItem, Cart, Customer } from '@/definitions';
 import { Dispatch, SetStateAction } from 'react';
-import { generateInvoice } from '@/actions/invoices/InvoicesServer';
+import { generateInvoice } from '@/core/frameworks/server-actions/invoice.actions';
 
 interface SelectProductOperationsDeps {
   products: CartItem[];
@@ -46,7 +46,7 @@ export default class SelectProductOperations {
     }
   };
 
-  onSelectProductCounterIncrement = (productId?: number) => {
+  onSelectedProductCounterIncrement = (productId?: number) => {
     if (productId) {
       this.deps.setCart((prev) => {
         const product = prev.items.find((item) => item.id === productId);
@@ -77,7 +77,7 @@ export default class SelectProductOperations {
     }
   };
 
-  onSelectProductCounterDecrement = (productId?: number) => {
+  onSelectedProductCounterDecrement = (productId?: number) => {
     if (productId) {
       this.deps.setCart((prev) => {
         const product = prev.items.find((item) => item.id === productId);
@@ -125,11 +125,18 @@ export default class SelectProductOperations {
   };
 
   onGenerateInvoice = async () => {
+    console.log(this.deps.cart);
     this.deps.cart.customerName = this.deps.customer.name;
     const newInvoice = await generateInvoice(
       this.deps.cart,
       this.deps.customer
     );
-    this.deps.router.push(`/billing/${newInvoice.id}`);
+
+    if (newInvoice) {
+      // TODO: mostrar toast
+      this.deps.router.push(`/billing/${newInvoice.id}`);
+    } else {
+      // TODO: mostrar toast
+    }
   };
 }

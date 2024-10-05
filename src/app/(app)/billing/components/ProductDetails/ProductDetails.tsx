@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useBilling } from '../../hooks/useBilling';
 import {
@@ -59,7 +59,7 @@ export function ProductDetails() {
               </Button>
               <Button
                 onClick={() =>
-                  selectProductOperations.onSelectProductCounterDecrement()
+                  selectProductOperations.onSelectedProductCounterDecrement()
                 }
                 className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                 size={'sm'}
@@ -68,7 +68,7 @@ export function ProductDetails() {
               </Button>
               <Button
                 onClick={() =>
-                  selectProductOperations.onSelectProductCounterIncrement()
+                  selectProductOperations.onSelectedProductCounterIncrement()
                 }
                 className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                 size={'sm'}

@@ -12,6 +12,8 @@ import { getEntityCountData } from '@/actions/counts/CountsServer';
 import { InvoicesCharts } from './components/InvoicesCharts';
 import { CountEntities } from './components/CountEntities';
 
+export const revalidate = 0;
+
 export default async function Home() {
   const entityCountData = await getEntityCountData();
   const monthlyChartData = await getMonthlyChartData();

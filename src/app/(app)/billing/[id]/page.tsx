@@ -1,10 +1,12 @@
 import { PageTitle } from '@/components/shared/PageTitle';
-import { getInvoiceById } from '@/actions/invoices/InvoicesServer';
 import { Calendar, User, Loader, Printer } from 'lucide-react';
 import { INVOICE_STATUS } from '@/definitions';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 import * as ShadTable from '@/components/ui/table';
+import { getInvoiceById } from '@/core/frameworks/server-actions/invoice.actions';
+
+export const revalidate = 0;
 
 export default async function Page({ params }: { params: { id: string } }) {
   const invoice = await getInvoiceById(Number(params.id));
@@ -70,7 +72,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     {item.sale.product.name}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
-                    {item.sale.product.price}
+                    ${item.sale.product.price}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
                     {item.sale.productQuantity}

@@ -1,7 +1,8 @@
 'use server';
 import ProductService from '@/core/application/product.services';
 import ProductRepository from '@/core/infrastructure/product.repository';
-import { Product } from '@/definitions';
+import { CartItem, Product } from '@/definitions';
+import cartItemMapper from '@/lib/mappers/cartItemMapper';
 
 const repository = new ProductRepository();
 const services = new ProductService(repository);
@@ -44,5 +45,14 @@ export const updateProduct = async (
     return await services.updatePartiallyProduct(id, product);
   } catch (error) {
     return {} as Product;
+  }
+};
+
+export const getProductsAsCartItems = async (): Promise<CartItem[]> => {
+  try {
+    const products = await services.getProductList();
+    return cartItemMapper(products);
+  } catch (error) {
+    return [];
   }
 };

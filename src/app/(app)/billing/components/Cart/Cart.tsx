@@ -50,7 +50,7 @@ export function Cart() {
               cart.items.map((item, i) => (
                 <ShadTable.TableRow key={i} className="hover:bg-gray-800/20">
                   <ShadTable.TableCell>{item.name}</ShadTable.TableCell>
-                  <ShadTable.TableCell>{item.price}</ShadTable.TableCell>
+                  <ShadTable.TableCell>${item.price}</ShadTable.TableCell>
                   <ShadTable.TableCell>{item.amount}</ShadTable.TableCell>
                   <ShadTable.TableCell className="text-right">
                     ${item.amount * Number(item.price)}
@@ -60,7 +60,7 @@ export function Cart() {
                       size={'icon'}
                       className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                       onClick={() =>
-                        selectProductOperations.onSelectProductCounterDecrement(
+                        selectProductOperations.onSelectedProductCounterDecrement(
                           item.id
                         )
                       }
@@ -71,7 +71,7 @@ export function Cart() {
                       size={'icon'}
                       className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                       onClick={() =>
-                        selectProductOperations.onSelectProductCounterIncrement(
+                        selectProductOperations.onSelectedProductCounterIncrement(
                           item.id
                         )
                       }
