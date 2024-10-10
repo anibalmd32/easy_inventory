@@ -2,11 +2,11 @@
 import React from 'react';
 import * as ShadAlert from '@/components/ui/alert-dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { useInventory } from '../../hooks/useInventory';
+import { useInventory } from '../../InventoryProvider';
 import { Product } from '@/definitions';
 import { useProductForm } from '../ProductsForm';
 
-interface ProductsTableActionsProps {
+export interface ProductsTableActionsProps {
   rowData: Product;
 }
 
@@ -32,7 +32,7 @@ export const EditProductBtn = ({ rowData }: ProductsTableActionsProps) => {
 };
 
 export const DeleteProductBtn = ({ rowData }: ProductsTableActionsProps) => {
-  const { productsOperations } = useInventory();
+  const { inventoryEvents } = useInventory();
 
   return (
     <ShadAlert.AlertDialog>
@@ -52,7 +52,7 @@ export const DeleteProductBtn = ({ rowData }: ProductsTableActionsProps) => {
           </ShadAlert.AlertDialogCancel>
           <ShadAlert.AlertDialogAction
             onClick={async () => {
-              await productsOperations.remove(rowData);
+              await inventoryEvents.remove(rowData);
             }}
             className="bg-gray-900 hover:bg-gray-800 text-gray-200 transition-all duration-300"
           >

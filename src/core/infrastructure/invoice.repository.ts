@@ -1,6 +1,7 @@
-import { Invoice } from '@/definitions';
+import { Invoice, INVOICE_STATUS } from '@/definitions';
 import { prisma } from '@/lib/prisma';
 import { invoiceMapper } from '@/lib/mappers/invoiceMapper';
+import { Prisma } from '@prisma/client';
 
 export default class InvoiceRepository {
   async add(customerId: number, data: Invoice): Promise<Invoice> {
@@ -60,15 +61,24 @@ export default class InvoiceRepository {
     return invoices.map((invoice) => invoiceMapper(invoice));
   }
 
-  async update(id: number, data: Partial<Invoice>): Promise<Invoice> {
+  async update(id: number, invoiceData: Partial<Invoice>): Promise<Invoice> {
+    const data: Prisma.InvoiceUpdateInput = {}; 
+
+    if (invoiceData.canceledAt) {
+      data.canceledAt = new Date(invoiceData.canceledAt);
+    }
+
+    if (invoiceData.paidAt) {
+      data.paidAt = new Date(invoiceData.paidAt);
+    }
+
+    if (invoiceData.status) {
+      data.status = invoiceData.status;
+    }
+
     const updatedInvoice = await prisma.invoice.update({
       where: { id },
-      data: {
-        canceledAt: data.canceledAt,
-        paidAt: data.paidAt,
-        status: data.status,
-        total: data.total,
-      },
+      data,
       include: {
         customer: true,
       },

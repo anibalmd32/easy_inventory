@@ -1,13 +1,10 @@
 'use client';
 import { DataTableColumnHeader } from '@/components/shared/DataTable';
-import * as ShadDropdown from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { EditProductBtn, DeleteProductBtn } from './ProductsTableActions';
-import { MoreHorizontal } from 'lucide-react';
 import { ColumnDef } from '@tanstack/react-table';
 import { Product } from '@/definitions';
 import { formatDate } from '@/lib/utils';
+import { ProductsTableActionsDropdown } from './ProductsTableActionsDropdown';
 
 export const productsTableColumns: ColumnDef<Product>[] = [
   {
@@ -77,29 +74,6 @@ export const productsTableColumns: ColumnDef<Product>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => {
-      return (
-        <ShadDropdown.DropdownMenu>
-          <ShadDropdown.DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </ShadDropdown.DropdownMenuTrigger>
-          <ShadDropdown.DropdownMenuContent
-            align="end"
-            className="bg-gray-800 text-gray-200"
-          >
-            <ShadDropdown.DropdownMenuLabel>
-              Acciones
-            </ShadDropdown.DropdownMenuLabel>
-
-            <ShadDropdown.DropdownMenuSeparator />
-
-            <EditProductBtn rowData={row.original} />
-            <DeleteProductBtn rowData={row.original} />
-          </ShadDropdown.DropdownMenuContent>
-        </ShadDropdown.DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <ProductsTableActionsDropdown rowData={row.original} />,
   },
 ];

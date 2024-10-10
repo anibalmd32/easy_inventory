@@ -23,3 +23,21 @@ export const getInvoiceById = async (id: number): Promise<Invoice> => {
     return {} as Invoice;
   }
 };
+
+export const payInvoice = async (id: number): Promise<Invoice> => {
+  try {
+    return await service.payInvoice(id);
+  } catch (error) {
+    console.log(error);
+    return {} as Invoice;
+  }
+};
+
+export const cancelInvoice = async (id: number): Promise<Invoice> => {
+  try {
+    return await service.cancelInvoice(id);
+  } catch (error) {
+    console.log(error);
+    return {} as Invoice;
+  }
+};

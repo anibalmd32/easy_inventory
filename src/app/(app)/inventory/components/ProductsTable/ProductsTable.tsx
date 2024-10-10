@@ -1,5 +1,5 @@
 'use client';
-import { useInventory } from '../../hooks/useInventory';
+import { useInventory } from '../../InventoryProvider';
 import { DataTable } from '@/components/shared/DataTable';
 import { productsTableColumns } from './productsTableColumns';
 

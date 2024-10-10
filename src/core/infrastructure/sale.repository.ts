@@ -27,7 +27,13 @@ export default class SaleRepository {
       },
     });
 
-    return newSale;
+    return {
+      ...newSale,
+      product: {
+        ...newSale.product,
+        price: Number(newSale.product.price)
+      }
+    };
   }
 
   async delete(id: number): Promise<Sale> {

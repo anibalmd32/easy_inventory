@@ -9,7 +9,7 @@ export interface Category {
 export interface Product {
   id: number;
   name: string;
-  price: string;
+  price: number;
   quantity: number;
   categoryId: number | null;
   createdAt: Date;

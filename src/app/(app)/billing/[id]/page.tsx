@@ -5,6 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 import * as ShadTable from '@/components/ui/table';
 import { getInvoiceById } from '@/core/frameworks/server-actions/invoice.actions';
+import GeneratedInvoiceBtns from '../components/GeneratedInvoiceBtns/GeneratedInvoiceBtns';
+import { BillingProvider } from '../BillingProvider';
 
 export const revalidate = 0;
 
@@ -44,6 +46,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Badge>
         </div>
       </div>
+
+      <GeneratedInvoiceBtns invoiceId={Number(params.id)} />
 
       {/* Table items */}
       <div className="bg-gray-950 rounded-md p-4">

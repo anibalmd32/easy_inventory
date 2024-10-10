@@ -1,6 +1,7 @@
 import { CartItem, Cart, Customer } from '@/definitions';
 import { Dispatch, SetStateAction } from 'react';
-import { generateInvoice } from '@/core/frameworks/server-actions/invoice.actions';
+import { generateInvoice, cancelInvoice, payInvoice } from '@/core/frameworks/server-actions/invoice.actions';
+import ToastEventHandlers from './ToastEventHandlers';
 
 interface SelectProductOperationsDeps {
   products: CartItem[];
@@ -10,6 +11,7 @@ interface SelectProductOperationsDeps {
   setCart: Dispatch<SetStateAction<Cart>>;
   customer: Customer;
   router: any;
+  toastEvents: ToastEventHandlers;
 }
 
 export default class SelectProductOperations {
@@ -125,7 +127,6 @@ export default class SelectProductOperations {
   };
 
   onGenerateInvoice = async () => {
-    console.log(this.deps.cart);
     this.deps.cart.customerName = this.deps.customer.name;
     const newInvoice = await generateInvoice(
       this.deps.cart,
@@ -139,4 +140,5 @@ export default class SelectProductOperations {
       // TODO: mostrar toast
     }
   };
+
 }

@@ -50,4 +50,18 @@ export default class InvoiceServices {
   async getInvoiceById(id: number) {
     return await this.repository.getById(id);
   }
+
+  async payInvoice(id: number) {
+    return await this.repository.update(id, {
+      paidAt: new Date().toDateString(),
+      status: INVOICE_STATUS.PAID,
+    });
+  }
+
+  async cancelInvoice(id: number) {
+    return await this.repository.update(id, {
+      canceledAt: new Date().toDateString(),
+      status: INVOICE_STATUS.CANCELED
+    });
+  }
 }

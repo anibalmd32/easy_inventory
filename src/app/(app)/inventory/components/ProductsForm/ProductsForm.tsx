@@ -8,12 +8,19 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useInventory } from '../../hooks/useInventory';
+import { useInventory } from '../../InventoryProvider';
 import { useProductForm } from './useProductForm';
 
 export function ProductsForm() {
-  const { form, value, setValue, categories, onSubmit, open, setOpen } =
-    useProductForm();
+  const {
+    form,
+    categoryValue,
+    setCategoryValue,
+    categories,
+    onSubmit,
+    openCategorySelect,
+    setOpenCategorySelect
+  } = useProductForm();
   const { openForm, setOpenForm } = useInventory();
 
   return (
@@ -22,14 +29,11 @@ export function ProductsForm() {
       onOpenChange={() => {
         setOpenForm(!openForm);
         form.reset();
-        setValue('');
+        setCategoryValue('');
       }}
     >
       <ShadSheet.SheetTrigger asChild>
-        <Button
-          onClick={() => setOpenForm(true)}
-          className="bg-gray-950 hover:bg-gray-800 text-gray-200 hover:text-gray-200 transition-all duration-300"
-        >
+        <Button className="bg-gray-950 hover:bg-gray-800 text-gray-200 hover:text-gray-200 transition-all duration-300">
           Agregar producto
         </Button>
       </ShadSheet.SheetTrigger>
@@ -102,17 +106,17 @@ export function ProductsForm() {
                   <ShadForm.FormItem>
                     <ShadForm.FormLabel>Categoría</ShadForm.FormLabel>
                     <ShadForm.FormControl>
-                      <ShadPopover.Popover open={open} onOpenChange={setOpen}>
+                      <ShadPopover.Popover open={openCategorySelect} onOpenChange={setOpenCategorySelect}>
                         <ShadPopover.PopoverTrigger asChild>
                           <Button
                             variant="outline"
                             role="combobox"
-                            aria-expanded={open}
+                            aria-expanded={openCategorySelect}
                             className="justify-between w-full bg-gray-900 text-gray-200"
                           >
-                            {value
+                            {categoryValue
                               ? categories.find(
-                                  (category) => String(category.value) === value
+                                  (category) => String(category.value) === categoryValue
                                 )?.label
                               : 'Seleccione una categoría...'}
                             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -135,14 +139,14 @@ export function ProductsForm() {
                                     key={category.value}
                                     value={String(category.value)}
                                     onSelect={(currentValue) => {
-                                      setValue(
-                                        currentValue === value
+                                      setCategoryValue(
+                                        currentValue === categoryValue
                                           ? ''
                                           : currentValue
                                       );
-                                      setOpen(false);
+                                      setOpenCategorySelect(false);
                                       field.onChange(
-                                        currentValue === value
+                                        currentValue === categoryValue
                                           ? null
                                           : currentValue
                                       );
@@ -151,7 +155,7 @@ export function ProductsForm() {
                                     <Check
                                       className={cn(
                                         'mr-2 h-4 w-4',
-                                        value === String(category.value)
+                                        categoryValue === String(category.value)
                                           ? 'opacity-100'
                                           : 'opacity-0'
                                       )}

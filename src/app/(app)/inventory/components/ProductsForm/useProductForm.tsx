@@ -1,18 +1,18 @@
 'use client';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
-import { useInventory } from '../../hooks/useInventory';
+import { useInventory } from '../../InventoryProvider';
 import { formSchema } from './schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import comboboxCategoryMapper from '@/lib/mappers/comboboxCategoryMapper';
 
 export function useProductForm() {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
+  const [openCategorySelect, setOpenCategorySelect] = React.useState(false);
+  const [categoryValue, setCategoryValue] = React.useState('');
 
   const {
-    productsOperations,
+    inventoryEvents,
     categories,
     defaultFormValues,
     setDefaultValues,
@@ -31,7 +31,7 @@ export function useProductForm() {
     form.setValue('price', defaultFormValues.price);
     form.setValue('quantity', defaultFormValues.quantity);
     form.setValue('category', defaultFormValues.category);
-    setValue(defaultFormValues.category ?? '');
+    setCategoryValue(defaultFormValues.category ?? '');
   }, [defaultFormValues, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -44,10 +44,10 @@ export function useProductForm() {
     }
 
     if (productId !== null) {
-      await productsOperations.update({
+      await inventoryEvents.update({
         id: productId,
         name: values.name,
-        price: values.price,
+        price: Number(values.price),
         quantity: parseInt(values.quantity),
         category: categoryToAssign ? categoryToAssign : null,
         createdAt: new Date(),
@@ -55,9 +55,9 @@ export function useProductForm() {
         categoryId: categoryToAssign ? categoryToAssign.id : null,
       });
     } else {
-      await productsOperations.add({
+      await inventoryEvents.add({
         name: values.name,
-        price: values.price,
+        price: Number(values.price),
         quantity: parseInt(values.quantity),
         category: categoryToAssign ? categoryToAssign : null,
         createdAt: new Date(),
@@ -74,11 +74,11 @@ export function useProductForm() {
   return {
     onSubmit,
     categories: comboboxCategoryMapper(categories),
-    open,
-    setOpen,
+    openCategorySelect,
+    setOpenCategorySelect,
     form,
-    value,
-    setValue,
+    categoryValue,
+    setCategoryValue,
     setProductId,
     setDefaultValues,
     setOpenForm,

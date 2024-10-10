@@ -1,11 +1,9 @@
 'use client';
 import { createContext, useState } from 'react';
 import { Invoice, LoadingData } from '@/definitions';
-import LoaderOperations from '@/operations/LoaderOperations';
 import { loaderInitialState } from '@/lib/utils';
 
 interface InvoiceCtx {
-  loaderOperations: LoaderOperations;
   invoices: Invoice[];
 }
 
@@ -24,12 +22,9 @@ export const InvoicesProvider = ({
     useState<LoadingData>(loaderInitialState);
   const [invoices, setInvoices] = useState<Invoice[]>(initialInvoices);
 
-  const loaderOperations = new LoaderOperations(setLoadingData);
-
   return (
     <InvoicesContext.Provider
       value={{
-        loaderOperations,
         invoices,
       }}
     >

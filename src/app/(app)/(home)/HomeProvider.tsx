@@ -1,56 +1,93 @@
 'use client';
-import { createContext, useState } from 'react';
+import { createContext, useContext } from 'react';
+import { HomeCtx, ProviderProps } from './definitions';
+import { EntityCountItem } from '@/definitions';
 import {
-  EntityCountItem,
-  MonthlyChartItem,
-  WeeklyChartItem,
-  LoadingData,
-} from '@/definitions';
-import LoaderOperations from '@/operations/LoaderOperations';
-import { loaderInitialState } from '@/lib/utils';
+  Receipt,
+  DollarSign,
+  Users,
+  Calculator,
+  ShoppingCart,
+} from 'lucide-react';
 
-interface HomeCtx {
-  loaderOperations: LoaderOperations;
-  entityCountData: EntityCountItem[];
-  monthlyChartData: MonthlyChartItem[];
-  weeklyChartData: WeeklyChartItem[];
-}
-
-interface ProviderProps {
-  children: React.ReactNode;
-  initialData: Omit<HomeCtx, 'loaderOperations'>;
-}
-
-export const HomeContext = createContext<HomeCtx>({} as HomeCtx);
+export const HomeContext = createContext<HomeCtx>({
+  entityCountData: [],
+  monthlyChartData: [],
+  weeklyChartData: [],
+});
 
 export function HomeProvider({ children, initialData }: ProviderProps) {
-  /** STATES */
-  const [loadingData, setLoadingData] =
-    useState<LoadingData>(loaderInitialState);
-  const [entityCountData, setEntityCountData] = useState<EntityCountItem[]>(
-    initialData.entityCountData
-  );
-  const [monthlyChartData, setMonthlyChartData] = useState<MonthlyChartItem[]>(
-    initialData.monthlyChartData
-  );
-  const [weeklyChartData, setWeeklyChartData] = useState<WeeklyChartItem[]>(
-    initialData.weeklyChartData
-  );
+  const {
+    monthlyChartData,
+    monthlySalesStats,
+    paidInvoicesStats,
+    registeredCustomersStats,
+    soldProductsStats,
+    weeklyChartData,
+    weeklySalesStats
+  } = initialData;
 
-  /** OPERATIONS */
-  const loaderOperations = new LoaderOperations(setLoadingData);
+  const entityCountData: EntityCountItem[] = [
+    {
+      title: 'Ventas del último mes',
+      icon: Receipt,
+      percentage: {
+        rate: String(monthlySalesStats.rate),
+        tendency: monthlySalesStats.tendency,
+      },
+      totalCount: monthlySalesStats.totalCount,
+      isCash: true,
+    },
+    {
+      title: 'Ventas la última semana',
+      icon: DollarSign,
+      percentage: {
+        rate: String(weeklySalesStats.rate),
+        tendency: monthlySalesStats.tendency,
+      },
+      totalCount: monthlySalesStats.totalCount,
+      isCash: true,
+    },
+    {
+      title: 'Total de clientes',
+      icon: Users,
+      percentage: {
+        rate: String(registeredCustomersStats.rate),
+        tendency: registeredCustomersStats.tendency,
+      },
+      totalCount: registeredCustomersStats.totalCount,
+    },
+    {
+      title: 'Facturas Pagadas',
+      icon: Calculator,
+      percentage: {
+        rate: String(paidInvoicesStats.rate),
+        tendency: paidInvoicesStats.tendency,
+      },
+      totalCount: paidInvoicesStats.totalCount,
+    },
+    {
+      title: 'Productos vendidos',
+      icon: ShoppingCart,
+      percentage: {
+        rate: String(soldProductsStats.rate),
+        tendency: soldProductsStats.tendency,
+      },
+      totalCount: soldProductsStats.totalCount,
+    }
+  ];
 
-  /** RETURN CONTEXT VALUES */
   return (
     <HomeContext.Provider
       value={{
-        loaderOperations,
         entityCountData,
-        monthlyChartData,
-        weeklyChartData,
+        monthlyChartData: monthlyChartData,
+        weeklyChartData: weeklyChartData,
       }}
     >
       {children}
     </HomeContext.Provider>
   );
 }
+
+export const useHome = () => useContext(HomeContext);

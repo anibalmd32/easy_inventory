@@ -1,8 +1,10 @@
 'use client';
 import { Cart, CartItem, Customer } from '@/definitions';
 import { useState, createContext, Dispatch, SetStateAction } from 'react';
-import SelectProductOperations from '@/operations/SelectProductOperations';
+import SelectProductOperations from '@/eventHandlers/SelectProductOperations';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/hooks/use-toast';
+import ToastEventHandlers from '@/eventHandlers/ToastEventHandlers';
 
 interface BillingCtx {
   products: CartItem[];
@@ -41,6 +43,8 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
 
   const router = useRouter();
 
+  const toastEvents = new ToastEventHandlers({ toast: useToast().toast });
+
   const selectProductOperations = new SelectProductOperations({
     products,
     selectedProduct,
@@ -49,6 +53,7 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
     cart,
     customer,
     router,
+    toastEvents,
   });
 
   return (

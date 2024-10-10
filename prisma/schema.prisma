@@ -8,10 +8,12 @@ datasource db {
 }
 
 model Category {
-  id       Int      @id @default(autoincrement())
-  name     String   @unique
-  color    String
-  products Product[]
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  color     String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @default(now()) @map("updated_at")
+  products  Product[]
 
   @@map("categories")
 }
@@ -19,7 +21,7 @@ model Category {
 model Product {
   id          Int           @id @default(autoincrement())
   name        String        @unique
-  price       String
+  price       Decimal       @db.Decimal(9, 2)
   quantity    Int
   categoryId  Int?          @map("category_id")
   createdAt   DateTime      @default(now()) @map("created_at")
@@ -32,10 +34,12 @@ model Product {
 }
 
 model ShopingList {
-  id          Int     @id @default(autoincrement())
-  productId   Int     @map("product_id")
-  isPurchased Boolean @map("is_purchased")
-  product     Product @relation(fields: [productId], references: [id])
+  id          Int      @id @default(autoincrement())
+  productId   Int      @map("product_id")
+  isPurchased Boolean  @map("is_purchased")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+  product     Product  @relation(fields: [productId], references: [id])
 
   @@map("shopping_list")
 }
@@ -44,6 +48,8 @@ model Sale {
   id               Int              @id @default(autoincrement())
   productId        Int              @map("product_id")
   productQuantity  Int              @map("product_quantity")
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @default(now()) @map("updated_at")
   product          Product          @relation(fields: [productId], references: [id])
   salesToCustomers SaleToCustomer[]
 
@@ -55,6 +61,8 @@ model Customer {
   name             String
   dni              String           @unique
   phone            String
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @default(now()) @map("updated_at")
   invoices         Invoice[]
   salesToCustomers SaleToCustomer[]
 
@@ -65,6 +73,8 @@ model SaleToCustomer {
   id         Int      @id @default(autoincrement())
   customerId Int      @map("customer_id")
   saleId     Int      @map("sale_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @map("updated_at")
   customer   Customer @relation(fields: [customerId], references: [id])
   sale       Sale     @relation(fields: [saleId], references: [id])
 
@@ -74,12 +84,14 @@ model SaleToCustomer {
 model Invoice {
   id          Int       @id @default(autoincrement())
   items       Json
-  total       String
+  total       Decimal   @db.Decimal(9, 2)
   status      Int
   generatedAt DateTime  @default(now()) @map("generated_at")
   paidAt      DateTime? @map("paid_at")
   canceledAt  DateTime? @map("canceled_at")
   customerId  Int       @map("customer_id")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @map("updated_at")
   customer    Customer  @relation(fields: [customerId], references: [id])
 
   @@map("invoices")
@@ -103,6 +115,8 @@ model Setting {
   invoiceTemplateId Int             @unique
   email             String          @unique
   password          String
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @default(now()) @map("updated_at")
   invoiceTemplate   InvoiceTemplate @relation(fields: [invoiceTemplateId], references: [id])
 
   @@map("settings")
@@ -112,6 +126,8 @@ model Notification {
   id          Int      @id @default(autoincrement())
   action      Int
   description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
   emitedAt    DateTime @default(now()) @map("emited_at")
 
   @@map("notifications")

@@ -2,7 +2,7 @@
 
 import { createContext, useState } from 'react';
 import { Setting } from '@/definitions';
-import SettingsEventHandler from '@/operations/SettingsEventHandler';
+import SettingsEventHandler from '@/eventHandlers/SettingsEventHandler';
 
 interface SettingsCtx {
   settings: Setting;

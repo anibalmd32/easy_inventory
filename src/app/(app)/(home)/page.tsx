@@ -12,17 +12,33 @@ import { getEntityCountData } from '@/actions/counts/CountsServer';
 import { InvoicesCharts } from './components/InvoicesCharts';
 import { CountEntities } from './components/CountEntities';
 
+import {
+  getSalesMonthStats,
+  getCustomerStats,
+  getPaidInvoicesStats,
+  getProductsSoldStats,
+  getSalesWeekStats,
+} from '@/core/frameworks/server-actions/dashboard.actions';
+
 export const revalidate = 0;
 
 export default async function Home() {
-  const entityCountData = await getEntityCountData();
   const monthlyChartData = await getMonthlyChartData();
   const weeklyChartData = await getWeeklyChartData();
+  const monthlySalesStats = await getSalesMonthStats();
+  const paidInvoicesStats = await getPaidInvoicesStats();
+  const registeredCustomersStats = await getCustomerStats();
+  const soldProductsStats = await getProductsSoldStats();
+  const weeklySalesStats = await getSalesWeekStats();
 
   return (
     <HomeProvider
       initialData={{
-        entityCountData,
+        monthlySalesStats,
+        paidInvoicesStats,
+        registeredCustomersStats,
+        weeklySalesStats,
+        soldProductsStats,
         monthlyChartData,
         weeklyChartData,
       }}

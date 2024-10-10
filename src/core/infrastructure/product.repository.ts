@@ -24,7 +24,10 @@ export default class ProductRepository implements IProductRepository {
       include: { category: true },
     });
 
-    return newProduct;
+    return {
+      ...newProduct,
+      price: Number(newProduct.price)
+    };
   }
 
   async getList(): Promise<Product[]> {
@@ -33,7 +36,10 @@ export default class ProductRepository implements IProductRepository {
       orderBy: { createdAt: 'desc' },
     });
 
-    return products;
+    return products.map(product => ({
+      ...product,
+      price: Number(product.price)
+    }));
   }
 
   async getById(id: number): Promise<Product> {
@@ -42,7 +48,10 @@ export default class ProductRepository implements IProductRepository {
       include: { category: true },
     });
 
-    return product!;
+    return {
+      ...product!,
+      price: Number(product!.price)
+    };
   }
 
   async update(id: number, product: Partial<Product>): Promise<Product> {
@@ -66,7 +75,10 @@ export default class ProductRepository implements IProductRepository {
       include: { category: true },
     });
 
-    return updatedProduct;
+    return {
+      ...updatedProduct,
+      price: Number(updatedProduct.price)
+    };
   }
 
   async delete(id: number): Promise<Product> {
@@ -75,6 +87,9 @@ export default class ProductRepository implements IProductRepository {
       include: { category: true },
     });
 
-    return deletedProduct;
+    return {
+      ...deletedProduct,
+      price: Number(deletedProduct.price)
+    };
   }
 }
