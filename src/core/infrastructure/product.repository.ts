@@ -3,7 +3,7 @@ import { Product } from '@/definitions';
 import { IProductRepository } from '../domain/product.domain';
 import { prisma } from '@/lib/prisma';
 
-export default class ProductRepository implements IProductRepository {
+export default class ProductRepository {
   async add(product: Product): Promise<Product> {
     const productData: Prisma.ProductCreateInput = {
       name: product.name,
@@ -91,5 +91,15 @@ export default class ProductRepository implements IProductRepository {
       ...deletedProduct,
       price: Number(deletedProduct.price)
     };
+  }
+
+  async decrementProductQuantity(id: number, quantity: number): Promise<void> {
+    await prisma.product.update({
+      where: { id },
+      data: { quantity: {
+          decrement: quantity
+        }
+      }
+    });
   }
 }

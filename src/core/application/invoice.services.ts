@@ -4,9 +4,12 @@ import SaleServices from './sale.services';
 import SaleRepository from '../infrastructure/sale.repository';
 import CustomerServices from './customer.services';
 import CustomerRepository from '../infrastructure/customer.repository';
+import ProductRepository from '../infrastructure/product.repository';
+import ProductService from './product.services';
 
 const customerServices = new CustomerServices(new CustomerRepository());
 const salesServices = new SaleServices(new SaleRepository());
+const productService = new ProductService(new ProductRepository());
 
 export default class InvoiceServices {
   constructor(private readonly repository: InvoiceRepository) {}
@@ -33,6 +36,8 @@ export default class InvoiceServices {
           productId: item.id,
           productQuantity: item.amount,
         });
+
+        await productService.decrementProduct(item.id, item.amount);
 
         newInvoice.items.push({
           customer: customer,

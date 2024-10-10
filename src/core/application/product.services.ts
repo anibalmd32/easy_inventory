@@ -1,8 +1,8 @@
 import { Product } from '@/definitions';
-import { IProductRepository } from '../domain/product.domain';
+import ProductRepository from '../infrastructure/product.repository';
 
 export default class ProductService {
-  constructor(private productRepository: IProductRepository) {}
+  constructor(private productRepository: ProductRepository) {}
 
   async getProductList() {
     return await this.productRepository.getList();
@@ -22,5 +22,9 @@ export default class ProductService {
 
   async createNewProduct(product: Product) {
     return await this.productRepository.add(product);
+  }
+
+  async decrementProduct(id: number, quantity: number): Promise<void> {
+    return await this.productRepository.decrementProductQuantity(id, quantity);
   }
 }
