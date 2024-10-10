@@ -37,8 +37,6 @@ export default class InvoiceServices {
           productQuantity: item.amount,
         });
 
-        await productService.decrementProduct(item.id, item.amount);
-
         newInvoice.items.push({
           customer: customer,
           customerId: customer.id,
@@ -57,6 +55,17 @@ export default class InvoiceServices {
   }
 
   async payInvoice(id: number) {
+    const invoice = await this.repository.getById(id);
+
+    await Promise.all(
+      invoice.items.map(async item => {
+        await productService.decrementProduct(
+          item.sale.productId,
+          item.sale.productQuantity
+        );
+      })
+    );
+
     return await this.repository.update(id, {
       paidAt: new Date().toDateString(),
       status: INVOICE_STATUS.PAID,
