@@ -78,4 +78,8 @@ export default class InvoiceServices {
       status: INVOICE_STATUS.CANCELED
     });
   }
+
+  async getInvoiceList(): Promise<Invoice[]> {
+    return await this.repository.getList();
+  }
 }

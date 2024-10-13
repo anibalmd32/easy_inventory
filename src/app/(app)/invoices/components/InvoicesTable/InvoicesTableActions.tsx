@@ -84,7 +84,7 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
                     {item.sale.product.name}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
-                    {item.sale.product.price}
+                    ${item.sale.product.price}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
                     {item.sale.productQuantity}

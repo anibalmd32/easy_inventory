@@ -55,7 +55,12 @@ export default class InvoiceRepository {
 
   async getList(): Promise<Invoice[]> {
     const invoices = await prisma.invoice.findMany({
-      include: { customer: true },
+      include: {
+        customer: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      }
     });
 
     return invoices.map((invoice) => invoiceMapper(invoice));

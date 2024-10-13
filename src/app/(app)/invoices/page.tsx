@@ -1,12 +1,12 @@
-import { Invoice } from '@/definitions';
 import { InvoicesProvider } from './InvoicesProvider';
 import { InvoicesTable } from './components/InvoicesTable/InvoicesTable';
 import { PageTitle } from '@/components/shared/PageTitle';
+import { getInvoiceList } from '@/core/frameworks/server-actions/invoice.actions';
 
 export const revalidate = 0;
 
 export default async function InvoicesPage() {
-  const invoices = [] as Invoice[];
+  const invoices = await getInvoiceList();
 
   return (
     <InvoicesProvider initialInvoices={invoices}>

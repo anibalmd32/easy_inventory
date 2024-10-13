@@ -41,3 +41,11 @@ export const cancelInvoice = async (id: number): Promise<Invoice> => {
     return {} as Invoice;
   }
 };
+
+export const getInvoiceList = async (): Promise<Invoice[]> => {
+  try {
+    return await service.getInvoiceList();
+  } catch (error) {
+    return [];
+  }
+};
