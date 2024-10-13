@@ -24,7 +24,7 @@ export default class InvoiceServices {
       total: String(cart.total),
     };
 
-    if (!customer.id) {
+    if (!customer.id || customer.id === 0) {
       customer = await customerServices.createNewCustomer(customer);
     }
 

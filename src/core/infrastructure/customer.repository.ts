@@ -2,7 +2,7 @@ import { AppRepository } from '../domain/app.domain';
 import { Customer } from '@/definitions';
 import { prisma } from '@/lib/prisma';
 
-export default class CustomerRepository implements AppRepository<Customer> {
+export default class CustomerRepository {
   async add(data: Customer): Promise<Customer> {
     const newCustomer = await prisma.customer.create({
       data: {
@@ -19,8 +19,9 @@ export default class CustomerRepository implements AppRepository<Customer> {
     return {} as Customer;
   }
 
-  async getById(id: number): Promise<Customer> {
-    return {} as Customer;
+  async getByDni(dni: string): Promise<Customer | null> {
+    const customer = await prisma.customer.findUnique({ where: { dni } });
+    return customer;
   }
 
   async getList(): Promise<Customer[]> {

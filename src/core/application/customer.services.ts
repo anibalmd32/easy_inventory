@@ -7,4 +7,8 @@ export default class CustomerServices {
   async createNewCustomer(customer: Customer) {
     return await this.repository.add(customer);
   }
+
+  async getOneCustomer(dni: string) {
+    return this.repository.getByDni(dni);
+  }
 }

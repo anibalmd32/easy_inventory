@@ -3,12 +3,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useBilling } from '../../hooks/useBilling';
-import { getCustomerByDni } from '@/actions/customers/customerServer';
-import { useEffect } from 'react';
-import { Customer } from '@/definitions';
+import { getCustomerByDni } from '@/core/frameworks/server-actions/customer.actions';
 import { useToast } from '@/components/hooks/use-toast';
 
+
 const formSchema = z.object({
+  id: z.number().default(0),
   dni: z.string().min(2).max(50),
   name: z.string().min(2).max(50),
   phone: z.string().min(2).max(50),
@@ -21,6 +21,7 @@ export function useCustomerForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      id: 0,
       dni: '',
       name: '',
       phone: '',
@@ -29,7 +30,7 @@ export function useCustomerForm() {
 
   form.watch((values) => {
     setCustomer({
-      ...customer,
+      id: values.id ?? 0,
       dni: values.dni ?? '',
       name: values.name ?? '',
       phone: values.phone ?? '',
@@ -44,6 +45,7 @@ export function useCustomerForm() {
     try {
       const verifiedCustomer = await getCustomerByDni(dni);
       if (verifiedCustomer) {
+        form.setValue('id', verifiedCustomer.id);
         form.setValue('dni', verifiedCustomer.dni);
         form.setValue('name', verifiedCustomer.name);
         form.setValue('phone', verifiedCustomer.phone);

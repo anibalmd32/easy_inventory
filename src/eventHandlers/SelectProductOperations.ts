@@ -1,6 +1,6 @@
 import { CartItem, Cart, Customer } from '@/definitions';
 import { Dispatch, SetStateAction } from 'react';
-import { generateInvoice, cancelInvoice, payInvoice } from '@/core/frameworks/server-actions/invoice.actions';
+import { generateInvoice } from '@/core/frameworks/server-actions/invoice.actions';
 import ToastEventHandlers from './ToastEventHandlers';
 
 interface SelectProductOperationsDeps {
@@ -128,17 +128,25 @@ export default class SelectProductOperations {
 
   onGenerateInvoice = async () => {
     this.deps.cart.customerName = this.deps.customer.name;
-    const newInvoice = await generateInvoice(
-      this.deps.cart,
-      this.deps.customer
-    );
 
-    if (newInvoice) {
-      // TODO: mostrar toast
+    try {
+      const newInvoice = await generateInvoice(
+        this.deps.cart,
+        this.deps.customer
+      );
+      
+      
+      this.deps.toastEvents.trigger({
+        title: 'Éxito',
+        description: 'Factura generada con éxito'
+      });
+
       this.deps.router.push(`/billing/${newInvoice.id}`);
-    } else {
-      // TODO: mostrar toast
+    } catch (error: any) {
+      this.deps.toastEvents.trigger({
+        title: 'Error',
+        description: error.message
+      });
     }
   };
-
 }
