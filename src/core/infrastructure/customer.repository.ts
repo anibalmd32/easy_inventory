@@ -4,6 +4,11 @@ import { prisma } from '@/lib/prisma';
 
 export default class CustomerRepository {
   async add(data: Customer): Promise<Customer> {
+
+    const existCustomer = await prisma.customer.findUnique({ where: { dni: data.dni } } );
+
+    if (existCustomer) return existCustomer;
+
     const newCustomer = await prisma.customer.create({
       data: {
         dni: data.dni,
