@@ -50,10 +50,10 @@ export const getInvoiceList = async (): Promise<Invoice[]> => {
   }
 };
 
-export const printInvoice = async () => {
+export const printInvoice = async (id: number) => {
   try {
-    const pdf = await service.printInvoice();
-    console.log(pdf);
+    const pdf = await service.printInvoice(id);
+    return pdf;
   } catch (error) {
     console.log(error);
   }

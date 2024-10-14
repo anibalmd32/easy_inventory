@@ -84,11 +84,11 @@ export default class InvoiceServices {
     return await this.repository.getList();
   }
 
-  async printInvoice() {
+  async printInvoice(id: number) {
     const browser = await chromium.launch();
     const page = await browser.newPage();
 
-    await page.goto('http://localhost:3000/print');
+    await page.goto(`http://localhost:3000/print/${id}`);
 
     const pdfBuffer = await page.pdf({ format: 'A4' });
 

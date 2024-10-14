@@ -115,7 +115,7 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
             variant="outline"
             className="text-sm w-full flex gap-2 items-center bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
             onClick={async () => {
-              await invoiceEvents.onPrintInvoice();
+              await invoiceEvents.onPrintInvoice(rowData.id);
             }}
           >
             <Printer />
