@@ -6,6 +6,7 @@ import CustomerServices from './customer.services';
 import CustomerRepository from '../infrastructure/customer.repository';
 import ProductRepository from '../infrastructure/product.repository';
 import ProductService from './product.services';
+import { chromium } from 'playwright';
 
 const customerServices = new CustomerServices(new CustomerRepository());
 const salesServices = new SaleServices(new SaleRepository());
@@ -81,5 +82,18 @@ export default class InvoiceServices {
 
   async getInvoiceList(): Promise<Invoice[]> {
     return await this.repository.getList();
+  }
+
+  async printInvoice() {
+    const browser = await chromium.launch();
+    const page = await browser.newPage();
+
+    await page.goto('http://localhost:3000/print');
+
+    const pdfBuffer = await page.pdf({ format: 'A4' });
+
+    await browser.close();
+
+    return pdfBuffer;
   }
 }

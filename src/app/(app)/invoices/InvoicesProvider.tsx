@@ -2,9 +2,11 @@
 import { createContext, useState } from 'react';
 import { Invoice, LoadingData } from '@/definitions';
 import { loaderInitialState } from '@/lib/utils';
+import InvoiceEventsHandlers from '@/eventHandlers/InvoiceEventsHandlers';
 
 interface InvoiceCtx {
   invoices: Invoice[];
+  invoiceEvents: InvoiceEventsHandlers;
 }
 
 interface InvoicesProviderProps {
@@ -22,10 +24,13 @@ export const InvoicesProvider = ({
     useState<LoadingData>(loaderInitialState);
   const [invoices, setInvoices] = useState<Invoice[]>(initialInvoices);
 
+  const invoiceEvents = new InvoiceEventsHandlers();
+
   return (
     <InvoicesContext.Provider
       value={{
         invoices,
+        invoiceEvents,
       }}
     >
       {children}

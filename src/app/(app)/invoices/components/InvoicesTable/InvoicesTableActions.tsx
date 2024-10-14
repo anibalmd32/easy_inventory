@@ -5,6 +5,7 @@ import { formatDate } from '@/lib/utils';
 import * as ShadDialog from '@/components/ui/dialog';
 import * as ShadTable from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import { useInvoices } from '../../hooks/useInvoices';
 
 interface InvoiceActionsProps {
   rowData: Invoice;
@@ -13,6 +14,8 @@ interface InvoiceActionsProps {
 export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
   const date = new Date(rowData.generatedAt);
   const formattedDate = formatDate(date);
+
+  const { invoiceEvents } = useInvoices();
 
   const status = rowData.status;
   const items = rowData.items;
@@ -111,6 +114,9 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
           <Button
             variant="outline"
             className="text-sm w-full flex gap-2 items-center bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
+            onClick={async () => {
+              await invoiceEvents.onPrintInvoice();
+            }}
           >
             <Printer />
             <span>Imprimir</span>

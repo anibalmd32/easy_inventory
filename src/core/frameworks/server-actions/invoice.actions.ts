@@ -49,3 +49,12 @@ export const getInvoiceList = async (): Promise<Invoice[]> => {
     return [];
   }
 };
+
+export const printInvoice = async () => {
+  try {
+    const pdf = await service.printInvoice();
+    console.log(pdf);
+  } catch (error) {
+    console.log(error);
+  }
+};
