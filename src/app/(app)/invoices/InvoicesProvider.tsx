@@ -3,6 +3,8 @@ import { createContext, useState } from 'react';
 import { Invoice, LoadingData } from '@/definitions';
 import { loaderInitialState } from '@/lib/utils';
 import InvoiceEventsHandlers from '@/eventHandlers/InvoiceEventsHandlers';
+import ToastEventHandlers from '@/eventHandlers/ToastEventHandlers';
+import { useToast } from '@/components/hooks/use-toast';
 
 interface InvoiceCtx {
   invoices: Invoice[];
@@ -24,7 +26,13 @@ export const InvoicesProvider = ({
     useState<LoadingData>(loaderInitialState);
   const [invoices, setInvoices] = useState<Invoice[]>(initialInvoices);
 
-  const invoiceEvents = new InvoiceEventsHandlers();
+  const { toast } = useToast();
+
+  const toastEvents = new ToastEventHandlers({ toast });
+
+  const invoiceEvents = new InvoiceEventsHandlers({
+    toastEvents,
+  });
 
   return (
     <InvoicesContext.Provider
