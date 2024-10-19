@@ -85,33 +85,27 @@ export default class InvoiceServices {
   }
 
   async printInvoice(id: number) {
+    const baseURL = process.env.BASE_URL || 'http://localhost:3000'; // URL por defecto en desarrollo
     const browser = await chromium.launch({
       args: [
-        '--no-sandbox', // Evitar el sandboxing
-        '--disable-setuid-sandbox', // Deshabilitar la comprobación de UID para sandbox
-        '--no-zygote', // Deshabilitar zygote (optimización de procesos múltiples)
-        '--disable-dev-shm-usage', // Evitar el uso de /dev/shm que puede ser pequeño en contenedores
-        '--disable-gpu', // Deshabilitar la aceleración de GPU
-        '--disable-software-rasterizer', // Usar el rasterizador de software en lugar de GPU
-        '--headless=new', // Ejecutar en modo headless (invisible) de la nueva versión
-        '--disable-extensions', // Deshabilitar las extensiones del navegador
-        '--disable-background-timer-throttling', // Evitar la limitación de temporizadores
-        '--disable-breakpad', // Deshabilitar el envío de reportes de errores
-        '--disable-component-extensions-with-background-pages', // Deshabilitar extensiones de componentes
-        '--no-first-run', // Evitar la pantalla de bienvenida
-        '--disable-default-apps', // Evitar la instalación de aplicaciones por defecto
-        '--disable-infobars', // Eliminar los banners de información
-        '--disable-renderer-backgrounding', // Evitar la limitación de procesos en segundo plano
-        '--force-color-profile=srgb' // Forzar el perfil de color sRGB
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--no-zygote',
+        '--single-process',
+        '--disable-accelerated-2d-canvas',
       ],
-      executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH, // Usar la ruta configurada en el contenedor
+      executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+      headless: true
     });
   
     const page = await browser.newPage();
-    await page.goto(`http://localhost:3000/print/${id}`);
+    await page.goto(`${baseURL}/print/${id}`); // Usar la URL dinámica
+  
     const pdfBuffer = await page.pdf({ format: 'A4' });
     await browser.close();
+  
     return pdfBuffer;
   }
-  
 }

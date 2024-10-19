@@ -1,68 +1,56 @@
 # Etapa de construcción
-FROM node:alpine AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
-COPY package.json ./ 
-COPY pnpm-lock.yaml ./
+# Copiar los archivos de configuración
+COPY package.json ./
 
-# Instala pnpm y dependencias
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+# Instalar dependencias
+RUN npm install
 
+# Copiar el resto del código
 COPY . .
 
-# Generar Prisma y construir la app
-RUN pnpm prisma generate
-RUN pnpm run build
+# Generar Prisma y construir el proyecto
+RUN npx prisma generate
+RUN npm run build
 
-# Instalar Chromium y dependencias del sistema
-RUN apk add --no-cache \
-  nss \
+# Instalar Playwright
+RUN npx playwright install
+
+# Instalar dependencias necesarias para Chromium
+RUN apt-get update && apt-get install -y \
   chromium \
-  harfbuzz \
-  ca-certificates \
-  ttf-freefont
-
-RUN pnpm playwright install
+  fonts-liberation \
+  libatk-bridge2.0-0 \
+  libatk1.0-0 \
+  libcups2 \
+  libdbus-1-3 \
+  libgbm1 \
+  libgdk-pixbuf2.0-0 \
+  libnspr4 \
+  libnss3 \
+  libxcomposite1 \
+  libxdamage1 \
+  libxrandr2 \
+  xdg-utils \
+  libu2f-udev
 
 # Etapa de producción
-FROM node:alpine AS runner
+FROM node:20 AS runner
 
 WORKDIR /app
 
+# Copiar el resultado de la construcción
 COPY --from=builder /app /app/
 
-RUN apk update && \
-  echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-  echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-  apk add --no-cache \
-  nss \
-  harfbuzz \
-  ca-certificates \
-  ttf-freefont \
-  libstdc++ \
-  libx11 \
-  libxcomposite \
-  libxdamage \
-  libxi \
-  libxtst \
-  libnss \
-  libxrandr \
-  libcups \
-  libpangocairo \
-  libpango \
-  libatk \
-  libatk-bridge2.0 \
-  libepoxy \
-  libdrm \
-  libgbm \
-  libxshmfence \
-  libxcb \
-  libxkbcommon
+# Exponer el puerto
+EXPOSE 3000
 
+# Establecer entorno
 ENV NODE_ENV=production
 ENV PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-EXPOSE 3000
-
-CMD [ "pnpm", "start" ]
+# Comando de inicio
+CMD [ "npm", "start" ]
