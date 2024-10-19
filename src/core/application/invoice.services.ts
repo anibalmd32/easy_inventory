@@ -96,7 +96,6 @@ export default class InvoiceServices {
         '--single-process',
         '--disable-accelerated-2d-canvas',
       ],
-      executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
       headless: true
     });
   
