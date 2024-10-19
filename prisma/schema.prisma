@@ -26,6 +26,7 @@ model Product {
   categoryId  Int?          @map("category_id")
   createdAt   DateTime      @default(now()) @map("created_at")
   updatedAt   DateTime      @default(now()) @map("updated_at")
+  isActive    Boolean       @default(true) @map("is_active")
   category    Category?     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   sales       Sale[]
   shopingList ShopingList[]

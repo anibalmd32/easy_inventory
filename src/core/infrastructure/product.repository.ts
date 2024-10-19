@@ -32,6 +32,7 @@ export default class ProductRepository {
 
   async getList(): Promise<Product[]> {
     const products = await prisma.product.findMany({
+      where: { isActive: true },
       include: { category: true },
       orderBy: { createdAt: 'desc' },
     });
@@ -82,8 +83,9 @@ export default class ProductRepository {
   }
 
   async delete(id: number): Promise<Product> {
-    const deletedProduct = await prisma.product.delete({
+    const deletedProduct = await prisma.product.update({
       where: { id },
+      data: { isActive: false },
       include: { category: true },
     });
 
