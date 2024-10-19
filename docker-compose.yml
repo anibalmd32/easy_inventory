@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: easy_inventory_db
+    environment:
+      POSTGRES_USER: easy_inventory
+      POSTGRES_PASSWORD: easy2024#18
+      POSTGRES_DB: easy_inventory
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: easy_inventory_app
+    environment:
+      DATABASE_URL: postgresql://easy_inventory:easy2024%2318@db:5432/easy_inventory?schema=public
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    command: >
+      sh -c "
+      pnpm prisma migrate deploy &&
+      pnpm start
+      "
+
+volumes:
+  postgres_data:

@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate && next build &&",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker-compose up --build"
   },
   "dependencies": {
     "@heroicons/react": "2.1.5",
