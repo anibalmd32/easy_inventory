@@ -30,17 +30,16 @@ FROM node:alpine AS runner
 
 WORKDIR /app
 
-# Copiar la app y dependencias de producción
 COPY --from=builder /app /app/
-COPY --from=builder /usr/bin/chromium-browser /usr/bin/chromium-browser
-COPY --from=builder /usr/lib/chromium/ /usr/lib/chromium/
 
-RUN apk add --no-cache \
+RUN apk update && \
+  echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+  echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+  apk add --no-cache \
   nss \
   harfbuzz \
   ca-certificates \
   ttf-freefont \
-  # Necesario para Chromium
   libstdc++ \
   libx11 \
   libxcomposite \
@@ -52,7 +51,7 @@ RUN apk add --no-cache \
   libcups \
   libpangocairo \
   libpango \
-  libatk1.0 \
+  libatk \
   libatk-bridge2.0 \
   libepoxy \
   libdrm \
@@ -61,10 +60,6 @@ RUN apk add --no-cache \
   libxcb \
   libxkbcommon
 
-# Evitar instalar pnpm en la segunda etapa
-RUN pnpm install --prod --frozen-lockfile
-
-# Variables de entorno
 ENV NODE_ENV=production
 ENV PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
