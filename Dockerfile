@@ -17,7 +17,7 @@ RUN npx prisma generate
 RUN npm run build
 
 # Instalar Playwright
-RUN npx playwright install
+RUN npx playwright install --with-deps
 
 # Instalar dependencias necesarias para Chromium
 RUN apt-get update && apt-get install -y \
