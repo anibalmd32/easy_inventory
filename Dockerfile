@@ -45,6 +45,8 @@ WORKDIR /app
 # Copiar el resultado de la construcción
 COPY --from=builder /app /app/
 
+RUN npx playwright install --with-deps
+
 # Exponer el puerto
 EXPOSE 3000
 
