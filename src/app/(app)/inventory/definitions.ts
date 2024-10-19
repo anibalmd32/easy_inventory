@@ -15,8 +15,6 @@ export interface InventoryCtx {
   setOpenForm: React.Dispatch<React.SetStateAction<boolean>>;
   productId: number | null;
   setProductId: React.Dispatch<React.SetStateAction<number | null>>;
-  openDropdown: boolean;
-  setOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface InitialData {

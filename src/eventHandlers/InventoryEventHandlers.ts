@@ -10,7 +10,6 @@ import ToastEventHandlers from './ToastEventHandlers';
 type EventHandlerDeps = {
   productsDispatcher: React.Dispatch<ReducerAction<Product, PRODUCTS_ACTIONS>>;
   toastEvents: ToastEventHandlers;
-  setOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default class InventoryEventHandlers {
@@ -80,9 +79,6 @@ export default class InventoryEventHandlers {
         description: 'El producto fue eliminado correctamente'
       });
 
-      //? Cierra el menu de acciones de la tabla
-      this.deps.setOpenDropdown(false);
-
     } catch (error: any) {
       //? Alerta de error si ocurre un error al eliminar un producto a la base de datos
       this.deps.toastEvents.error({
@@ -118,9 +114,6 @@ export default class InventoryEventHandlers {
         title: 'Éxito',
         description: 'El producto fue actualizado correctamente'
       });
-
-      //? Cierra el menu de acciones de la tabla
-      this.deps.setOpenDropdown(false);
 
     } catch (error: any) {
       //? Alerta de error si ocurre un error al actualizar un producto de la base de datos

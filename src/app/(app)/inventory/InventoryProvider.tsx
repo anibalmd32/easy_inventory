@@ -20,8 +20,6 @@ export function InventoryProvider({ children, initialData }: ProviderProps) {
   const [openForm, setOpenForm] = React.useState<boolean>(false);
   const [productId, setProductId] = React.useState<number | null>(null);
 
-  const [openDropdown, setOpenDropdown] = React.useState(false);
-
   //? State for dynamic data
   const [productsState, dispatchProduct] = React.useReducer(productsReducer, initialData.products);
 
@@ -31,7 +29,6 @@ export function InventoryProvider({ children, initialData }: ProviderProps) {
     toastEvents: new ToastEventHandlers({
       toast: useToast().toast,
     }),
-    setOpenDropdown,
   });
 
   return (
@@ -46,8 +43,6 @@ export function InventoryProvider({ children, initialData }: ProviderProps) {
         setOpenForm,
         productId,
         setProductId,
-        openDropdown,
-        setOpenDropdown
       }}
     >
       {children}
