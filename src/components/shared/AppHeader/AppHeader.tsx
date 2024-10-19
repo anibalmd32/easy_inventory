@@ -31,7 +31,7 @@ export function AppHeader(props: AppHeaderProps) {
             </div>
 
             <div className="flex items-center gap-4">
-              <Notifications />
+              {/* <Notifications /> */}
               <HeaderMenu />
             </div>
           </div>

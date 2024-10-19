@@ -31,9 +31,9 @@ export function HeaderMenu() {
         <DropdownMenuItem className="cursor-pointer">
           <Link href="/billing">Facturación</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
+        {/* <DropdownMenuItem className="cursor-pointer">
           Lista de compras
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
 
         <DropdownMenuSeparator />
 
