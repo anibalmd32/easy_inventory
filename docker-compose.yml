@@ -5,7 +5,7 @@ services:
     container_name: easy_inventory_db
     environment:
       POSTGRES_USER: easy_inventory
-      POSTGRES_PASSWORD: easy2024#18
+      POSTGRES_PASSWORD: "easy2024#18"
       POSTGRES_DB: easy_inventory
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -25,7 +25,10 @@ services:
       - db
     command: >
       sh -c "
-      pnpm prisma migrate deploy &&
+      until pnpm prisma migrate deploy; do
+        echo 'Waiting for Postgres to be ready...'
+        sleep 2
+      done &&
       pnpm start
       "
 
