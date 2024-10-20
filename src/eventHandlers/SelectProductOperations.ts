@@ -70,11 +70,21 @@ export default class SelectProductOperations {
         };
       });
     } else {
+      
       if (this.deps.selectedProduct) {
-        this.deps.setSelectedProduct({
-          ...this.deps.selectedProduct,
-          amount: this.deps.selectedProduct.amount + 1,
-        });
+        const { amount, quantity } = this.deps.selectedProduct;
+      
+        if (amount < quantity) {
+          this.deps.setSelectedProduct({
+            ...this.deps.selectedProduct,
+            amount: amount + 1,
+          });
+        } else {
+          this.deps.toastEvents.error({
+            title: 'Insuficiente',
+            description: 'No hay suficiente de este producto en el inventario'
+          });
+        }
       }
     }
   };
@@ -102,10 +112,16 @@ export default class SelectProductOperations {
       });
     } else {
       if (this.deps.selectedProduct) {
-        this.deps.setSelectedProduct({
-          ...this.deps.selectedProduct,
-          amount: this.deps.selectedProduct.amount - 1,
-        });
+        const { amount } = this.deps.selectedProduct;
+      
+        if (amount > 1) {
+          this.deps.setSelectedProduct({
+            ...this.deps.selectedProduct,
+            amount: amount - 1,
+          });
+        } else {
+          this.onUnselectProduct();
+        }
       }
     }
   };

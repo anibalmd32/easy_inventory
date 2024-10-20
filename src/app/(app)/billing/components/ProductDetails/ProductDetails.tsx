@@ -27,7 +27,7 @@ export function ProductDetails() {
                   variant="default"
                   style={{ backgroundColor: selectedProduct.category?.color }}
                 >
-                  {selectedProduct.category?.name}
+                  {selectedProduct.category ? selectedProduct.category.name : 'Sin categoría'}
                 </Badge>
               </span>
             </CardTitle>
