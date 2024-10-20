@@ -1,6 +1,15 @@
 import { TRENDING } from '@/definitions';
-import { monthIntervals, weekIntervals, getRate, getTendency } from '@/lib/utils';
+import {
+  monthIntervals,
+  weekIntervals,
+  getRate,
+  getTendency,
+  specificMonthIntervals,
+  getLastSixMonths,
+  getLastWeekDays
+} from '@/lib/utils';
 import DashboardRepository from '../infrastructure/dashboard.repository';
+import { MonthlyChartItem, CHART_FOR, WeeklyChartItem } from '@/definitions';
 
 export interface Stats {
   rate: number;
@@ -154,5 +163,40 @@ export default class DashboardService {
       tendency,
       totalCount: totalSoldProductsInCurrentMonth
     };
+  }
+
+  async countLastSixMonthsInvoices(): Promise<MonthlyChartItem[]> {
+    const lastSixMonths = getLastSixMonths();
+
+    const result = await Promise.all(lastSixMonths.map(async (month) => {
+      const { monthEnd, monthStart } = specificMonthIntervals(month.num);
+      const count = await this.repository.countInvoicesPerInterval({
+        end: monthEnd,
+        start: monthStart,
+      });
+
+      return {
+        month: month.month,
+        [CHART_FOR.PAID]: count.paidInvoices,
+        [CHART_FOR.CANCELED]: count.paidInvoices
+      };
+    }));
+
+    return result;
+  }
+
+  async countLastWeekInvoices(): Promise<WeeklyChartItem[]> {
+    const lastWeekDays = getLastWeekDays();
+    const result: WeeklyChartItem[] = await Promise.all(lastWeekDays.map(async day => {
+      const count = await this.repository.countInvoicesPerDate(day.date);
+
+      return {
+        day: day.day,
+        [CHART_FOR.PAID]: count.paidInvoices,
+        [CHART_FOR.CANCELED]: count.canceledInvoices
+      };
+    }));
+
+    return result;
   }
 }

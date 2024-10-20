@@ -2,7 +2,7 @@
 import DashboardRepository from '@/core/infrastructure/dashboard.repository';
 import DashboardService from '@/core/application/dashboard.services';
 import { Stats } from '@/core/application/dashboard.services';
-import { TRENDING } from '@/definitions';
+import { TRENDING, MonthlyChartItem, WeeklyChartItem } from '@/definitions';
 
 const services = new DashboardService(new DashboardRepository());
 
@@ -68,5 +68,21 @@ export const getProductsSoldStats = async (): Promise<Stats> => {
       tendency: TRENDING.DOWN,
       totalCount: 0
     };
+  }
+};
+
+export const getMonthlyChartData = async (): Promise<MonthlyChartItem[]> => {
+  try {
+    return await services.countLastSixMonthsInvoices();
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getWeeklyChartData = async (): Promise<WeeklyChartItem[]> => {
+  try {
+    return await services.countLastWeekInvoices();
+  } catch (error) {
+    return [];
   }
 };

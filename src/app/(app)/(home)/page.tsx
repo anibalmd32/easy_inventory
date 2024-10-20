@@ -1,23 +1,19 @@
 /** PROVIDERS */
 import { HomeProvider } from './HomeProvider';
 
-/** SERVER ACTIONS */
-import {
-  getMonthlyChartData,
-  getWeeklyChartData,
-} from '@/actions/charts/ChartsServer';
-import { getEntityCountData } from '@/actions/counts/CountsServer';
-
 /** COMPONENTS */
 import { InvoicesCharts } from './components/InvoicesCharts';
 import { CountEntities } from './components/CountEntities';
 
+/** SERVER ACTIONS */
 import {
   getSalesMonthStats,
   getCustomerStats,
   getPaidInvoicesStats,
   getProductsSoldStats,
   getSalesWeekStats,
+  getWeeklyChartData,
+  getMonthlyChartData,
 } from '@/core/frameworks/server-actions/dashboard.actions';
 
 export const revalidate = 0;

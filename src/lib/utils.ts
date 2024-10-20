@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { LoadingData, FETCH_STATUS, TRENDING } from '@/definitions';
+import { LoadingData, FETCH_STATUS, TRENDING, MONTHS, DAYS } from '@/definitions';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -41,6 +41,82 @@ export function monthIntervals() {
     lastMonthEnd,
   };
 }
+
+export function specificMonthIntervals(monthNumber: number) {
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
+  const adjustedMonth = monthNumber - 1;
+  const year = adjustedMonth > currentMonth ? currentYear - 1 : currentYear;
+
+  const monthStart = new Date(year, adjustedMonth, 1);
+  const monthEnd = new Date(year, adjustedMonth + 1, 0);
+
+  return {
+    monthStart,
+    monthEnd,
+  };
+}
+
+export function getLastSixMonths(): { num: number, month: MONTHS }[] {
+  const currentMonth = new Date().getMonth(); // 0 = enero, 11 = diciembre
+  const lastSixMonths: { num: number, month: MONTHS }[] = [];
+
+  const monthsArray = [
+    MONTHS.ENERO, MONTHS.FEBRERO, MONTHS.MARZO, MONTHS.ABRIL, MONTHS.MAYO, 
+    MONTHS.JUNIO, MONTHS.JULIO, MONTHS.AGOSTO, MONTHS.SEPTIEMBRE, MONTHS.OBTUBRE, 
+    MONTHS.NOMVIEMBRE, MONTHS.DICIEMBRE
+  ];
+
+  for (let i = 1; i <= 6; i++) {
+    let month = currentMonth - i;
+    if (month < 0) {
+      month += 12;
+    }
+    lastSixMonths.push({
+      num: month + 1,
+      month: monthsArray[month]
+    });
+  }
+
+  return lastSixMonths;
+}
+
+export function getLastWeekDays(): { day: DAYS, date: Date }[] {
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
+
+  const daysArray = [
+      DAYS.DOMINGO,
+      DAYS.LUNES,
+      DAYS.MARTES,
+      DAYS.MIERCOLES,
+      DAYS.JUEVES,
+      DAYS.VIERNES,
+      DAYS.SABADO,
+  ];
+
+  const adjustedCurrentDay = currentDay === 0 ? 7 : currentDay;
+
+  const lastMonday = new Date(currentDate);
+  lastMonday.setDate(currentDate.getDate() - adjustedCurrentDay - 7);
+
+  const lastWeekDays: { day: DAYS, date: Date }[] = [];
+
+  for (let i = 0; i < 7; i++) {
+      const dayDate = new Date(lastMonday);
+      dayDate.setDate(lastMonday.getDate() + i);
+      lastWeekDays.push({
+          day: daysArray[(i + 1) % 7],
+          date: dayDate
+      });
+  }
+
+  return lastWeekDays;
+}
+
+
 
 export function weekIntervals() {
   const today = new Date();

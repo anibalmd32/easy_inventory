@@ -99,4 +99,52 @@ export default class DashboardRepository {
 
     return result._sum.productQuantity ?? 0;
   }
+
+  async countInvoicesPerInterval({ end, start }: Interval) {
+    const paidInvoices = await prisma.invoice.count({
+      where: {
+        status: INVOICE_STATUS.PAID,
+        paidAt: {
+          gte: start,
+          lte: end,
+        }
+      }
+    });
+
+    const canceledInvoices = await prisma.invoice.count({
+      where: {
+        status: INVOICE_STATUS.CANCELED,
+        canceledAt: {
+          gte: start,
+          lte: end,
+        }
+      }
+    });
+
+    return {
+      paidInvoices,
+      canceledInvoices,
+    };
+  }
+
+  async countInvoicesPerDate(date: Date) {
+    const paidInvoices = await prisma.invoice.count({
+      where: {
+        status: INVOICE_STATUS.PAID,
+        paidAt: date
+      }
+    });
+
+    const canceledInvoices = await prisma.invoice.count({
+      where: {
+        status: INVOICE_STATUS.CANCELED,
+        canceledAt: date
+      }
+    });
+
+    return {
+      paidInvoices,
+      canceledInvoices,
+    };
+  }
 }
