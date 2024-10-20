@@ -33,7 +33,10 @@ export default class SelectProductOperations {
     if (productId) {
       this.deps.setCart((prev) => {
         const product = prev.items.find((item) => item.id === productId);
-        const totalProduct = product!.amount * Number(product!.price);
+
+        if (!product) return prev;
+
+        const totalProduct = product.amount * Number(product.price);
         const newTotal = prev.total - totalProduct;
         const updatedItems = prev.items.filter((item) => item.id !== productId);
 
@@ -52,79 +55,115 @@ export default class SelectProductOperations {
     if (productId) {
       this.deps.setCart((prev) => {
         const product = prev.items.find((item) => item.id === productId);
-        const newTotal = prev.total + Number(product!.price);
-        const updatedItems = prev.items.map((item) => {
-          if (item.id === productId) {
-            return {
-              ...item,
-              amount: item.amount + 1,
-            };
-          }
-          return item;
-        });
-
-        return {
-          ...prev,
-          total: newTotal,
-          items: updatedItems,
-        };
+  
+        // Si no se encuentra el producto, retornar el estado anterior sin cambios
+        if (!product) return prev;
+  
+        const { amount, quantity, price } = product;
+  
+        // Verificar si el amount es menor que el quantity antes de incrementar
+        if (amount < quantity) {
+          const newTotal = prev.total + Number(price);
+          const updatedItems = prev.items.map((item) => {
+            if (item.id === productId) {
+              return {
+                ...item,
+                amount: item.amount + 1,
+              };
+            }
+            return item;
+          });
+  
+          return {
+            ...prev,
+            total: newTotal,
+            items: updatedItems,
+          };
+        } else {
+          // Mostrar alerta si se intenta incrementar más allá de lo disponible
+          this.deps.toastEvents.error({
+            title: 'Insuficiente',
+            description: 'No hay suficiente de este producto en el inventario',
+          });
+          return prev; // No se realizan cambios si no se puede incrementar
+        }
       });
     } else {
-      
       if (this.deps.selectedProduct) {
         const { amount, quantity } = this.deps.selectedProduct;
-      
+  
+        // Verificar si amount es menor que quantity antes de incrementar
         if (amount < quantity) {
           this.deps.setSelectedProduct({
             ...this.deps.selectedProduct,
             amount: amount + 1,
           });
         } else {
+          // Mostrar alerta si se intenta incrementar más allá de lo disponible
           this.deps.toastEvents.error({
             title: 'Insuficiente',
-            description: 'No hay suficiente de este producto en el inventario'
+            description: 'No hay suficiente de este producto en el inventario',
           });
         }
       }
     }
   };
-
+  
   onSelectedProductCounterDecrement = (productId?: number) => {
     if (productId) {
       this.deps.setCart((prev) => {
         const product = prev.items.find((item) => item.id === productId);
-        const newTotal = prev.total - Number(product!.price);
-        const updatedItems = prev.items.map((item) => {
-          if (item.id === productId) {
-            return {
-              ...item,
-              amount: item.amount - 1,
-            };
-          }
-          return item;
-        });
-
-        return {
-          ...prev,
-          total: newTotal,
-          items: updatedItems,
-        };
+  
+        // Si no se encuentra el producto, retornar el estado anterior sin cambios
+        if (!product) return prev;
+  
+        const { amount, price } = product;
+  
+        // Verificar si el amount es mayor que 1 antes de decrementar
+        if (amount > 1) {
+          const newTotal = prev.total - Number(price);
+          const updatedItems = prev.items.map((item) => {
+            if (item.id === productId) {
+              return {
+                ...item,
+                amount: item.amount - 1,
+              };
+            }
+            return item;
+          });
+  
+          return {
+            ...prev,
+            total: newTotal,
+            items: updatedItems,
+          };
+        } else {
+          // Si amount es 1, eliminar el producto del carrito
+          this.onUnselectProduct(productId);
+          return {
+            ...prev,
+            total: prev.total - Number(price),
+            items: prev.items.filter((item) => item.id !== productId),
+          };
+        }
       });
     } else {
       if (this.deps.selectedProduct) {
         const { amount } = this.deps.selectedProduct;
-      
+  
+        // Verificar si amount es mayor que 1 antes de decrementar
         if (amount > 1) {
           this.deps.setSelectedProduct({
             ...this.deps.selectedProduct,
             amount: amount - 1,
           });
         } else {
+          // Quitar el producto seleccionado si se intenta decrementar por debajo de 1
           this.onUnselectProduct();
         }
       }
     }
-  };
+  };  
 
   onAddProductToCart = () => {
     const product = this.deps.selectedProduct;
