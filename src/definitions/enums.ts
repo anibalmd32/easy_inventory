@@ -34,29 +34,31 @@ export enum TRENDING {
 }
 
 export enum MONTHS {
-  ENERO = 'enero',
-  FEBRERO = 'febrero',
-  MARZO = 'marzo',
-  ABRIL = 'abril',
-  MAYO = 'mayo',
-  JUNIO = 'junio',
-  JULIO = 'julio',
-  AGOSTO = 'agosto',
-  SEPTIEMBRE = 'septiembre',
-  OBTUBRE = 'obtubre',
-  NOMVIEMBRE = 'noviembre',
-  DICIEMBRE = 'diciembre',
+  JANUARY = 'enero',
+  FEBRUARY = 'febrero',
+  MARCH = 'marzo',
+  APRIL = 'abril',
+  MAY = 'mayo',
+  JUNE = 'junio',
+  JULY = 'julio',
+  AUGUST = 'agosto',
+  SEPTEMBER = 'septiembre',
+  OCTOBER = 'octubre',
+  NOVEMBER = 'noviembre',
+  DECEMBER = 'diciembre',
 }
 
+
 export enum DAYS {
-  LUNES = 'lunes',
-  MARTES = 'martes',
-  MIERCOLES = 'miercoles',
-  JUEVES = 'jueves',
-  VIERNES = 'viernes',
-  SABADO = 'sabado',
-  DOMINGO = 'domingo',
+  MONDAY = 'lunes',
+  TUESDAY = 'martes',
+  WEDNESDAY = 'miércoles',
+  THURSDAY = 'jueves',
+  FRIDAY = 'viernes',
+  SATURDAY = 'sábado',
+  SUNDAY = 'domingo',
 }
+
 
 export enum CHART_FOR {
   PAID = 'paid',

@@ -10,6 +10,7 @@ import {
 } from '@/lib/utils';
 import DashboardRepository from '../infrastructure/dashboard.repository';
 import { MonthlyChartItem, CHART_FOR, WeeklyChartItem } from '@/definitions';
+import { startOfDay, endOfDay } from 'date-fns';
 
 export interface Stats {
   rate: number;
@@ -187,8 +188,12 @@ export default class DashboardService {
 
   async countLastWeekInvoices(): Promise<WeeklyChartItem[]> {
     const lastWeekDays = getLastWeekDays();
+    
     const result: WeeklyChartItem[] = await Promise.all(lastWeekDays.map(async day => {
-      const count = await this.repository.countInvoicesPerDate(day.date);
+      const start = startOfDay(day.date);
+      const end = endOfDay(day.date);
+
+      const count = await this.repository.countInvoicesPerDate({ start, end });
 
       return {
         day: day.day,

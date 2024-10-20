@@ -1,18 +1,33 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { LoadingData, FETCH_STATUS, TRENDING, MONTHS, DAYS } from '@/definitions';
+import {
+  LoadingData,
+  FETCH_STATUS,
+  TRENDING,
+  MONTHS,
+  DAYS
+} from '@/definitions';
+import {
+  startOfMonth,
+  endOfMonth,
+  subMonths,
+  subYears,
+  setMonth,
+  getMonth,
+  startOfWeek,
+  subWeeks,
+  addDays,
+  endOfWeek,
+  format
+} from 'date-fns';
+import { es } from 'date-fns/locale';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(date: Date) {
-  return date.toLocaleDateString('es-ES', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+export function formatDate(date: Date): string {
+  return format(date, 'EEEE, dd \'de\' MMMM \'de\' yyyy', { locale: es });
 }
 
 export function generateCartId() {
@@ -28,11 +43,12 @@ export const loaderInitialState: LoadingData = {
 };
 
 export function monthIntervals() {
-  const lastMonthStart = new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1);;
-  const lastMonthEnd = new Date(new Date().getFullYear(), new Date().getMonth(), 0);
-  
-  const currentMonthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
   const today = new Date();
+
+  const lastMonthStart = startOfMonth(subMonths(today, 1));
+  const lastMonthEnd = endOfMonth(subMonths(today, 1));
+
+  const currentMonthStart = startOfMonth(today);
 
   return {
     currentMonthStart,
@@ -42,16 +58,17 @@ export function monthIntervals() {
   };
 }
 
+
 export function specificMonthIntervals(monthNumber: number) {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
 
-  const adjustedMonth = monthNumber - 1;
-  const year = adjustedMonth > currentMonth ? currentYear - 1 : currentYear;
+  const adjustedDate = monthNumber - 1 > currentMonth ? subYears(currentDate, 1) : currentDate;
 
-  const monthStart = new Date(year, adjustedMonth, 1);
-  const monthEnd = new Date(year, adjustedMonth + 1, 0);
+  const specificMonthDate = setMonth(adjustedDate, monthNumber - 1);
+
+  const monthStart = startOfMonth(specificMonthDate);
+  const monthEnd = endOfMonth(specificMonthDate);
 
   return {
     monthStart,
@@ -59,24 +76,32 @@ export function specificMonthIntervals(monthNumber: number) {
   };
 }
 
-export function getLastSixMonths(): { num: number, month: MONTHS }[] {
-  const currentMonth = new Date().getMonth(); // 0 = enero, 11 = diciembre
-  const lastSixMonths: { num: number, month: MONTHS }[] = [];
 
+export function getLastSixMonths(): { num: number, month: MONTHS }[] {
+  const today = new Date();
   const monthsArray = [
-    MONTHS.ENERO, MONTHS.FEBRERO, MONTHS.MARZO, MONTHS.ABRIL, MONTHS.MAYO, 
-    MONTHS.JUNIO, MONTHS.JULIO, MONTHS.AGOSTO, MONTHS.SEPTIEMBRE, MONTHS.OBTUBRE, 
-    MONTHS.NOMVIEMBRE, MONTHS.DICIEMBRE
+    MONTHS.JANUARY,
+    MONTHS.FEBRUARY,
+    MONTHS.MARCH,
+    MONTHS.APRIL,
+    MONTHS.MAY, 
+    MONTHS.JUNE,
+    MONTHS.JULY,
+    MONTHS.AUGUST,
+    MONTHS.SEPTEMBER,
+    MONTHS.OCTOBER, 
+    MONTHS.NOVEMBER,
+    MONTHS.DECEMBER,
   ];
 
+  const lastSixMonths: { num: number, month: MONTHS }[] = [];
+
   for (let i = 1; i <= 6; i++) {
-    let month = currentMonth - i;
-    if (month < 0) {
-      month += 12;
-    }
+    const date = subMonths(today, i);
+    const monthIndex = getMonth(date);
     lastSixMonths.push({
-      num: month + 1,
-      month: monthsArray[month]
+      num: monthIndex + 1,
+      month: monthsArray[monthIndex],
     });
   }
 
@@ -85,51 +110,41 @@ export function getLastSixMonths(): { num: number, month: MONTHS }[] {
 
 export function getLastWeekDays(): { day: DAYS, date: Date }[] {
   const currentDate = new Date();
-  const currentDay = currentDate.getDay();
+
+  const lastMonday = startOfWeek(subWeeks(currentDate, 1), { weekStartsOn: 1 });
 
   const daysArray = [
-      DAYS.DOMINGO,
-      DAYS.LUNES,
-      DAYS.MARTES,
-      DAYS.MIERCOLES,
-      DAYS.JUEVES,
-      DAYS.VIERNES,
-      DAYS.SABADO,
+    DAYS.MONDAY,
+    DAYS.TUESDAY,
+    DAYS.WEDNESDAY,
+    DAYS.THURSDAY,
+    DAYS.FRIDAY,
+    DAYS.SATURDAY,
+    DAYS.SUNDAY,
   ];
-
-  const adjustedCurrentDay = currentDay === 0 ? 7 : currentDay;
-
-  const lastMonday = new Date(currentDate);
-  lastMonday.setDate(currentDate.getDate() - adjustedCurrentDay - 7);
 
   const lastWeekDays: { day: DAYS, date: Date }[] = [];
 
   for (let i = 0; i < 7; i++) {
-      const dayDate = new Date(lastMonday);
-      dayDate.setDate(lastMonday.getDate() + i);
-      lastWeekDays.push({
-          day: daysArray[(i + 1) % 7],
-          date: dayDate
-      });
+    const dayDate = addDays(lastMonday, i);
+    lastWeekDays.push({
+      day: daysArray[i],
+      date: dayDate,
+    });
   }
 
   return lastWeekDays;
 }
 
-
-
 export function weekIntervals() {
   const today = new Date();
-  const weekDay = today.getDay();
 
-  const lastWeekStart = new Date(today);
-  lastWeekStart.setDate(today.getDate() - weekDay - 7);
+  // Inicio y fin de la semana pasada
+  const lastWeekStart = startOfWeek(subWeeks(today, 1), { weekStartsOn: 1 }); // Semana comienza en lunes
+  const lastWeekEnd = endOfWeek(subWeeks(today, 1), { weekStartsOn: 1 });
 
-  const lastWeekEnd = new Date(lastWeekStart);
-  lastWeekEnd.setDate(lastWeekStart.getDate() + 6);
-
-  const currentWeekStart = new Date(today);
-  currentWeekStart.setDate(today.getDate() - weekDay);
+  // Inicio de la semana actual
+  const currentWeekStart = startOfWeek(today, { weekStartsOn: 1 });
 
   return {
     lastWeekStart,
@@ -139,16 +154,29 @@ export function weekIntervals() {
   };
 }
 
-export function getRate({ lastCount, currentCount }: { lastCount: number, currentCount: number }): number {
-  let rate = 0;
+export function getRate({
+  lastCount,
+  currentCount
+}: {
+  lastCount: number,
+  currentCount: number
+}): number {
+  if (lastCount === 0) {
+    return currentCount > 0 ? 100 : 0;
+  }
 
-    if (lastCount > currentCount) {
-      rate = ((currentCount - lastCount) / lastCount) * 100;
-    }
+  const rate = Math.abs(((currentCount - lastCount) / lastCount) * 100);
 
-    return rate;
+  return Math.round(rate);
 }
 
-export function getTendency({ lastCount, currentCount }: { lastCount: number, currentCount: number }): TRENDING {
+
+export function getTendency({
+  lastCount,
+  currentCount
+}: {
+  lastCount: number,
+  currentCount: number
+}): TRENDING {
   return currentCount > lastCount ? TRENDING.UP : TRENDING.DOWN;
 }
