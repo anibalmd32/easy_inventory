@@ -7,7 +7,7 @@ import { Setting } from '@/definitions';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Inventario Fácil',
+  title: 'Inversiones Jeicar, C.A.',
   description:
     'Aplicación de inventario y facturación para negocios personales',
 };

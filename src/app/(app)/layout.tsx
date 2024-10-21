@@ -12,7 +12,7 @@ export default function AppLayout({
 }>) {
   return (
     <main className="relative">
-      <AppHeader appName="Easy Inventory" appLogo="/billing.svg" />
+      <AppHeader appName="Inversiones Jeicar, C.A." appLogo="/logo.png" />
       <PageContainer>{children}</PageContainer>
       <AppMenu />
       <Toaster />

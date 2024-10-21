@@ -15,9 +15,9 @@ export default async function InvoiceTemplate({ params }: { params: { id: string
     <div className="bg-white min-h-screen p-12 flex flex-col gap-20">
       <div className='flex justify-between'>
         <div>
-          <p className='font-bold text-2xl'>Inventario Fácil</p>
-          <p><span className='font-semibold'>Dirección:</span> Calle 1</p>
-          <p><span className='font-semibold'>Tlf:</span> 0414 357 17 45</p>
+          <p className='font-bold text-2xl'>Inversiones Jeicar, C.A.</p>
+          <p><span className='font-semibold'>Dirección:</span> Calle principal local Nro 34, Urb la Hidalguía san Fernando de apure</p>
+          <p><span className='font-semibold'>Tlf:</span> +58 424-3822446</p>
         </div>
 
         <div>
