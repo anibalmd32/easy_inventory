@@ -1,17 +1,17 @@
-import { cancelInvoice, payInvoice } from '@/core/frameworks/server-actions/invoice.actions';
+import {
+  cancelInvoice,
+  payInvoice
+} from '@/core/frameworks/server-actions/invoice.actions';
 import ToastEventHandlers from './ToastEventHandlers';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface EventHandlerDeps {
   toastEvents: ToastEventHandlers;
-  router: any;
+  router: AppRouterInstance;
 }
 
 export default class BillingEventHandlers {
-  private deps: EventHandlerDeps;
-
-  constructor(deps: EventHandlerDeps) {
-    this.deps = deps;
-  }
+  constructor(private deps: EventHandlerDeps) {}
 
   onPayInvoice = async (id: number) => {
     this.deps.toastEvents.trigger({
@@ -37,7 +37,6 @@ export default class BillingEventHandlers {
   };
 
   onCancelInvoice = async (id: number) => {
-    
     this.deps.toastEvents.trigger({
       title: 'Cargando',
       description: 'Procesando la cancelación de la factura'

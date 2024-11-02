@@ -7,12 +7,15 @@ interface EventHandler {
   onAddCategory: (category: Category) => Promise<void>;
   onUpdateCategory: (
     category: Partial<Category>,
-    categoryId: number
+    categoryId: number,
   ) => Promise<void>;
   onDeleteCategory: (categoryId: number) => Promise<void>;
+  onColorChange: (color: string) => void;
 }
 
-interface Deps {}
+interface Deps {
+  setSelectedColor: (color: string) => void;
+}
 
 export default class SettingsEventHandler implements EventHandler {
   constructor(private readonly deps: Deps) {}
@@ -23,7 +26,12 @@ export default class SettingsEventHandler implements EventHandler {
   onMarkTemplateAsFavorite = async (templateId: number): Promise<void> => {};
   onUpdateCategory = async (
     category: Partial<Category>,
-    categoryId: number
+    categoryId: number,
   ): Promise<void> => {};
   onUploadLog = async (logoData: any): Promise<void> => {};
+
+  onColorChange = (color: string): void => {
+    this.deps.setSelectedColor(color);
+    console.log('onColorChange', color);
+  };
 }
