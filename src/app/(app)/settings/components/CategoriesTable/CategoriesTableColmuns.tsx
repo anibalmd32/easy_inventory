@@ -1,5 +1,5 @@
 import { DataTableColumnHeader } from '@/components/shared/DataTable';
-import { Category } from '@prisma/client';
+import { Category } from '@/definitions';
 import { ColumnDef } from '@tanstack/react-table';
 
 import { MoreHorizontal } from 'lucide-react';

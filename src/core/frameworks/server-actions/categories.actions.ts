@@ -6,11 +6,40 @@ import { Category } from '@/definitions';
 
 const service = new CategoryService(new CategoryRepository());
 
-export const getAllCategories = async (): Promise<Category[]> => {
+export const getAllCategoriesAction = async (): Promise<Category[]> => {
   try {
     return await service.getCategoryList();
   } catch (error) {
     console.error(error);
     return [];
+  }
+};
+
+export const createCategoryAction = async (
+  newCategory: Category,
+): Promise<void> => {
+  try {
+    await service.createNewCategory(newCategory);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateCategoryAction = async (
+  data: Partial<Category>,
+  id: number,
+): Promise<void> => {
+  try {
+    await service.updatePartiallyCategory(id, data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteCategoryAction = async (id: number): Promise<void> => {
+  try {
+    await service.deleteCategory(id);
+  } catch (error) {
+    console.error(error);
   }
 };

@@ -1,6 +1,6 @@
 import * as ShadAlert from '@/components/ui/alert-dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { Category } from '@prisma/client';
+import { Category } from '@/definitions';
 import { useSettings } from '../../hooks/useSettings';
 
 export const EditCategory = ({ rowData }: { rowData: Category }) => {

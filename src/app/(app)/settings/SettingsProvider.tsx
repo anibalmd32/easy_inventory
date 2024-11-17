@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, useState } from 'react';
-import { Setting } from '@/definitions';
+import { createContext, useState, useCallback, useEffect } from 'react';
+import { Category, Setting } from '@/definitions';
 import SettingsEventHandler from '@/eventHandlers/SettingsEventHandler';
 import {
   formSchema,
@@ -11,6 +11,8 @@ import { z } from 'zod';
 import { CategoriesForm } from './components/CategoriesForm/CategoriesForm';
 import { MinimunStockForm } from './components/MinimunStockForm/MinimunStockForm';
 import { BusinessNameForm } from './components/BusinessNameForm/BusinessNameForm';
+import { getAllCategoriesAction } from '@/core/frameworks/server-actions/categories.actions';
+import useCategories from './hooks/useCategories';
 
 interface SettingsCtx {
   settings: Setting;
