@@ -3,7 +3,7 @@ import { InventoryProvider } from './InventoryProvider';
 
 /** SERVER ACTIONS */
 import { getAllProducts } from '@/core/frameworks/server-actions/products.actions';
-import { getAllCategories } from '@/core/frameworks/server-actions/categories.actions';
+import { getAllCategoriesAction } from '@/core/frameworks/server-actions/categories.actions';
 
 /** COMPONENTS */
 import { ProductsTable } from './components/ProductsTable';
@@ -14,7 +14,7 @@ export const revalidate = 0;
 
 export default async function InventoryPage() {
   const products = await getAllProducts();
-  const categories = await getAllCategories();
+  const categories = await getAllCategoriesAction();
 
   return (
     <InventoryProvider

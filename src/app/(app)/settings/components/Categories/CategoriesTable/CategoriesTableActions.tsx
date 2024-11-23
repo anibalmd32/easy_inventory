@@ -1,20 +1,14 @@
 import * as ShadAlert from '@/components/ui/alert-dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Category } from '@/definitions';
-import { useSettings } from '../../hooks/useSettings';
+import { useSettings } from '../../../hooks/useSettings';
 
 export const EditCategory = ({ rowData }: { rowData: Category }) => {
-  const { setCategoriesOpenForm, setCategoryId, setDefaultFormValues } =
-    useSettings();
-
-  const handleEdit = () => {
-    setDefaultFormValues({ name: rowData.name, color: rowData.color });
-    setCategoryId(rowData.id);
-    setCategoriesOpenForm(true);
-  };
-
   return (
-    <DropdownMenuItem className="cursor-pointer" onClick={handleEdit}>
+    <DropdownMenuItem
+      className="cursor-pointer"
+      onClick={() => console.log('Editar', rowData)}
+    >
       Editar
     </DropdownMenuItem>
   );
@@ -30,7 +24,7 @@ export const DeleteCategory = ({ rowData }: { rowData: Category }) => {
         <ShadAlert.AlertDialogHeader>
           <ShadAlert.AlertDialogTitle>Estas seguro?</ShadAlert.AlertDialogTitle>
           <ShadAlert.AlertDialogDescription>
-            Esta acción eliminara la categoria
+            Esta acción eliminara la categoría
           </ShadAlert.AlertDialogDescription>
         </ShadAlert.AlertDialogHeader>
         <ShadAlert.AlertDialogFooter>

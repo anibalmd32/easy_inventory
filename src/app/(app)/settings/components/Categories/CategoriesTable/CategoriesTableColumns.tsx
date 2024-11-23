@@ -1,22 +1,18 @@
 import { DataTableColumnHeader } from '@/components/shared/DataTable';
 import { Category } from '@/definitions';
 import { ColumnDef } from '@tanstack/react-table';
-
 import { MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import * as ShadDropdown from '@/components/ui/dropdown-menu';
-import { Badge } from '@/components/ui/badge';
 import { DeleteCategory, EditCategory } from './CategoriesTableActions';
 
 export const categoriesTableColumns: ColumnDef<Category>[] = [
   {
     accessorKey: 'name',
     enableSorting: true,
-
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Nombre" />;
     },
-
     cell: ({ row }) => {
       return <div>{row.getValue('name')}</div>;
     },
@@ -25,11 +21,9 @@ export const categoriesTableColumns: ColumnDef<Category>[] = [
   {
     accessorKey: 'color',
     enableSorting: true,
-
     header: ({ column }) => {
       return <DataTableColumnHeader column={column} title="Color" />;
     },
-
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
@@ -37,7 +31,6 @@ export const categoriesTableColumns: ColumnDef<Category>[] = [
             className="w-6 h-6 rounded-full"
             style={{ backgroundColor: row.getValue('color') }}
           />
-          <span className="text-xs font-bold">{row.getValue('color')}</span>
         </div>
       );
     },

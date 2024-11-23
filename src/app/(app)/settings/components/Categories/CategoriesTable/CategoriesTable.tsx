@@ -1,11 +1,11 @@
 'use client';
 
 import { DataTable } from '@/components/shared/DataTable';
-import { categoriesTableColumns } from './CategoriesTableColmuns';
-import useCategories from '../../hooks/useCategories';
-import Spinner from '@/components/shared/Spinner/Spinner';
+import { categoriesTableColumns } from './CategoriesTableColumns';
+import { useSettings } from '../../../hooks/useSettings';
 
 const CategoriesTable = () => {
+  const { useCategories } = useSettings();
   const { categoryState } = useCategories();
 
   return (
@@ -17,4 +17,5 @@ const CategoriesTable = () => {
     />
   );
 };
+
 export default CategoriesTable;
