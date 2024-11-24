@@ -22,11 +22,11 @@ const menuItems = [
     href: '/invoices',
     icon: CircleDollarSign,
   },
-  {
-    name: 'Configuraciones',
-    href: '/settings',
-    icon: Settings,
-  },
+  //   {
+  //     name: 'Configuraciones',
+  //     href: '/settings',
+  //     icon: Settings,
+  //   },
 ];
 
 export default menuItems;
