@@ -8,6 +8,7 @@ import {
   updateCategoryCommand,
 } from '../commands/categoryCommands';
 import { Category } from '@/definitions';
+import { useCategoryForm } from './useCategoryForm';
 
 export type CategoryState = {
   categories: Category[];
@@ -21,6 +22,15 @@ const useCategories = () => {
     loading: true,
     error: null,
   });
+
+  const [defaultFormValues, setDefaultFormValues] = useState<Category>({
+    id: 0,
+    name: '',
+    color: '',
+  });
+
+  const { form, onSubmit, openForm, toggleForm } =
+    useCategoryForm(defaultFormValues);
 
   const initCategories = useCallback(async () => {
     if (categoryState.categories.length <= 0 && categoryState.loading) {
@@ -58,6 +68,11 @@ const useCategories = () => {
     addCategory,
     removeCategory,
     updateCategory,
+    form,
+    openForm,
+    toggleForm,
+    onSubmit,
+    setDefaultFormValues,
   };
 };
 

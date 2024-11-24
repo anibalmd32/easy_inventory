@@ -4,11 +4,16 @@ import { Category } from '@/definitions';
 import { useSettings } from '../../../hooks/useSettings';
 
 export const EditCategory = ({ rowData }: { rowData: Category }) => {
+  const { useCategories } = useSettings();
+  const { toggleForm, setDefaultFormValues } = useCategories();
+
+  const handleEdit = () => {
+    setDefaultFormValues(rowData);
+    toggleForm();
+  };
+
   return (
-    <DropdownMenuItem
-      className="cursor-pointer"
-      onClick={() => console.log('Editar', rowData)}
-    >
+    <DropdownMenuItem className="cursor-pointer" onClick={handleEdit}>
       Editar
     </DropdownMenuItem>
   );
