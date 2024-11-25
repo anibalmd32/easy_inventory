@@ -20,6 +20,8 @@ services:
     environment:
       DATABASE_URL: postgresql://easy_inventory:easy2024%2318@db:5432/easy_inventory?schema=public
       BASE_URL: http://159.100.9.188:3000
+      NEXTAUTH_JWT_SECRET: NEXT_AUTH_JWT_SECRET
+      NEXTAUTH_SECRET: NEXT_AUTH_SECRET
     ports:
       - "3000:3000"
     depends_on:
