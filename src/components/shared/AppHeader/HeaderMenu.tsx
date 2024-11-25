@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { AlignJustify } from 'lucide-react';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 export function HeaderMenu() {
   return (
@@ -38,7 +39,7 @@ export function HeaderMenu() {
         <DropdownMenuSeparator />
 
         <DropdownMenuLabel>Aplicación</DropdownMenuLabel>
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
           Cerrar Sesión
         </DropdownMenuItem>
       </DropdownMenuContent>

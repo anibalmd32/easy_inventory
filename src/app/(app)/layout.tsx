@@ -4,6 +4,8 @@ import { AppHeader } from '@/components/shared/AppHeader';
 import { PageContainer } from '@/components/shared/PageContainer';
 import { Toaster } from '@/components/ui/toaster';
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+import { SessionProvider } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 export default function AppLayout({
   children,
@@ -11,17 +13,19 @@ export default function AppLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="relative">
-      <AppHeader appName="Inversiones Jeicar, C.A." appLogo="/logo.png" />
-      <PageContainer>{children}</PageContainer>
-      <AppMenu />
-      <Toaster />
-      <ProgressBar
-        height="4px"
-        color="#fff"
-        options={{ showSpinner: false }}
-        shallowRouting
-      />
-    </main>
+    <SessionProvider>
+      <main className="relative">
+        <AppHeader appName="Inversiones Jeicar, C.A." appLogo="/logo.png" />
+        <PageContainer>{children}</PageContainer>
+        <AppMenu />
+        <Toaster />
+        <ProgressBar
+          height="4px"
+          color="#fff"
+          options={{ showSpinner: false }}
+          shallowRouting
+        />
+      </main>
+    </SessionProvider>
   );
 }

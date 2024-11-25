@@ -1,6 +1,10 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import { hash } from 'bcrypt';
 
 const prisma = new PrismaClient();
+
+const saltRounds = 10;
+const hashPassword = async (password: string) => hash(password, saltRounds);
 
 async function main() {
   const categories: Prisma.CategoryCreateInput[] = [
@@ -18,13 +22,43 @@ async function main() {
     },
   ];
 
+  const users: Prisma.UserCreateInput[] = [
+    {
+      name: 'Administrator',
+      email: 'admin@example.com',
+      password: await hashPassword('admin'),
+      isAdmin: true,
+      isEmployee: false,
+    },
+    {
+      name: 'Empleado',
+      email: 'empleado@example.com',
+      password: await hashPassword('empleado'),
+      isAdmin: false,
+      isEmployee: true,
+    },
+  ];
+
   const seedCategories = async () => {
-    await prisma.category.createMany({ data: categories });
-    console.log('Las categorías fueron creadas');
+    const existingCategories = await prisma.category.findMany();
+
+    if (existingCategories.length === 0) {
+      await prisma.category.createMany({ data: categories });
+      console.log('Las categorías fueron creadas');
+    }
+  };
+
+  const seedUsers = async () => {
+    const existingUsers = await prisma.user.findMany();
+    if (existingUsers.length === 0) {
+      await prisma.user.createMany({ data: users });
+      console.log('Los usuarios fueron creados');
+    }
   };
 
   try {
     await seedCategories();
+    await seedUsers();
     process.exit(0);
   } catch (error: any) {
     throw new Error(error.message);
