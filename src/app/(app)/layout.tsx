@@ -5,7 +5,6 @@ import { PageContainer } from '@/components/shared/PageContainer';
 import { Toaster } from '@/components/ui/toaster';
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import { SessionProvider } from 'next-auth/react';
-import { useSession } from 'next-auth/react';
 
 export default function AppLayout({
   children,
