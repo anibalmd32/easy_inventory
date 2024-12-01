@@ -3,9 +3,13 @@
 import { Button } from '@/components/ui/button';
 import useBillingActions from './useBillingActions';
 
-export default function GeneratedInvoiceBtns({ invoiceId }: { invoiceId: number }) {
+export default function GeneratedInvoiceBtns({
+  invoiceId,
+}: {
+  invoiceId: number;
+}) {
   const { billingEvents } = useBillingActions();
-  
+
   return (
     <div className="flex justify-end gap-2">
       <Button

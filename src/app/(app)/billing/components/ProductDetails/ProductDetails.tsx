@@ -27,7 +27,9 @@ export function ProductDetails() {
                   variant="default"
                   style={{ backgroundColor: selectedProduct.category?.color }}
                 >
-                  {selectedProduct.category ? selectedProduct.category.name : 'Sin categoría'}
+                  {selectedProduct.category
+                    ? selectedProduct.category.name
+                    : 'Sin categoría'}
                 </Badge>
               </span>
             </CardTitle>
@@ -36,7 +38,7 @@ export function ProductDetails() {
             <div className="flex gap-4 items-center">
               <p className="flex gap-2 items-center">
                 <DollarSign className="h-4 w-4" />
-                <span>${selectedProduct.price}</span>
+                <span>{selectedProduct.price}</span>
               </p>
               <p className="flex gap-2 items-center">
                 <ShoppingCart className="h-4 w-4" />

@@ -6,6 +6,7 @@ import * as ShadDialog from '@/components/ui/dialog';
 import * as ShadTable from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useInvoices } from '../../hooks/useInvoices';
+import { useRouter } from 'next/navigation';
 
 interface InvoiceActionsProps {
   rowData: Invoice;
@@ -15,7 +16,9 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
   const date = new Date(rowData.generatedAt);
   const formattedDate = formatDate(date);
 
-  const { invoiceEvents } = useInvoices();
+  const { invoiceEvents, billingEvents } = useInvoices();
+
+  const router = useRouter();
 
   const status = rowData.status;
   const items = rowData.items;
@@ -43,24 +46,49 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
 
         {/* Short details */}
         <div
-          className="flex gap-4 flex-col md:flex-row text-sm"
+          className="flex gap-4 flex-col md:justify-between md:flex-row text-sm"
           aria-describedby="modal-heading"
         >
-          <div className="flex gap-2 items-center">
-            <User />
-            <span>{rowData.customerName}</span>
+          <div className="flex gap-4 flex-col md:flex-row text-sm">
+            <div className="flex gap-2 items-center">
+              <User />
+              <span>{rowData.customerName}</span>
+            </div>
+            <div className="flex gap-2 items-center">
+              <Calendar />
+              <span>{formattedDate}</span>
+            </div>
+            <div className="flex gap-2 items-center">
+              <Loader />
+              <Badge variant={'default'} className={statusClass[status]}>
+                {status === INVOICE_STATUS.PAID && 'Pagada'}
+                {status === INVOICE_STATUS.CANCELED && 'Cancelada'}
+                {status === INVOICE_STATUS.PENDING && 'Por pagar'}
+              </Badge>
+            </div>
           </div>
-          <div className="flex gap-2 items-center">
-            <Calendar />
-            <span>{formattedDate}</span>
-          </div>
-          <div className="flex gap-2 items-center">
-            <Loader />
-            <Badge variant={'default'} className={statusClass[status]}>
-              {status === INVOICE_STATUS.PAID && 'Pagada'}
-              {status === INVOICE_STATUS.CANCELED && 'Cancelada'}
-              {status === INVOICE_STATUS.PENDING && 'Por pagar'}
-            </Badge>
+
+          <div className="flex justify-end gap-2">
+            {status !== INVOICE_STATUS.CANCELED && (
+              <Button
+                className="bg-transparent border border-red-400 hover:bg-red-400 hover:text-gray-200 text-gray-200 transition-all duration-300"
+                onClick={async () => {
+                  await billingEvents.onCancelInvoice(rowData.id);
+                }}
+              >
+                Cancelar
+              </Button>
+            )}
+            {status === INVOICE_STATUS.PENDING && (
+              <Button
+                className="bg-gray-900 hover:bg-gray-800 text-gray-200 transition-all duration-300"
+                onClick={async () =>
+                  await billingEvents.onPayInvoice(rowData.id)
+                }
+              >
+                Pagar
+              </Button>
+            )}
           </div>
         </div>
 

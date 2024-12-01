@@ -30,7 +30,6 @@ const handler = NextAuth({
       return session;
     },
     async redirect({ baseUrl }) {
-      console.log('Esta es la url base', baseUrl);
       return baseUrl;
     },
   },

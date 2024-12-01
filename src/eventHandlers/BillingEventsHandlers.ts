@@ -1,6 +1,6 @@
 import {
   cancelInvoice,
-  payInvoice
+  payInvoice,
 } from '@/core/frameworks/server-actions/invoice.actions';
 import ToastEventHandlers from './ToastEventHandlers';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
@@ -16,7 +16,7 @@ export default class BillingEventHandlers {
   onPayInvoice = async (id: number) => {
     this.deps.toastEvents.trigger({
       title: 'Cargando',
-      description: 'Procesando pago de la factura'
+      description: 'Procesando pago de la factura',
     });
 
     try {
@@ -24,14 +24,14 @@ export default class BillingEventHandlers {
 
       this.deps.toastEvents.trigger({
         title: 'Éxito',
-        description: 'Factura pagada con éxito'
+        description: 'Factura pagada con éxito',
       });
 
-      this.deps.router.push('/invoices');
+      this.deps.router.refresh();
     } catch (error) {
       this.deps.toastEvents.error({
         title: 'Error',
-        description: 'Error al pagar la factura'
+        description: 'Error al pagar la factura',
       });
     }
   };
@@ -39,7 +39,7 @@ export default class BillingEventHandlers {
   onCancelInvoice = async (id: number) => {
     this.deps.toastEvents.trigger({
       title: 'Cargando',
-      description: 'Procesando la cancelación de la factura'
+      description: 'Procesando la cancelación de la factura',
     });
 
     try {
@@ -47,14 +47,14 @@ export default class BillingEventHandlers {
 
       this.deps.toastEvents.trigger({
         title: 'Éxito',
-        description: 'La factura se ha cancelado con éxito'
+        description: 'La factura se ha cancelado con éxito',
       });
 
-      this.deps.router.push('/invoices');
+      this.deps.router.refresh();
     } catch (error) {
       this.deps.toastEvents.error({
         title: 'Error',
-        description: 'Error al cancelar la factura'
+        description: 'Error al cancelar la factura',
       });
     }
   };
