@@ -101,12 +101,12 @@ export default function AuthPage() {
         </form>
       </div>
 
-      <ProgressBar
+      {/* <ProgressBar
         height="4px"
         color="#fff"
         options={{ showSpinner: false }}
         shallowRouting
-      />
+      /> */}
     </div>
   );
 }

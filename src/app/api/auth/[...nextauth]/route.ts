@@ -29,6 +29,10 @@ const handler = NextAuth({
       session.user.isEmployee = token.isEmployee;
       return session;
     },
+    async redirect({ baseUrl }) {
+      console.log('Esta es la url base', baseUrl);
+      return baseUrl;
+    },
   },
   providers: [
     CredentialsProvider({
