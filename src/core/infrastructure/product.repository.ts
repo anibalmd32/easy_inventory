@@ -26,7 +26,7 @@ export default class ProductRepository {
 
     return {
       ...newProduct,
-      price: Number(newProduct.price)
+      price: Number(newProduct.price),
     };
   }
 
@@ -37,9 +37,9 @@ export default class ProductRepository {
       orderBy: { createdAt: 'desc' },
     });
 
-    return products.map(product => ({
+    return products.map((product) => ({
       ...product,
-      price: Number(product.price)
+      price: Number(product.price),
     }));
   }
 
@@ -51,7 +51,7 @@ export default class ProductRepository {
 
     return {
       ...product!,
-      price: Number(product!.price)
+      price: Number(product!.price),
     };
   }
 
@@ -78,7 +78,7 @@ export default class ProductRepository {
 
     return {
       ...updatedProduct,
-      price: Number(updatedProduct.price)
+      price: Number(updatedProduct.price),
     };
   }
 
@@ -91,17 +91,29 @@ export default class ProductRepository {
 
     return {
       ...deletedProduct,
-      price: Number(deletedProduct.price)
+      price: Number(deletedProduct.price),
     };
   }
 
   async decrementProductQuantity(id: number, quantity: number): Promise<void> {
     await prisma.product.update({
       where: { id },
-      data: { quantity: {
-          decrement: quantity
-        }
-      }
+      data: {
+        quantity: {
+          decrement: quantity,
+        },
+      },
+    });
+  }
+
+  async incrementProductQuantity(id: number, quantity: number): Promise<void> {
+    await prisma.product.update({
+      where: { id },
+      data: {
+        quantity: {
+          increment: quantity,
+        },
+      },
     });
   }
 }

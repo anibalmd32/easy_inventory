@@ -27,4 +27,8 @@ export default class ProductService {
   async decrementProduct(id: number, quantity: number): Promise<void> {
     return await this.productRepository.decrementProductQuantity(id, quantity);
   }
+
+  async incrementProduct(id: number, quantity: number): Promise<void> {
+    return await this.productRepository.incrementProductQuantity(id, quantity);
+  }
 }

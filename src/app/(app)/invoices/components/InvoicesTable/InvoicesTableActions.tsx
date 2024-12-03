@@ -74,6 +74,7 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
                 className="bg-transparent border border-red-400 hover:bg-red-400 hover:text-gray-200 text-gray-200 transition-all duration-300"
                 onClick={async () => {
                   await billingEvents.onCancelInvoice(rowData.id);
+                  window.location.reload();
                 }}
               >
                 Cancelar
@@ -82,9 +83,10 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
             {status === INVOICE_STATUS.PENDING && (
               <Button
                 className="bg-gray-900 hover:bg-gray-800 text-gray-200 transition-all duration-300"
-                onClick={async () =>
-                  await billingEvents.onPayInvoice(rowData.id)
-                }
+                onClick={async () => {
+                  await billingEvents.onPayInvoice(rowData.id);
+                  window.location.reload();
+                }}
               >
                 Pagar
               </Button>

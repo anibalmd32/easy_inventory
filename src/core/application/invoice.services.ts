@@ -45,7 +45,7 @@ export default class InvoiceServices {
           saleId: newSale.id,
           id: 0,
         });
-      })
+      }),
     );
 
     return await this.repository.add(customer.id, newInvoice);
@@ -59,12 +59,12 @@ export default class InvoiceServices {
     const invoice = await this.repository.getById(id);
 
     await Promise.all(
-      invoice.items.map(async item => {
+      invoice.items.map(async (item) => {
         await productService.decrementProduct(
           item.sale.productId,
-          item.sale.productQuantity
+          item.sale.productQuantity,
         );
-      })
+      }),
     );
 
     return await this.repository.update(id, {
@@ -74,9 +74,22 @@ export default class InvoiceServices {
   }
 
   async cancelInvoice(id: number) {
+    const invoice = await this.repository.getById(id);
+
+    if (invoice.status === INVOICE_STATUS.PAID) {
+      await Promise.all(
+        invoice.items.map(async (item) => {
+          await productService.incrementProduct(
+            item.sale.productId,
+            item.sale.productQuantity,
+          );
+        }),
+      );
+    }
+
     return await this.repository.update(id, {
       canceledAt: new Date().toDateString(),
-      status: INVOICE_STATUS.CANCELED
+      status: INVOICE_STATUS.CANCELED,
     });
   }
 
@@ -85,7 +98,7 @@ export default class InvoiceServices {
   }
 
   async printInvoice(id: number) {
-    const baseURL = process.env.BASE_URL || 'http://localhost:3000'; // URL por defecto en desarrollo
+    const baseURL = process.env.BASE_URL ?? 'http://localhost:3000';
     const browser = await chromium.launch({
       args: [
         '--no-sandbox',
@@ -96,15 +109,15 @@ export default class InvoiceServices {
         '--single-process',
         '--disable-accelerated-2d-canvas',
       ],
-      headless: true
+      headless: true,
     });
-  
+
     const page = await browser.newPage();
     await page.goto(`${baseURL}/print/${id}`); // Usar la URL dinámica
-  
-    const pdfBuffer = await page.pdf({ format: 'A4' });
+
+    const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
     await browser.close();
-  
+
     return pdfBuffer;
   }
 }

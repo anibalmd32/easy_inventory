@@ -47,7 +47,10 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      <GeneratedInvoiceBtns invoiceId={Number(params.id)} />
+      <GeneratedInvoiceBtns
+        invoiceId={Number(params.id)}
+        invoiceStatus={invoice.status}
+      />
 
       {/* Table items */}
       <div className="bg-gray-950 rounded-md p-4">
