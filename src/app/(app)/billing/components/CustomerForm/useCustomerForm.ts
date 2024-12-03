@@ -6,12 +6,30 @@ import { useBilling } from '../../hooks/useBilling';
 import { getCustomerByDni } from '@/core/frameworks/server-actions/customer.actions';
 import { useToast } from '@/components/hooks/use-toast';
 
-
 const formSchema = z.object({
   id: z.number().default(0),
-  dni: z.string().min(2).max(50),
-  name: z.string().min(2).max(50),
-  phone: z.string().min(2).max(50),
+  dni: z
+    .string()
+    .regex(/^\d+$/, 'La cédula debe contener solo números')
+    .refine((val) => Number(val) > 1000000, {
+      message: 'Formato de cédula inválido',
+    }),
+  name: z
+    .string({
+      message: 'Nombre invalido',
+    })
+    .min(3, {
+      message: 'Nombre muy corto',
+    })
+    .max(50, {
+      message: 'Nombre muy largo',
+    })
+    .regex(/^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/, {
+      message: 'El nombre solo puede contener letras',
+    }),
+  phone: z.string().regex(/^(0412|0414|0424|0416|0426)\d{7}$/, {
+    message: 'Formato de tlf invalido',
+  }),
 });
 
 export function useCustomerForm() {
@@ -26,6 +44,7 @@ export function useCustomerForm() {
       name: '',
       phone: '',
     },
+    mode: 'onChange',
   });
 
   form.watch((values) => {

@@ -8,6 +8,7 @@ import { useCustomerForm } from './useCustomerForm';
 
 export function CustomerForm() {
   const { form, onSubmit, handleVerifyCustomer } = useCustomerForm();
+  const { errors } = form.formState;
 
   return (
     <ShadCard.Card className="bg-gray-950 p-4 text-gray-200 w-full">
@@ -28,7 +29,11 @@ export function CustomerForm() {
                   <ShadForm.FormLabel>Cédula</ShadForm.FormLabel>
                   <ShadForm.FormControl>
                     <div className="flex justify-between items-center gap-2">
-                      <Input {...field} className="bg-gray-900 text-gray-200" />
+                      <Input
+                        {...field}
+                        className="bg-gray-900 text-gray-200"
+                        onBlur={() => form.trigger('dni')}
+                      />
                       <Button
                         type="button"
                         className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
@@ -40,7 +45,9 @@ export function CustomerForm() {
                       </Button>
                     </div>
                   </ShadForm.FormControl>
-                  <ShadForm.FormMessage />
+                  <ShadForm.FormMessage>
+                    {errors.dni?.message}
+                  </ShadForm.FormMessage>
                 </ShadForm.FormItem>
               )}
             />
@@ -52,9 +59,15 @@ export function CustomerForm() {
                 <ShadForm.FormItem>
                   <ShadForm.FormLabel>Nombre</ShadForm.FormLabel>
                   <ShadForm.FormControl>
-                    <Input {...field} className="bg-gray-900 text-gray-200" />
+                    <Input
+                      {...field}
+                      className="bg-gray-900 text-gray-200"
+                      onBlur={() => form.trigger('name')}
+                    />
                   </ShadForm.FormControl>
-                  <ShadForm.FormMessage />
+                  <ShadForm.FormMessage>
+                    {errors.name?.message}
+                  </ShadForm.FormMessage>
                 </ShadForm.FormItem>
               )}
             />
@@ -65,9 +78,15 @@ export function CustomerForm() {
                 <ShadForm.FormItem>
                   <ShadForm.FormLabel>Teléfono</ShadForm.FormLabel>
                   <ShadForm.FormControl>
-                    <Input {...field} className="bg-gray-900 text-gray-200" />
+                    <Input
+                      {...field}
+                      className="bg-gray-900 text-gray-200"
+                      onBlur={() => form.trigger('phone')}
+                    />
                   </ShadForm.FormControl>
-                  <ShadForm.FormMessage />
+                  <ShadForm.FormMessage>
+                    {errors.phone?.message}
+                  </ShadForm.FormMessage>
                 </ShadForm.FormItem>
               )}
             />
