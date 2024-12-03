@@ -3,8 +3,8 @@ import { getToken } from 'next-auth/jwt';
 
 const secret = process.env.NEXTAUTH_SECRET;
 
-// Define las rutas públicas que no requieren autenticación
 const publicRoutes = ['/print/:id', '/auth'];
+const allowedRoutes = ['/billing', '/billing/:id'];
 
 function isPublicRoute(pathname: string) {
   return publicRoutes.some((route) => {
@@ -13,8 +13,14 @@ function isPublicRoute(pathname: string) {
   });
 }
 
+function isAllowedRoute(pathname: string) {
+  return allowedRoutes.some((route) => {
+    const routePattern = new RegExp(`^${route.replace(/:\w+/g, '\\w+')}$`);
+    return routePattern.test(pathname);
+  });
+}
+
 export async function middleware(request: NextRequest) {
-  // Verifica si la ruta es pública
   if (isPublicRoute(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
@@ -26,14 +32,9 @@ export async function middleware(request: NextRequest) {
   }
 
   if (token.isEmployee) {
-    const allowedRoutes = ['/billing'];
     const callbackUrl = '/billing';
 
-    if (request.nextUrl.pathname !== callbackUrl) {
-      return NextResponse.redirect(new URL(callbackUrl, request.url));
-    }
-
-    if (!allowedRoutes.includes(request.nextUrl.pathname)) {
+    if (!isAllowedRoute(request.nextUrl.pathname)) {
       return NextResponse.redirect(new URL(callbackUrl, request.url));
     }
 
