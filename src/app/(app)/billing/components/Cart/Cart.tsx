@@ -6,12 +6,14 @@ import { useBilling } from '../../hooks/useBilling';
 import { Minus, Plus, Trash } from 'lucide-react';
 
 export function Cart() {
-  const { selectProductOperations, cart, customer } = useBilling();
+  const { selectProductOperations, cart, customer, reVerifyCustomer } =
+    useBilling();
   const disabled =
     cart.items.length === 0 ||
     !customer.dni ||
     !customer.name ||
-    !customer.phone;
+    !customer.phone ||
+    reVerifyCustomer;
 
   return (
     <ShadCard.Card className="bg-gray-950 p-4 text-gray-200 w-full">
@@ -61,7 +63,7 @@ export function Cart() {
                       className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                       onClick={() =>
                         selectProductOperations.onSelectedProductCounterDecrement(
-                          item.id
+                          item.id,
                         )
                       }
                     >
@@ -72,7 +74,7 @@ export function Cart() {
                       className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                       onClick={() =>
                         selectProductOperations.onSelectedProductCounterIncrement(
-                          item.id
+                          item.id,
                         )
                       }
                     >

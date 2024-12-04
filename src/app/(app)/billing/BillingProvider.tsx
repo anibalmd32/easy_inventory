@@ -13,6 +13,8 @@ interface BillingCtx {
   setCustomer: Dispatch<SetStateAction<Customer>>;
   customer: Customer;
   cart: Cart;
+  reVerifyCustomer: boolean;
+  setReVerifyCustomer: Dispatch<SetStateAction<boolean>>;
 }
 
 interface ProviderProps {
@@ -40,6 +42,7 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
   const [selectedProduct, setSelectedProduct] = useState<CartItem | null>(null);
   const [cart, setCart] = useState<Cart>(cartDefaultValue);
   const [customer, setCustomer] = useState<Customer>(customerDefaultValue);
+  const [reVerifyCustomer, setReVerifyCustomer] = useState(true);
 
   const router = useRouter();
 
@@ -65,6 +68,8 @@ export function BillingProvider({ children, initialProducts }: ProviderProps) {
         cart,
         setCustomer,
         customer,
+        reVerifyCustomer,
+        setReVerifyCustomer,
       }}
     >
       {children}

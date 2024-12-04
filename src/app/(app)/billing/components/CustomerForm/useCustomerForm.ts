@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 export function useCustomerForm() {
   const [isVerified, setIsVerified] = useState(false);
   const [enableVerification, setEnableVerification] = useState(false);
-  const { setCustomer } = useBilling();
+  const { setCustomer, setReVerifyCustomer, reVerifyCustomer } = useBilling();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -25,17 +25,22 @@ export function useCustomerForm() {
     mode: 'onChange',
   });
 
+  const dni = form.watch('dni');
+
+  useEffect(() => {
+    if (dni) {
+      if (dni.length >= 7 && dni.length <= 8) {
+        setEnableVerification(true);
+        setReVerifyCustomer(true);
+      } else {
+        setEnableVerification(false);
+      }
+    }
+  }, [dni, setReVerifyCustomer]);
+
   // Use useEffect to update the customer state
   useEffect(() => {
     const subscription = form.watch((values) => {
-      if (values.dni) {
-        if (values.dni.length >= 7 && values.dni.length <= 8) {
-          console.log('enable verification');
-          setEnableVerification(true);
-        } else {
-          setEnableVerification(false);
-        }
-      }
       setCustomer({
         id: values.id ?? 0,
         dni: values.dni ?? '',
@@ -43,7 +48,7 @@ export function useCustomerForm() {
         phone: values.phone ?? '',
       });
     });
-    return () => subscription.unsubscribe(); // Cleanup subscription on unmount
+    return () => subscription.unsubscribe();
   }, [form, setCustomer]);
 
   const handleVerifyCustomer = async (dni: string) => {
@@ -67,6 +72,9 @@ export function useCustomerForm() {
         variant: 'destructive',
       });
       setIsVerified(true);
+    } finally {
+      setReVerifyCustomer(false);
+      setEnableVerification(false);
     }
   };
 
@@ -75,5 +83,6 @@ export function useCustomerForm() {
     handleVerifyCustomer,
     isVerified,
     enableVerification,
+    reVerifyCustomer,
   };
 }

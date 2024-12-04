@@ -7,8 +7,13 @@ import { Input } from '@/components/ui/input';
 import { useCustomerForm } from './useCustomerForm';
 
 export function CustomerForm() {
-  const { form, handleVerifyCustomer, isVerified, enableVerification } =
-    useCustomerForm();
+  const {
+    form,
+    handleVerifyCustomer,
+    isVerified,
+    enableVerification,
+    reVerifyCustomer,
+  } = useCustomerForm();
   const { errors } = form.formState;
 
   return (
@@ -38,12 +43,16 @@ export function CustomerForm() {
                       <Button
                         disabled={!enableVerification}
                         type="button"
-                        className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
+                        className={`bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200 ${
+                          !reVerifyCustomer
+                            ? 'text-green-300 ring-1 ring-green-300'
+                            : 'text-red-400 ring-1 ring-red-400'
+                        }`}
                         onClick={async () =>
                           await handleVerifyCustomer(field.value)
                         }
                       >
-                        Verificar
+                        {reVerifyCustomer ? 'Verificar' : 'Verificando'}
                       </Button>
                     </div>
                   </ShadForm.FormControl>
