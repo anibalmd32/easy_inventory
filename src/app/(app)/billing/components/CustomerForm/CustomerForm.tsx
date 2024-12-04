@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { useCustomerForm } from './useCustomerForm';
 
 export function CustomerForm() {
-  const { form, onSubmit, handleVerifyCustomer } = useCustomerForm();
+  const { form, handleVerifyCustomer, isVerified } = useCustomerForm();
   const { errors } = form.formState;
 
   return (
@@ -20,7 +20,7 @@ export function CustomerForm() {
       </ShadCard.CardHeader>
       <ShadCard.CardContent>
         <ShadForm.Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+          <form className="space-y-2">
             <ShadForm.FormField
               control={form.control}
               name="dni"
@@ -55,6 +55,7 @@ export function CustomerForm() {
             <ShadForm.FormField
               control={form.control}
               name="name"
+              disabled={!isVerified}
               render={({ field }) => (
                 <ShadForm.FormItem>
                   <ShadForm.FormLabel>Nombre</ShadForm.FormLabel>
@@ -74,6 +75,7 @@ export function CustomerForm() {
             <ShadForm.FormField
               control={form.control}
               name="phone"
+              disabled={!isVerified}
               render={({ field }) => (
                 <ShadForm.FormItem>
                   <ShadForm.FormLabel>Teléfono</ShadForm.FormLabel>
