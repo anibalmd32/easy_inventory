@@ -4,8 +4,9 @@ import { prisma } from '@/lib/prisma';
 
 export default class CustomerRepository {
   async add(data: Customer): Promise<Customer> {
-
-    const existCustomer = await prisma.customer.findUnique({ where: { dni: data.dni } } );
+    const existCustomer = await prisma.customer.findUnique({
+      where: { dni: data.dni },
+    });
 
     if (existCustomer) return existCustomer;
 
@@ -35,5 +36,19 @@ export default class CustomerRepository {
 
   async update(id: number, data: Partial<Customer>): Promise<Customer> {
     return {} as Customer;
+  }
+
+  async validate(dni: string, name: string): Promise<Customer | null> {
+    const customer = await prisma.customer.findUnique({ where: { dni } });
+
+    if (customer) {
+      if (customer.name === name) {
+        return customer;
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 }

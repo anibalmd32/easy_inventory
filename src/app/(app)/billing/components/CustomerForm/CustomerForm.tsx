@@ -7,7 +7,8 @@ import { Input } from '@/components/ui/input';
 import { useCustomerForm } from './useCustomerForm';
 
 export function CustomerForm() {
-  const { form, handleVerifyCustomer, isVerified } = useCustomerForm();
+  const { form, handleVerifyCustomer, isVerified, enableVerification } =
+    useCustomerForm();
   const { errors } = form.formState;
 
   return (
@@ -35,6 +36,7 @@ export function CustomerForm() {
                         onBlur={() => form.trigger('dni')}
                       />
                       <Button
+                        disabled={!enableVerification}
                         type="button"
                         className="bg-gray-800 hover:bg-gray-800/20 transition-all duration-300 text-gray-200"
                         onClick={async () =>

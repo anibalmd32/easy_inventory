@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 
 export function useCustomerForm() {
   const [isVerified, setIsVerified] = useState(false);
+  const [enableVerification, setEnableVerification] = useState(false);
   const { setCustomer } = useBilling();
   const { toast } = useToast();
 
@@ -27,6 +28,14 @@ export function useCustomerForm() {
   // Use useEffect to update the customer state
   useEffect(() => {
     const subscription = form.watch((values) => {
+      if (values.dni) {
+        if (values.dni.length >= 7 && values.dni.length <= 8) {
+          console.log('enable verification');
+          setEnableVerification(true);
+        } else {
+          setEnableVerification(false);
+        }
+      }
       setCustomer({
         id: values.id ?? 0,
         dni: values.dni ?? '',
@@ -65,5 +74,6 @@ export function useCustomerForm() {
     form,
     handleVerifyCustomer,
     isVerified,
+    enableVerification,
   };
 }

@@ -11,4 +11,8 @@ export default class CustomerServices {
   async getOneCustomer(dni: string) {
     return this.repository.getByDni(dni);
   }
+
+  async validateCustomer(dni: string, name: string) {
+    return await this.repository.validate(dni, name);
+  }
 }

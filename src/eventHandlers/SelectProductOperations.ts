@@ -1,6 +1,7 @@
 import { CartItem, Cart, Customer } from '@/definitions';
 import { Dispatch, SetStateAction } from 'react';
 import { generateInvoice } from '@/core/frameworks/server-actions/invoice.actions';
+import { getCustomerByDni } from '@/core/frameworks/server-actions/customer.actions';
 import ToastEventHandlers from './ToastEventHandlers';
 
 interface SelectProductOperationsDeps {
@@ -19,7 +20,7 @@ export default class SelectProductOperations {
 
   onSelectProduct = (productId: number) => {
     const product = this.deps.products.find(
-      (product) => product.id === productId
+      (product) => product.id === productId,
     );
 
     if (!product) {
@@ -55,12 +56,12 @@ export default class SelectProductOperations {
     if (productId) {
       this.deps.setCart((prev) => {
         const product = prev.items.find((item) => item.id === productId);
-  
+
         // Si no se encuentra el producto, retornar el estado anterior sin cambios
         if (!product) return prev;
-  
+
         const { amount, quantity, price } = product;
-  
+
         // Verificar si el amount es menor que el quantity antes de incrementar
         if (amount < quantity) {
           const newTotal = prev.total + Number(price);
@@ -73,7 +74,7 @@ export default class SelectProductOperations {
             }
             return item;
           });
-  
+
           return {
             ...prev,
             total: newTotal,
@@ -91,7 +92,7 @@ export default class SelectProductOperations {
     } else {
       if (this.deps.selectedProduct) {
         const { amount, quantity } = this.deps.selectedProduct;
-  
+
         // Verificar si amount es menor que quantity antes de incrementar
         if (amount < quantity) {
           this.deps.setSelectedProduct({
@@ -108,17 +109,17 @@ export default class SelectProductOperations {
       }
     }
   };
-  
+
   onSelectedProductCounterDecrement = (productId?: number) => {
     if (productId) {
       this.deps.setCart((prev) => {
         const product = prev.items.find((item) => item.id === productId);
-  
+
         // Si no se encuentra el producto, retornar el estado anterior sin cambios
         if (!product) return prev;
-  
+
         const { amount, price } = product;
-  
+
         // Verificar si el amount es mayor que 1 antes de decrementar
         if (amount > 1) {
           const newTotal = prev.total - Number(price);
@@ -131,7 +132,7 @@ export default class SelectProductOperations {
             }
             return item;
           });
-  
+
           return {
             ...prev,
             total: newTotal,
@@ -150,7 +151,7 @@ export default class SelectProductOperations {
     } else {
       if (this.deps.selectedProduct) {
         const { amount } = this.deps.selectedProduct;
-  
+
         // Verificar si amount es mayor que 1 antes de decrementar
         if (amount > 1) {
           this.deps.setSelectedProduct({
@@ -163,7 +164,7 @@ export default class SelectProductOperations {
         }
       }
     }
-  };  
+  };
 
   onAddProductToCart = () => {
     const product = this.deps.selectedProduct;
@@ -184,24 +185,61 @@ export default class SelectProductOperations {
   onGenerateInvoice = async () => {
     this.deps.cart.customerName = this.deps.customer.name;
 
+    const isValidCustomer = await this.onValidateCustomer(
+      this.deps.customer.dni,
+      this.deps.customer.name,
+    );
+
+    if (!isValidCustomer) {
+      return;
+    }
+
     try {
       const newInvoice = await generateInvoice(
         this.deps.cart,
-        this.deps.customer
+        this.deps.customer,
       );
-      
-      
+
       this.deps.toastEvents.trigger({
         title: 'Éxito',
-        description: 'Factura generada con éxito'
+        description: 'Factura generada con éxito',
       });
 
       this.deps.router.push(`/billing/${newInvoice.id}`);
     } catch (error: any) {
       this.deps.toastEvents.trigger({
         title: 'Error',
-        description: error.message
+        description: error.message,
       });
+    }
+  };
+
+  onValidateCustomer = async (dni: string, name: string) => {
+    this.deps.toastEvents.trigger({
+      title: 'Cargando',
+      description: 'Validando al cliente',
+    });
+
+    try {
+      const customer = await getCustomerByDni(dni);
+
+      if (customer) {
+        if (customer.name !== name) {
+          this.deps.toastEvents.error({
+            title: 'Error',
+            description: 'Ya existe un cliente con la misma cédula',
+          });
+          return false;
+        }
+      }
+
+      return true;
+    } catch (error: any) {
+      this.deps.toastEvents.trigger({
+        title: 'Error',
+        description: error.message,
+      });
+      return false;
     }
   };
 }
