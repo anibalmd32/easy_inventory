@@ -23,6 +23,7 @@ import {
 export interface ComboboxItem {
   value: string | number;
   label: string;
+  disabled?: boolean;
 }
 
 interface ComboboxProps {
@@ -59,6 +60,7 @@ export function Combobox({ items, placeholder, onSelectItem }: ComboboxProps) {
                 <CommandItem
                   key={item.value}
                   value={String(item.value)}
+                  disabled={item.disabled}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? '' : currentValue);
                     setOpen(false);
@@ -70,7 +72,7 @@ export function Combobox({ items, placeholder, onSelectItem }: ComboboxProps) {
                   <Check
                     className={cn(
                       'mr-2 h-4 w-4',
-                      value === item.value ? 'opacity-100' : 'opacity-0'
+                      value === item.value ? 'opacity-100' : 'opacity-0',
                     )}
                   />
                   {item.label}

@@ -33,6 +33,7 @@ const customerDefaultValue: Customer = {
   dni: '',
   name: '',
   phone: '',
+  din_prefix: 'V',
 };
 
 export const BillingContext = createContext<BillingCtx>({} as BillingCtx);
