@@ -25,14 +25,14 @@ async function main() {
   const users: Prisma.UserCreateInput[] = [
     {
       name: 'Administrator',
-      email: 'admin@example.com',
+      email: 'admin@inventario.com',
       password: await hashPassword('admin'),
       isAdmin: true,
       isEmployee: false,
     },
     {
       name: 'Empleado',
-      email: 'empleado@example.com',
+      email: 'empleado@inventario.com',
       password: await hashPassword('empleado'),
       isAdmin: false,
       isEmployee: true,
