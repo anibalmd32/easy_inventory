@@ -36,6 +36,7 @@ export interface Customer {
   id: number;
   name: string;
   dni: string;
+  din_prefix: string;
   phone: string;
 }
 

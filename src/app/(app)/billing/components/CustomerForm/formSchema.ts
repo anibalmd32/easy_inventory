@@ -14,6 +14,7 @@ export const formSchema = z.object({
     .refine((val) => Number(val) > 1000000, {
       message: 'Formato de cédula inválido',
     }),
+  dni_prefix: z.string().default('V'),
   name: z
     .string({
       message: 'Nombre invalido',
