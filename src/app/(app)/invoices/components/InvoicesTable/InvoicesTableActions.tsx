@@ -87,6 +87,11 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
                   await billingEvents.onPayInvoice(rowData.id);
                   window.location.reload();
                 }}
+                disabled={items.some(
+                  (item) =>
+                    (item.sale.currentProductQuantity ?? 0) <
+                    item.sale.productQuantity,
+                )}
               >
                 Pagar
               </Button>
@@ -120,7 +125,13 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
                     ${item.sale.product.price}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
-                    {item.sale.productQuantity}
+                    {item.sale.productQuantity}{' '}
+                    <span className="text-orange-400">
+                      {status === INVOICE_STATUS.PENDING &&
+                        `(quedan: ${
+                          item.sale.currentProductQuantity ?? 0
+                        })`}{' '}
+                    </span>
                   </ShadTable.TableCell>
                   <ShadTable.TableCell className="text-right">
                     $

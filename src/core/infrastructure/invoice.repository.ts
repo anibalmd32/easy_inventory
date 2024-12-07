@@ -2,6 +2,9 @@ import { Invoice, INVOICE_STATUS } from '@/definitions';
 import { prisma } from '@/lib/prisma';
 import { invoiceMapper } from '@/lib/mappers/invoiceMapper';
 import { Prisma } from '@prisma/client';
+import ProductRepository from './product.repository';
+
+const productRepository = new ProductRepository();
 
 export default class InvoiceRepository {
   async add(customerId: number, data: Invoice): Promise<Invoice> {
@@ -60,14 +63,39 @@ export default class InvoiceRepository {
       },
       orderBy: {
         createdAt: 'desc',
-      }
+      },
     });
 
-    return invoices.map((invoice) => invoiceMapper(invoice));
+    const mappedInvoices = invoices.map((invoice) => invoiceMapper(invoice));
+
+    const remappedInvoices = await Promise.all(
+      mappedInvoices.map(async (invoice) => {
+        const mappedItems = invoice.items.map(async (item) => {
+          const { productId } = item.sale;
+          const currentProductQuantity =
+            await productRepository.getQuantityByProductId(productId);
+
+          return {
+            ...item,
+            sale: {
+              ...item.sale,
+              currentProductQuantity,
+            },
+          };
+        });
+
+        return {
+          ...invoice,
+          items: await Promise.all(mappedItems),
+        };
+      }),
+    );
+
+    return remappedInvoices;
   }
 
   async update(id: number, invoiceData: Partial<Invoice>): Promise<Invoice> {
-    const data: Prisma.InvoiceUpdateInput = {}; 
+    const data: Prisma.InvoiceUpdateInput = {};
 
     if (invoiceData.canceledAt) {
       data.canceledAt = new Date(invoiceData.canceledAt);

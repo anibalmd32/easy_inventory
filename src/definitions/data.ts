@@ -29,6 +29,7 @@ export interface Sale {
   productId: number;
   productQuantity: number;
   product: Product;
+  currentProductQuantity?: number;
 }
 
 export interface Customer {

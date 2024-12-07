@@ -43,11 +43,7 @@ export const cancelInvoice = async (id: number): Promise<Invoice> => {
 };
 
 export const getInvoiceList = async (): Promise<Invoice[]> => {
-  try {
-    return await service.getInvoiceList();
-  } catch (error) {
-    return [];
-  }
+  return await service.getInvoiceList();
 };
 
 export const printInvoice = async (id: number) => {
