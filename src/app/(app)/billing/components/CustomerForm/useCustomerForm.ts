@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useBilling } from '../../hooks/useBilling';
-import { getCustomerByDni } from '@/core/frameworks/server-actions/customer.actions';
+import { getCustomerByDniAndPrefix } from '@/core/frameworks/server-actions/customer.actions';
 import { useToast } from '@/components/hooks/use-toast';
 import { formSchema } from './formSchema';
 import { useState, useEffect } from 'react';
@@ -21,14 +21,17 @@ export function useCustomerForm() {
       dni: '',
       name: '',
       phone: '',
+      dni_prefix: 'V',
     },
     mode: 'onChange',
   });
 
   const dni = form.watch('dni');
+  const dniPrefix = form.watch('dni_prefix');
 
   useEffect(() => {
-    if (dni) {
+    console.log(dniPrefix);
+    if (dni && dniPrefix) {
       if (dni.length >= 7 && dni.length <= 8) {
         setEnableVerification(true);
         setReVerifyCustomer(true);
@@ -36,7 +39,7 @@ export function useCustomerForm() {
         setEnableVerification(false);
       }
     }
-  }, [dni, setReVerifyCustomer]);
+  }, [dni, dniPrefix, setReVerifyCustomer]);
 
   // Use useEffect to update the customer state
   useEffect(() => {
@@ -46,6 +49,7 @@ export function useCustomerForm() {
         dni: values.dni ?? '',
         name: values.name ?? '',
         phone: values.phone ?? '',
+        din_prefix: values.dni_prefix ?? '',
       });
     });
     return () => subscription.unsubscribe();
@@ -53,7 +57,10 @@ export function useCustomerForm() {
 
   const handleVerifyCustomer = async (dni: string) => {
     try {
-      const verifiedCustomer = await getCustomerByDni(dni);
+      const verifiedCustomer = await getCustomerByDniAndPrefix(
+        dni,
+        form.getValues('dni_prefix'),
+      );
       if (verifiedCustomer) {
         form.setValue('id', verifiedCustomer.id);
         form.setValue('dni', verifiedCustomer.dni);
@@ -66,10 +73,10 @@ export function useCustomerForm() {
       form.setValue('name', '');
       form.setValue('phone', '');
       toast({
-        title: 'Error',
+        title: 'Aviso',
         description: error.message,
         duration: 3000,
-        variant: 'destructive',
+        variant: 'default',
       });
       setIsVerified(true);
     } finally {

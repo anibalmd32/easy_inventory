@@ -39,7 +39,7 @@ export function CustomerForm() {
         <ShadForm.Form {...form}>
           <form className="space-y-2">
             <p>Identificación</p>
-            <div className="flex gap-2 justify-center items-center">
+            <div className="flex gap-2 justify-between md:justify-center items-center">
               <ShadForm.FormField
                 control={form.control}
                 name="dni_prefix"
@@ -140,7 +140,7 @@ export function CustomerForm() {
                             await handleVerifyCustomer(field.value)
                           }
                         >
-                          {reVerifyCustomer ? 'Verificar' : 'Verificando'}
+                          {reVerifyCustomer ? 'Verificar' : 'Verificado'}
                         </Button>
                       </div>
                     </ShadForm.FormControl>
@@ -175,7 +175,6 @@ export function CustomerForm() {
             <ShadForm.FormField
               control={form.control}
               name="phone"
-              disabled={!isVerified}
               render={({ field }) => (
                 <ShadForm.FormItem>
                   <ShadForm.FormLabel>Teléfono</ShadForm.FormLabel>

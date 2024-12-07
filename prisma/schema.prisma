@@ -74,7 +74,7 @@ model Customer {
     id               Int              @id @default(autoincrement())
     name             String
     dni              String           @unique
-    din_prefix       String           @default("v")
+    din_prefix       String           @default("V")
     phone            String
     createdAt        DateTime         @default(now()) @map("created_at")
     updatedAt        DateTime         @default(now()) @map("updated_at")

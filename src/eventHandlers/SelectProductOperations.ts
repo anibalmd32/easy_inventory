@@ -1,7 +1,10 @@
 import { CartItem, Cart, Customer } from '@/definitions';
 import { Dispatch, SetStateAction } from 'react';
 import { generateInvoice } from '@/core/frameworks/server-actions/invoice.actions';
-import { getCustomerByDni } from '@/core/frameworks/server-actions/customer.actions';
+import {
+  getCustomerByDni,
+  getCustomerByDniAndPrefix,
+} from '@/core/frameworks/server-actions/customer.actions';
 import ToastEventHandlers from './ToastEventHandlers';
 
 interface SelectProductOperationsDeps {
@@ -187,6 +190,7 @@ export default class SelectProductOperations {
 
     const isValidCustomer = await this.onValidateCustomer(
       this.deps.customer.dni,
+      this.deps.customer.din_prefix,
       this.deps.customer.name,
     );
 
@@ -214,20 +218,20 @@ export default class SelectProductOperations {
     }
   };
 
-  onValidateCustomer = async (dni: string, name: string) => {
+  onValidateCustomer = async (dni: string, prefix: string, name: string) => {
     this.deps.toastEvents.trigger({
       title: 'Cargando',
       description: 'Validando al cliente',
     });
 
     try {
-      const customer = await getCustomerByDni(dni);
+      const customer = await getCustomerByDniAndPrefix(dni, prefix);
 
       if (customer) {
         if (customer.name !== name) {
           this.deps.toastEvents.error({
             title: 'Error',
-            description: 'Ya existe un cliente con la misma cédula',
+            description: 'Ya existe un cliente con la misma identificación',
           });
           return false;
         }

@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 export default class CustomerRepository {
   async add(data: Customer): Promise<Customer> {
     const existCustomer = await prisma.customer.findUnique({
-      where: { dni: data.dni },
+      where: { dni: data.dni, din_prefix: data.din_prefix },
     });
 
     if (existCustomer) return existCustomer;
@@ -15,6 +15,7 @@ export default class CustomerRepository {
         dni: data.dni,
         name: data.name,
         phone: data.phone,
+        din_prefix: data.din_prefix,
       },
     });
 
@@ -27,6 +28,20 @@ export default class CustomerRepository {
 
   async getByDni(dni: string): Promise<Customer | null> {
     const customer = await prisma.customer.findUnique({ where: { dni } });
+    return customer;
+  }
+
+  async getByDniAndPrefix(
+    dni: string,
+    prefix: string,
+  ): Promise<Customer | null> {
+    const customer = await prisma.customer.findFirst({
+      where: {
+        dni,
+        din_prefix: prefix,
+      },
+    });
+
     return customer;
   }
 

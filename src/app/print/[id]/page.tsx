@@ -54,7 +54,8 @@ export default async function InvoiceTemplate({
               {invoiceCustomer.customer.name}
             </p>
             <p>
-              <span className="font-semibold">Cédula:</span>{' '}
+              <span className="font-semibold">Identificación:</span>{' '}
+              {invoiceCustomer.customer.din_prefix}-
               {invoiceCustomer.customer.dni}
             </p>
             <p>

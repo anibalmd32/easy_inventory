@@ -15,6 +15,17 @@ export const getCustomerByDni = async (
   }
 };
 
+export const getCustomerByDniAndPrefix = async (
+  dni: string,
+  prefix: string,
+): Promise<Customer | null> => {
+  try {
+    return await customerService.getCustomerByDniAndPrefix(dni, prefix);
+  } catch (error) {
+    return null;
+  }
+};
+
 export const validateCustomer = async (
   dni: string,
   name: string,

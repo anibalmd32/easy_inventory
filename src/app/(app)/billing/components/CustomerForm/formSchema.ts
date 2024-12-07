@@ -5,14 +5,14 @@ export const formSchema = z.object({
   dni: z
     .string()
     .min(7, {
-      message: 'Cédula muy corta',
+      message: 'Identificación muy corta',
     })
-    .max(8, {
-      message: 'Cédula muy larga',
+    .max(20, {
+      message: 'Identificación muy larga',
     })
-    .regex(/^\d+$/, 'Formato de cédula inválido')
+    .regex(/^\d+$/, 'Formato de identificación inválido')
     .refine((val) => Number(val) > 1000000, {
-      message: 'Formato de cédula inválido',
+      message: 'Formato de identificación inválido',
     }),
   dni_prefix: z.string().default('V'),
   name: z
