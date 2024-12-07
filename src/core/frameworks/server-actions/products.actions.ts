@@ -39,7 +39,7 @@ export const removeProduct = async (id: number): Promise<Product> => {
 
 export const updateProduct = async (
   id: number,
-  product: Partial<Product>
+  product: Partial<Product>,
 ): Promise<Product> => {
   try {
     return await services.updatePartiallyProduct(id, product);
@@ -54,5 +54,17 @@ export const getProductsAsCartItems = async (): Promise<CartItem[]> => {
     return cartItemMapper(products);
   } catch (error) {
     return [];
+  }
+};
+
+export const validateProductQuantity = async (
+  id: number,
+  quantity: number,
+): Promise<void> => {
+  try {
+    await services.validateProductQuantity(id, quantity);
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };

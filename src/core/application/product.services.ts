@@ -31,4 +31,14 @@ export default class ProductService {
   async incrementProduct(id: number, quantity: number): Promise<void> {
     return await this.productRepository.incrementProductQuantity(id, quantity);
   }
+
+  async validateProductQuantity(id: number, quantity: number): Promise<void> {
+    const productQuantity = await this.productRepository.getQuantityByProductId(
+      id,
+    );
+
+    if (quantity > productQuantity) {
+      throw new Error('La cantidad no puede ser menor a la existente');
+    }
+  }
 }

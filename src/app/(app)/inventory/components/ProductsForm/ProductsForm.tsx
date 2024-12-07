@@ -19,9 +19,9 @@ export function ProductsForm() {
     categories,
     onSubmit,
     openCategorySelect,
-    setOpenCategorySelect
+    setOpenCategorySelect,
   } = useProductForm();
-  const { openForm, setOpenForm } = useInventory();
+  const { openForm, setOpenForm, productId, setProductId } = useInventory();
 
   return (
     <ShadSheet.Sheet
@@ -30,6 +30,7 @@ export function ProductsForm() {
         setOpenForm(!openForm);
         form.reset();
         setCategoryValue('');
+        setProductId(null);
       }}
     >
       <ShadSheet.SheetTrigger asChild>
@@ -40,10 +41,12 @@ export function ProductsForm() {
       <ShadSheet.SheetContent className="bg-gray-950 text-gray-200">
         <ShadSheet.SheetHeader>
           <ShadSheet.SheetTitle className="text-gray-200">
-            Agregar Producto
+            {productId ? 'Editar producto' : 'Agregar producto'}
           </ShadSheet.SheetTitle>
           <ShadSheet.SheetDescription className="text-gray-200">
-            Agrega un nuevo producto al inventario.
+            {productId
+              ? 'Edita un producto existente'
+              : 'Agrega un nuevo producto'}
           </ShadSheet.SheetDescription>
         </ShadSheet.SheetHeader>
 
@@ -106,7 +109,10 @@ export function ProductsForm() {
                   <ShadForm.FormItem>
                     <ShadForm.FormLabel>Categoría</ShadForm.FormLabel>
                     <ShadForm.FormControl>
-                      <ShadPopover.Popover open={openCategorySelect} onOpenChange={setOpenCategorySelect}>
+                      <ShadPopover.Popover
+                        open={openCategorySelect}
+                        onOpenChange={setOpenCategorySelect}
+                      >
                         <ShadPopover.PopoverTrigger asChild>
                           <Button
                             variant="outline"
@@ -116,7 +122,8 @@ export function ProductsForm() {
                           >
                             {categoryValue
                               ? categories.find(
-                                  (category) => String(category.value) === categoryValue
+                                  (category) =>
+                                    String(category.value) === categoryValue,
                                 )?.label
                               : 'Seleccione una categoría...'}
                             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -142,13 +149,13 @@ export function ProductsForm() {
                                       setCategoryValue(
                                         currentValue === categoryValue
                                           ? ''
-                                          : currentValue
+                                          : currentValue,
                                       );
                                       setOpenCategorySelect(false);
                                       field.onChange(
                                         currentValue === categoryValue
                                           ? null
-                                          : currentValue
+                                          : currentValue,
                                       );
                                     }}
                                   >
@@ -157,7 +164,7 @@ export function ProductsForm() {
                                         'mr-2 h-4 w-4',
                                         categoryValue === String(category.value)
                                           ? 'opacity-100'
-                                          : 'opacity-0'
+                                          : 'opacity-0',
                                       )}
                                     />
                                     {category.label}
@@ -178,7 +185,7 @@ export function ProductsForm() {
                 type="submit"
                 className="bg-gray-900 hover:bg-gray-800 text-gray-200 hover:text-gray-200 transition-all duration-300 w-full"
               >
-                Agregar
+                {productId ? 'Editar' : 'Agregar'}
               </Button>
             </form>
           </ShadForm.Form>
