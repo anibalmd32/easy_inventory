@@ -6,11 +6,12 @@ export const POST = async (req: Request) => {
   const dashboardService = new DashboardService(new DashboardRepository());
 
   const body = await req.json();
-
   const { start, end } = body as {
     start: Date;
     end: Date;
   };
+
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const result = await dashboardService.getSalesReport({ start, end });
 

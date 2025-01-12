@@ -1,6 +1,7 @@
 import { INVOICE_STATUS, SaleReport, SaleToCustomer } from '@/definitions';
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { invoiceMapper } from '@/lib/mappers/invoiceMapper';
 
 interface Interval {
   start: Date;
@@ -192,20 +193,21 @@ export default class DashboardRepository {
 
     const invoicesItems = await prisma.invoice.findMany({
       where: invoiceWhere,
-      select: {
-        items: true,
+      include: {
+        customer: true,
+      },
+      orderBy: {
+        paidAt: 'desc',
       },
     });
-
-    const salesItems = invoicesItems
-      .map((invoice) => JSON.parse(String(invoice.items)) as SaleToCustomer[])
-      .flat();
 
     return {
       totalPaidInvoices: invoicesStats._count.id,
       totalUSD: String(invoicesStats._sum.total),
       totalBS: '',
-      items: salesItems,
+      items: invoicesItems.map(invoiceMapper),
+      start: startDate,
+      end: end === start ? null : endDate,
     };
   }
 }

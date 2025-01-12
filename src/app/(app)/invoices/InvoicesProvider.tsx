@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Invoice, LoadingData } from '@/definitions';
 import { loaderInitialState } from '@/lib/utils';
 import InvoiceEventsHandlers from '@/eventHandlers/InvoiceEventsHandlers';
@@ -32,6 +32,10 @@ export const InvoicesProvider = ({
   const { toast } = useToast();
   const router = useRouter();
   const toastEvents = new ToastEventHandlers({ toast });
+
+  useEffect(() => {
+    setInvoices(initialInvoices);
+  }, [initialInvoices]);
 
   const invoiceEvents = new InvoiceEventsHandlers({
     toastEvents,

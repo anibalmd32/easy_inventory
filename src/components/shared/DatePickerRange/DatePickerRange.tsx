@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { addDays, format } from 'date-fns';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 
@@ -41,7 +42,7 @@ export function DatePickerWithRange({
             id="date"
             variant={'outline'}
             className={cn(
-              'w-full justify-start text-left font-normal bg-gray-900',
+              'w-full justify-start text-left font-normal bg-gray-900 text-gray-200',
               !date && 'text-muted-foreground',
             )}
           >
@@ -49,11 +50,11 @@ export function DatePickerWithRange({
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, 'LLL dd, y')} -{' '}
-                  {format(date.to, 'LLL dd, y')}
+                  {format(date.from, 'LLL dd, y', { locale: es })} -{' '}
+                  {format(date.to, 'LLL dd, y', { locale: es })}
                 </>
               ) : (
-                format(date.from, 'LLL dd, y')
+                format(date.from, 'LLL dd, y', { locale: es })
               )
             ) : (
               <span>Seleccione una fecha</span>
@@ -67,6 +68,9 @@ export function DatePickerWithRange({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
+            toDate={new Date()}
+            lang="es"
+            locale={es}
             onSelect={setDate}
             numberOfMonths={1}
           />
