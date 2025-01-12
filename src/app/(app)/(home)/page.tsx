@@ -4,6 +4,7 @@ import { HomeProvider } from './HomeProvider';
 /** COMPONENTS */
 import { InvoicesCharts } from './components/InvoicesCharts';
 import { CountEntities } from './components/CountEntities';
+import { Reports } from './components/Reports/Reports';
 
 /** SERVER ACTIONS */
 import {
@@ -42,6 +43,7 @@ export default async function Home() {
       <div className="flex flex-col md:flex-col-reverse gap-4">
         <InvoicesCharts />
         <CountEntities />
+        <Reports />
       </div>
     </HomeProvider>
   );

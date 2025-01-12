@@ -1,4 +1,4 @@
-import { Home, Sheet, CircleDollarSign, Settings } from 'lucide-react';
+import { Home, Sheet, CircleDollarSign } from 'lucide-react';
 
 export type MenuItem = {
   name: string;
@@ -22,11 +22,6 @@ const menuItems = [
     href: '/invoices',
     icon: CircleDollarSign,
   },
-  //   {
-  //     name: 'Configuraciones',
-  //     href: '/settings',
-  //     icon: Settings,
-  //   },
 ];
 
 export default menuItems;
