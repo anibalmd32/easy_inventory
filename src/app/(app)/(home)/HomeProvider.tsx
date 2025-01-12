@@ -1,7 +1,7 @@
 'use client';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { HomeCtx, ProviderProps } from './definitions';
-import { EntityCountItem } from '@/definitions';
+import { EntityCountItem, SaleReport } from '@/definitions';
 import {
   Receipt,
   DollarSign,
@@ -10,13 +10,17 @@ import {
   ShoppingCart,
 } from 'lucide-react';
 
-export const HomeContext = createContext<HomeCtx>({
-  entityCountData: [],
-  monthlyChartData: [],
-  weeklyChartData: [],
-});
+export const HomeContext = createContext<HomeCtx>({} as HomeCtx);
 
 export function HomeProvider({ children, initialData }: ProviderProps) {
+  const [salesReport, setSalesReport] = useState<SaleReport>({
+    totalPaidInvoices: 0,
+    totalUSD: '0',
+    totalBS: '',
+    items: [],
+  });
+  const [openReportsModal, setOpenReportsModal] = useState(false);
+
   const {
     monthlyChartData,
     monthlySalesStats,
@@ -24,7 +28,7 @@ export function HomeProvider({ children, initialData }: ProviderProps) {
     registeredCustomersStats,
     soldProductsStats,
     weeklyChartData,
-    weeklySalesStats
+    weeklySalesStats,
   } = initialData;
 
   const entityCountData: EntityCountItem[] = [
@@ -74,7 +78,7 @@ export function HomeProvider({ children, initialData }: ProviderProps) {
         tendency: soldProductsStats.tendency,
       },
       totalCount: soldProductsStats.totalCount,
-    }
+    },
   ];
 
   return (
@@ -83,6 +87,10 @@ export function HomeProvider({ children, initialData }: ProviderProps) {
         entityCountData,
         monthlyChartData: monthlyChartData,
         weeklyChartData: weeklyChartData,
+        salesReport,
+        setSalesReport,
+        openReportsModal,
+        setOpenReportsModal,
       }}
     >
       {children}

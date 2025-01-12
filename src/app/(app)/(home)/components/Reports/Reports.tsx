@@ -6,6 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { DatePickerWithRange } from '@/components/shared/DatePickerRange/DatePickerRange';
+import { fetcher } from '@/lib/fetcher';
+import { useEffect, useTransition } from 'react';
+import { SaleReport } from '@/definitions';
+import { useToast } from '@/components/hooks/use-toast';
 
 const formSchema = z.object({
   dateRange: z.any(),
@@ -19,11 +23,44 @@ export const Reports = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const [isLoadingReports, startReportsTransition] = useTransition();
+  const { toast } = useToast();
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const { dateRange } = data;
 
-    console.log(dateRange);
+    if (!dateRange.from) {
+      toast({
+        title: 'Error',
+        description: 'Debes seleccionar una fecha',
+        variant: 'destructive',
+        duration: 3000,
+      });
+      return;
+    }
+
+    const start = new Date(dateRange.from);
+    const end = dateRange.to ? new Date(dateRange.to) : start;
+
+    startReportsTransition(async () => {
+      const { data } = await fetcher.post<SaleReport>('/reports', {
+        start,
+        end,
+      });
+
+      console.log(data);
+    });
   };
+
+  useEffect(() => {
+    if (isLoadingReports) {
+      toast({
+        title: 'Cargando',
+        description: 'Generando reporte de ventas',
+      });
+    }
+  }, [isLoadingReports, toast]);
+
   return (
     <div>
       <PageTitle>Reporte de ventas</PageTitle>

@@ -2,7 +2,12 @@
 import DashboardRepository from '@/core/infrastructure/dashboard.repository';
 import DashboardService from '@/core/application/dashboard.services';
 import { Stats } from '@/core/application/dashboard.services';
-import { TRENDING, MonthlyChartItem, WeeklyChartItem } from '@/definitions';
+import {
+  TRENDING,
+  MonthlyChartItem,
+  WeeklyChartItem,
+  SaleReport,
+} from '@/definitions';
 
 const services = new DashboardService(new DashboardRepository());
 
@@ -14,7 +19,7 @@ export const getSalesMonthStats = async (): Promise<Stats> => {
     return {
       rate: 0,
       tendency: TRENDING.DOWN,
-      totalCount: 0
+      totalCount: 0,
     };
   }
 };
@@ -27,7 +32,7 @@ export const getSalesWeekStats = async (): Promise<Stats> => {
     return {
       rate: 0,
       tendency: TRENDING.DOWN,
-      totalCount: 0
+      totalCount: 0,
     };
   }
 };
@@ -40,7 +45,7 @@ export const getPaidInvoicesStats = async (): Promise<Stats> => {
     return {
       rate: 0,
       tendency: TRENDING.DOWN,
-      totalCount: 0
+      totalCount: 0,
     };
   }
 };
@@ -53,7 +58,7 @@ export const getCustomerStats = async (): Promise<Stats> => {
     return {
       rate: 0,
       tendency: TRENDING.DOWN,
-      totalCount: 0
+      totalCount: 0,
     };
   }
 };
@@ -66,7 +71,7 @@ export const getProductsSoldStats = async (): Promise<Stats> => {
     return {
       rate: 0,
       tendency: TRENDING.DOWN,
-      totalCount: 0
+      totalCount: 0,
     };
   }
 };
@@ -84,5 +89,23 @@ export const getWeeklyChartData = async (): Promise<WeeklyChartItem[]> => {
     return await services.countLastWeekInvoices();
   } catch (error) {
     return [];
+  }
+};
+
+export const getSalesReport = async ({
+  end,
+  start,
+}: Partial<{ end: Date; start: Date }>): Promise<SaleReport> => {
+  try {
+    console.log('getSalesReport', end, start);
+    return await services.getSalesReport({ end, start });
+  } catch (error) {
+    console.log(error);
+    return {
+      totalPaidInvoices: 0,
+      totalUSD: '0',
+      totalBS: '',
+      items: [],
+    };
   }
 };

@@ -1,4 +1,4 @@
-import { TRENDING } from '@/definitions';
+import { SaleReport, TRENDING } from '@/definitions';
 import {
   monthIntervals,
   weekIntervals,
@@ -6,7 +6,7 @@ import {
   getTendency,
   specificMonthIntervals,
   getLastSixMonths,
-  getLastWeekDays
+  getLastWeekDays,
 } from '@/lib/utils';
 import DashboardRepository from '../infrastructure/dashboard.repository';
 import { MonthlyChartItem, CHART_FOR, WeeklyChartItem } from '@/definitions';
@@ -27,7 +27,6 @@ export default class DashboardService {
       end: monthIntervals().lastMonthEnd,
     });
 
-    
     const currentMonthSales = await this.repository.getTotalSalesByInterval({
       start: monthIntervals().currentMonthStart,
       end: monthIntervals().today,
@@ -42,11 +41,11 @@ export default class DashboardService {
       lastCount: lastMonthSales,
       currentCount: currentMonthSales,
     });
-    
+
     return {
       rate,
       tendency,
-      totalCount: currentMonthSales
+      totalCount: currentMonthSales,
     };
   }
 
@@ -81,45 +80,49 @@ export default class DashboardService {
   async countCustomers(): Promise<Stats> {
     const totalCustomersRegistered = await this.repository.countCustomers({});
 
-    const totalCustomersRegisteredInLastMonth = await this.repository.countCustomers({
-      start: monthIntervals().lastMonthStart,
-      end: monthIntervals().lastMonthEnd,
-    });
+    const totalCustomersRegisteredInLastMonth =
+      await this.repository.countCustomers({
+        start: monthIntervals().lastMonthStart,
+        end: monthIntervals().lastMonthEnd,
+      });
 
-    const totalCustomersRegisteredInCurrentMonth = await this.repository.countCustomers({
-      start: monthIntervals().currentMonthStart,
-      end: monthIntervals().today,
-    });
+    const totalCustomersRegisteredInCurrentMonth =
+      await this.repository.countCustomers({
+        start: monthIntervals().currentMonthStart,
+        end: monthIntervals().today,
+      });
 
     const rate = getRate({
       lastCount: totalCustomersRegisteredInLastMonth,
-      currentCount: totalCustomersRegisteredInCurrentMonth
+      currentCount: totalCustomersRegisteredInCurrentMonth,
     });
 
     const tendency = getTendency({
       lastCount: totalCustomersRegisteredInLastMonth,
-      currentCount: totalCustomersRegisteredInCurrentMonth
+      currentCount: totalCustomersRegisteredInCurrentMonth,
     });
 
     return {
       rate,
       tendency,
-      totalCount: totalCustomersRegistered
+      totalCount: totalCustomersRegistered,
     };
   }
 
   async countPaidInvoices(): Promise<Stats> {
     const totalPaidInvoices = await this.repository.countPaidInvoices({});
-    
-    const totalPaidInvoicesInLastMonth = await this.repository.countPaidInvoices({
-      start: monthIntervals().lastMonthStart,
-      end: monthIntervals().lastMonthEnd,
-    });
 
-    const totalPaidInvoicesInCurrentMonth = await this.repository.countPaidInvoices({
-      start: monthIntervals().currentMonthStart,
-      end: monthIntervals().today,
-    });
+    const totalPaidInvoicesInLastMonth =
+      await this.repository.countPaidInvoices({
+        start: monthIntervals().lastMonthStart,
+        end: monthIntervals().lastMonthEnd,
+      });
+
+    const totalPaidInvoicesInCurrentMonth =
+      await this.repository.countPaidInvoices({
+        start: monthIntervals().currentMonthStart,
+        end: monthIntervals().today,
+      });
 
     const rate = getRate({
       lastCount: totalPaidInvoicesInLastMonth,
@@ -139,15 +142,17 @@ export default class DashboardService {
   }
 
   async countSoldProducts(): Promise<Stats> {
-    const totalSoldProductsInLastMonth = await this.repository.countSoldProducts({
-      start: monthIntervals().lastMonthStart,
-      end: monthIntervals().lastMonthEnd,
-    });
+    const totalSoldProductsInLastMonth =
+      await this.repository.countSoldProducts({
+        start: monthIntervals().lastMonthStart,
+        end: monthIntervals().lastMonthEnd,
+      });
 
-    const totalSoldProductsInCurrentMonth = await this.repository.countSoldProducts({
-      start: monthIntervals().currentMonthStart,
-      end: monthIntervals().today,
-    });
+    const totalSoldProductsInCurrentMonth =
+      await this.repository.countSoldProducts({
+        start: monthIntervals().currentMonthStart,
+        end: monthIntervals().today,
+      });
 
     const rate = getRate({
       lastCount: totalSoldProductsInLastMonth,
@@ -162,46 +167,63 @@ export default class DashboardService {
     return {
       rate,
       tendency,
-      totalCount: totalSoldProductsInCurrentMonth
+      totalCount: totalSoldProductsInCurrentMonth,
     };
   }
 
   async countLastSixMonthsInvoices(): Promise<MonthlyChartItem[]> {
     const lastSixMonths = getLastSixMonths();
 
-    const result = await Promise.all(lastSixMonths.map(async (month) => {
-      const { monthEnd, monthStart } = specificMonthIntervals(month.num);
-      const count = await this.repository.countInvoicesPerInterval({
-        end: monthEnd,
-        start: monthStart,
-      });
+    const result = await Promise.all(
+      lastSixMonths.map(async (month) => {
+        const { monthEnd, monthStart } = specificMonthIntervals(month.num);
+        const count = await this.repository.countInvoicesPerInterval({
+          end: monthEnd,
+          start: monthStart,
+        });
 
-      return {
-        month: month.month,
-        [CHART_FOR.PAID]: count.paidInvoices,
-        [CHART_FOR.CANCELED]: count.paidInvoices
-      };
-    }));
+        return {
+          month: month.month,
+          [CHART_FOR.PAID]: count.paidInvoices,
+          [CHART_FOR.CANCELED]: count.paidInvoices,
+        };
+      }),
+    );
 
     return result;
   }
 
   async countLastWeekInvoices(): Promise<WeeklyChartItem[]> {
     const lastWeekDays = getLastWeekDays();
-    
-    const result: WeeklyChartItem[] = await Promise.all(lastWeekDays.map(async day => {
-      const start = startOfDay(day.date);
-      const end = endOfDay(day.date);
 
-      const count = await this.repository.countInvoicesPerDate({ start, end });
+    const result: WeeklyChartItem[] = await Promise.all(
+      lastWeekDays.map(async (day) => {
+        const start = startOfDay(day.date);
+        const end = endOfDay(day.date);
 
-      return {
-        day: day.day,
-        [CHART_FOR.PAID]: count.paidInvoices,
-        [CHART_FOR.CANCELED]: count.canceledInvoices
-      };
-    }));
+        const count = await this.repository.countInvoicesPerDate({
+          start,
+          end,
+        });
+
+        return {
+          day: day.day,
+          [CHART_FOR.PAID]: count.paidInvoices,
+          [CHART_FOR.CANCELED]: count.canceledInvoices,
+        };
+      }),
+    );
 
     return result;
+  }
+
+  async getSalesReport({
+    end,
+    start,
+  }: {
+    end: Date;
+    start: Date;
+  }): Promise<SaleReport> {
+    return await this.repository.getSalesReport({ end, start });
   }
 }

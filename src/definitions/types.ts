@@ -1,4 +1,4 @@
-import { Product } from './data';
+import { Product, SaleToCustomer } from './data';
 import { CHART_FOR, TRENDING, FETCH_STATUS, MONTHS, DAYS } from './enums';
 
 export type ReducerAction<TData, TAction> = {
@@ -44,4 +44,11 @@ export type Cart = {
   items: CartItem[];
   total: number;
   customerName: string;
+};
+
+export type SaleReport = {
+  totalPaidInvoices: number;
+  totalUSD: string;
+  totalBS: string;
+  items: SaleToCustomer[];
 };
