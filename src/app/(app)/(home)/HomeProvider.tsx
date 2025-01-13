@@ -18,6 +18,8 @@ export function HomeProvider({ children, initialData }: ProviderProps) {
     totalUSD: '0',
     totalBS: '',
     items: [],
+    end: new Date(),
+    start: new Date(),
   });
   const [openReportsModal, setOpenReportsModal] = useState(false);
 

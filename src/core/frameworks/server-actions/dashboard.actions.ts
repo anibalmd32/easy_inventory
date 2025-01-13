@@ -91,21 +91,3 @@ export const getWeeklyChartData = async (): Promise<WeeklyChartItem[]> => {
     return [];
   }
 };
-
-export const getSalesReport = async ({
-  end,
-  start,
-}: Partial<{ end: Date; start: Date }>): Promise<SaleReport> => {
-  try {
-    console.log('getSalesReport', end, start);
-    return await services.getSalesReport({ end, start });
-  } catch (error) {
-    console.log(error);
-    return {
-      totalPaidInvoices: 0,
-      totalUSD: '0',
-      totalBS: '',
-      items: [],
-    };
-  }
-};
