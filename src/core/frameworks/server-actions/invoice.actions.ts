@@ -15,12 +15,25 @@ export const generateInvoice = async (cart: Cart, customer: Customer) => {
   }
 };
 
-export const getInvoiceById = async (id: number): Promise<Invoice> => {
+export const getInvoiceById = async (
+  id: number,
+): Promise<Invoice & { price: number | null }> => {
   try {
-    return await service.getInvoiceById(id);
+    const dolarRes = await fetch(
+      'https://pydolarve.org/api/v1/dollar?page=bcv',
+    );
+    const dolarData = await dolarRes.json();
+    const { price } = dolarData.monitors['usd'];
+
+    const result = await service.getInvoiceById(id);
+
+    return {
+      ...result,
+      price: price ?? null,
+    };
   } catch (error) {
     console.log(error);
-    return {} as Invoice;
+    return {} as Invoice & { price: number | null };
   }
 };
 

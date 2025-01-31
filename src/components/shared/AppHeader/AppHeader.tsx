@@ -1,6 +1,9 @@
+'use client';
 import NextImage from 'next/image';
 import { HeaderMenu } from './HeaderMenu';
 import { Notifications } from './Notifications';
+import { useEffect, useState } from 'react';
+import { useDolarStore } from '@/store/dolarStore';
 
 export interface AppHeaderProps {
   appName: string;
@@ -8,6 +11,8 @@ export interface AppHeaderProps {
 }
 
 export function AppHeader(props: AppHeaderProps) {
+  const { price } = useDolarStore();
+
   return (
     <>
       {/* Fondo fijo detrás del header */}
@@ -31,6 +36,7 @@ export function AppHeader(props: AppHeaderProps) {
             </div>
 
             <div className="flex items-center gap-4">
+              {price && <div className="font-bold">$1 = Bs. {price}</div>}
               {/* <Notifications /> */}
               <HeaderMenu />
             </div>

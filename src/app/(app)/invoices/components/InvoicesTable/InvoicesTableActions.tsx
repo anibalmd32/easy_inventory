@@ -1,3 +1,4 @@
+'use client';
 import { Invoice, INVOICE_STATUS } from '@/definitions';
 import { Calendar, User, Loader, Printer } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -6,7 +7,7 @@ import * as ShadDialog from '@/components/ui/dialog';
 import * as ShadTable from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useInvoices } from '../../hooks/useInvoices';
-import { useRouter } from 'next/navigation';
+import { useDolarStore } from '@/store/dolarStore';
 
 interface InvoiceActionsProps {
   rowData: Invoice;
@@ -16,9 +17,9 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
   const date = new Date(rowData.generatedAt);
   const formattedDate = formatDate(date);
 
-  const { invoiceEvents, billingEvents } = useInvoices();
+  const { price } = useDolarStore();
 
-  const router = useRouter();
+  const { invoiceEvents, billingEvents } = useInvoices();
 
   const status = rowData.status;
   const items = rowData.items;
@@ -122,7 +123,10 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
                     {item.sale.product.name}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
-                    ${item.sale.product.price}
+                    ${item.sale.product.price}{' '}
+                    {price && (
+                      <span>(Bs. {price * item.sale.product.price})</span>
+                    )}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
                     {item.sale.productQuantity}{' '}
@@ -136,7 +140,16 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
                   <ShadTable.TableCell className="text-right">
                     $
                     {Number(item.sale.product.price) *
-                      item.sale.productQuantity}
+                      item.sale.productQuantity}{' '}
+                    {price && (
+                      <span>
+                        (Bs.{' '}
+                        {price *
+                          (Number(item.sale.product.price) *
+                            item.sale.productQuantity)}
+                        )
+                      </span>
+                    )}
                   </ShadTable.TableCell>
                 </ShadTable.TableRow>
               ))}
@@ -145,7 +158,7 @@ export const InvoiceDetails = ({ rowData }: InvoiceActionsProps) => {
             <ShadTable.TableRow className="hover:bg-gray-800/20">
               <ShadTable.TableCell colSpan={3}>Total</ShadTable.TableCell>
               <ShadTable.TableCell className="text-right">
-                ${total}
+                ${total} {price && <span>(Bs. {price * Number(total)})</span>}
               </ShadTable.TableCell>
             </ShadTable.TableRow>
           </ShadTable.TableFooter>

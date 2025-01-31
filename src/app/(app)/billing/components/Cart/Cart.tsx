@@ -4,8 +4,11 @@ import * as ShadTable from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useBilling } from '../../hooks/useBilling';
 import { Minus, Plus, Trash } from 'lucide-react';
+import { useDolarStore } from '@/store/dolarStore';
 
 export function Cart() {
+  const { price } = useDolarStore();
+
   const { selectProductOperations, cart, customer, reVerifyCustomer } =
     useBilling();
   const disabled =
@@ -52,10 +55,18 @@ export function Cart() {
               cart.items.map((item, i) => (
                 <ShadTable.TableRow key={i} className="hover:bg-gray-800/20">
                   <ShadTable.TableCell>{item.name}</ShadTable.TableCell>
-                  <ShadTable.TableCell>${item.price}</ShadTable.TableCell>
+                  <ShadTable.TableCell>
+                    ${item.price}{' '}
+                    {price && <span>(Bs. {item.price * price})</span>}
+                  </ShadTable.TableCell>
                   <ShadTable.TableCell>{item.amount}</ShadTable.TableCell>
                   <ShadTable.TableCell className="text-right">
-                    ${item.amount * Number(item.price)}
+                    ${item.amount * Number(item.price)}{' '}
+                    {price && (
+                      <span>
+                        (Bs. {item.amount * Number(item.price) * price})
+                      </span>
+                    )}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell className="text-right flex gap-2">
                     <Button

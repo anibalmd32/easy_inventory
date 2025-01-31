@@ -1,5 +1,4 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -11,9 +10,12 @@ import { SaleReport } from '@/definitions';
 import { useEffect, useState } from 'react';
 import { InvoicesProvider } from '@/app/(app)/invoices/InvoicesProvider';
 import { InvoicesTable } from '@/app/(app)/invoices/components/InvoicesTable';
+import { useDolarStore } from '@/store/dolarStore';
 
 export const ReportResult = ({ report }: { report: SaleReport }) => {
   const [open, setOpen] = useState(false);
+
+  const { price } = useDolarStore();
 
   useEffect(() => {
     if (report.items.length > 0) {
@@ -35,7 +37,10 @@ export const ReportResult = ({ report }: { report: SaleReport }) => {
 
           <div className="flex flex-col gap-4 items-start">
             <div className="flex gap-4 flex-col md:flex-row">
-              <p>Total en USD: ${report.totalUSD}</p>
+              <p>
+                Total en USD: ${report.totalUSD}{' '}
+                {price && <span>(Bs. {Number(report.totalUSD) * price})</span>}{' '}
+              </p>
               <p>Total de facturas pagadas: {report.totalPaidInvoices}</p>
             </div>
 

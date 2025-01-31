@@ -1,12 +1,11 @@
 import { PageTitle } from '@/components/shared/PageTitle';
-import { Calendar, User, Loader, Printer } from 'lucide-react';
+import { Calendar, User, Loader } from 'lucide-react';
 import { INVOICE_STATUS } from '@/definitions';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 import * as ShadTable from '@/components/ui/table';
 import { getInvoiceById } from '@/core/frameworks/server-actions/invoice.actions';
 import GeneratedInvoiceBtns from '../components/GeneratedInvoiceBtns/GeneratedInvoiceBtns';
-import { BillingProvider } from '../BillingProvider';
 
 export const revalidate = 0;
 
@@ -79,7 +78,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                     {item.sale.product.name}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
-                    ${item.sale.product.price}
+                    ${item.sale.product.price}{' '}
+                    {invoice.price && (
+                      <span>
+                        (Bs. {invoice.price * item.sale.product.price})
+                      </span>
+                    )}
                   </ShadTable.TableCell>
                   <ShadTable.TableCell>
                     {item.sale.productQuantity}
@@ -87,7 +91,16 @@ export default async function Page({ params }: { params: { id: string } }) {
                   <ShadTable.TableCell className="text-right">
                     $
                     {Number(item.sale.product.price) *
-                      item.sale.productQuantity}
+                      item.sale.productQuantity}{' '}
+                    {invoice.price && (
+                      <span>
+                        (Bs.{' '}
+                        {Number(item.sale.product.price) *
+                          item.sale.productQuantity *
+                          invoice.price}
+                        )
+                      </span>
+                    )}
                   </ShadTable.TableCell>
                 </ShadTable.TableRow>
               ))}
@@ -96,7 +109,10 @@ export default async function Page({ params }: { params: { id: string } }) {
             <ShadTable.TableRow className="hover:bg-gray-800/20">
               <ShadTable.TableCell colSpan={3}>Total</ShadTable.TableCell>
               <ShadTable.TableCell className="text-right">
-                ${invoice.total}
+                ${invoice.total}{' '}
+                {invoice.price && (
+                  <span>(Bs. {invoice.price * Number(invoice.total)})</span>
+                )}
               </ShadTable.TableCell>
             </ShadTable.TableRow>
           </ShadTable.TableFooter>

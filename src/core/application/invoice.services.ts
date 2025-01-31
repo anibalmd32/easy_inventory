@@ -18,7 +18,7 @@ export default class InvoiceServices {
   async createInvoice(cart: Cart, customer: Customer): Promise<Invoice> {
     const newInvoice: Invoice = {
       customerName: customer.name,
-      generatedAt: new Date().toLocaleDateString(),
+      generatedAt: new Date().toString(),
       id: 0,
       items: [],
       status: INVOICE_STATUS.PENDING,

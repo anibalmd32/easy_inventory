@@ -57,6 +57,7 @@ export interface Invoice {
   customerName: string;
   paidAt?: string;
   canceledAt?: string;
+  customer?: Customer;
 }
 
 export interface InvoiceTemplate {

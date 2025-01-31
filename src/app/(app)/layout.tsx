@@ -5,12 +5,20 @@ import { PageContainer } from '@/components/shared/PageContainer';
 import { Toaster } from '@/components/ui/toaster';
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import { SessionProvider } from 'next-auth/react';
+import { useDolarStore } from '@/store/dolarStore';
+import { useEffect } from 'react';
 
 export default function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { getDolarPrice } = useDolarStore();
+
+  useEffect(() => {
+    getDolarPrice();
+  }, [getDolarPrice]);
+
   return (
     <SessionProvider>
       <main className="relative">

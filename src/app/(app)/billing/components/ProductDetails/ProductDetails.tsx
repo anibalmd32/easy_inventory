@@ -11,9 +11,11 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useDolarStore } from '@/store/dolarStore';
 
 export function ProductDetails() {
   const { selectedProduct, selectProductOperations } = useBilling();
+  const { price } = useDolarStore();
 
   return (
     <Card className="bg-gray-950 p-4 text-gray-200 w-full">
@@ -39,6 +41,7 @@ export function ProductDetails() {
               <p className="flex gap-2 items-center">
                 <DollarSign className="h-4 w-4" />
                 <span>{selectedProduct.price}</span>
+                {price && <span>(Bs. {selectedProduct.price * price})</span>}
               </p>
               <p className="flex gap-2 items-center">
                 <ShoppingCart className="h-4 w-4" />
@@ -48,6 +51,15 @@ export function ProductDetails() {
                 <ShoppingBag className="h-4 w-4" />
                 <span>
                   ${selectedProduct.amount * Number(selectedProduct.price)}
+                  {price && (
+                    <span>
+                      (Bs.{' '}
+                      {selectedProduct.amount *
+                        Number(selectedProduct.price) *
+                        price}
+                      )
+                    </span>
+                  )}
                 </span>
               </p>
             </div>

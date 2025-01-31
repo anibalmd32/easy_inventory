@@ -76,7 +76,10 @@ export default async function InvoiceTemplate({
               <span className="font-semibold">Fecha:</span> {formattedDate}
             </p>
             <p>
-              <span className="font-semibold">Total:</span> ${invoice.total}
+              <span className="font-semibold">Total:</span> ${invoice.total}{' '}
+              {invoice.price && (
+                <span>(Bs. {Number(invoice.total) * invoice.price})</span>
+              )}
             </p>
           </div>
         </div>
@@ -103,7 +106,12 @@ export default async function InvoiceTemplate({
                     {item.sale.product.name}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    ${item.sale.product.price}
+                    ${item.sale.product.price}{' '}
+                    {invoice.price && (
+                      <span>
+                        (Bs. {invoice.price * Number(item.sale.product.price)})
+                      </span>
+                    )}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
                     {item.sale.productQuantity}
@@ -111,7 +119,16 @@ export default async function InvoiceTemplate({
                   <td className="border border-gray-300 px-4 py-2">
                     $
                     {Number(item.sale.product.price) *
-                      item.sale.productQuantity}
+                      item.sale.productQuantity}{' '}
+                    {invoice.price && (
+                      <span>
+                        (Bs.{' '}
+                        {invoice.price *
+                          (Number(item.sale.product.price) *
+                            item.sale.productQuantity)}
+                        )
+                      </span>
+                    )}
                   </td>
                 </tr>
               );
@@ -127,7 +144,10 @@ export default async function InvoiceTemplate({
                 Total
               </td>
               <td className="border-t-2 border-gray-300 px-4 py-2 font-semibold">
-                ${invoice.total}
+                ${invoice.total}{' '}
+                {invoice.price && (
+                  <span>(Bs. {Number(invoice.total) * invoice.price})</span>
+                )}
               </td>
             </tr>
           </tfoot>

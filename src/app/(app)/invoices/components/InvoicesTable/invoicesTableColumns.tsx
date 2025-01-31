@@ -9,7 +9,9 @@ import { InvoiceDetails } from './InvoicesTableActions';
 import { DataTableColumnHeader } from '@/components/shared/DataTable';
 import { formatDate } from '@/lib/utils';
 
-export const invoicesTableColumns: ColumnDef<Invoice>[] = [
+export const invoicesTableColumns = (
+  dolarPrice: number | null,
+): ColumnDef<Invoice>[] => [
   {
     accessorKey: 'id',
     enableSorting: true,
@@ -64,7 +66,12 @@ export const invoicesTableColumns: ColumnDef<Invoice>[] = [
     ),
     cell: ({ row }) => {
       const total = row.original.total;
-      return <div className="min-w-16">${total}</div>;
+      const totalBs = dolarPrice ? Number(total) * dolarPrice : null;
+      return (
+        <div className="min-w-16">
+          ${total} {totalBs && <span>(Bs. {totalBs})</span>}
+        </div>
+      );
     },
   },
   {
