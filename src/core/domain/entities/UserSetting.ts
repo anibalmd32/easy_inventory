@@ -1,6 +1,4 @@
-import type { BaseEntity } from "./BaseEntity";
-
-export type UserSettings = BaseEntity & {
+export type UserSettings = {
   theme: string;
   language: string;
 };

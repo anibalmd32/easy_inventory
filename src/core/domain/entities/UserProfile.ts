@@ -1,6 +1,4 @@
-import type { BaseEntity } from "./BaseEntity";
-
-export type UserProfile = BaseEntity & {
+export type UserProfile = {
   name: string;
   last_name: string;
   avatar_url?: string;

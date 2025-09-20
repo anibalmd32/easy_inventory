@@ -1,6 +1,4 @@
-import type { BaseEntity } from "./BaseEntity";
-
-export type UserDeviceSession = BaseEntity & {
+export type UserDeviceSession = {
   device_id: string;
   device_type: string;
   ip_address: string;

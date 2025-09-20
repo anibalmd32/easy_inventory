@@ -1,6 +1,4 @@
-import type { BaseEntity } from "./BaseEntity";
-
-export type UserCredential = BaseEntity & {
+export type UserCredential = {
   email: string;
-  password_hash: string;
+  password: string;
 };

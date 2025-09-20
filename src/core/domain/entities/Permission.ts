@@ -1,6 +1,4 @@
-import type { BaseEntity } from "./BaseEntity";
-
-export type Permission = BaseEntity & {
+export type Permission = {
   name: string;
   description?: string;
 };
