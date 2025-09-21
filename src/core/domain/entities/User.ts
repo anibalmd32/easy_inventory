@@ -1,11 +1,5 @@
-import type { Role } from "./Role";
-import type { UserCredential } from "./UserCredential";
-import type { UserProfile } from "./UserProfile";
-import type { UserSettings } from "./UserSetting";
-
 export type User = {
-  profile: UserProfile;
-  credentials: UserCredential;
-  settings: UserSettings;
-  roles: Role[];
+  profile_id: bigint | number;
+  credential_id: bigint | number;
+  settings_id: bigint | number;
 };

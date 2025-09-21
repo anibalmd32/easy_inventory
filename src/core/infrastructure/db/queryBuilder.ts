@@ -1,44 +1,12 @@
-import {
-  DummyDriver,
-  Kysely,
-  SqliteAdapter,
-  SqliteIntrospector,
-  SqliteQueryCompiler,
-  sql,
-} from "kysely";
-import type { Permission } from "../../domain/entities/Permission";
-import type { Role } from "../../domain/entities/Role";
-import type { User } from "../../domain/entities/User";
-import type { UserCredential } from "../../domain/entities/UserCredential";
-import type { UserDeviceSession } from "../../domain/entities/UserDeviceSession";
-import type { UserProfile } from "../../domain/entities/UserProfile";
-import type { UserSession } from "../../domain/entities/UserSession";
-import type { UserSettings } from "../../domain/entities/UserSetting";
+import Database from "@tauri-apps/plugin-sql";
+import { Kysely } from "kysely";
+import { TauriSqliteDialect } from "kysely-dialect-tauri";
+import type { DB } from "../../domain/DB";
 
-interface Database {
-  user: User;
-  permission: Permission;
-  role: Role;
-  user_credential: UserCredential;
-  user_device_session: UserDeviceSession;
-  user_profile: UserProfile;
-  user_session: UserSession;
-  user_settings: UserSettings;
-}
-
-export const queryBuilder = new Kysely<Database>({
-  dialect: {
-    createAdapter() {
-      return new SqliteAdapter();
+export const db = new Kysely<DB>({
+  dialect: new TauriSqliteDialect({
+    database: async (prefix) => {
+      return Database.load(`${prefix}easy_inventory_storage.db`);
     },
-    createDriver() {
-      return new DummyDriver();
-    },
-    createIntrospector(db: Kysely<unknown>) {
-      return new SqliteIntrospector(db);
-    },
-    createQueryCompiler() {
-      return new SqliteQueryCompiler();
-    },
-  },
+  }),
 });

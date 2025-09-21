@@ -22,6 +22,7 @@
     "@tauri-apps/plugin-sql": "2",
     "bcrypt": "6.0.0",
     "kysely": "0.28.5",
+    "kysely-dialect-tauri": "1.2.1",
     "lefthook": "1.13.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",

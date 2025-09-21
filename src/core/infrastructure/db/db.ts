@@ -1,3 +1,3 @@
 import Database from "@tauri-apps/plugin-sql";
 
-export const db = await Database.load("sqlite:easy_inventory_storage.db");
+const db = await Database.load("sqlite:easy_inventory_storage.db");
