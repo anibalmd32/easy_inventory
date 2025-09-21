@@ -1,5 +1,5 @@
 import { DEFAULT_USER_SETTINGS } from "../../domain/enums/defaultValues";
-import { db } from "../db/queryBuilder";
+import { db } from "../db/db";
 import type { RegisterUserInput } from "../dtos/RegisterUserDto";
 
 export class UserRepository {
