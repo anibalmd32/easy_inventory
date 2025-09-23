@@ -1,4 +1,4 @@
 export enum DEFAULT_USER_SETTINGS {
-  THEME = "dark",
+  THEME_VARIANT = "dark",
   LANGUAGE = "es",
 }

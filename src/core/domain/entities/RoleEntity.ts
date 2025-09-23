@@ -1,4 +1,4 @@
-export type Role = {
+export type RoleEntity = {
   name: string;
   description?: string;
 };

@@ -1,5 +1,5 @@
+import { db } from "../../../db";
 import { DEFAULT_USER_SETTINGS } from "../../domain/enums/defaultValues";
-import { db } from "../db/db";
 import type { RegisterUserInput } from "../dtos/RegisterUserDto";
 
 export class UserRepository {
@@ -29,7 +29,7 @@ export class UserRepository {
       const newUserSettings = await trx
         .insertInto("user_settings")
         .values({
-          theme: DEFAULT_USER_SETTINGS.THEME,
+          theme: DEFAULT_USER_SETTINGS.THEME_VARIANT,
           language: DEFAULT_USER_SETTINGS.LANGUAGE,
         })
         .executeTakeFirstOrThrow();
