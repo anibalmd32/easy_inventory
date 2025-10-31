@@ -1,11 +1,7 @@
 import { createRootRoute, Outlet, redirect } from "@tanstack/react-router";
 
 const RootLayout = () => {
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 };
 
 export const Route = createRootRoute({
