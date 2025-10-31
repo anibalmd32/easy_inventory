@@ -8,5 +8,5 @@ export type UserData = BaseEntity & {
   profile: UserProfileData;
   credential: UserCredentialData;
   settings: UserSettingData;
-  Role: RoleData;
+  role: RoleData;
 };
