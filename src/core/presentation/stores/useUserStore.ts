@@ -17,7 +17,7 @@ export const useUserStore = zustand.create<UserState>()((set) => ({
       name: "admin",
     },
   } as UserData,
-  isAuthenticated: false,
+  isAuthenticated: true,
   setAuthenticated: (isAuthenticated: boolean) =>
     set({
       isAuthenticated,

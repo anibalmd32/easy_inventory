@@ -5,3 +5,4 @@
     dark --prefersdark,
     business;
 }
+@plugin "@midudev/tailwind-animations";

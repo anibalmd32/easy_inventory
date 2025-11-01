@@ -12,6 +12,7 @@
     "pre-commit:install": "bun run lefthook install"
   },
   "dependencies": {
+    "@midudev/tailwind-animations": "^0.2.0",
     "@tailwindcss/vite": "4.1.13",
     "@tanstack/react-form": "1.19.3",
     "@tanstack/react-router": "1.131.35",
@@ -26,6 +27,7 @@
     "lefthook": "1.13.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-icons": "5.5.0",
     "tailwindcss": "4.1.13",
     "valibot": "1.1.0",
     "valipass": "1.0.0",
