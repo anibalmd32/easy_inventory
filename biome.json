@@ -25,11 +25,16 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "correctness": {
+        "noChildrenProp": "off",
+        "noUnknownProperty": "off"
+      },
       "complexity": {
         "noUselessTypeConstraint": "off"
       },
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noArrayIndexKey": "off"
       }
     }
   },
