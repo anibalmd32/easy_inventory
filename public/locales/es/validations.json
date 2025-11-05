@@ -1,0 +1,25 @@
+{
+  "generic": {
+    "required_field": "Este campo es obligatorio",
+    "invalid_format": "Valor no válido",
+    "too_short": "El valor es demasiado corto",
+    "too_long": "El valor es demasiado largo",
+    "must_string": "El valor debe ser una cadena de texto",
+    "must_number": "El valor debe ser un número"
+  },
+  "email": {
+    "invalid": "Dirección de correo electrónico no válida"
+  },
+  "password": {
+    "min_length": "La contraseña debe tener al menos 4 caracteres",
+    "min_lowercase": "La contraseña debe contener al menos 2 letra(s) minúscula(s)",
+    "min_uppercase": "La contraseña debe contener al menos 1 letra(s) mayúscula(s)",
+    "min_numbers": "La contraseña debe contener al menos 2 número(s)",
+    "min_symbols": "La contraseña debe contener al menos 1 símbolo(s)",
+    "max_repeating": "La contraseña no debe contener más de 3 carácter(es) repetido(s)"
+  },
+  "avatar": {
+    "max_size": "El tamaño del archivo no debe exceder de 10 MB",
+    "invalid_mime_type": "Tipo de archivo no válido. Se permiten: JPEG, PNG"
+  }
+}

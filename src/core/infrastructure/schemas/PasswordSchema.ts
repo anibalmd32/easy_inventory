@@ -6,15 +6,15 @@ import {
   minSymbols,
   minUppercase,
 } from "valipass";
+import { PASSWORD_VALIDATION_ERROR_MESSAGES } from "../../domain/enums/validationErrorMessages";
 
 export const PasswordSchema = v.pipe(
   v.string(),
   v.trim(),
-  v.minLength(4, "Password must be at least 4 characters long"),
-  v.maxLength(10, "Password must be at most 8 characters long"),
-  minLowercase(2, "Password must contain at least 2 lowercase letters"),
-  minUppercase(1, "Password must contain at least 1 uppercase letter"),
-  minNumbers(2, "Password must contain at least 2 numbers"),
-  minSymbols(1, "Password must contain at least 1 special character"),
-  maxRepeating(3, "Password must not contain more than 2 repeating characters"),
+  v.minLength(4, PASSWORD_VALIDATION_ERROR_MESSAGES.min_length),
+  minLowercase(2, PASSWORD_VALIDATION_ERROR_MESSAGES.min_lowercase),
+  minUppercase(1, PASSWORD_VALIDATION_ERROR_MESSAGES.min_uppercase),
+  minNumbers(2, PASSWORD_VALIDATION_ERROR_MESSAGES.min_numbers),
+  minSymbols(1, PASSWORD_VALIDATION_ERROR_MESSAGES.min_symbols),
+  maxRepeating(3, PASSWORD_VALIDATION_ERROR_MESSAGES.max_repeating),
 );

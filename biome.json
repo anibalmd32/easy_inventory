@@ -8,6 +8,7 @@
   "files": {
     "ignoreUnknown": false,
     "includes": [
+      "./public/locales/**/*.json",
       "./package.json",
       "./biome.json",
       "src/**/*",

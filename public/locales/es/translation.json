@@ -1,0 +1,24 @@
+{
+  "pages": {
+    "auth": {
+      "login": {
+        "title": "Iniciar sesión"
+      }
+    }
+  },
+  "inputs": {
+    "email": {
+      "label": "Correo electrónico",
+      "placeholder": "Introduce tu correo electrónico"
+    },
+    "password": {
+      "label": "Contraseña",
+      "placeholder": "Introduce tu contraseña"
+    }
+  },
+  "buttons": {
+    "submit": {
+      "label": "Enviar"
+    }
+  }
+}

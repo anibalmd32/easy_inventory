@@ -1,13 +1,15 @@
 import * as v from "valibot";
+import { AVATAR_VALIDATION_ERROR_MESSAGES } from "../../domain/enums/validationErrorMessages";
+import { MIME_TYPES } from "../../domain/helpers/mimeTypes";
 
 export const AvatarSchema = v.pipe(
   v.file(),
-  v.maxSize(1024 * 1024 * 10, "Please select a file smaller than 10 MB."),
+  v.maxSize(1024 * 1024 * 10, AVATAR_VALIDATION_ERROR_MESSAGES.max_size),
   v.mimeType(
     [
-      "image/jpeg",
-      "image/png",
+      MIME_TYPES.JPEG,
+      MIME_TYPES.PNG,
     ],
-    "Please select a JPEG or PNG file.",
+    AVATAR_VALIDATION_ERROR_MESSAGES.invalid_mime_type,
   ),
 );

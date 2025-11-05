@@ -1,0 +1,24 @@
+{
+  "pages": {
+    "auth": {
+      "login": {
+        "title": "Log in"
+      }
+    }
+  },
+  "inputs": {
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password"
+    }
+  },
+  "buttons": {
+    "submit": {
+      "label": "Submit"
+    }
+  }
+}

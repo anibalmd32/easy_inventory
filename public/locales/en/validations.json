@@ -1,0 +1,25 @@
+{
+  "generic": {
+    "required_field": "This field is required",
+    "invalid_format": "Invalid value",
+    "too_short": "The value is too short",
+    "too_long": "The value is too long",
+    "must_string": "The value must be a string",
+    "must_number": "The value must be a number"
+  },
+  "email": {
+    "invalid": "Invalid email address"
+  },
+  "password": {
+    "min_length": "The password must be at least 4 characters long",
+    "min_lowercase": "The password must contain at least 2 lowercase letter(s)",
+    "min_uppercase": "The password must contain at least 1 uppercase letter(s)",
+    "min_numbers": "The password must contain at least 2 number(s)",
+    "min_symbols": "The password must contain at least 1 symbol(s)",
+    "max_repeating": "The password must not contain more than 3 repeating character(s)"
+  },
+  "avatar": {
+    "max_size": "The file size must not exceed 10 MB",
+    "invalid_mime_type": "Invalid file type. Allowed types: JPEG, PNG"
+  }
+}

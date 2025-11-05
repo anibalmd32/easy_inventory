@@ -1,4 +1,5 @@
 import { useStore } from "@tanstack/react-form";
+import { useTranslation } from "react-i18next";
 import { useFieldContext } from "../hooks/form-context";
 
 interface TextInputProps {
@@ -14,6 +15,7 @@ export const TextInput = ({
 }: TextInputProps) => {
   const field = useFieldContext<string>();
   const errors = useStore(field.store, (state) => state.meta.errors);
+  const { t } = useTranslation("validations");
 
   return (
     <fieldset className="fieldset w-full">
@@ -29,7 +31,7 @@ export const TextInput = ({
       {!field.state.meta.isValid &&
         errors.map((error, idx) => (
           <em className="text-error" key={idx} role="alert">
-            {error?.message}
+            {t(error?.message)}
           </em>
         ))}
     </fieldset>

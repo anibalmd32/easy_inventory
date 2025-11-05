@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { useLoginForm } from "./useLoginForm";
 
 export const LoginForm = () => {
   const { form } = useLoginForm();
+  const { t } = useTranslation();
 
   return (
     <div className="w-full max-w-xs card">
@@ -14,18 +16,23 @@ export const LoginForm = () => {
         }}
       >
         <form.AppField
-          children={(field) => <field.TextInput label="Email" type="email" />}
+          children={(field) => (
+            <field.TextInput label={t("inputs.email.label")} type="email" />
+          )}
           name="email"
         />
         <form.AppField
           children={(field) => (
-            <field.TextInput label="Password" type="password" />
+            <field.TextInput
+              label={t("inputs.password.label")}
+              type="password"
+            />
           )}
           name="password"
         />
 
         <form.AppForm>
-          <form.SubmitBtn label="submit" />
+          <form.SubmitBtn label={t("buttons.submit.label")} />
         </form.AppForm>
       </form>
     </div>
