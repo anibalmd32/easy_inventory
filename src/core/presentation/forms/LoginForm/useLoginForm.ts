@@ -1,17 +1,20 @@
 import { useAppForm } from "../../hooks/create-form-hook";
-import { loginFormSchema } from "./loginFormSchema";
+import { useAuth } from "../../hooks/useAuth";
+// import { loginFormSchema } from "./loginFormSchema";
 
 export const useLoginForm = () => {
+  const { login } = useAuth();
+
   const form = useAppForm({
     validators: {
-      onSubmit: loginFormSchema,
+      // onSubmit: loginFormSchema,
     },
     defaultValues: {
       email: "",
       password: "",
     },
-    onSubmit: ({ value }) => {
-      console.log("Form Submitted with values:", value);
+    onSubmit: () => {
+      login();
     },
   });
 

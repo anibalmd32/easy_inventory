@@ -19,6 +19,12 @@
   "buttons": {
     "submit": {
       "label": "Submit"
+    },
+    "login": {
+      "label": "Log in"
+    },
+    "logout": {
+      "label": "Log out"
     }
   }
 }

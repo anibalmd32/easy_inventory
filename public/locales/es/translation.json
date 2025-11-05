@@ -19,6 +19,12 @@
   "buttons": {
     "submit": {
       "label": "Enviar"
+    },
+    "login": {
+      "label": "Iniciar sesión"
+    },
+    "logout": {
+      "label": "Cerrar sesión"
     }
   }
 }

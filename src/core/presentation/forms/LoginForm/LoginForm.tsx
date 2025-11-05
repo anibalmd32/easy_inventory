@@ -32,7 +32,7 @@ export const LoginForm = () => {
         />
 
         <form.AppForm>
-          <form.SubmitBtn label={t("buttons.submit.label")} />
+          <form.SubmitBtn label={t("buttons.login.label")} />
         </form.AppForm>
       </form>
     </div>
