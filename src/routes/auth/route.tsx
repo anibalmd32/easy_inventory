@@ -5,17 +5,17 @@ import { useUserStore } from "../../core/presentation/stores/useUserStore";
 export const Route = createFileRoute("/auth")({
   beforeLoad: () => {
     const { userData, isAuthenticated } = useUserStore.getState();
+    const userRole = userData?.role.name;
 
     if (isAuthenticated) {
-      if (userData.role.name === "admin") {
+      if (userRole) {
         throw redirect({
-          to: "/admin",
+          to: "/$role",
+          params: {
+            role: userRole,
+          },
         });
       }
-
-      throw redirect({
-        to: "/guest",
-      });
     }
   },
   component: RouteComponent,

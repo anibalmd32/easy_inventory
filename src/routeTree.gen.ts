@@ -9,96 +9,79 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as GuestRouteRouteImport } from './routes/guest/route'
 import { Route as AuthRouteRouteImport } from './routes/auth/route'
-import { Route as AdminRouteRouteImport } from './routes/admin/route'
-import { Route as GuestIndexRouteImport } from './routes/guest/index'
+import { Route as RoleRouteRouteImport } from './routes/$role/route'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as RoleIndexRouteImport } from './routes/$role/index'
+import { Route as RoleSettingsRolesIndexRouteImport } from './routes/$role/settings/roles/index'
 
-const GuestRouteRoute = GuestRouteRouteImport.update({
-  id: '/guest',
-  path: '/guest',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRouteRoute = AdminRouteRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const RoleRouteRoute = RoleRouteRouteImport.update({
+  id: '/$role',
+  path: '/$role',
   getParentRoute: () => rootRouteImport,
-} as any)
-const GuestIndexRoute = GuestIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => GuestRouteRoute,
 } as any)
 const AuthIndexRoute = AuthIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
+const RoleIndexRoute = RoleIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AdminRouteRoute,
+  getParentRoute: () => RoleRouteRoute,
+} as any)
+const RoleSettingsRolesIndexRoute = RoleSettingsRolesIndexRouteImport.update({
+  id: '/settings/roles/',
+  path: '/settings/roles/',
+  getParentRoute: () => RoleRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/admin': typeof AdminRouteRouteWithChildren
+  '/$role': typeof RoleRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
-  '/guest': typeof GuestRouteRouteWithChildren
-  '/admin/': typeof AdminIndexRoute
+  '/$role/': typeof RoleIndexRoute
   '/auth/': typeof AuthIndexRoute
-  '/guest/': typeof GuestIndexRoute
+  '/$role/settings/roles': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/admin': typeof AdminIndexRoute
+  '/$role': typeof RoleIndexRoute
   '/auth': typeof AuthIndexRoute
-  '/guest': typeof GuestIndexRoute
+  '/$role/settings/roles': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/admin': typeof AdminRouteRouteWithChildren
+  '/$role': typeof RoleRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
-  '/guest': typeof GuestRouteRouteWithChildren
-  '/admin/': typeof AdminIndexRoute
+  '/$role/': typeof RoleIndexRoute
   '/auth/': typeof AuthIndexRoute
-  '/guest/': typeof GuestIndexRoute
+  '/$role/settings/roles/': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/admin' | '/auth' | '/guest' | '/admin/' | '/auth/' | '/guest/'
+  fullPaths: '/$role' | '/auth' | '/$role/' | '/auth/' | '/$role/settings/roles'
   fileRoutesByTo: FileRoutesByTo
-  to: '/admin' | '/auth' | '/guest'
+  to: '/$role' | '/auth' | '/$role/settings/roles'
   id:
     | '__root__'
-    | '/admin'
+    | '/$role'
     | '/auth'
-    | '/guest'
-    | '/admin/'
+    | '/$role/'
     | '/auth/'
-    | '/guest/'
+    | '/$role/settings/roles/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  RoleRouteRoute: typeof RoleRouteRouteWithChildren
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
-  GuestRouteRoute: typeof GuestRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/guest': {
-      id: '/guest'
-      path: '/guest'
-      fullPath: '/guest'
-      preLoaderRoute: typeof GuestRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -106,19 +89,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteRouteImport
+    '/$role': {
+      id: '/$role'
+      path: '/$role'
+      fullPath: '/$role'
+      preLoaderRoute: typeof RoleRouteRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/guest/': {
-      id: '/guest/'
-      path: '/'
-      fullPath: '/guest/'
-      preLoaderRoute: typeof GuestIndexRouteImport
-      parentRoute: typeof GuestRouteRoute
     }
     '/auth/': {
       id: '/auth/'
@@ -127,26 +103,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/admin/': {
-      id: '/admin/'
+    '/$role/': {
+      id: '/$role/'
       path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
+      fullPath: '/$role/'
+      preLoaderRoute: typeof RoleIndexRouteImport
+      parentRoute: typeof RoleRouteRoute
+    }
+    '/$role/settings/roles/': {
+      id: '/$role/settings/roles/'
+      path: '/settings/roles'
+      fullPath: '/$role/settings/roles'
+      preLoaderRoute: typeof RoleSettingsRolesIndexRouteImport
+      parentRoute: typeof RoleRouteRoute
     }
   }
 }
 
-interface AdminRouteRouteChildren {
-  AdminIndexRoute: typeof AdminIndexRoute
+interface RoleRouteRouteChildren {
+  RoleIndexRoute: typeof RoleIndexRoute
+  RoleSettingsRolesIndexRoute: typeof RoleSettingsRolesIndexRoute
 }
 
-const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminIndexRoute: AdminIndexRoute,
+const RoleRouteRouteChildren: RoleRouteRouteChildren = {
+  RoleIndexRoute: RoleIndexRoute,
+  RoleSettingsRolesIndexRoute: RoleSettingsRolesIndexRoute,
 }
 
-const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
-  AdminRouteRouteChildren,
+const RoleRouteRouteWithChildren = RoleRouteRoute._addFileChildren(
+  RoleRouteRouteChildren,
 )
 
 interface AuthRouteRouteChildren {
@@ -161,22 +146,9 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
-interface GuestRouteRouteChildren {
-  GuestIndexRoute: typeof GuestIndexRoute
-}
-
-const GuestRouteRouteChildren: GuestRouteRouteChildren = {
-  GuestIndexRoute: GuestIndexRoute,
-}
-
-const GuestRouteRouteWithChildren = GuestRouteRoute._addFileChildren(
-  GuestRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
-  AdminRouteRoute: AdminRouteRouteWithChildren,
+  RoleRouteRoute: RoleRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRouteWithChildren,
-  GuestRouteRoute: GuestRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

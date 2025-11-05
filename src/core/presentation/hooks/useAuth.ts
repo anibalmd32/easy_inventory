@@ -11,6 +11,7 @@ export const useAuth = () => {
     });
 
   const logout = () => {
+    useUserStore.persist.clearStorage();
     setAuthenticated(false);
     navigateToRoot();
   };

@@ -26,12 +26,9 @@ export const AsidePanelNavItem = ({
     setExpandedItems(newExpanded);
   };
 
-  const isItemActive = (href: string) => {
-    return window.location.pathname === href;
-  };
   const hasChildren = item.children && item.children.length > 0;
   const isExpanded = expandedItems.has(item.label);
-  const isActive = isItemActive(item.href);
+
   return (
     <div
       className={`w-full ${isOpen ? "" : "tooltip tooltip-right"}`}
@@ -44,11 +41,6 @@ export const AsidePanelNavItem = ({
             className={`
               w-full flex items-center gap-3 ${isOpen ? "px-4" : "px-2"} py-3 text-left transition-all duration-200 cursor-pointer
               ${level === 0 ? "rounded-lg" : "rounded-md"}
-              ${
-                isActive
-                  ? "bg-primary text-primary-content"
-                  : "hover:bg-base-200 text-base-content"
-              }
             `}
             data-tip={isOpen ? "" : item.label}
             onClick={() => toggleItem(item.label)}
@@ -80,14 +72,15 @@ export const AsidePanelNavItem = ({
         </div>
       ) : (
         <Link
+          activeProps={{
+            style: {
+              backgroundColor:
+                "color-mix(in oklab, oklch(64.092% 0.027 229.389) 50%, transparent)",
+            },
+          }}
           className={`
             w-full flex items-center gap-3 ${isOpen ? "px-4" : "px-2"} py-3 duration-200 transition-all
             ${level === 0 ? "rounded-lg" : "rounded-md"}
-            ${
-              isActive
-                ? "bg-primary text-primary-content"
-                : "hover:bg-base-200 text-base-content"
-            }
           `}
           to={item.href}
         >

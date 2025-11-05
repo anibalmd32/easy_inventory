@@ -1,4 +1,9 @@
 {
+  "common": {
+    "administration": "Administración",
+    "settings": "Configuración",
+    "roles": "Roles"
+  },
   "pages": {
     "auth": {
       "login": {

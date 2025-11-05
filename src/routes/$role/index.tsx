@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/guest/")({
+export const Route = createFileRoute("/$role/")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <div>Hello "/guest/"!</div>;
+  return <div>Admin index page!</div>;
 }
