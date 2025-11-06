@@ -3,4 +3,5 @@ import type { PermissionData } from "./PermissionData";
 
 export type RoleData = RoleEntity & {
   permissions: PermissionData[];
+  totalAssignedUsers: number;
 };

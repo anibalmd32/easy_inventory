@@ -9,6 +9,16 @@
       "login": {
         "title": "Log in"
       }
+    },
+    "settings": {
+      "roles": {
+        "title": "Roles and Permissions",
+        "description": "Manage your users' roles and assign permissions",
+        "usersBadge": "user(s)",
+        "showUsersLink": "View users",
+        "showPermissionsLink": "View permissions",
+        "editRoleTooltip": "Edit role"
+      }
     }
   },
   "inputs": {
@@ -30,6 +40,12 @@
     },
     "logout": {
       "label": "Log out"
+    },
+    "addRole": {
+      "label": "Add role"
+    },
+    "addUser": {
+      "label": "Add user"
     }
   }
 }

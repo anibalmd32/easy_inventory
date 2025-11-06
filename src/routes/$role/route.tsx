@@ -33,7 +33,9 @@ function RouteComponent() {
   return (
     <div className="flex gap-4 h-screen">
       <AsidePanel sections={navigationSections} />
-      <Outlet />
+      <div className="flex-1 p-4 overflow-y-auto">
+        <Outlet />
+      </div>
     </div>
   );
 }

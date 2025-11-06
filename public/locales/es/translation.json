@@ -9,6 +9,16 @@
       "login": {
         "title": "Iniciar sesión"
       }
+    },
+    "settings": {
+      "roles": {
+        "title": "Roles y permisos",
+        "description": "Gestiona el rol de tus usuarios y asigna permisos",
+        "usersBadge": "usuario(s)",
+        "showUsersLink": "Ver usuarios",
+        "showPermissionsLink": "Ver permisos",
+        "editRoleTooltip": "Editar rol"
+      }
     }
   },
   "inputs": {
@@ -30,6 +40,12 @@
     },
     "logout": {
       "label": "Cerrar sesión"
+    },
+    "addRole": {
+      "label": "Agregar rol"
+    },
+    "addUser": {
+      "label": "Agregar usuario"
     }
   }
 }
