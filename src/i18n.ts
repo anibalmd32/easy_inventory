@@ -8,7 +8,7 @@ const userLang = useUserStore.getState().getUserLang();
 
 i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
   fallbackLng: "es",
-  debug: true,
+  debug: false,
   lng: userLang,
 });
 

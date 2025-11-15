@@ -21,6 +21,7 @@ export const TextInput = ({
     <fieldset className="fieldset w-full">
       <legend className="fieldset-legend">{label}</legend>
       <input
+        autoComplete="off"
         className={field.state.meta.isValid ? "input" : "input input-error"}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
