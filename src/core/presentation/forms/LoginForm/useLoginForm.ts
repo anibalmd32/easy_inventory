@@ -1,9 +1,9 @@
 import { useAppForm } from "../../hooks/create-form-hook";
-import { useAuth } from "../../hooks/useAuth";
+import { useLoginMutation } from "../../hooks/useLoginMutation";
 // import { loginFormSchema } from "./loginFormSchema";
 
 export const useLoginForm = () => {
-  const { login } = useAuth();
+  const loginMutation = useLoginMutation();
 
   const form = useAppForm({
     validators: {
@@ -13,12 +13,13 @@ export const useLoginForm = () => {
       email: "",
       password: "",
     },
-    onSubmit: () => {
-      login();
+    onSubmit: ({ value }) => {
+      loginMutation.mutate(value);
     },
   });
 
   return {
     form,
+    loginMutation,
   };
 };
