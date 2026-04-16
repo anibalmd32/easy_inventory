@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useLoginForm } from "./useLoginForm";
 
 export const LoginForm = () => {
-  const { form } = useLoginForm();
+  const { form, loginMutation } = useLoginForm();
   const { t } = useTranslation();
 
   return (
@@ -31,8 +31,20 @@ export const LoginForm = () => {
           name="password"
         />
 
+        {loginMutation.isError && (
+          <div className="alert alert-error w-full mt-2">
+            <span>{loginMutation.error?.message ?? t("common.error")}</span>
+          </div>
+        )}
+
         <form.AppForm>
-          <form.SubmitBtn label={t("buttons.login.label")} />
+          <form.SubmitBtn
+            label={
+              loginMutation.isPending
+                ? t("common.loading")
+                : t("buttons.login.label")
+            }
+          />
         </form.AppForm>
       </form>
     </div>

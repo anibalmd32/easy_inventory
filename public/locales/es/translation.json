@@ -2,7 +2,9 @@
   "common": {
     "administration": "Administración",
     "settings": "Configuración",
-    "roles": "Roles"
+    "roles": "Roles",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error"
   },
   "pages": {
     "auth": {
