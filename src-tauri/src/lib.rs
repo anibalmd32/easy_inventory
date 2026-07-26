@@ -9,6 +9,18 @@ pub fn run() {
             sql: include_str!("../migrations/01_user_auth.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 2,
+            description: "create security question catalog and seed it",
+            sql: include_str!("../migrations/02_security_questions.sql"),
+            kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 3,
+            description: "seed roles, permissions and their relations",
+            sql: include_str!("../migrations/03_roles_and_permissions.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
         .plugin(

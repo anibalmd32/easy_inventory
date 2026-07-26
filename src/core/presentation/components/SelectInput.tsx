@@ -2,23 +2,24 @@ import { useStore } from "@tanstack/react-form";
 import { useTranslation } from "react-i18next";
 import { useFieldContext } from "../hooks/form-context";
 
-interface TextInputProps {
+export interface SelectOption {
+  value: string;
   label: string;
-  placeholder?: string;
-  type?: "text" | "password" | "email";
-  autoComplete?: string;
-  inputMode?: "text" | "email";
-  autoCapitalize?: "none" | "sentences" | "words";
 }
 
-export const TextInput = ({
+interface SelectInputProps {
+  label: string;
+  options: SelectOption[];
+  placeholder?: string;
+  disabled?: boolean;
+}
+
+export const SelectInput = ({
   label,
+  options,
   placeholder = "",
-  type = "text",
-  autoComplete = "off",
-  inputMode,
-  autoCapitalize,
-}: TextInputProps) => {
+  disabled = false,
+}: SelectInputProps) => {
   const field = useFieldContext<string>();
   const errors = useStore(field.store, (state) => state.meta.errors);
   const { t } = useTranslation("validations");
@@ -26,19 +27,24 @@ export const TextInput = ({
   return (
     <fieldset className="fieldset w-full">
       <legend className="fieldset-legend">{label}</legend>
-      <input
-        autoCapitalize={autoCapitalize}
-        autoComplete={autoComplete}
+      <select
         className={
-          field.state.meta.isValid ? "input w-full" : "input input-error w-full"
+          field.state.meta.isValid
+            ? "select w-full"
+            : "select select-error w-full"
         }
-        inputMode={inputMode}
+        disabled={disabled}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
-        placeholder={placeholder}
-        type={type}
         value={field.state.value}
-      />
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
       {!field.state.meta.isValid &&
         errors.map((error, idx) => (
           <em className="text-error" key={idx} role="alert">

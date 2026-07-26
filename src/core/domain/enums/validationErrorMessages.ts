@@ -15,6 +15,13 @@ export enum PASSWORD_VALIDATION_ERROR_MESSAGES {
   min_numbers = "password.min_numbers",
   min_symbols = "password.min_symbols",
   max_repeating = "password.max_repeating",
+  confirm_mismatch = "password.confirm_mismatch",
+}
+
+export enum SECURITY_ANSWER_VALIDATION_ERROR_MESSAGES {
+  question_required = "security.question_required",
+  answer_too_short = "security.answer_too_short",
+  answer_too_long = "security.answer_too_long",
 }
 
 export enum EMAIL_VALIDATION_ERROR_MESSAGES {

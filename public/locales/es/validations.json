@@ -16,7 +16,13 @@
     "min_uppercase": "La contraseña debe contener al menos 1 letra(s) mayúscula(s)",
     "min_numbers": "La contraseña debe contener al menos 2 número(s)",
     "min_symbols": "La contraseña debe contener al menos 1 símbolo(s)",
-    "max_repeating": "La contraseña no debe contener más de 3 carácter(es) repetido(s)"
+    "max_repeating": "La contraseña no debe contener más de 3 carácter(es) repetido(s)",
+    "confirm_mismatch": "Las contraseñas no coinciden"
+  },
+  "security": {
+    "question_required": "Elige una pregunta de seguridad",
+    "answer_too_short": "La respuesta debe tener al menos 2 caracteres",
+    "answer_too_long": "La respuesta no debe superar los 120 caracteres"
   },
   "avatar": {
     "max_size": "El tamaño del archivo no debe exceder de 10 MB",

@@ -8,12 +8,23 @@ import { useUserStore } from "../../core/presentation/stores/useUserStore";
 import { getSettingsNavItems } from "../../utils/navItems/getSettingsNavItems";
 
 export const Route = createFileRoute("/$role")({
-  beforeLoad: () => {
-    const { isAuthenticated } = useUserStore.getState();
+  beforeLoad: ({ params }) => {
+    const { isAuthenticated, userData } = useUserStore.getState();
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !userData) {
       throw redirect({
         to: "/auth",
+      });
+    }
+
+    // El segmento de la URL no es una credencial: si no coincide con el rol
+    // real de la sesión se corrige, no se acepta.
+    if (params.role !== userData.role.name) {
+      throw redirect({
+        to: "/$role",
+        params: {
+          role: userData.role.name,
+        },
       });
     }
   },

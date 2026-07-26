@@ -16,7 +16,13 @@
     "min_uppercase": "The password must contain at least 1 uppercase letter(s)",
     "min_numbers": "The password must contain at least 2 number(s)",
     "min_symbols": "The password must contain at least 1 symbol(s)",
-    "max_repeating": "The password must not contain more than 3 repeating character(s)"
+    "max_repeating": "The password must not contain more than 3 repeating character(s)",
+    "confirm_mismatch": "The passwords do not match"
+  },
+  "security": {
+    "question_required": "Choose a security question",
+    "answer_too_short": "The answer must be at least 2 characters long",
+    "answer_too_long": "The answer must not exceed 120 characters"
   },
   "avatar": {
     "max_size": "The file size must not exceed 10 MB",

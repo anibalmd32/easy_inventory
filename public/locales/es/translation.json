@@ -7,7 +7,32 @@
   "pages": {
     "auth": {
       "login": {
-        "title": "Iniciar sesión"
+        "title": "Iniciar sesión",
+        "subtitle": "Entra con tu correo y tu contraseña.",
+        "forgotPassword": "¿Olvidaste tu contraseña?"
+      },
+      "recover": {
+        "title": "Recuperar contraseña",
+        "subtitle": "Responde tu pregunta de seguridad para definir una contraseña nueva.",
+        "steps": {
+          "email": "Cuenta",
+          "answer": "Pregunta",
+          "reset": "Nueva clave"
+        },
+        "emailHint": "Escribe el correo de la cuenta que quieres recuperar.",
+        "answerHint": "No importan las mayúsculas ni las tildes.",
+        "resetHint": "Elige una contraseña nueva. La anterior deja de funcionar.",
+        "remainingAttempts_one": "Te queda {{count}} intento.",
+        "remainingAttempts_other": "Te quedan {{count}} intentos.",
+        "tooManyAttempts": "Demasiados intentos fallidos. Cierra y vuelve a abrir la app para intentarlo de nuevo.",
+        "successTitle": "Contraseña actualizada",
+        "successMessage": "Ya puedes iniciar sesión con tu contraseña nueva."
+      },
+      "setup": {
+        "title": "Configura tu negocio",
+        "subtitle": "Es la primera vez que abres la app. La cuenta que crees aquí será el superadministrador y tendrá el control total.",
+        "recoverySection": "Recuperación de contraseña",
+        "recoveryHint": "Si algún día olvidas tu contraseña, esta pregunta será la única forma de recuperarla. Elige una respuesta que no puedan adivinar."
       }
     },
     "settings": {
@@ -29,6 +54,57 @@
     "password": {
       "label": "Contraseña",
       "placeholder": "Introduce tu contraseña"
+    },
+    "confirmPassword": {
+      "label": "Confirmar contraseña",
+      "placeholder": "Repite tu contraseña"
+    },
+    "newPassword": {
+      "label": "Nueva contraseña",
+      "placeholder": "Introduce tu nueva contraseña"
+    },
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Introduce tu nombre"
+    },
+    "lastName": {
+      "label": "Apellido",
+      "placeholder": "Introduce tu apellido"
+    },
+    "securityQuestion": {
+      "label": "Pregunta de seguridad",
+      "placeholder": "Elige una pregunta"
+    },
+    "securityAnswer": {
+      "label": "Respuesta",
+      "placeholder": "Introduce tu respuesta"
+    },
+    "remember": {
+      "label": "Recordar mi correo",
+      "hint": "La contraseña no se guarda nunca."
+    }
+  },
+  "securityQuestions": {
+    "pet_name": "¿Cómo se llamó tu primera mascota?",
+    "mother_maiden_name": "¿Cuál es el apellido de soltera de tu madre?",
+    "birth_city": "¿En qué ciudad naciste?",
+    "first_school": "¿Cómo se llamaba tu primera escuela?",
+    "childhood_friend": "¿Cómo se llamaba tu mejor amigo de la infancia?",
+    "favorite_teacher": "¿Cómo se llamaba tu maestro favorito?"
+  },
+  "errors": {
+    "auth": {
+      "invalid_credentials": "El correo o la contraseña no son correctos.",
+      "superadmin_already_exists": "Esta app ya tiene un superadministrador. Inicia sesión con tu cuenta.",
+      "email_already_taken": "Ya existe una cuenta con ese correo electrónico.",
+      "role_not_found": "No se encontró el rol. Reinicia la app para que se apliquen las migraciones.",
+      "security_question_not_found": "La pregunta de seguridad que elegiste ya no está disponible.",
+      "user_without_role": "Tu usuario no tiene un rol asignado. Contacta al administrador.",
+      "invalid_form": "Revisa los datos del formulario.",
+      "unexpected": "Ocurrió un error inesperado. Vuelve a intentarlo.",
+      "email_not_found": "No existe ninguna cuenta con ese correo electrónico.",
+      "no_security_question": "Esa cuenta no tiene pregunta de seguridad, así que no se puede recuperar por esta vía.",
+      "wrong_security_answer": "La respuesta no es correcta."
     }
   },
   "buttons": {
@@ -40,6 +116,21 @@
     },
     "logout": {
       "label": "Cerrar sesión"
+    },
+    "createSuperAdmin": {
+      "label": "Crear superadministrador"
+    },
+    "continue": {
+      "label": "Continuar"
+    },
+    "verify": {
+      "label": "Verificar"
+    },
+    "savePassword": {
+      "label": "Guardar contraseña"
+    },
+    "backToLogin": {
+      "label": "Volver a iniciar sesión"
     },
     "addRole": {
       "label": "Agregar rol"

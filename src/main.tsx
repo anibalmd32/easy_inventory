@@ -9,6 +9,9 @@ import "./index.css";
 
 const router = createRouter({
   routeTree,
+  context: {
+    queryClient,
+  },
 });
 
 declare module "@tanstack/react-router" {
