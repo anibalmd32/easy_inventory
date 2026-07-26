@@ -12,7 +12,9 @@ type BusinessSettingsStore = {
 
 export const useBusinessSettings = create<BusinessSettingsStore>((set) => ({
   businessSettings: {
-    name: "Easy Inventory",
+    // Provisional hasta que el usuario configure su negocio: es su nombre
+    // comercial el que debe salir aquí, no el de la app.
+    name: "Inventario fácil",
     logoUrl: "/logo.png",
   },
   setBusinessSettings: (settings) =>
