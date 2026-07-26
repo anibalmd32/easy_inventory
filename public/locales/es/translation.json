@@ -1,8 +1,17 @@
 {
   "common": {
     "administration": "Administración",
+    "modules": "Módulos",
     "settings": "Configuración",
-    "roles": "Roles"
+    "roles": "Roles",
+    "home": "Inicio",
+    "inventory": "Inventario",
+    "invoicing": "Facturación",
+    "debts": "Deudas",
+    "profile": "Perfil",
+    "account": "Cuenta",
+    "language": "Idioma",
+    "comingSoon": "Este módulo todavía está en construcción."
   },
   "pages": {
     "auth": {
@@ -34,6 +43,16 @@
         "recoverySection": "Recuperación de contraseña",
         "recoveryHint": "Si algún día olvidas tu contraseña, esta pregunta será la única forma de recuperarla. Elige una respuesta que no puedan adivinar."
       }
+    },
+    "home": {
+      "greeting": "Hola, {{name}}",
+      "subtitle": "¿Qué quieres hacer hoy?"
+    },
+    "profile": {
+      "title": "Mi perfil",
+      "role": "Rol",
+      "permissions": "Permisos de tu rol",
+      "editSoon": "La edición del perfil llegará más adelante."
     },
     "settings": {
       "roles": {

@@ -72,6 +72,9 @@ export const AsidePanelNavItem = ({
         </div>
       ) : (
         <Link
+          activeOptions={{
+            exact: item.exact ?? false,
+          }}
           activeProps={{
             style: {
               backgroundColor:

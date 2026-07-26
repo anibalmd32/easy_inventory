@@ -13,8 +13,12 @@ import { Route as AuthRouteRouteImport } from './routes/auth/route'
 import { Route as RoleRouteRouteImport } from './routes/$role/route'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as RoleIndexRouteImport } from './routes/$role/index'
-import { Route as AuthSetupRouteImport } from './routes/auth/setup'
-import { Route as AuthRecoverRouteImport } from './routes/auth/recover'
+import { Route as AuthSetupIndexRouteImport } from './routes/auth/setup/index'
+import { Route as AuthRecoverIndexRouteImport } from './routes/auth/recover/index'
+import { Route as RoleProfileIndexRouteImport } from './routes/$role/profile/index'
+import { Route as RoleInvoicingIndexRouteImport } from './routes/$role/invoicing/index'
+import { Route as RoleInventoryIndexRouteImport } from './routes/$role/inventory/index'
+import { Route as RoleDebtsIndexRouteImport } from './routes/$role/debts/index'
 import { Route as RoleSettingsRolesIndexRouteImport } from './routes/$role/settings/roles/index'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -37,15 +41,35 @@ const RoleIndexRoute = RoleIndexRouteImport.update({
   path: '/',
   getParentRoute: () => RoleRouteRoute,
 } as any)
-const AuthSetupRoute = AuthSetupRouteImport.update({
-  id: '/setup',
-  path: '/setup',
+const AuthSetupIndexRoute = AuthSetupIndexRouteImport.update({
+  id: '/setup/',
+  path: '/setup/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const AuthRecoverRoute = AuthRecoverRouteImport.update({
-  id: '/recover',
-  path: '/recover',
+const AuthRecoverIndexRoute = AuthRecoverIndexRouteImport.update({
+  id: '/recover/',
+  path: '/recover/',
   getParentRoute: () => AuthRouteRoute,
+} as any)
+const RoleProfileIndexRoute = RoleProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => RoleRouteRoute,
+} as any)
+const RoleInvoicingIndexRoute = RoleInvoicingIndexRouteImport.update({
+  id: '/invoicing/',
+  path: '/invoicing/',
+  getParentRoute: () => RoleRouteRoute,
+} as any)
+const RoleInventoryIndexRoute = RoleInventoryIndexRouteImport.update({
+  id: '/inventory/',
+  path: '/inventory/',
+  getParentRoute: () => RoleRouteRoute,
+} as any)
+const RoleDebtsIndexRoute = RoleDebtsIndexRouteImport.update({
+  id: '/debts/',
+  path: '/debts/',
+  getParentRoute: () => RoleRouteRoute,
 } as any)
 const RoleSettingsRolesIndexRoute = RoleSettingsRolesIndexRouteImport.update({
   id: '/settings/roles/',
@@ -56,27 +80,39 @@ const RoleSettingsRolesIndexRoute = RoleSettingsRolesIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/$role': typeof RoleRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
-  '/auth/recover': typeof AuthRecoverRoute
-  '/auth/setup': typeof AuthSetupRoute
   '/$role/': typeof RoleIndexRoute
   '/auth/': typeof AuthIndexRoute
+  '/$role/debts': typeof RoleDebtsIndexRoute
+  '/$role/inventory': typeof RoleInventoryIndexRoute
+  '/$role/invoicing': typeof RoleInvoicingIndexRoute
+  '/$role/profile': typeof RoleProfileIndexRoute
+  '/auth/recover': typeof AuthRecoverIndexRoute
+  '/auth/setup': typeof AuthSetupIndexRoute
   '/$role/settings/roles': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/auth/recover': typeof AuthRecoverRoute
-  '/auth/setup': typeof AuthSetupRoute
   '/$role': typeof RoleIndexRoute
   '/auth': typeof AuthIndexRoute
+  '/$role/debts': typeof RoleDebtsIndexRoute
+  '/$role/inventory': typeof RoleInventoryIndexRoute
+  '/$role/invoicing': typeof RoleInvoicingIndexRoute
+  '/$role/profile': typeof RoleProfileIndexRoute
+  '/auth/recover': typeof AuthRecoverIndexRoute
+  '/auth/setup': typeof AuthSetupIndexRoute
   '/$role/settings/roles': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/$role': typeof RoleRouteRouteWithChildren
   '/auth': typeof AuthRouteRouteWithChildren
-  '/auth/recover': typeof AuthRecoverRoute
-  '/auth/setup': typeof AuthSetupRoute
   '/$role/': typeof RoleIndexRoute
   '/auth/': typeof AuthIndexRoute
+  '/$role/debts/': typeof RoleDebtsIndexRoute
+  '/$role/inventory/': typeof RoleInventoryIndexRoute
+  '/$role/invoicing/': typeof RoleInvoicingIndexRoute
+  '/$role/profile/': typeof RoleProfileIndexRoute
+  '/auth/recover/': typeof AuthRecoverIndexRoute
+  '/auth/setup/': typeof AuthSetupIndexRoute
   '/$role/settings/roles/': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRouteTypes {
@@ -84,26 +120,38 @@ export interface FileRouteTypes {
   fullPaths:
     | '/$role'
     | '/auth'
-    | '/auth/recover'
-    | '/auth/setup'
     | '/$role/'
     | '/auth/'
+    | '/$role/debts'
+    | '/$role/inventory'
+    | '/$role/invoicing'
+    | '/$role/profile'
+    | '/auth/recover'
+    | '/auth/setup'
     | '/$role/settings/roles'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/auth/recover'
-    | '/auth/setup'
     | '/$role'
     | '/auth'
+    | '/$role/debts'
+    | '/$role/inventory'
+    | '/$role/invoicing'
+    | '/$role/profile'
+    | '/auth/recover'
+    | '/auth/setup'
     | '/$role/settings/roles'
   id:
     | '__root__'
     | '/$role'
     | '/auth'
-    | '/auth/recover'
-    | '/auth/setup'
     | '/$role/'
     | '/auth/'
+    | '/$role/debts/'
+    | '/$role/inventory/'
+    | '/$role/invoicing/'
+    | '/$role/profile/'
+    | '/auth/recover/'
+    | '/auth/setup/'
     | '/$role/settings/roles/'
   fileRoutesById: FileRoutesById
 }
@@ -142,19 +190,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoleIndexRouteImport
       parentRoute: typeof RoleRouteRoute
     }
-    '/auth/setup': {
-      id: '/auth/setup'
+    '/auth/setup/': {
+      id: '/auth/setup/'
       path: '/setup'
       fullPath: '/auth/setup'
-      preLoaderRoute: typeof AuthSetupRouteImport
+      preLoaderRoute: typeof AuthSetupIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/auth/recover': {
-      id: '/auth/recover'
+    '/auth/recover/': {
+      id: '/auth/recover/'
       path: '/recover'
       fullPath: '/auth/recover'
-      preLoaderRoute: typeof AuthRecoverRouteImport
+      preLoaderRoute: typeof AuthRecoverIndexRouteImport
       parentRoute: typeof AuthRouteRoute
+    }
+    '/$role/profile/': {
+      id: '/$role/profile/'
+      path: '/profile'
+      fullPath: '/$role/profile'
+      preLoaderRoute: typeof RoleProfileIndexRouteImport
+      parentRoute: typeof RoleRouteRoute
+    }
+    '/$role/invoicing/': {
+      id: '/$role/invoicing/'
+      path: '/invoicing'
+      fullPath: '/$role/invoicing'
+      preLoaderRoute: typeof RoleInvoicingIndexRouteImport
+      parentRoute: typeof RoleRouteRoute
+    }
+    '/$role/inventory/': {
+      id: '/$role/inventory/'
+      path: '/inventory'
+      fullPath: '/$role/inventory'
+      preLoaderRoute: typeof RoleInventoryIndexRouteImport
+      parentRoute: typeof RoleRouteRoute
+    }
+    '/$role/debts/': {
+      id: '/$role/debts/'
+      path: '/debts'
+      fullPath: '/$role/debts'
+      preLoaderRoute: typeof RoleDebtsIndexRouteImport
+      parentRoute: typeof RoleRouteRoute
     }
     '/$role/settings/roles/': {
       id: '/$role/settings/roles/'
@@ -168,11 +244,19 @@ declare module '@tanstack/react-router' {
 
 interface RoleRouteRouteChildren {
   RoleIndexRoute: typeof RoleIndexRoute
+  RoleDebtsIndexRoute: typeof RoleDebtsIndexRoute
+  RoleInventoryIndexRoute: typeof RoleInventoryIndexRoute
+  RoleInvoicingIndexRoute: typeof RoleInvoicingIndexRoute
+  RoleProfileIndexRoute: typeof RoleProfileIndexRoute
   RoleSettingsRolesIndexRoute: typeof RoleSettingsRolesIndexRoute
 }
 
 const RoleRouteRouteChildren: RoleRouteRouteChildren = {
   RoleIndexRoute: RoleIndexRoute,
+  RoleDebtsIndexRoute: RoleDebtsIndexRoute,
+  RoleInventoryIndexRoute: RoleInventoryIndexRoute,
+  RoleInvoicingIndexRoute: RoleInvoicingIndexRoute,
+  RoleProfileIndexRoute: RoleProfileIndexRoute,
   RoleSettingsRolesIndexRoute: RoleSettingsRolesIndexRoute,
 }
 
@@ -181,15 +265,15 @@ const RoleRouteRouteWithChildren = RoleRouteRoute._addFileChildren(
 )
 
 interface AuthRouteRouteChildren {
-  AuthRecoverRoute: typeof AuthRecoverRoute
-  AuthSetupRoute: typeof AuthSetupRoute
   AuthIndexRoute: typeof AuthIndexRoute
+  AuthRecoverIndexRoute: typeof AuthRecoverIndexRoute
+  AuthSetupIndexRoute: typeof AuthSetupIndexRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
-  AuthRecoverRoute: AuthRecoverRoute,
-  AuthSetupRoute: AuthSetupRoute,
   AuthIndexRoute: AuthIndexRoute,
+  AuthRecoverIndexRoute: AuthRecoverIndexRoute,
+  AuthSetupIndexRoute: AuthSetupIndexRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

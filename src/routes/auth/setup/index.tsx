@@ -1,12 +1,12 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { SetupSuperAdminForm } from "../../core/presentation/forms/SetupSuperAdminForm/SetupSuperAdminForm";
+import { SetupSuperAdminForm } from "../../../core/presentation/forms/SetupSuperAdminForm/SetupSuperAdminForm";
 import {
   securityQuestionsQueryOptions,
   superAdminExistsQueryOptions,
-} from "../../core/presentation/queries/authQueries";
+} from "../../../core/presentation/queries/authQueries";
 
-export const Route = createFileRoute("/auth/setup")({
+export const Route = createFileRoute("/auth/setup/")({
   beforeLoad: async ({ context }) => {
     const hasSuperAdmin = await context.queryClient.ensureQueryData(
       superAdminExistsQueryOptions,

@@ -9,6 +9,8 @@ export interface NavItem {
   href: string;
   Icon: IconType;
   children?: NavItem[];
+  /** Marca el ítem como activo solo en coincidencia exacta de ruta. */
+  exact?: boolean;
 }
 
 export interface NavSection {
@@ -28,8 +30,10 @@ export const AsidePanel = ({ sections }: AsidePanelNavigationProps) => {
   };
 
   return (
+    // En mobile la navegación vive en el dock y en el menú de la barra
+    // superior, así que el panel lateral solo existe a partir de `lg`.
     <div
-      className={`flex flex-col justify-between h-full bg-primary text-base-content border-r border-base-300 p-3 transition-width duration-300 ${isOpen ? "w-64" : "w-16"} overflow-hidden`}
+      className={`hidden lg:flex flex-col justify-between h-full bg-primary text-base-content border-r border-base-300 p-3 transition-width duration-300 ${isOpen ? "w-64" : "w-16"} overflow-hidden`}
     >
       <AsidePanelHeader isOpen={isOpen} togglePanel={togglePanel} />
       <AsidePanelBody isOpen={isOpen} sections={sections} />

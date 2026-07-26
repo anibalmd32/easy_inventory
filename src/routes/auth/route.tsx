@@ -25,7 +25,9 @@ function RouteComponent() {
   );
 
   return (
-    <div className="flex min-h-dvh flex-col bg-base-200">
+    // Las pantallas de sesión no tienen barra superior con fondo propio, así
+    // que el área segura se aplica al contenedor, que sí lleva `bg-base-200`.
+    <div className="flex min-h-dvh flex-col bg-base-200 pt-safe px-safe">
       <header className="flex items-center justify-between gap-2 px-4 pt-4">
         <div className="flex min-w-0 items-center gap-2">
           <img

@@ -1,9 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { PasswordRecoveryForm } from "../../core/presentation/forms/PasswordRecoveryForm/PasswordRecoveryForm";
-import { superAdminExistsQueryOptions } from "../../core/presentation/queries/authQueries";
+import { PasswordRecoveryForm } from "../../../core/presentation/forms/PasswordRecoveryForm/PasswordRecoveryForm";
+import { superAdminExistsQueryOptions } from "../../../core/presentation/queries/authQueries";
 
-export const Route = createFileRoute("/auth/recover")({
+export const Route = createFileRoute("/auth/recover/")({
   beforeLoad: async ({ context }) => {
     const hasSuperAdmin = await context.queryClient.ensureQueryData(
       superAdminExistsQueryOptions,

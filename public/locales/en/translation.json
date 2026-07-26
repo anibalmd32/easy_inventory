@@ -1,8 +1,17 @@
 {
   "common": {
     "administration": "Administration",
+    "modules": "Modules",
     "settings": "Settings",
-    "roles": "Roles"
+    "roles": "Roles",
+    "home": "Home",
+    "inventory": "Inventory",
+    "invoicing": "Invoicing",
+    "debts": "Debts",
+    "profile": "Profile",
+    "account": "Account",
+    "language": "Language",
+    "comingSoon": "This module is still under construction."
   },
   "pages": {
     "auth": {
@@ -34,6 +43,16 @@
         "recoverySection": "Password recovery",
         "recoveryHint": "If you ever forget your password, this question will be the only way to recover it. Pick an answer nobody can guess."
       }
+    },
+    "home": {
+      "greeting": "Hi, {{name}}",
+      "subtitle": "What would you like to do today?"
+    },
+    "profile": {
+      "title": "My profile",
+      "role": "Role",
+      "permissions": "Your role's permissions",
+      "editSoon": "Profile editing is coming later."
     },
     "settings": {
       "roles": {
