@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "fmt": "bunx --bun biome format --write .",
-    "pre-commit:install": "bun run lefthook install"
+    "pre-commit:install": "bun run lefthook install",
+    "dev:desk": "bun run tauri dev",
+    "dev:android": "bun run tauri android dev"
   },
   "dependencies": {
     "@midudev/tailwind-animations": "^0.2.0",

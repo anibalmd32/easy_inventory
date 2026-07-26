@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "skills": {
+    "database-migrations": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/database-migrations/SKILL.md",
+      "computedHash": "71053b570ad648117f19b3456836a819a6b85f868628899ee28246d8a956b06f"
+    },
+    "kysely": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "kysely/SKILL.md",
+      "computedHash": "12b2cba0b6f48c2f30268293929171b825d3ea6b73872fb175bf0c72ac9b48fd"
+    },
+    "tanstack-form": {
+      "source": "tanstack-skills/tanstack-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/tanstack-form/skills/tanstack-form/SKILL.md",
+      "computedHash": "6d00fa22960ef5c45d14906f8f05d91870de658effb8c76bacc69d60a1000098"
+    },
+    "tanstack-query": {
+      "source": "tanstack-skills/tanstack-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/tanstack-query/skills/tanstack-query/SKILL.md",
+      "computedHash": "bfe2977e92667b84efeb4b12e5c3010807934aab2f7ac2b059241cd3da2a3e6e"
+    },
+    "tanstack-router": {
+      "source": "tanstack-skills/tanstack-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/tanstack-router/skills/tanstack-router/SKILL.md",
+      "computedHash": "6aba9066ca12bf6bb6eebec9c58f5d4e33b6b06e2b11bf263f5b7a5c18edc389"
+    },
+    "tanstack-table": {
+      "source": "tanstack-skills/tanstack-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/tanstack-table/skills/tanstack-table/SKILL.md",
+      "computedHash": "5527e42e541ac26fc1157e49d58c399b95e44eb276ef3caa7576ab138558d593"
+    },
+    "tauri-v2": {
+      "source": "nodnarbnitram/claude-code-extensions",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/tauri-v2/SKILL.md",
+      "computedHash": "7108944eec3bef17686df9ebae9c9bdbee7809744930c8734c979e3c4573eaab"
+    },
+    "valibot": {
+      "source": "open-circle/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/valibot/SKILL.md",
+      "computedHash": "31d519d234d3af2cb44fb777f613abf9c187959791af172221af7d0b7af6e892"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
+    },
+    "zustand": {
+      "source": "lobehub/lobehub",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/zustand/SKILL.md",
+      "computedHash": "a30e48757fc553094deb207307474391cb54152010aa9af1baf078c22c679d7d"
+    }
+  }
+}
