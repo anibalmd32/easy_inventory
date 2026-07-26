@@ -15,5 +15,13 @@ build
 local.properties
 key.properties
 
+# Firma del APK de release. `keystore.properties` lleva la contraseña del
+# keystore en texto plano, y el .jks es la identidad de firma de la app: si se
+# filtra, cualquiera puede publicar actualizaciones que el móvil aceptará como
+# tuyas. Nunca deben entrar al repositorio.
+keystore.properties
+*.jks
+*.keystore
+
 /.tauri
 /tauri.settings.gradle

@@ -13,6 +13,17 @@ val tauriProperties = Properties().apply {
     }
 }
 
+// Datos de firma del APK de release. El archivo nunca va al repositorio (ver
+// el .gitignore de gen/android): en local se crea a mano y en CI lo escribe el
+// workflow a partir de los secretos de GitHub.
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val hasSigningConfig = keystorePropertiesFile.exists()
+val keystoreProperties = Properties().apply {
+    if (hasSigningConfig) {
+        keystorePropertiesFile.inputStream().use { load(it) }
+    }
+}
+
 android {
     compileSdk = 36
     namespace = "com.easy_inventory"
@@ -23,6 +34,19 @@ android {
         targetSdk = 36
         versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()
         versionName = tauriProperties.getProperty("tauri.android.versionName", "1.0")
+    }
+    signingConfigs {
+        create("release") {
+            // Se comprueba la existencia en lugar de fallar directamente
+            // porque Gradle evalúa este bloque también al compilar en debug
+            // (`tauri android dev`), donde no hay keystore ni hace falta.
+            if (hasSigningConfig) {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["password"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["password"] as String
+            }
+        }
     }
     buildTypes {
         getByName("debug") {
@@ -37,6 +61,15 @@ android {
             }
         }
         getByName("release") {
+            if (hasSigningConfig) {
+                signingConfig = signingConfigs.getByName("release")
+            } else {
+                logger.warn(
+                    "AVISO: no existe gen/android/keystore.properties, así que " +
+                        "el APK de release saldrá SIN FIRMAR y Android se " +
+                        "negará a instalarlo."
+                )
+            }
             isMinifyEnabled = true
             proguardFiles(
                 *fileTree(".") { include("**/*.pro") }

@@ -1,0 +1,90 @@
+name: Release Android
+
+# Se dispara al empujar una etiqueta de versión. Ese es el gesto que crea el
+# release: `git tag v0.1.0 && git push origin v0.1.0`.
+on:
+  push:
+    tags:
+      - "v*"
+  # Permite lanzarlo a mano desde la pestaña Actions para probar el workflow
+  # sin gastar una etiqueta.
+  workflow_dispatch:
+
+permissions:
+  # Sin esto la action no puede crear el release ni subir el APK.
+  contents: write
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # El Android Gradle Plugin 8.x exige JDK 17.
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Instalar NDK
+        run: |
+          sdkmanager --install "ndk;27.2.12479018"
+          echo "NDK_HOME=$ANDROID_HOME/ndk/27.2.12479018" >> "$GITHUB_ENV"
+
+      - name: Configurar Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+
+      # Compilar Rust para cuatro arquitecturas es lento; sin caché cada
+      # release tardaría lo mismo desde cero.
+      - name: Caché de Rust
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Instalar dependencias
+        run: bun install --frozen-lockfile
+
+      # El keystore viaja como secreto en base64 y se reconstruye aquí. El
+      # archivo keystore.properties se genera en cada corrida y muere con el
+      # runner: nunca se versiona.
+      - name: Preparar la firma
+        run: |
+          cd src-tauri/gen/android
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" > keystore.properties
+          echo "password=${{ secrets.ANDROID_KEY_PASSWORD }}" >> keystore.properties
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > "$RUNNER_TEMP/keystore.jks"
+          echo "storeFile=$RUNNER_TEMP/keystore.jks" >> keystore.properties
+
+      # Solo APK: es lo que se instala directamente desde el release. El AAB
+      # únicamente sirve para publicar en Google Play.
+      - name: Compilar el APK de release
+        run: bun run tauri android build --apk
+
+      - name: Localizar el APK
+        id: apk
+        run: |
+          apk=$(find src-tauri/gen/android/app/build/outputs/apk -name "*.apk" -path "*release*" ! -name "*unsigned*" | head -1)
+          if [ -z "$apk" ]; then
+            echo "No se encontró ningún APK de release firmado."
+            find src-tauri/gen/android/app/build/outputs -name "*.apk" || true
+            exit 1
+          fi
+          echo "Encontrado: $apk"
+          echo "path=$apk" >> "$GITHUB_OUTPUT"
+
+      - name: Publicar el release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.apk.outputs.path }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
