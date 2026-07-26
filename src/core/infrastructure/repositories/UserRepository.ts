@@ -83,6 +83,8 @@ export class UserRepository {
         "user_profile.avatar_url as avatar_url",
         "user_settings.theme as theme",
         "user_settings.language as language",
+        "user_settings.biometric_enabled as biometric_enabled",
+        "user_settings.biometric_prompted_at as biometric_prompted_at",
         "role.id as role_id",
         "role.name as role_name",
       ])
@@ -109,6 +111,8 @@ export class UserRepository {
         settings: {
           theme: row.theme,
           language: row.language,
+          biometric_enabled: row.biometric_enabled === 1,
+          biometric_prompted: row.biometric_prompted_at !== null,
         },
         role: {
           id: row.role_id,
@@ -186,6 +190,10 @@ export class UserRepository {
         .values({
           theme: DEFAULT_USER_SETTINGS.THEME_VARIANT,
           language,
+          // Explícito aunque la columna tenga DEFAULT: la biometría nace
+          // apagada y sin preguntar, y el aviso salta en el primer acceso.
+          biometric_enabled: 0,
+          biometric_prompted_at: null,
         })
         .executeTakeFirstOrThrow();
 
@@ -232,6 +240,10 @@ export class UserRepository {
         settings: {
           theme: DEFAULT_USER_SETTINGS.THEME_VARIANT,
           language,
+          // Nace desactivada y sin preguntar: el aviso salta en el primer
+          // acceso, ya dentro de la app.
+          biometric_enabled: false,
+          biometric_prompted: false,
         },
         role: {
           id: role.id,
@@ -322,6 +334,54 @@ export class UserRepository {
         updated_at: new Date().toISOString(),
       })
       .where("id", "=", Number(credential.credential_id))
+      .execute();
+  }
+
+  /** Activa o desactiva el desbloqueo biométrico de ese usuario. */
+  async setBiometricEnabled(userId: number, enabled: boolean): Promise<void> {
+    await this.updateSettings(userId, {
+      biometric_enabled: enabled ? 1 : 0,
+      // Aceptar o rechazar cuenta igualmente como "ya se le preguntó".
+      biometric_prompted_at: new Date().toISOString(),
+    });
+  }
+
+  /** Deja constancia de que ya se le ofreció, aunque haya dicho que no. */
+  async markBiometricPrompted(userId: number): Promise<void> {
+    await this.updateSettings(userId, {
+      biometric_prompted_at: new Date().toISOString(),
+    });
+  }
+
+  /**
+   * Escribe en `user_settings` a través de `user.settings_id`, y no por el id
+   * de la fila de settings, para no depender de que quien llama lo conozca.
+   */
+  private async updateSettings(
+    userId: number,
+    values: Partial<{
+      biometric_enabled: number;
+      biometric_prompted_at: string;
+    }>,
+  ): Promise<void> {
+    const user = await db
+      .selectFrom("user")
+      .select("settings_id")
+      .where("id", "=", userId)
+      .where("deleted_at", "is", null)
+      .executeTakeFirst();
+
+    if (!user) {
+      throw new AuthError(AUTH_ERROR_MESSAGES.email_not_found);
+    }
+
+    await db
+      .updateTable("user_settings")
+      .set({
+        ...values,
+        updated_at: new Date().toISOString(),
+      })
+      .where("id", "=", Number(user.settings_id))
       .execute();
   }
 

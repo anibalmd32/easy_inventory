@@ -6,6 +6,7 @@ import {
   AsidePanel,
   type NavSection,
 } from "../../core/presentation/components/AsidePanel/AsidePanel";
+import { BiometricEnrollmentPrompt } from "../../core/presentation/components/BiometricEnrollmentPrompt";
 import { useUserStore } from "../../core/presentation/stores/useUserStore";
 import { getMainNavItems } from "../../utils/navItems/getMainNavItems";
 import { getSettingsNavItems } from "../../utils/navItems/getSettingsNavItems";
@@ -66,6 +67,10 @@ function RouteComponent() {
       </div>
 
       <AppDock items={mainNavItems} />
+
+      {/* Vive en el layout y no en la home para que el aviso salga sea cual
+          sea la primera pantalla a la que llegue el usuario. */}
+      <BiometricEnrollmentPrompt />
     </div>
   );
 }

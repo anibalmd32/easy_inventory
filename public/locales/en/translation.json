@@ -103,6 +103,19 @@
       "hint": "Your password is never stored."
     }
   },
+  "biometric": {
+    "promptTitle": "Inventario fácil",
+    "reasonEnable": "Verify your identity to turn on fingerprint unlock",
+    "reasonLogin": "Verify your identity to sign in",
+    "enrollTitle": "Sign in with your fingerprint?",
+    "enrollBody": "You can use this device's fingerprint or face to sign in without typing your password. You can change this any time from your profile.",
+    "enableAction": "Turn on",
+    "notNowAction": "Not now",
+    "settingTitle": "Fingerprint unlock",
+    "settingHint": "Sign in on this device without typing your password.",
+    "loginAction": "Sign in with fingerprint",
+    "orDivider": "or"
+  },
   "securityQuestions": {
     "pet_name": "What was the name of your first pet?",
     "mother_maiden_name": "What is your mother's maiden name?",
@@ -123,7 +136,9 @@
       "unexpected": "Something went wrong. Please try again.",
       "email_not_found": "There is no account with that email address.",
       "no_security_question": "That account has no security question, so it cannot be recovered this way.",
-      "wrong_security_answer": "That answer is not correct."
+      "wrong_security_answer": "That answer is not correct.",
+      "biometric_not_enabled": "This account no longer has fingerprint unlock enabled. Sign in with your password.",
+      "biometric_failed": "We couldn't verify your identity. Please try again."
     }
   },
   "buttons": {
@@ -150,6 +165,9 @@
     },
     "backToLogin": {
       "label": "Back to log in"
+    },
+    "cancel": {
+      "label": "Cancel"
     },
     "addRole": {
       "label": "Add role"

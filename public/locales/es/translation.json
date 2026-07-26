@@ -103,6 +103,19 @@
       "hint": "La contraseña no se guarda nunca."
     }
   },
+  "biometric": {
+    "promptTitle": "Inventario fácil",
+    "reasonEnable": "Verifica tu identidad para activar el acceso con huella",
+    "reasonLogin": "Verifica tu identidad para entrar",
+    "enrollTitle": "¿Entrar con tu huella?",
+    "enrollBody": "Puedes usar la huella o el rostro de este dispositivo para entrar sin escribir tu contraseña. Podrás cambiarlo cuando quieras desde tu perfil.",
+    "enableAction": "Activar",
+    "notNowAction": "Ahora no",
+    "settingTitle": "Acceso con huella",
+    "settingHint": "Entra sin escribir tu contraseña en este dispositivo.",
+    "loginAction": "Entrar con huella",
+    "orDivider": "o"
+  },
   "securityQuestions": {
     "pet_name": "¿Cómo se llamó tu primera mascota?",
     "mother_maiden_name": "¿Cuál es el apellido de soltera de tu madre?",
@@ -123,7 +136,9 @@
       "unexpected": "Ocurrió un error inesperado. Vuelve a intentarlo.",
       "email_not_found": "No existe ninguna cuenta con ese correo electrónico.",
       "no_security_question": "Esa cuenta no tiene pregunta de seguridad, así que no se puede recuperar por esta vía.",
-      "wrong_security_answer": "La respuesta no es correcta."
+      "wrong_security_answer": "La respuesta no es correcta.",
+      "biometric_not_enabled": "Esta cuenta ya no tiene activado el acceso con huella. Entra con tu contraseña.",
+      "biometric_failed": "No se pudo verificar tu identidad. Inténtalo de nuevo."
     }
   },
   "buttons": {
@@ -150,6 +165,9 @@
     },
     "backToLogin": {
       "label": "Volver a iniciar sesión"
+    },
+    "cancel": {
+      "label": "Cancelar"
     },
     "addRole": {
       "label": "Agregar rol"

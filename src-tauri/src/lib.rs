@@ -21,8 +21,22 @@ pub fn run() {
             sql: include_str!("../migrations/03_roles_and_permissions.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 4,
+            description: "add biometric unlock preference to user settings",
+            sql: include_str!("../migrations/04_biometric_settings.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
+        .setup(|_app| {
+            // El plugin biométrico solo existe en móvil; en escritorio ni
+            // siquiera se compila (ver el target en Cargo.toml).
+            #[cfg(mobile)]
+            _app.handle()
+                .plugin(tauri_plugin_biometric::init())?;
+            Ok(())
+        })
         .plugin(
             tauri_plugin_sql::Builder::default()
                 .add_migrations("sqlite:easy_inventory_storage.db", migrations)

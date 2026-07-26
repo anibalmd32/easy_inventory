@@ -22,9 +22,21 @@ interface UserState {
    * Se persiste para que el enlace no desaparezca al reiniciar la app.
    */
   failedLoginAttempts: number;
+  /**
+   * Cuenta que tiene el desbloqueo biométrico activo en ESTE dispositivo.
+   *
+   * La huella identifica al dueño del móvil, no a un usuario concreto de la
+   * app, así que hace falta saber a quién corresponde. Se guarda aquí y no se
+   * deduce de la base de datos porque es una decisión por dispositivo: la
+   * última cuenta que lo activó es la que se ofrece en el login.
+   */
+  biometricEmail: string | null;
   setSession: (user: AuthUserData) => void;
   clearSession: () => void;
   setRememberedEmail: (email: string | null) => void;
+  setBiometricEmail: (email: string | null) => void;
+  /** Refleja en la sesión la preferencia ya guardada en la base de datos. */
+  setBiometricPreference: (enabled: boolean) => void;
   registerFailedLogin: () => void;
   resetFailedLogins: () => void;
   setUserLanguage: (language: string) => void;
@@ -40,6 +52,7 @@ export const useUserStore = zustand.create<UserState>()(
       language: DEFAULT_USER_SETTINGS.LANGUAGE,
       rememberedEmail: null,
       failedLoginAttempts: 0,
+      biometricEmail: null,
       setSession: (user: AuthUserData) =>
         set({
           userData: user,
@@ -56,6 +69,25 @@ export const useUserStore = zustand.create<UserState>()(
         set({
           rememberedEmail: email,
         }),
+      setBiometricEmail: (email: string | null) =>
+        set({
+          biometricEmail: email,
+        }),
+      setBiometricPreference: (enabled: boolean) =>
+        set((state) => ({
+          userData: state.userData
+            ? {
+                ...state.userData,
+                settings: {
+                  ...state.userData.settings,
+                  biometric_enabled: enabled,
+                  // Guardar la preferencia implica que ya se le preguntó, así
+                  // que el aviso de bienvenida no vuelve a salir.
+                  biometric_prompted: true,
+                },
+              }
+            : null,
+        })),
       registerFailedLogin: () =>
         set((state) => ({
           failedLoginAttempts: state.failedLoginAttempts + 1,

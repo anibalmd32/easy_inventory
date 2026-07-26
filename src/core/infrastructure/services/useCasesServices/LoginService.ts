@@ -25,4 +25,22 @@ export class LoginService {
 
     return record.user;
   }
+
+  /**
+   * Inicia sesión tras una verificación biométrica correcta.
+   *
+   * No recibe contraseña porque la huella ya identificó al dueño del
+   * dispositivo. Se vuelve a comprobar la preferencia contra la base de datos
+   * y no contra el estado local: si la cuenta desactivó la biometría, este
+   * camino queda cerrado aunque el cliente crea lo contrario.
+   */
+  async executeWithBiometrics(email: string): Promise<AuthUserData> {
+    const record = await this.repository.findAuthUserByEmail(email);
+
+    if (!record?.user.settings.biometric_enabled) {
+      throw new AuthError(AUTH_ERROR_MESSAGES.biometric_not_enabled);
+    }
+
+    return record.user;
+  }
 }

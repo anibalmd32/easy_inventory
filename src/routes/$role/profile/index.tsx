@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { BiometricToggleCard } from "../../../core/presentation/components/BiometricToggleCard";
 import { UserAvatar } from "../../../core/presentation/components/UserAvatar";
 import { useUserStore } from "../../../core/presentation/stores/useUserStore";
 
@@ -67,6 +68,8 @@ function RouteComponent() {
           </dl>
         </div>
       </div>
+
+      <BiometricToggleCard />
 
       <div className="card bg-base-100 shadow-sm">
         <div className="card-body gap-3 p-4 sm:p-6">

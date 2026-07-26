@@ -1,0 +1,8 @@
+{
+	"$schema": "../gen/schemas/mobile-schema.json",
+	"identifier": "mobile",
+	"description": "Permisos que solo existen en móvil. El plugin biométrico no se compila en escritorio (ver el target en Cargo.toml), así que su permiso no puede vivir en la capability por defecto: rompería el build de desktop con un permiso desconocido.",
+	"platforms": ["android", "iOS"],
+	"windows": ["main"],
+	"permissions": ["biometric:default"]
+}

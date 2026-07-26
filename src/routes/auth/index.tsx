@@ -1,5 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { BiometricLoginButton } from "../../core/presentation/components/BiometricLoginButton";
 import { LoginForm } from "../../core/presentation/forms/LoginForm/LoginForm";
 import { superAdminExistsQueryOptions } from "../../core/presentation/queries/authQueries";
 
@@ -30,6 +31,7 @@ function RouteComponent() {
           {t("pages.auth.login.subtitle")}
         </p>
         <LoginForm />
+        <BiometricLoginButton />
       </div>
     </div>
   );
