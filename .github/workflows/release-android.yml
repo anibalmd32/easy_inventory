@@ -69,7 +69,10 @@ jobs:
       - name: Compilar el APK de release
         run: bun run tauri android build --apk
 
-      - name: Localizar el APK
+      # Gradle lo nombra `app-universal-release.apk` (módulo + ABI + tipo de
+      # build), que no dice nada a quien lo descarga. Se copia con un nombre
+      # legible; el asset se sube con el nombre del archivo.
+      - name: Localizar y renombrar el APK
         id: apk
         run: |
           apk=$(find src-tauri/gen/android/app/build/outputs/apk -name "*.apk" -path "*release*" ! -name "*unsigned*" | head -1)
@@ -78,8 +81,19 @@ jobs:
             find src-tauri/gen/android/app/build/outputs -name "*.apk" || true
             exit 1
           fi
-          echo "Encontrado: $apk"
-          echo "path=$apk" >> "$GITHUB_OUTPUT"
+
+          # La versión se lee de tauri.conf.json y no de la etiqueta, para que
+          # el nombre también salga bien al lanzar el workflow a mano, donde no
+          # hay etiqueta que leer.
+          version=$(jq -r .version src-tauri/tauri.conf.json)
+
+          # Sin espacios ni tildes a propósito: GitHub convierte los espacios
+          # en puntos y la tilde saldría escapada en la URL de descarga.
+          dest="$RUNNER_TEMP/inventario-facil-v${version}.apk"
+          cp "$apk" "$dest"
+
+          echo "$apk -> $(basename "$dest")"
+          echo "path=$dest" >> "$GITHUB_OUTPUT"
 
       - name: Publicar el release
         uses: softprops/action-gh-release@v2
