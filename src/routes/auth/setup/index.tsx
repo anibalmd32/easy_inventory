@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { SetupSuperAdminForm } from "../../../core/presentation/forms/SetupSuperAdminForm/SetupSuperAdminForm";
 import {
@@ -12,8 +12,8 @@ export const Route = createFileRoute("/auth/setup/")({
       superAdminExistsQueryOptions,
     );
 
-    // Solo puede existir un superadmin: si ya está creado, esta pantalla
-    // deja de ser alcanzable para siempre.
+    // Solo puede existir un dueño: si ya está creado, esta pantalla deja de
+    // ser alcanzable para siempre.
     if (hasSuperAdmin) {
       throw redirect({
         to: "/auth",
@@ -36,6 +36,13 @@ function RouteComponent() {
           {t("pages.auth.setup.subtitle")}
         </p>
         <SetupSuperAdminForm />
+
+        <p className="mt-3 text-center text-sm opacity-70">
+          {t("pages.auth.setup.alreadyHaveAccount")}{" "}
+          <Link className="link link-primary" to="/auth">
+            {t("pages.auth.setup.goToLogin")}
+          </Link>
+        </p>
       </div>
     </div>
   );

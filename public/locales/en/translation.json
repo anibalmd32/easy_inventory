@@ -18,7 +18,9 @@
       "login": {
         "title": "Log in",
         "subtitle": "Sign in with your email and password.",
-        "forgotPassword": "Forgot your password?"
+        "forgotPassword": "Forgot your password?",
+        "noAccount": "First time here?",
+        "goToSetup": "Create your account"
       },
       "recover": {
         "title": "Recover password",
@@ -39,7 +41,9 @@
       },
       "setup": {
         "title": "Set up your business",
-        "subtitle": "This is the first time you open the app. The account you create here will be the super administrator and will have full control.",
+        "subtitle": "This is the first time you open the app on this device. Create your owner account and you'll have full control.",
+        "alreadyHaveAccount": "Already have an account?",
+        "goToLogin": "Sign in",
         "recoverySection": "Password recovery",
         "recoveryHint": "If you ever forget your password, this question will be the only way to recover it. Pick an answer nobody can guess."
       }
@@ -151,8 +155,8 @@
     "logout": {
       "label": "Log out"
     },
-    "createSuperAdmin": {
-      "label": "Create super administrator"
+    "start": {
+      "label": "Get started"
     },
     "continue": {
       "label": "Continue"

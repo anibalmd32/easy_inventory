@@ -18,7 +18,9 @@
       "login": {
         "title": "Iniciar sesión",
         "subtitle": "Entra con tu correo y tu contraseña.",
-        "forgotPassword": "¿Olvidaste tu contraseña?"
+        "forgotPassword": "¿Olvidaste tu contraseña?",
+        "noAccount": "¿Es tu primera vez?",
+        "goToSetup": "Crea tu cuenta"
       },
       "recover": {
         "title": "Recuperar contraseña",
@@ -39,7 +41,9 @@
       },
       "setup": {
         "title": "Configura tu negocio",
-        "subtitle": "Es la primera vez que abres la app. La cuenta que crees aquí será el superadministrador y tendrá el control total.",
+        "subtitle": "Es la primera vez que abres la app en este dispositivo. Crea tu cuenta de dueño y tendrás el control total.",
+        "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+        "goToLogin": "Inicia sesión",
         "recoverySection": "Recuperación de contraseña",
         "recoveryHint": "Si algún día olvidas tu contraseña, esta pregunta será la única forma de recuperarla. Elige una respuesta que no puedan adivinar."
       }
@@ -151,8 +155,8 @@
     "logout": {
       "label": "Cerrar sesión"
     },
-    "createSuperAdmin": {
-      "label": "Crear superadministrador"
+    "start": {
+      "label": "Empezar"
     },
     "continue": {
       "label": "Continuar"

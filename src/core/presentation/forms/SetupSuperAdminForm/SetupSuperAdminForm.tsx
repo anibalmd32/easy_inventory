@@ -116,7 +116,7 @@ export const SetupSuperAdminForm = () => {
       <form.AppForm>
         <form.SubmitBtn
           isLoading={isSubmitting}
-          label={t("buttons.createSuperAdmin.label")}
+          label={t("buttons.start.label")}
         />
       </form.AppForm>
     </form>
