@@ -26,7 +26,11 @@
   },
   "avatar": {
     "max_size": "The file size must not exceed 10 MB",
-    "invalid_mime_type": "Invalid file type. Allowed types: JPEG, PNG"
+    "invalid_mime_type": "Invalid file type. Allowed: JPEG, PNG"
+  },
+  "logo": {
+    "max_size": "The logo must not exceed 10 MB",
+    "invalid_mime_type": "Invalid file type. Allowed: JPEG, PNG"
   },
   "catalog": {
     "name_too_short": "The name must be at least 2 characters long",

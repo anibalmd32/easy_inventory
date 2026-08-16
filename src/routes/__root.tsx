@@ -1,10 +1,14 @@
 import type { QueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   createRootRouteWithContext,
   Outlet,
   redirect,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { superAdminExistsQueryOptions } from "../core/presentation/queries/authQueries";
+import { businessSettingQueryOptions } from "../core/presentation/queries/businessSettingsQueries";
+import { useBusinessSettings } from "../core/presentation/stores/useBusinessSettings";
 
 export interface RouterContext {
   /** Permite que los `beforeLoad` consulten la BD sin refetchear de más. */
@@ -12,6 +16,25 @@ export interface RouterContext {
 }
 
 const RootLayout = () => {
+  const { data } = useQuery(businessSettingQueryOptions);
+
+  // El tema y la marca del negocio se aplican a toda la app, incluidas las
+  // pantallas de sesión. El `data-theme` inicial lo pone el index.html, así
+  // que esto solo pisa el valor cuando ya se conoce el guardado en la BD.
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    document.documentElement.dataset.theme = data.theme;
+    useBusinessSettings.getState().hydrateBusinessSettings({
+      name: data.name,
+      logoUrl: data.logo,
+    });
+  }, [
+    data,
+  ]);
+
   return <Outlet />;
 };
 

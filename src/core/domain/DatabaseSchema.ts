@@ -1,5 +1,6 @@
 import type { Generated } from "kysely";
 import type { BaseTable } from "./entities/BaseTable";
+import type { BusinessSettingEntity } from "./entities/BusinessSettingEntity";
 import type { ExchangeRateEntity } from "./entities/ExchangeRateEntity";
 import type { InventorySettingEntity } from "./entities/InventorySettingEntity";
 import type { MeasurementUnitEntity } from "./entities/MeasurementUnitEntity";
@@ -19,6 +20,7 @@ import type { UserSessionEntity } from "./entities/UserSessionEntity";
 import type { UserSettingsEntity } from "./entities/UserSettingEntity";
 
 export interface DatabaseSchema {
+  business_setting: BusinessSettingEntity & BaseTable;
   // La tasa de cambio es append-only: no tiene updated_at ni deleted_at.
   exchange_rate: ExchangeRateEntity & {
     id: Generated<number>;

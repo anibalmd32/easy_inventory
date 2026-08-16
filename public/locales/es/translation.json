@@ -90,7 +90,7 @@
         },
         "business": {
           "title": "Mi negocio",
-          "description": "Nombre, logo y datos de contacto."
+          "description": "Nombre, logo y tema de la app."
         },
         "roles": {
           "title": "Usuarios y permisos",
@@ -173,6 +173,29 @@
           "editTitle": "Editar método de pago",
           "deleteTitle": "¿Eliminar el método de pago?",
           "deleteDescription": "Se quitará «{{name}}» de tu lista. Podrás volver a crearlo cuando quieras."
+        }
+      },
+      "business": {
+        "name": {
+          "title": "Nombre del negocio",
+          "description": "Es el nombre que se ve en la app y en tus documentos.",
+          "label": "Nombre",
+          "placeholder": "Mi negocio",
+          "saved": "Guardado"
+        },
+        "logo": {
+          "title": "Logo",
+          "description": "La imagen que identifica tu negocio en la app.",
+          "upload": "Subir logo",
+          "change": "Cambiar logo",
+          "remove": "Quitar logo",
+          "hint": "PNG o JPEG, hasta 10 MB. Se recomienda una imagen cuadrada."
+        },
+        "theme": {
+          "title": "Tema",
+          "description": "Elige la combinación de colores de toda la app.",
+          "activeBadge": "Activo",
+          "sample": "Aa 123"
         }
       }
     }

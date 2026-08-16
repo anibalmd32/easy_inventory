@@ -46,3 +46,8 @@ export enum AVATAR_VALIDATION_ERROR_MESSAGES {
   max_size = "avatar.max_size",
   invalid_mime_type = "avatar.invalid_mime_type",
 }
+
+export enum LOGO_VALIDATION_ERROR_MESSAGES {
+  max_size = "logo.max_size",
+  invalid_mime_type = "logo.invalid_mime_type",
+}

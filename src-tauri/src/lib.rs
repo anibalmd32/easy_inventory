@@ -39,6 +39,12 @@ pub fn run() {
             sql: include_str!("../migrations/06_point_of_sale_settings.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 7,
+            description: "create business settings: name, logo and theme",
+            sql: include_str!("../migrations/07_business_settings.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
         .setup(|_app| {

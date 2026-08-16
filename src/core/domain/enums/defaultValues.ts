@@ -10,3 +10,10 @@ export enum DEFAULT_INVENTORY_SETTINGS {
   // `inventory_setting.low_quantity_threshold` en la migración 05.
   LOW_QUANTITY = 5,
 }
+
+export enum DEFAULT_BUSINESS_SETTINGS {
+  NAME = "",
+  // Debe coincidir con el DEFAULT de `business_setting.theme` en la
+  // migración 07 y con el `data-theme` estático del index.html.
+  THEME = "business",
+}

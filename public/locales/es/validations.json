@@ -28,6 +28,10 @@
     "max_size": "El tamaño del archivo no debe exceder de 10 MB",
     "invalid_mime_type": "Tipo de archivo no válido. Se permiten: JPEG, PNG"
   },
+  "logo": {
+    "max_size": "El logo no debe exceder de 10 MB",
+    "invalid_mime_type": "Tipo de archivo no válido. Se permiten: JPEG, PNG"
+  },
   "catalog": {
     "name_too_short": "El nombre debe tener al menos 2 caracteres",
     "name_too_long": "El nombre no debe superar los 60 caracteres",
