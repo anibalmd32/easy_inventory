@@ -1,5 +1,7 @@
+import { ExchangeRateRepository } from "./repositories/ExchangeRateRepository";
 import { InventorySettingRepository } from "./repositories/InventorySettingRepository";
 import { MeasurementUnitRepository } from "./repositories/MeasurementUnitRepository";
+import { PaymentMethodRepository } from "./repositories/PaymentMethodRepository";
 import { ProductCategoryRepository } from "./repositories/ProductCategoryRepository";
 import { SecurityQuestionRepository } from "./repositories/SecurityQuestionRepository";
 import { UserRepository } from "./repositories/UserRepository";
@@ -9,6 +11,7 @@ import { BiometricSettingsService } from "./services/useCasesServices/BiometricS
 import { InventorySettingsService } from "./services/useCasesServices/InventorySettingsService";
 import { LoginService } from "./services/useCasesServices/LoginService";
 import { PasswordRecoveryService } from "./services/useCasesServices/PasswordRecoveryService";
+import { PosSettingsService } from "./services/useCasesServices/PosSettingsService";
 import { SetupSuperAdminService } from "./services/useCasesServices/SetupSuperAdminService";
 
 /**
@@ -36,4 +39,8 @@ export const inventorySettingsService = new InventorySettingsService(
   new ProductCategoryRepository(),
   new MeasurementUnitRepository(),
   new InventorySettingRepository(),
+);
+export const posSettingsService = new PosSettingsService(
+  new PaymentMethodRepository(),
+  new ExchangeRateRepository(),
 );

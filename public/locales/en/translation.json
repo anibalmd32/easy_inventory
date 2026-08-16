@@ -136,6 +136,44 @@
           "deleteTitle": "Delete this unit?",
           "deleteDescription": "“{{name}}” will be removed from your list. You can create it again any time."
         }
+      },
+      "pos": {
+        "exchangeRate": {
+          "title": "Exchange rate",
+          "description": "How many bolivars a dollar is worth. Used to charge in dollars and show the equivalent in bolivars.",
+          "current": "One dollar equals",
+          "sourceManual": "Manual rate",
+          "updatedAt": "Set on {{date}}",
+          "update": "Update",
+          "setFirst": "Set rate",
+          "emptyTitle": "You haven't set a rate yet",
+          "emptyBody": "Set it now to charge in dollars and show the bolivar equivalent.",
+          "updateTitle": "Update rate",
+          "setTitle": "Set rate",
+          "updateDescription": "The current rate is {{rate}} bolivars per dollar. The new value will be kept in the history.",
+          "setDescription": "Set how many bolivars a dollar is worth.",
+          "rateLabel": "Bolivars per dollar",
+          "ratePlaceholder": "36.50",
+          "preview": "It will look like this:",
+          "history": "History",
+          "historyTitle": "Change history",
+          "historyDescription": "Every value the rate has had, from newest to oldest.",
+          "historyEmpty": "No changes recorded yet.",
+          "currentBadge": "Current"
+        },
+        "paymentMethods": {
+          "title": "Payment methods",
+          "description": "The ways you accept getting paid.",
+          "add": "Add",
+          "emptyTitle": "No payment methods yet",
+          "emptyBody": "Create the first one: cash, mobile payment, bank transfer…",
+          "nameLabel": "Name",
+          "namePlaceholder": "Mobile payment",
+          "createTitle": "New payment method",
+          "editTitle": "Edit payment method",
+          "deleteTitle": "Delete this payment method?",
+          "deleteDescription": "“{{name}}” will be removed from your list. You can create it again any time."
+        }
       }
     }
   },
@@ -218,6 +256,7 @@
       "duplicate_category": "You already have a category with that name.",
       "duplicate_unit_name": "You already have a unit with that name.",
       "duplicate_unit_abbreviation": "That short form is already used by another unit.",
+      "duplicate_payment_method": "You already have a payment method with that name.",
       "not_found": "That no longer exists. Reload the screen.",
       "invalid_form": "Please check the form fields."
     }

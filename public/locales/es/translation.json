@@ -136,6 +136,44 @@
           "deleteTitle": "¿Eliminar la unidad?",
           "deleteDescription": "Se quitará «{{name}}» de tu lista. Podrás volver a crearla cuando quieras."
         }
+      },
+      "pos": {
+        "exchangeRate": {
+          "title": "Tasa de cambio",
+          "description": "Cuántos bolívares vale un dólar. Sirve para cobrar en dólares y mostrar el equivalente en bolívares.",
+          "current": "Un dólar equivale a",
+          "sourceManual": "Tasa manual",
+          "updatedAt": "Fijada el {{date}}",
+          "update": "Actualizar",
+          "setFirst": "Fijar tasa",
+          "emptyTitle": "Todavía no has fijado la tasa",
+          "emptyBody": "Fíjala ahora para poder cobrar en dólares y mostrar el equivalente en bolívares.",
+          "updateTitle": "Actualizar tasa",
+          "setTitle": "Fijar tasa",
+          "updateDescription": "La tasa actual es {{rate}} bolívares por dólar. El valor nuevo quedará registrado en el historial.",
+          "setDescription": "Fija cuántos bolívares vale un dólar.",
+          "rateLabel": "Bolívares por dólar",
+          "ratePlaceholder": "36,50",
+          "preview": "Se verá así:",
+          "history": "Historial",
+          "historyTitle": "Historial de cambios",
+          "historyDescription": "Cada valor que ha tenido la tasa, del más reciente al más antiguo.",
+          "historyEmpty": "Aún no hay cambios registrados.",
+          "currentBadge": "Actual"
+        },
+        "paymentMethods": {
+          "title": "Métodos de pago",
+          "description": "Las formas en las que aceptas que te paguen.",
+          "add": "Agregar",
+          "emptyTitle": "Todavía no tienes métodos de pago",
+          "emptyBody": "Crea el primero: efectivo, pago móvil, transferencia…",
+          "nameLabel": "Nombre",
+          "namePlaceholder": "Pago móvil",
+          "createTitle": "Nuevo método de pago",
+          "editTitle": "Editar método de pago",
+          "deleteTitle": "¿Eliminar el método de pago?",
+          "deleteDescription": "Se quitará «{{name}}» de tu lista. Podrás volver a crearlo cuando quieras."
+        }
       }
     }
   },
@@ -218,6 +256,7 @@
       "duplicate_category": "Ya tienes una categoría con ese nombre.",
       "duplicate_unit_name": "Ya tienes una unidad con ese nombre.",
       "duplicate_unit_abbreviation": "Ya usas esa abreviatura en otra unidad.",
+      "duplicate_payment_method": "Ya tienes un método de pago con ese nombre.",
       "not_found": "Eso ya no existe. Vuelve a cargar la pantalla.",
       "invalid_form": "Revisa los datos del formulario."
     }

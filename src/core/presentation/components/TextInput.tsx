@@ -7,11 +7,12 @@ interface TextInputProps {
   placeholder?: string;
   type?: "text" | "password" | "email" | "number";
   autoComplete?: string;
-  inputMode?: "text" | "email" | "numeric";
+  inputMode?: "text" | "email" | "numeric" | "decimal";
   autoCapitalize?: "none" | "sentences" | "words";
   /** Solo para `type="number"`. */
   min?: number;
   max?: number;
+  step?: number | "any";
 }
 
 export const TextInput = ({
@@ -23,6 +24,7 @@ export const TextInput = ({
   autoCapitalize,
   min,
   max,
+  step,
 }: TextInputProps) => {
   const field = useFieldContext<string>();
   const errors = useStore(field.store, (state) => state.meta.errors);
@@ -43,6 +45,7 @@ export const TextInput = ({
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
         placeholder={placeholder}
+        step={step}
         type={type}
         value={field.state.value}
       />

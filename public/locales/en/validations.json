@@ -36,5 +36,8 @@
     "description_too_long": "The description must not exceed 200 characters",
     "quantity_invalid": "Enter a whole number of 0 or more",
     "quantity_too_big": "The number cannot be greater than 9999"
+  },
+  "pos": {
+    "rate_invalid": "Enter a number greater than 0"
   }
 }

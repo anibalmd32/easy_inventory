@@ -36,5 +36,8 @@
     "description_too_long": "La descripción no debe superar los 200 caracteres",
     "quantity_invalid": "Escribe un número entero de 0 en adelante",
     "quantity_too_big": "El número no puede ser mayor que 9999"
+  },
+  "pos": {
+    "rate_invalid": "Escribe un número mayor que 0"
   }
 }

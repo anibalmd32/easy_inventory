@@ -1,6 +1,9 @@
+import type { Generated } from "kysely";
 import type { BaseTable } from "./entities/BaseTable";
+import type { ExchangeRateEntity } from "./entities/ExchangeRateEntity";
 import type { InventorySettingEntity } from "./entities/InventorySettingEntity";
 import type { MeasurementUnitEntity } from "./entities/MeasurementUnitEntity";
+import type { PaymentMethodEntity } from "./entities/PaymentMethodEntity";
 import type { PermissionEntity } from "./entities/PermissionEntity";
 import type { ProductCategoryEntity } from "./entities/ProductCategoryEntity";
 import type { RoleEntity } from "./entities/RoleEntity";
@@ -16,8 +19,14 @@ import type { UserSessionEntity } from "./entities/UserSessionEntity";
 import type { UserSettingsEntity } from "./entities/UserSettingEntity";
 
 export interface DatabaseSchema {
+  // La tasa de cambio es append-only: no tiene updated_at ni deleted_at.
+  exchange_rate: ExchangeRateEntity & {
+    id: Generated<number>;
+    created_at: Generated<string>;
+  };
   inventory_setting: InventorySettingEntity & BaseTable;
   measurement_unit: MeasurementUnitEntity & BaseTable;
+  payment_method: PaymentMethodEntity & BaseTable;
   product_category: ProductCategoryEntity & BaseTable;
   user: UserEntity & BaseTable;
   permission: PermissionEntity & BaseTable;

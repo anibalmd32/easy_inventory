@@ -33,6 +33,12 @@ pub fn run() {
             sql: include_str!("../migrations/05_inventory_settings.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 6,
+            description: "create payment methods and exchange rate history",
+            sql: include_str!("../migrations/06_point_of_sale_settings.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
         .setup(|_app| {

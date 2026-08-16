@@ -18,7 +18,10 @@ type SettingsGroup = {
   key: string;
   Icon: IconType;
   /** Sin `to` mientras el módulo no exista: la fila se muestra apagada. */
-  to?: "/$role/settings/inventory" | "/$role/settings/roles";
+  to?:
+    | "/$role/settings/inventory"
+    | "/$role/settings/pos"
+    | "/$role/settings/roles";
 };
 
 // El orden sigue el recorrido del negocio: primero lo que vendes, luego cómo
@@ -32,6 +35,7 @@ const GROUPS: SettingsGroup[] = [
   {
     key: "pos",
     Icon: MdPointOfSale,
+    to: "/$role/settings/pos",
   },
   {
     key: "debts",

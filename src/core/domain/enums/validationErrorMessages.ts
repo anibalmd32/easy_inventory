@@ -28,6 +28,10 @@ export enum CATALOG_VALIDATION_ERROR_MESSAGES {
   quantity_too_big = "catalog.quantity_too_big",
 }
 
+export enum POS_VALIDATION_ERROR_MESSAGES {
+  rate_invalid = "pos.rate_invalid",
+}
+
 export enum SECURITY_ANSWER_VALIDATION_ERROR_MESSAGES {
   question_required = "security.question_required",
   answer_too_short = "security.answer_too_short",

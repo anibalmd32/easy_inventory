@@ -21,6 +21,7 @@ import { Route as RoleInvoicingIndexRouteImport } from './routes/$role/invoicing
 import { Route as RoleInventoryIndexRouteImport } from './routes/$role/inventory/index'
 import { Route as RoleDebtsIndexRouteImport } from './routes/$role/debts/index'
 import { Route as RoleSettingsRolesIndexRouteImport } from './routes/$role/settings/roles/index'
+import { Route as RoleSettingsPosIndexRouteImport } from './routes/$role/settings/pos/index'
 import { Route as RoleSettingsInventoryIndexRouteImport } from './routes/$role/settings/inventory/index'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -83,6 +84,11 @@ const RoleSettingsRolesIndexRoute = RoleSettingsRolesIndexRouteImport.update({
   path: '/settings/roles/',
   getParentRoute: () => RoleRouteRoute,
 } as any)
+const RoleSettingsPosIndexRoute = RoleSettingsPosIndexRouteImport.update({
+  id: '/settings/pos/',
+  path: '/settings/pos/',
+  getParentRoute: () => RoleRouteRoute,
+} as any)
 const RoleSettingsInventoryIndexRoute =
   RoleSettingsInventoryIndexRouteImport.update({
     id: '/settings/inventory/',
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/auth/recover': typeof AuthRecoverIndexRoute
   '/auth/setup': typeof AuthSetupIndexRoute
   '/$role/settings/inventory': typeof RoleSettingsInventoryIndexRoute
+  '/$role/settings/pos': typeof RoleSettingsPosIndexRoute
   '/$role/settings/roles': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/auth/recover': typeof AuthRecoverIndexRoute
   '/auth/setup': typeof AuthSetupIndexRoute
   '/$role/settings/inventory': typeof RoleSettingsInventoryIndexRoute
+  '/$role/settings/pos': typeof RoleSettingsPosIndexRoute
   '/$role/settings/roles': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRoutesById {
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/auth/recover/': typeof AuthRecoverIndexRoute
   '/auth/setup/': typeof AuthSetupIndexRoute
   '/$role/settings/inventory/': typeof RoleSettingsInventoryIndexRoute
+  '/$role/settings/pos/': typeof RoleSettingsPosIndexRoute
   '/$role/settings/roles/': typeof RoleSettingsRolesIndexRoute
 }
 export interface FileRouteTypes {
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/auth/recover'
     | '/auth/setup'
     | '/$role/settings/inventory'
+    | '/$role/settings/pos'
     | '/$role/settings/roles'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/auth/recover'
     | '/auth/setup'
     | '/$role/settings/inventory'
+    | '/$role/settings/pos'
     | '/$role/settings/roles'
   id:
     | '__root__'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/auth/recover/'
     | '/auth/setup/'
     | '/$role/settings/inventory/'
+    | '/$role/settings/pos/'
     | '/$role/settings/roles/'
   fileRoutesById: FileRoutesById
 }
@@ -271,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoleSettingsRolesIndexRouteImport
       parentRoute: typeof RoleRouteRoute
     }
+    '/$role/settings/pos/': {
+      id: '/$role/settings/pos/'
+      path: '/settings/pos'
+      fullPath: '/$role/settings/pos'
+      preLoaderRoute: typeof RoleSettingsPosIndexRouteImport
+      parentRoute: typeof RoleRouteRoute
+    }
     '/$role/settings/inventory/': {
       id: '/$role/settings/inventory/'
       path: '/settings/inventory'
@@ -289,6 +308,7 @@ interface RoleRouteRouteChildren {
   RoleProfileIndexRoute: typeof RoleProfileIndexRoute
   RoleSettingsIndexRoute: typeof RoleSettingsIndexRoute
   RoleSettingsInventoryIndexRoute: typeof RoleSettingsInventoryIndexRoute
+  RoleSettingsPosIndexRoute: typeof RoleSettingsPosIndexRoute
   RoleSettingsRolesIndexRoute: typeof RoleSettingsRolesIndexRoute
 }
 
@@ -300,6 +320,7 @@ const RoleRouteRouteChildren: RoleRouteRouteChildren = {
   RoleProfileIndexRoute: RoleProfileIndexRoute,
   RoleSettingsIndexRoute: RoleSettingsIndexRoute,
   RoleSettingsInventoryIndexRoute: RoleSettingsInventoryIndexRoute,
+  RoleSettingsPosIndexRoute: RoleSettingsPosIndexRoute,
   RoleSettingsRolesIndexRoute: RoleSettingsRolesIndexRoute,
 }
 
