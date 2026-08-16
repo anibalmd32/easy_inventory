@@ -27,6 +27,12 @@ pub fn run() {
             sql: include_str!("../migrations/04_biometric_settings.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 5,
+            description: "create inventory settings: categories, units and low quantity threshold",
+            sql: include_str!("../migrations/05_inventory_settings.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
         .setup(|_app| {

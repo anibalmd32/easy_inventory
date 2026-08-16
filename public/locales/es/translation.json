@@ -11,7 +11,13 @@
     "profile": "Perfil",
     "account": "Cuenta",
     "language": "Idioma",
-    "comingSoon": "Este módulo todavía está en construcción."
+    "comingSoon": "Este módulo todavía está en construcción.",
+    "soon": "Pronto",
+    "pagination": {
+      "range": "{{from}}–{{to}} de {{total}}",
+      "previous": "Anterior",
+      "next": "Siguiente"
+    }
   },
   "pages": {
     "auth": {
@@ -66,6 +72,70 @@
         "showUsersLink": "Ver usuarios",
         "showPermissionsLink": "Ver permisos",
         "editRoleTooltip": "Editar rol"
+      },
+      "title": "Configuración",
+      "subtitle": "Ajusta la app a la forma de trabajar de tu negocio.",
+      "groups": {
+        "inventory": {
+          "title": "Inventario",
+          "description": "Categorías, unidades de medida y aviso de poca cantidad."
+        },
+        "pos": {
+          "title": "Punto de venta",
+          "description": "Cómo cobras y qué aparece en tus facturas."
+        },
+        "debts": {
+          "title": "Deudas",
+          "description": "Plazos y recordatorios de cobro."
+        },
+        "business": {
+          "title": "Mi negocio",
+          "description": "Nombre, logo y datos de contacto."
+        },
+        "roles": {
+          "title": "Usuarios y permisos",
+          "description": "Quién entra a la app y qué puede hacer."
+        }
+      },
+      "inventory": {
+        "lowQuantity": {
+          "title": "Aviso de poca cantidad",
+          "description": "Para saber cuándo reponer antes de quedarte sin nada que vender.",
+          "sentenceStart": "Avísame cuando queden",
+          "sentenceEnd": "o menos",
+          "saved": "Guardado"
+        },
+        "categories": {
+          "title": "Categorías",
+          "description": "Agrupa tus productos para encontrarlos rápido.",
+          "add": "Agregar",
+          "emptyTitle": "Todavía no tienes categorías",
+          "emptyBody": "Crea la primera para agrupar tus productos: bebidas, limpieza, snacks…",
+          "nameLabel": "Nombre",
+          "namePlaceholder": "Bebidas",
+          "descriptionLabel": "Descripción (opcional)",
+          "descriptionPlaceholder": "Refrescos, jugos y agua",
+          "createTitle": "Nueva categoría",
+          "editTitle": "Editar categoría",
+          "deleteTitle": "¿Eliminar la categoría?",
+          "deleteDescription": "Se quitará «{{name}}» de tu lista. Podrás volver a crearla cuando quieras."
+        },
+        "units": {
+          "title": "Unidades de medida",
+          "description": "Cómo vendes cada producto: por unidad, por kilo, por caja…",
+          "add": "Agregar",
+          "emptyTitle": "Todavía no tienes unidades",
+          "emptyBody": "Crea la primera para indicar cómo mides lo que vendes.",
+          "nameLabel": "Nombre",
+          "namePlaceholder": "Kilogramo",
+          "abbreviationLabel": "Abreviatura",
+          "abbreviationPlaceholder": "kg",
+          "preview": "Se verá así:",
+          "createTitle": "Nueva unidad",
+          "editTitle": "Editar unidad",
+          "deleteTitle": "¿Eliminar la unidad?",
+          "deleteDescription": "Se quitará «{{name}}» de tu lista. Podrás volver a crearla cuando quieras."
+        }
       }
     }
   },
@@ -143,6 +213,13 @@
       "wrong_security_answer": "La respuesta no es correcta.",
       "biometric_not_enabled": "Esta cuenta ya no tiene activado el acceso con huella. Entra con tu contraseña.",
       "biometric_failed": "No se pudo verificar tu identidad. Inténtalo de nuevo."
+    },
+    "catalog": {
+      "duplicate_category": "Ya tienes una categoría con ese nombre.",
+      "duplicate_unit_name": "Ya tienes una unidad con ese nombre.",
+      "duplicate_unit_abbreviation": "Ya usas esa abreviatura en otra unidad.",
+      "not_found": "Eso ya no existe. Vuelve a cargar la pantalla.",
+      "invalid_form": "Revisa los datos del formulario."
     }
   },
   "buttons": {
@@ -178,6 +255,18 @@
     },
     "addUser": {
       "label": "Agregar usuario"
+    },
+    "save": {
+      "label": "Guardar"
+    },
+    "edit": {
+      "label": "Editar"
+    },
+    "delete": {
+      "label": "Eliminar"
+    },
+    "close": {
+      "label": "Cerrar"
     }
   }
 }

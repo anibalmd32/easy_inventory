@@ -18,6 +18,16 @@ export enum PASSWORD_VALIDATION_ERROR_MESSAGES {
   confirm_mismatch = "password.confirm_mismatch",
 }
 
+export enum CATALOG_VALIDATION_ERROR_MESSAGES {
+  name_too_short = "catalog.name_too_short",
+  name_too_long = "catalog.name_too_long",
+  abbreviation_too_short = "catalog.abbreviation_too_short",
+  abbreviation_too_long = "catalog.abbreviation_too_long",
+  description_too_long = "catalog.description_too_long",
+  quantity_invalid = "catalog.quantity_invalid",
+  quantity_too_big = "catalog.quantity_too_big",
+}
+
 export enum SECURITY_ANSWER_VALIDATION_ERROR_MESSAGES {
   question_required = "security.question_required",
   answer_too_short = "security.answer_too_short",

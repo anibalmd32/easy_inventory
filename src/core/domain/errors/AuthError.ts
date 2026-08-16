@@ -1,16 +1,11 @@
 import type { AUTH_ERROR_MESSAGES } from "../enums/authErrorMessages";
+import { AppError } from "./AppError";
 
-/**
- * Error de autenticación pensado para llegar hasta la UI: en vez de un
- * texto suelto lleva la clave i18n que la vista debe traducir.
- */
-export class AuthError extends Error {
-  readonly messageKey: AUTH_ERROR_MESSAGES;
-
+/** Error de autenticación. Ver [AppError] para el contrato con la UI. */
+export class AuthError extends AppError {
   constructor(messageKey: AUTH_ERROR_MESSAGES) {
     super(messageKey);
     this.name = "AuthError";
-    this.messageKey = messageKey;
   }
 }
 

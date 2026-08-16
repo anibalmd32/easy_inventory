@@ -13,6 +13,12 @@
       "skillPath": "skills/database-migrations/SKILL.md",
       "computedHash": "71053b570ad648117f19b3456836a819a6b85f868628899ee28246d8a956b06f"
     },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "93f53fd1c0352d3d7ec17b8f73d7351bf76f4821e55d123c9d2abc2c53ba48e4"
+    },
     "kysely": {
       "source": "mindrally/skills",
       "sourceType": "github",

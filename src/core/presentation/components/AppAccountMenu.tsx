@@ -74,7 +74,7 @@ export const AppAccountMenu = () => {
               params={{
                 role,
               }}
-              to="/$role/settings/roles"
+              to="/$role/settings"
             >
               <FiSettings size={16} />
               {t("common.settings")}

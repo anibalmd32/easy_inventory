@@ -27,5 +27,14 @@
   "avatar": {
     "max_size": "The file size must not exceed 10 MB",
     "invalid_mime_type": "Invalid file type. Allowed types: JPEG, PNG"
+  },
+  "catalog": {
+    "name_too_short": "The name must be at least 2 characters long",
+    "name_too_long": "The name must not exceed 60 characters",
+    "abbreviation_too_short": "Enter a short form",
+    "abbreviation_too_long": "The short form must not exceed 8 characters",
+    "description_too_long": "The description must not exceed 200 characters",
+    "quantity_invalid": "Enter a whole number of 0 or more",
+    "quantity_too_big": "The number cannot be greater than 9999"
   }
 }

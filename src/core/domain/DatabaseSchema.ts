@@ -1,5 +1,8 @@
 import type { BaseTable } from "./entities/BaseTable";
+import type { InventorySettingEntity } from "./entities/InventorySettingEntity";
+import type { MeasurementUnitEntity } from "./entities/MeasurementUnitEntity";
 import type { PermissionEntity } from "./entities/PermissionEntity";
+import type { ProductCategoryEntity } from "./entities/ProductCategoryEntity";
 import type { RoleEntity } from "./entities/RoleEntity";
 import type { RolePermissionEntity } from "./entities/RolePermissionEntity";
 import type { SecurityQuestionEntity } from "./entities/SecurityQuestionEntity";
@@ -13,6 +16,9 @@ import type { UserSessionEntity } from "./entities/UserSessionEntity";
 import type { UserSettingsEntity } from "./entities/UserSettingEntity";
 
 export interface DatabaseSchema {
+  inventory_setting: InventorySettingEntity & BaseTable;
+  measurement_unit: MeasurementUnitEntity & BaseTable;
+  product_category: ProductCategoryEntity & BaseTable;
   user: UserEntity & BaseTable;
   permission: PermissionEntity & BaseTable;
   role: RoleEntity & BaseTable;

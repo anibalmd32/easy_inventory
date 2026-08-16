@@ -11,7 +11,13 @@
     "profile": "Profile",
     "account": "Account",
     "language": "Language",
-    "comingSoon": "This module is still under construction."
+    "comingSoon": "This module is still under construction.",
+    "soon": "Soon",
+    "pagination": {
+      "range": "{{from}}–{{to}} of {{total}}",
+      "previous": "Previous",
+      "next": "Next"
+    }
   },
   "pages": {
     "auth": {
@@ -66,6 +72,70 @@
         "showUsersLink": "View users",
         "showPermissionsLink": "View permissions",
         "editRoleTooltip": "Edit role"
+      },
+      "title": "Settings",
+      "subtitle": "Adjust the app to the way your business works.",
+      "groups": {
+        "inventory": {
+          "title": "Inventory",
+          "description": "Categories, units and the running-low alert."
+        },
+        "pos": {
+          "title": "Point of sale",
+          "description": "How you charge and what shows on your invoices."
+        },
+        "debts": {
+          "title": "Debts",
+          "description": "Payment terms and collection reminders."
+        },
+        "business": {
+          "title": "My business",
+          "description": "Name, logo and contact details."
+        },
+        "roles": {
+          "title": "Users and permissions",
+          "description": "Who gets into the app and what they can do."
+        }
+      },
+      "inventory": {
+        "lowQuantity": {
+          "title": "Running-low alert",
+          "description": "So you know when to restock before you run out of something to sell.",
+          "sentenceStart": "Tell me when there are",
+          "sentenceEnd": "or fewer left",
+          "saved": "Saved"
+        },
+        "categories": {
+          "title": "Categories",
+          "description": "Group your products so you can find them fast.",
+          "add": "Add",
+          "emptyTitle": "No categories yet",
+          "emptyBody": "Create the first one to group your products: drinks, cleaning, snacks…",
+          "nameLabel": "Name",
+          "namePlaceholder": "Drinks",
+          "descriptionLabel": "Description (optional)",
+          "descriptionPlaceholder": "Sodas, juices and water",
+          "createTitle": "New category",
+          "editTitle": "Edit category",
+          "deleteTitle": "Delete this category?",
+          "deleteDescription": "“{{name}}” will be removed from your list. You can create it again any time."
+        },
+        "units": {
+          "title": "Units of measure",
+          "description": "How you sell each product: by unit, by kilo, by box…",
+          "add": "Add",
+          "emptyTitle": "No units yet",
+          "emptyBody": "Create the first one to say how you measure what you sell.",
+          "nameLabel": "Name",
+          "namePlaceholder": "Kilogram",
+          "abbreviationLabel": "Short form",
+          "abbreviationPlaceholder": "kg",
+          "preview": "It will look like this:",
+          "createTitle": "New unit",
+          "editTitle": "Edit unit",
+          "deleteTitle": "Delete this unit?",
+          "deleteDescription": "“{{name}}” will be removed from your list. You can create it again any time."
+        }
       }
     }
   },
@@ -143,6 +213,13 @@
       "wrong_security_answer": "That answer is not correct.",
       "biometric_not_enabled": "This account no longer has fingerprint unlock enabled. Sign in with your password.",
       "biometric_failed": "We couldn't verify your identity. Please try again."
+    },
+    "catalog": {
+      "duplicate_category": "You already have a category with that name.",
+      "duplicate_unit_name": "You already have a unit with that name.",
+      "duplicate_unit_abbreviation": "That short form is already used by another unit.",
+      "not_found": "That no longer exists. Reload the screen.",
+      "invalid_form": "Please check the form fields."
     }
   },
   "buttons": {
@@ -178,6 +255,18 @@
     },
     "addUser": {
       "label": "Add user"
+    },
+    "save": {
+      "label": "Save"
+    },
+    "edit": {
+      "label": "Edit"
+    },
+    "delete": {
+      "label": "Delete"
+    },
+    "close": {
+      "label": "Close"
     }
   }
 }

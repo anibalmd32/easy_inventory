@@ -1,23 +1,18 @@
 import type { TFunction } from "i18next";
-import { FiSettings, FiShield } from "react-icons/fi";
+import { FiSettings } from "react-icons/fi";
 import type { NavItem } from "../../core/presentation/components/AsidePanel/AsidePanel";
 
+/**
+ * En el panel lateral la configuración es una sola entrada que lleva al hub.
+ * Antes colgaba de ahí cada submódulo, pero repartir botones de configuración
+ * hace fácil creer que estás ajustando un módulo cuando estás en otro.
+ */
 export const getSettingsNavItems = (t: TFunction, role: string): NavItem[] => {
   return [
     {
       label: t("common.settings"),
-      href: "",
+      href: `/${role}/settings`,
       Icon: FiSettings,
-      children: [
-        {
-          // El rol se interpola: antes estaba fijo en "/admin/...", así que
-          // para cualquier otro rol el enlace rebotaba contra el guard de
-          // `/$role` y la pantalla quedaba inalcanzable.
-          label: t("common.roles"),
-          href: `/${role}/settings/roles`,
-          Icon: FiShield,
-        },
-      ],
     },
   ];
 };
