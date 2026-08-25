@@ -3,6 +3,8 @@ import type { BusinessSettingData } from "../../../domain/data/BusinessSettingDa
 import { CATALOG_ERROR_MESSAGES } from "../../../domain/enums/catalogErrorMessages";
 import { CatalogError } from "../../../domain/errors/CatalogError";
 import {
+  BusinessInfoDto,
+  type BusinessInfoInput,
   BusinessLogoDto,
   type BusinessLogoInput,
   BusinessNameDto,
@@ -53,5 +55,14 @@ export class BusinessSettingsService {
     }
 
     await this.settings.updateTheme(validData.theme);
+  }
+  async updateInfo(data: BusinessInfoInput): Promise<void> {
+    const { validData } = dtoValidator(BusinessInfoDto, data);
+
+    if (!validData) {
+      throw new CatalogError(CATALOG_ERROR_MESSAGES.invalid_form);
+    }
+
+    await this.settings.updateInfo(validData);
   }
 }

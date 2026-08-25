@@ -17,6 +17,10 @@ export const posSettingsKeys = {
     "pos-settings",
     "rate-history",
   ] as const,
+  settings: [
+    "pos-settings",
+    "settings",
+  ] as const,
 };
 
 export const paymentMethodsQueryOptions = queryOptions({
@@ -32,4 +36,9 @@ export const currentRateQueryOptions = queryOptions({
 export const rateHistoryQueryOptions = queryOptions({
   queryKey: posSettingsKeys.rateHistory,
   queryFn: () => posSettingsService.getRateHistory(),
+});
+
+export const posSettingQueryOptions = queryOptions({
+  queryKey: posSettingsKeys.settings,
+  queryFn: () => posSettingsService.getSettings(),
 });

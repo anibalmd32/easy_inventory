@@ -1,16 +1,22 @@
 import { dtoValidator } from "../../../../libs/dtoValidator";
 import type { ExchangeRateData } from "../../../domain/data/ExchangeRateData";
 import type { PaymentMethodData } from "../../../domain/data/PaymentMethodData";
+import type { PosSettingData } from "../../../domain/data/PosSettingData";
 import { CATALOG_ERROR_MESSAGES } from "../../../domain/enums/catalogErrorMessages";
 import { CatalogError } from "../../../domain/errors/CatalogError";
 import {
   ExchangeRateDto,
   type ExchangeRateInput,
+  InvoiceSettingsDto,
+  type InvoiceSettingsInput,
   PaymentMethodDto,
   type PaymentMethodInput,
+  PrimaryCurrencyDto,
+  type PrimaryCurrencyInput,
 } from "../../dtos/PosSettingsDtos";
 import type { ExchangeRateRepository } from "../../repositories/ExchangeRateRepository";
 import type { PaymentMethodRepository } from "../../repositories/PaymentMethodRepository";
+import type { PosSettingRepository } from "../../repositories/PosSettingRepository";
 
 /**
  * Configuración del punto de venta: métodos de pago y tasa de cambio
@@ -24,6 +30,7 @@ export class PosSettingsService {
   constructor(
     private paymentMethods: PaymentMethodRepository,
     private exchangeRates: ExchangeRateRepository,
+    private settings: PosSettingRepository,
   ) {}
 
   // --- Métodos de pago ----------------------------------------------------
@@ -65,6 +72,32 @@ export class PosSettingsService {
     }
 
     await this.exchangeRates.create(validData.rate);
+  }
+
+  // --- Moneda y factura ---------------------------------------------------
+
+  getSettings(): Promise<PosSettingData> {
+    return this.settings.find();
+  }
+
+  async setPrimaryCurrency(data: PrimaryCurrencyInput): Promise<void> {
+    const { validData } = dtoValidator(PrimaryCurrencyDto, data);
+
+    if (!validData) {
+      throw new CatalogError(CATALOG_ERROR_MESSAGES.invalid_form);
+    }
+
+    await this.settings.updatePrimaryCurrency(validData.primary_currency);
+  }
+
+  async setInvoiceSettings(data: InvoiceSettingsInput): Promise<void> {
+    const { validData } = dtoValidator(InvoiceSettingsDto, data);
+
+    if (!validData) {
+      throw new CatalogError(CATALOG_ERROR_MESSAGES.invalid_form);
+    }
+
+    await this.settings.updateInvoiceSettings(validData);
   }
 
   // --- Validación ---------------------------------------------------------

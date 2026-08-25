@@ -5,7 +5,9 @@ import { MdArrowBack } from "react-icons/md";
 import type { PaymentMethodData } from "../../../../core/domain/data/PaymentMethodData";
 import { posSettingsService } from "../../../../core/infrastructure/container";
 import { CatalogSection } from "../../../../core/presentation/components/CatalogSection";
+import { CurrencyCard } from "../../../../core/presentation/forms/PosSettings/CurrencyCard";
 import { ExchangeRateCard } from "../../../../core/presentation/forms/PosSettings/ExchangeRateCard";
+import { InvoiceCard } from "../../../../core/presentation/forms/PosSettings/InvoiceCard";
 import { PaymentMethodForm } from "../../../../core/presentation/forms/PosSettings/PaymentMethodForm";
 import {
   paymentMethodsQueryOptions,
@@ -43,6 +45,10 @@ function RouteComponent() {
       </div>
 
       <ExchangeRateCard />
+
+      <CurrencyCard />
+
+      <InvoiceCard />
 
       <CatalogSection<PaymentMethodData>
         addLabel={t("pages.settings.pos.paymentMethods.add")}

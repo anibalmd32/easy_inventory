@@ -3,6 +3,7 @@ import { ExchangeRateRepository } from "./repositories/ExchangeRateRepository";
 import { InventorySettingRepository } from "./repositories/InventorySettingRepository";
 import { MeasurementUnitRepository } from "./repositories/MeasurementUnitRepository";
 import { PaymentMethodRepository } from "./repositories/PaymentMethodRepository";
+import { PosSettingRepository } from "./repositories/PosSettingRepository";
 import { ProductCategoryRepository } from "./repositories/ProductCategoryRepository";
 import { SecurityQuestionRepository } from "./repositories/SecurityQuestionRepository";
 import { UserRepository } from "./repositories/UserRepository";
@@ -48,4 +49,5 @@ export const businessSettingsService = new BusinessSettingsService(
 export const posSettingsService = new PosSettingsService(
   new PaymentMethodRepository(),
   new ExchangeRateRepository(),
+  new PosSettingRepository(),
 );

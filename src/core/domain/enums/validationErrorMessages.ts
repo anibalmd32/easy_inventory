@@ -30,6 +30,9 @@ export enum CATALOG_VALIDATION_ERROR_MESSAGES {
 
 export enum POS_VALIDATION_ERROR_MESSAGES {
   rate_invalid = "pos.rate_invalid",
+  prefix_too_long = "pos.prefix_too_long",
+  invoice_number_invalid = "pos.invoice_number_invalid",
+  footer_too_long = "pos.footer_too_long",
 }
 
 export enum SECURITY_ANSWER_VALIDATION_ERROR_MESSAGES {
@@ -50,4 +53,11 @@ export enum AVATAR_VALIDATION_ERROR_MESSAGES {
 export enum LOGO_VALIDATION_ERROR_MESSAGES {
   max_size = "logo.max_size",
   invalid_mime_type = "logo.invalid_mime_type",
+}
+
+export enum BUSINESS_VALIDATION_ERROR_MESSAGES {
+  tax_id_too_long = "business.tax_id_too_long",
+  address_too_long = "business.address_too_long",
+  phone_too_long = "business.phone_too_long",
+  phone_invalid = "business.phone_invalid",
 }

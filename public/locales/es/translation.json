@@ -90,7 +90,7 @@
         },
         "business": {
           "title": "Mi negocio",
-          "description": "Nombre, logo y tema de la app."
+          "description": "Nombre, datos del negocio y tema de la app."
         },
         "roles": {
           "title": "Usuarios y permisos",
@@ -173,6 +173,26 @@
           "editTitle": "Editar método de pago",
           "deleteTitle": "¿Eliminar el método de pago?",
           "deleteDescription": "Se quitará «{{name}}» de tu lista. Podrás volver a crearlo cuando quieras."
+        },
+        "currency": {
+          "title": "Moneda de los precios",
+          "description": "Elige cuál de los dos importes se muestra grande. El otro se sigue viendo, más pequeño y entre paréntesis.",
+          "bolivares": "Bolívares",
+          "dolares": "Dólares",
+          "preview": "Así se verán los precios",
+          "noRate": "Todavía no has fijado la tasa de cambio, así que solo se puede mostrar el precio en dólares."
+        },
+        "invoice": {
+          "title": "Facturas",
+          "description": "Cómo se numeran y qué datos aparecen impresos en ellas.",
+          "prefixLabel": "Prefijo (opcional)",
+          "prefixPlaceholder": "FAC-",
+          "nextNumberLabel": "Próximo número",
+          "preview": "La próxima factura será:",
+          "showBusinessInfoLabel": "Mostrar los datos de mi negocio",
+          "showBusinessInfoHint": "RIF, dirección y teléfono, tal como los guardaste en Mi negocio.",
+          "footerLabel": "Nota al pie (opcional)",
+          "footerPlaceholder": "Gracias por su compra"
         }
       },
       "business": {
@@ -196,6 +216,16 @@
           "description": "Elige la combinación de colores de toda la app.",
           "activeBadge": "Activo",
           "sample": "Aa 123"
+        },
+        "info": {
+          "title": "Datos del negocio",
+          "description": "Los que pueden salir impresos en tus facturas. Todos son opcionales.",
+          "taxIdLabel": "RIF",
+          "taxIdPlaceholder": "J-12345678-9",
+          "addressLabel": "Dirección",
+          "addressPlaceholder": "Calle, sector, ciudad",
+          "phoneLabel": "Teléfono",
+          "phonePlaceholder": "0412 1234567"
         }
       }
     }

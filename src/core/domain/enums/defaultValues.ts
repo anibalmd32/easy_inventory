@@ -17,3 +17,17 @@ export enum DEFAULT_BUSINESS_SETTINGS {
   // migración 07 y con el `data-theme` estático del index.html.
   THEME = "business",
 }
+
+/**
+ * Objeto y no enum: un enum que mezcla texto y números hace que TypeScript
+ * tipe cada miembro como la unión completa, y entonces no se puede asignar
+ * ni a `string` ni a `number`.
+ *
+ * Deben coincidir con los DEFAULT de `pos_setting` en las migraciones 08 y 10.
+ */
+export const DEFAULT_POS_SETTINGS = {
+  INVOICE_PREFIX: "",
+  INVOICE_NEXT_NUMBER: 1,
+  INVOICE_FOOTER_NOTE: "",
+  INVOICE_SHOW_BUSINESS_INFO: true,
+} as const;

@@ -45,6 +45,24 @@ pub fn run() {
             sql: include_str!("../migrations/07_business_settings.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 8,
+            description: "create pos settings with the primary display currency",
+            sql: include_str!("../migrations/08_pos_currency_settings.sql"),
+            kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 9,
+            description: "add tax id, address and phone to business settings",
+            sql: include_str!("../migrations/09_business_contact_info.sql"),
+            kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 10,
+            description: "add invoice numbering and receipt options to pos settings",
+            sql: include_str!("../migrations/10_invoice_settings.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
         .setup(|_app| {

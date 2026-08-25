@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { MdArrowBack } from "react-icons/md";
-import { BusinessLogoCard } from "../../../../core/presentation/forms/BusinessSettings/BusinessLogoCard";
+// import { BusinessLogoCard } from "../../../../core/presentation/forms/BusinessSettings/BusinessLogoCard";
+import { BusinessInfoCard } from "../../../../core/presentation/forms/BusinessSettings/BusinessInfoCard";
 import { BusinessNameCard } from "../../../../core/presentation/forms/BusinessSettings/BusinessNameCard";
 import { ThemePickerCard } from "../../../../core/presentation/forms/BusinessSettings/ThemePickerCard";
 
@@ -35,7 +36,23 @@ function RouteComponent() {
       </div>
 
       <BusinessNameCard />
-      <BusinessLogoCard />
+
+      <BusinessInfoCard />
+
+      {/*
+        Subida del logo desactivada, no eliminada.
+        Para reactivarla basta con descomentar el import de arriba y esta línea.
+
+        Todo lo que necesita sigue en su sitio y compilando: el componente
+        `BusinessLogoCard`, el `LogoSchema`, y los métodos `updateLogo` del
+        servicio y del repositorio. La columna `logo` de `business_setting`
+        tampoco se toca, así que un logo guardado antes no se pierde.
+
+        Mientras esté desactivada, la app usa el logo provisional definido en
+        `useBusinessSettings` (`/logo.png`).
+      */}
+      {/* <BusinessLogoCard /> */}
+
       <ThemePickerCard />
     </div>
   );

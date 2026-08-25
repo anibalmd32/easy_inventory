@@ -90,7 +90,7 @@
         },
         "business": {
           "title": "My business",
-          "description": "Name, logo and app theme."
+          "description": "Name, business details and app theme."
         },
         "roles": {
           "title": "Users and permissions",
@@ -173,6 +173,26 @@
           "editTitle": "Edit payment method",
           "deleteTitle": "Delete this payment method?",
           "deleteDescription": "“{{name}}” will be removed from your list. You can create it again any time."
+        },
+        "currency": {
+          "title": "Price currency",
+          "description": "Choose which of the two amounts shows large. The other stays visible, smaller and in parentheses.",
+          "bolivares": "Bolívares",
+          "dolares": "Dollars",
+          "preview": "This is how prices will look",
+          "noRate": "You haven't set the exchange rate yet, so only the dollar price can be shown."
+        },
+        "invoice": {
+          "title": "Invoices",
+          "description": "How they are numbered and what details get printed on them.",
+          "prefixLabel": "Prefix (optional)",
+          "prefixPlaceholder": "INV-",
+          "nextNumberLabel": "Next number",
+          "preview": "The next invoice will be:",
+          "showBusinessInfoLabel": "Show my business details",
+          "showBusinessInfoHint": "Tax ID, address and phone, as you saved them under My business.",
+          "footerLabel": "Footer note (optional)",
+          "footerPlaceholder": "Thank you for your purchase"
         }
       },
       "business": {
@@ -196,6 +216,16 @@
           "description": "Pick the color scheme for the whole app.",
           "activeBadge": "Active",
           "sample": "Aa 123"
+        },
+        "info": {
+          "title": "Business details",
+          "description": "The ones that can be printed on your invoices. All optional.",
+          "taxIdLabel": "Tax ID",
+          "taxIdPlaceholder": "J-12345678-9",
+          "addressLabel": "Address",
+          "addressPlaceholder": "Street, area, city",
+          "phoneLabel": "Phone",
+          "phonePlaceholder": "0412 1234567"
         }
       }
     }

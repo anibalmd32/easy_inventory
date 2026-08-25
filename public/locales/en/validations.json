@@ -42,6 +42,15 @@
     "quantity_too_big": "The number cannot be greater than 9999"
   },
   "pos": {
-    "rate_invalid": "Enter a number greater than 0"
+    "rate_invalid": "Enter a number greater than 0",
+    "prefix_too_long": "The prefix must not exceed 10 characters",
+    "invoice_number_invalid": "Enter a whole number of 1 or more",
+    "footer_too_long": "The note must not exceed 160 characters"
+  },
+  "business": {
+    "tax_id_too_long": "The tax ID must not exceed 30 characters",
+    "address_too_long": "The address must not exceed 200 characters",
+    "phone_too_long": "The phone must not exceed 30 characters",
+    "phone_invalid": "Use only digits, spaces and the signs + ( ) - ."
   }
 }

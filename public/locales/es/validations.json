@@ -42,6 +42,15 @@
     "quantity_too_big": "El número no puede ser mayor que 9999"
   },
   "pos": {
-    "rate_invalid": "Escribe un número mayor que 0"
+    "rate_invalid": "Escribe un número mayor que 0",
+    "prefix_too_long": "El prefijo no debe superar los 10 caracteres",
+    "invoice_number_invalid": "Escribe un número entero de 1 en adelante",
+    "footer_too_long": "La nota no debe superar los 160 caracteres"
+  },
+  "business": {
+    "tax_id_too_long": "El RIF no debe superar los 30 caracteres",
+    "address_too_long": "La dirección no debe superar los 200 caracteres",
+    "phone_too_long": "El teléfono no debe superar los 30 caracteres",
+    "phone_invalid": "Usa solo números, espacios y los signos + ( ) - ."
   }
 }

@@ -14,6 +14,9 @@ export class BusinessSettingRepository {
         "name",
         "logo",
         "theme",
+        "tax_id",
+        "address",
+        "phone",
       ])
       .where("id", "=", SETTINGS_ROW_ID)
       .executeTakeFirst();
@@ -27,6 +30,9 @@ export class BusinessSettingRepository {
         name: DEFAULT_BUSINESS_SETTINGS.NAME,
         logo: null,
         theme: DEFAULT_BUSINESS_SETTINGS.THEME,
+        tax_id: "",
+        address: "",
+        phone: "",
       }
     );
   }
@@ -58,6 +64,20 @@ export class BusinessSettingRepository {
       .updateTable("business_setting")
       .set({
         theme,
+        updated_at: new Date().toISOString(),
+      })
+      .where("id", "=", SETTINGS_ROW_ID)
+      .execute();
+  }
+  async updateInfo(info: {
+    tax_id: string;
+    address: string;
+    phone: string;
+  }): Promise<void> {
+    await db
+      .updateTable("business_setting")
+      .set({
+        ...info,
         updated_at: new Date().toISOString(),
       })
       .where("id", "=", SETTINGS_ROW_ID)
