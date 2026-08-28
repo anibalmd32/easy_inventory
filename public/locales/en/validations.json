@@ -52,5 +52,9 @@
     "address_too_long": "The address must not exceed 200 characters",
     "phone_too_long": "The phone must not exceed 30 characters",
     "phone_invalid": "Use only digits, spaces and the signs + ( ) - ."
+  },
+  "debt": {
+    "term_invalid": "Enter a whole number between 0 and 365",
+    "limit_invalid": "Enter an amount of 0 or more"
   }
 }

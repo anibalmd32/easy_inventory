@@ -21,6 +21,7 @@ type SettingsGroup = {
   to?:
     | "/$role/settings/inventory"
     | "/$role/settings/pos"
+    | "/$role/settings/debts"
     | "/$role/settings/business"
     | "/$role/settings/roles";
 };
@@ -41,6 +42,7 @@ const GROUPS: SettingsGroup[] = [
   {
     key: "debts",
     Icon: MdReceiptLong,
+    to: "/$role/settings/debts",
   },
   {
     key: "business",

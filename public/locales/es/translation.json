@@ -60,19 +60,32 @@
     },
     "profile": {
       "title": "Mi perfil",
-      "role": "Rol",
-      "permissions": "Permisos de tu rol",
-      "editSoon": "La edición del perfil llegará más adelante."
+      "permissions": {
+        "title": "Lo que puedes hacer",
+        "description": "Permisos de tu rol: {{role}}."
+      },
+      "subtitle": "Tus datos y cómo entras a la app.",
+      "identity": {
+        "title": "Tus datos",
+        "description": "El nombre y la foto que verá tu equipo.",
+        "addPhoto": "Subir foto",
+        "changePhoto": "Cambiar foto",
+        "removePhoto": "Quitar",
+        "photoHint": "JPG o PNG. Se recorta y reduce automáticamente."
+      },
+      "email": {
+        "title": "Correo de acceso",
+        "description": "Con este correo inicias sesión. Si lo cambias, usa el nuevo la próxima vez."
+      },
+      "password": {
+        "title": "Contraseña",
+        "description": "Para cambiarla, confirma primero la que usas ahora.",
+        "currentLabel": "Contraseña actual",
+        "action": "Cambiar contraseña",
+        "changed": "Contraseña cambiada"
+      }
     },
     "settings": {
-      "roles": {
-        "title": "Roles y permisos",
-        "description": "Gestiona el rol de tus usuarios y asigna permisos",
-        "usersBadge": "usuario(s)",
-        "showUsersLink": "Ver usuarios",
-        "showPermissionsLink": "Ver permisos",
-        "editRoleTooltip": "Editar rol"
-      },
       "title": "Configuración",
       "subtitle": "Ajusta la app a la forma de trabajar de tu negocio.",
       "groups": {
@@ -86,7 +99,7 @@
         },
         "debts": {
           "title": "Deudas",
-          "description": "Plazos y recordatorios de cobro."
+          "description": "Si fías y bajo qué condiciones."
         },
         "business": {
           "title": "Mi negocio",
@@ -227,6 +240,43 @@
           "phoneLabel": "Teléfono",
           "phonePlaceholder": "0412 1234567"
         }
+      },
+      "debts": {
+        "credit": {
+          "title": "Vender a crédito",
+          "description": "Permite entregar mercancía para cobrarla después. Si lo apagas, todas las ventas se cobran al momento."
+        },
+        "terms": {
+          "title": "Condiciones de pago",
+          "description": "Cuánto tiempo das para pagar y hasta cuánto dejas que te deban.",
+          "sentenceStart": "Doy",
+          "sentenceEnd": "días para pagar",
+          "termLabel": "Días para pagar",
+          "limitLabel": "Máximo que puede deber un cliente (en dólares)",
+          "limitPreview": "Cuando llegue a",
+          "noLimit": "Con 0 no hay límite: un cliente puede deber lo que sea.",
+          "creditDisabled": "Apagaste las ventas a crédito, así que estas condiciones no se aplican. Vuelve a activarlas arriba para editarlas."
+        }
+      },
+      "team": {
+        "members": {
+          "title": "Tu equipo",
+          "description": "Quién puede entrar a la app y con qué rol.",
+          "add": "Agregar",
+          "you": "Tú",
+          "roleLabel": "Rol",
+          "recoveryHint": "Esta pregunta le servirá a esa persona para recuperar su contraseña si la olvida.",
+          "createTitle": "Agregar a alguien al equipo",
+          "deleteTitle": "¿Quitar del equipo?",
+          "deleteDescription": "«{{name}}» dejará de poder entrar a la app. Su correo queda libre por si quieres volver a darle acceso."
+        },
+        "roles": {
+          "title": "Roles y permisos",
+          "description": "Lo que puede hacer cada rol dentro de la app.",
+          "assigned_one": "{{count}} persona",
+          "assigned_other": "{{count}} personas",
+          "readOnly": "Los roles vienen definidos por la app y de momento no se pueden editar."
+        }
       }
     }
   },
@@ -312,6 +362,21 @@
       "duplicate_payment_method": "Ya tienes un método de pago con ese nombre.",
       "not_found": "Eso ya no existe. Vuelve a cargar la pantalla.",
       "invalid_form": "Revisa los datos del formulario."
+    },
+    "team": {
+      "cannot_create_superadmin": "Solo puede haber un dueño y ya existe.",
+      "cannot_modify_superadmin": "Al dueño no se le puede cambiar el rol ni eliminarlo.",
+      "cannot_modify_self": "No puedes cambiarte el rol ni eliminar tu propia cuenta.",
+      "email_already_taken": "Ya existe una cuenta con ese correo electrónico.",
+      "role_not_found": "No se encontró el rol. Reinicia la app para que se apliquen las migraciones.",
+      "invalid_form": "Revisa los datos del formulario."
+    },
+    "profile": {
+      "current_password_wrong": "La contraseña actual no es correcta.",
+      "email_already_taken": "Ya existe una cuenta con ese correo electrónico.",
+      "image_failed": "No se pudo procesar la imagen. Prueba con otra.",
+      "invalid_form": "Revisa los datos del formulario.",
+      "not_found": "No se encontró tu cuenta. Vuelve a iniciar sesión."
     }
   },
   "buttons": {
@@ -342,12 +407,6 @@
     "cancel": {
       "label": "Cancelar"
     },
-    "addRole": {
-      "label": "Agregar rol"
-    },
-    "addUser": {
-      "label": "Agregar usuario"
-    },
     "save": {
       "label": "Guardar"
     },
@@ -360,5 +419,22 @@
     "close": {
       "label": "Cerrar"
     }
+  },
+  "roles": {
+    "superadmin": "Dueño",
+    "admin": "Administrador",
+    "contador": "Contador",
+    "vendedor": "Vendedor"
+  },
+  "permissionModules": {
+    "inventory": "Inventario",
+    "invoicing": "Facturación",
+    "debts": "Deudas",
+    "reports": "Reportes",
+    "users": "Usuarios",
+    "roles": "Roles",
+    "settings": "Configuración",
+    "otros": "Otros",
+    "none": "Este rol no tiene permisos asignados."
   }
 }

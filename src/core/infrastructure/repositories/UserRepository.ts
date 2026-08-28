@@ -2,11 +2,13 @@ import type { Transaction } from "kysely";
 import { db } from "../../../db";
 import type { DatabaseSchema } from "../../domain/DatabaseSchema";
 import type { AuthUserData } from "../../domain/data/AuthUserData";
+import type { TeamMemberData } from "../../domain/data/TeamMemberData";
 import { AUTH_ERROR_MESSAGES } from "../../domain/enums/authErrorMessages";
 import { DEFAULT_USER_SETTINGS } from "../../domain/enums/defaultValues";
 import { ROLES } from "../../domain/enums/roles";
 import { AuthError } from "../../domain/errors/AuthError";
 import { normalizeSecurityAnswer } from "../../domain/helpers/normalizeSecurityAnswer";
+import { violatesUniqueConstraint } from "./violatesUniqueConstraint";
 
 export type AuthUserRecord = {
   /** En texto plano: la app es local y ofrece recuperación por pregunta. */
@@ -383,6 +385,176 @@ export class UserRepository {
       })
       .where("id", "=", Number(user.settings_id))
       .execute();
+  }
+
+  /** Todo el equipo con su rol, del más antiguo al más reciente. */
+  async findTeamMembers(): Promise<TeamMemberData[]> {
+    const rows = await db
+      .selectFrom("user")
+      .innerJoin("user_credential", "user_credential.id", "user.credential_id")
+      .innerJoin("user_profile", "user_profile.id", "user.profile_id")
+      .innerJoin("user_role", "user_role.user_id", "user.id")
+      .innerJoin("role", "role.id", "user_role.role_id")
+      .select([
+        "user.id as id",
+        "user.created_at as created_at",
+        "user_credential.email as email",
+        "user_profile.name as name",
+        "user_profile.last_name as last_name",
+        "user_profile.avatar_url as avatar_url",
+        "role.name as role_name",
+      ])
+      .where("user.deleted_at", "is", null)
+      .orderBy("user.id", "asc")
+      .execute();
+
+    return rows.map((row) => ({
+      ...row,
+      avatar_url: row.avatar_url ?? undefined,
+    }));
+  }
+
+  async findRoleNameByUserId(userId: number): Promise<string | null> {
+    const row = await db
+      .selectFrom("user_role")
+      .innerJoin("role", "role.id", "user_role.role_id")
+      .select("role.name as name")
+      .where("user_role.user_id", "=", userId)
+      .executeTakeFirst();
+
+    return row?.name ?? null;
+  }
+
+  async updateUserRole(userId: number, roleId: number): Promise<void> {
+    const result = await db
+      .updateTable("user_role")
+      .set({
+        role_id: roleId,
+        updated_at: new Date().toISOString(),
+      })
+      .where("user_id", "=", userId)
+      .executeTakeFirst();
+
+    if (Number(result.numUpdatedRows) === 0) {
+      throw new AuthError(AUTH_ERROR_MESSAGES.email_not_found);
+    }
+  }
+
+  /**
+   * Borrado lógico. La credencial se marca también para que su correo quede
+   * libre y se pueda volver a dar de alta a esa persona más adelante.
+   */
+  async softDeleteUser(userId: number): Promise<void> {
+    const now = new Date().toISOString();
+
+    const user = await db
+      .selectFrom("user")
+      .select("credential_id")
+      .where("id", "=", userId)
+      .where("deleted_at", "is", null)
+      .executeTakeFirst();
+
+    if (!user) {
+      throw new AuthError(AUTH_ERROR_MESSAGES.email_not_found);
+    }
+
+    await db
+      .updateTable("user")
+      .set({
+        deleted_at: now,
+        updated_at: now,
+      })
+      .where("id", "=", userId)
+      .execute();
+
+    await db
+      .updateTable("user_credential")
+      .set({
+        deleted_at: now,
+        updated_at: now,
+      })
+      .where("id", "=", Number(user.credential_id))
+      .execute();
+  }
+
+  /** Nombre, apellido y foto del propio usuario. */
+  async updateProfileDetails(
+    userId: number,
+    details: {
+      name: string;
+      last_name: string;
+      avatar_url?: string | null;
+    },
+  ): Promise<void> {
+    const user = await db
+      .selectFrom("user")
+      .select("profile_id")
+      .where("id", "=", userId)
+      .where("deleted_at", "is", null)
+      .executeTakeFirst();
+
+    if (!user) {
+      throw new AuthError(AUTH_ERROR_MESSAGES.email_not_found);
+    }
+
+    await db
+      .updateTable("user_profile")
+      .set({
+        name: details.name,
+        last_name: details.last_name,
+        // `undefined` deja la foto como está; `null` la quita.
+        ...(details.avatar_url === undefined
+          ? {}
+          : {
+              avatar_url: details.avatar_url ?? undefined,
+            }),
+        updated_at: new Date().toISOString(),
+      })
+      .where("id", "=", Number(user.profile_id))
+      .execute();
+  }
+
+  /** Cambia el correo de acceso. Lanza si ya lo usa otra cuenta. */
+  async updateEmail(userId: number, email: string): Promise<void> {
+    const user = await db
+      .selectFrom("user")
+      .select("credential_id")
+      .where("id", "=", userId)
+      .where("deleted_at", "is", null)
+      .executeTakeFirst();
+
+    if (!user) {
+      throw new AuthError(AUTH_ERROR_MESSAGES.email_not_found);
+    }
+
+    try {
+      await db
+        .updateTable("user_credential")
+        .set({
+          email,
+          updated_at: new Date().toISOString(),
+        })
+        .where("id", "=", Number(user.credential_id))
+        .execute();
+    } catch (error) {
+      if (violatesUniqueConstraint(error, "user_credential.email")) {
+        throw new AuthError(AUTH_ERROR_MESSAGES.email_already_taken);
+      }
+      throw error;
+    }
+  }
+
+  /** La contraseña actual, para confirmarla antes de cambiarla. */
+  async findPasswordByUserId(userId: number): Promise<string | null> {
+    const row = await db
+      .selectFrom("user")
+      .innerJoin("user_credential", "user_credential.id", "user.credential_id")
+      .select("user_credential.password as password")
+      .where("user.id", "=", userId)
+      .where("user.deleted_at", "is", null)
+      .executeTakeFirst();
+
+    return row?.password ?? null;
   }
 
   private async findPermissionNamesByRoleId(

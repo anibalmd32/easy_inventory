@@ -31,3 +31,10 @@ export const DEFAULT_POS_SETTINGS = {
   INVOICE_FOOTER_NOTE: "",
   INVOICE_SHOW_BUSINESS_INFO: true,
 } as const;
+
+/** Deben coincidir con los DEFAULT de `debt_setting` en la migración 11. */
+export const DEFAULT_DEBT_SETTINGS = {
+  CREDIT_ENABLED: true,
+  DEFAULT_TERM_DAYS: 15,
+  CUSTOMER_DEBT_LIMIT: 0,
+} as const;

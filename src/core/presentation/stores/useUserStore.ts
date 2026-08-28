@@ -35,6 +35,13 @@ interface UserState {
   clearSession: () => void;
   setRememberedEmail: (email: string | null) => void;
   setBiometricEmail: (email: string | null) => void;
+  /** Refleja en la sesión los datos que el usuario acaba de editar. */
+  updateSessionProfile: (profile: {
+    name: string;
+    last_name: string;
+    avatar_url?: string | null;
+  }) => void;
+  updateSessionEmail: (email: string) => void;
   /** Refleja en la sesión la preferencia ya guardada en la base de datos. */
   setBiometricPreference: (enabled: boolean) => void;
   registerFailedLogin: () => void;
@@ -72,6 +79,46 @@ export const useUserStore = zustand.create<UserState>()(
       setBiometricEmail: (email: string | null) =>
         set({
           biometricEmail: email,
+        }),
+      updateSessionProfile: (profile) =>
+        set((state) =>
+          state.userData
+            ? {
+                userData: {
+                  ...state.userData,
+                  profile: {
+                    ...state.userData.profile,
+                    name: profile.name,
+                    last_name: profile.last_name,
+                    // `undefined` deja la foto como está; `null` la quita.
+                    ...(profile.avatar_url === undefined
+                      ? {}
+                      : {
+                          avatar_url: profile.avatar_url ?? undefined,
+                        }),
+                  },
+                },
+              }
+            : {},
+        ),
+      updateSessionEmail: (email) =>
+        set((state) => {
+          if (!state.userData) {
+            return {};
+          }
+
+          return {
+            userData: {
+              ...state.userData,
+              email,
+            },
+            // Si el correo estaba recordado, se recuerda el nuevo.
+            rememberedEmail: state.rememberedEmail === null ? null : email,
+            biometricEmail:
+              state.biometricEmail === state.userData.email
+                ? email
+                : state.biometricEmail,
+          };
         }),
       setBiometricPreference: (enabled: boolean) =>
         set((state) => ({

@@ -60,19 +60,32 @@
     },
     "profile": {
       "title": "My profile",
-      "role": "Role",
-      "permissions": "Your role's permissions",
-      "editSoon": "Profile editing is coming later."
+      "permissions": {
+        "title": "What you can do",
+        "description": "Permissions for your role: {{role}}."
+      },
+      "subtitle": "Your details and how you sign in.",
+      "identity": {
+        "title": "Your details",
+        "description": "The name and photo your team will see.",
+        "addPhoto": "Upload photo",
+        "changePhoto": "Change photo",
+        "removePhoto": "Remove",
+        "photoHint": "JPG or PNG. Cropped and resized automatically."
+      },
+      "email": {
+        "title": "Sign-in email",
+        "description": "You sign in with this email. If you change it, use the new one next time."
+      },
+      "password": {
+        "title": "Password",
+        "description": "To change it, confirm the one you use now first.",
+        "currentLabel": "Current password",
+        "action": "Change password",
+        "changed": "Password changed"
+      }
     },
     "settings": {
-      "roles": {
-        "title": "Roles and Permissions",
-        "description": "Manage your users' roles and assign permissions",
-        "usersBadge": "user(s)",
-        "showUsersLink": "View users",
-        "showPermissionsLink": "View permissions",
-        "editRoleTooltip": "Edit role"
-      },
       "title": "Settings",
       "subtitle": "Adjust the app to the way your business works.",
       "groups": {
@@ -86,7 +99,7 @@
         },
         "debts": {
           "title": "Debts",
-          "description": "Payment terms and collection reminders."
+          "description": "Whether you sell on credit and on what terms."
         },
         "business": {
           "title": "My business",
@@ -227,6 +240,43 @@
           "phoneLabel": "Phone",
           "phonePlaceholder": "0412 1234567"
         }
+      },
+      "debts": {
+        "credit": {
+          "title": "Sell on credit",
+          "description": "Let customers take goods now and pay later. If you turn this off, every sale is paid on the spot."
+        },
+        "terms": {
+          "title": "Payment terms",
+          "description": "How long you give people to pay and how much you let them owe.",
+          "sentenceStart": "I give",
+          "sentenceEnd": "days to pay",
+          "termLabel": "Days to pay",
+          "limitLabel": "Most a customer can owe (in dollars)",
+          "limitPreview": "Once they reach",
+          "noLimit": "With 0 there is no limit: a customer can owe any amount.",
+          "creditDisabled": "You turned credit sales off, so these terms do not apply. Turn them back on above to edit."
+        }
+      },
+      "team": {
+        "members": {
+          "title": "Your team",
+          "description": "Who can get into the app and with what role.",
+          "add": "Add",
+          "you": "You",
+          "roleLabel": "Role",
+          "recoveryHint": "This question will let that person recover their password if they forget it.",
+          "createTitle": "Add someone to the team",
+          "deleteTitle": "Remove from the team?",
+          "deleteDescription": "“{{name}}” will no longer be able to get into the app. Their email is freed up in case you want to give them access again."
+        },
+        "roles": {
+          "title": "Roles and permissions",
+          "description": "What each role can do inside the app.",
+          "assigned_one": "{{count}} person",
+          "assigned_other": "{{count}} people",
+          "readOnly": "Roles are defined by the app and cannot be edited for now."
+        }
       }
     }
   },
@@ -312,6 +362,21 @@
       "duplicate_payment_method": "You already have a payment method with that name.",
       "not_found": "That no longer exists. Reload the screen.",
       "invalid_form": "Please check the form fields."
+    },
+    "team": {
+      "cannot_create_superadmin": "There can only be one owner and one already exists.",
+      "cannot_modify_superadmin": "The owner cannot be given another role or removed.",
+      "cannot_modify_self": "You cannot change your own role or remove your own account.",
+      "email_already_taken": "An account with that email already exists.",
+      "role_not_found": "The role was not found. Restart the app so the migrations run.",
+      "invalid_form": "Please check the form fields."
+    },
+    "profile": {
+      "current_password_wrong": "Your current password is not correct.",
+      "email_already_taken": "An account with that email already exists.",
+      "image_failed": "We could not process that image. Try another one.",
+      "invalid_form": "Please check the form fields.",
+      "not_found": "We could not find your account. Please sign in again."
     }
   },
   "buttons": {
@@ -342,12 +407,6 @@
     "cancel": {
       "label": "Cancel"
     },
-    "addRole": {
-      "label": "Add role"
-    },
-    "addUser": {
-      "label": "Add user"
-    },
     "save": {
       "label": "Save"
     },
@@ -360,5 +419,22 @@
     "close": {
       "label": "Close"
     }
+  },
+  "roles": {
+    "superadmin": "Owner",
+    "admin": "Administrator",
+    "contador": "Accountant",
+    "vendedor": "Salesperson"
+  },
+  "permissionModules": {
+    "inventory": "Inventory",
+    "invoicing": "Invoicing",
+    "debts": "Debts",
+    "reports": "Reports",
+    "users": "Users",
+    "roles": "Roles",
+    "settings": "Settings",
+    "otros": "Other",
+    "none": "This role has no permissions assigned."
   }
 }

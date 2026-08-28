@@ -63,6 +63,12 @@ pub fn run() {
             sql: include_str!("../migrations/10_invoice_settings.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 11,
+            description: "create debt settings: credit switch, payment term and per-customer limit",
+            sql: include_str!("../migrations/11_debt_settings.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
         .setup(|_app| {

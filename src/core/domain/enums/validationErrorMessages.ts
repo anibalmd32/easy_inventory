@@ -61,3 +61,8 @@ export enum BUSINESS_VALIDATION_ERROR_MESSAGES {
   phone_too_long = "business.phone_too_long",
   phone_invalid = "business.phone_invalid",
 }
+
+export enum DEBT_VALIDATION_ERROR_MESSAGES {
+  term_invalid = "debt.term_invalid",
+  limit_invalid = "debt.limit_invalid",
+}
