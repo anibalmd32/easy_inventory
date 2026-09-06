@@ -6,14 +6,18 @@ import { MeasurementUnitRepository } from "./repositories/MeasurementUnitReposit
 import { PaymentMethodRepository } from "./repositories/PaymentMethodRepository";
 import { PosSettingRepository } from "./repositories/PosSettingRepository";
 import { ProductCategoryRepository } from "./repositories/ProductCategoryRepository";
+import { ProductRepository } from "./repositories/ProductRepository";
 import { RoleRepository } from "./repositories/RoleRepository";
 import { SecurityQuestionRepository } from "./repositories/SecurityQuestionRepository";
 import { UserRepository } from "./repositories/UserRepository";
+import { BarcodeScannerService } from "./services/sharedServices/BarcodeScannerService";
 import { BiometricService } from "./services/sharedServices/BiometricService";
 import { ErrorHandlerService } from "./services/sharedServices/ErrorHandlerService";
+import { FileDeliveryService } from "./services/sharedServices/FileDeliveryService";
 import { BiometricSettingsService } from "./services/useCasesServices/BiometricSettingsService";
 import { BusinessSettingsService } from "./services/useCasesServices/BusinessSettingsService";
 import { DebtSettingsService } from "./services/useCasesServices/DebtSettingsService";
+import { InventoryService } from "./services/useCasesServices/InventoryService";
 import { InventorySettingsService } from "./services/useCasesServices/InventorySettingsService";
 import { LoginService } from "./services/useCasesServices/LoginService";
 import { PasswordRecoveryService } from "./services/useCasesServices/PasswordRecoveryService";
@@ -30,6 +34,8 @@ export const userRepository = new UserRepository();
 export const securityQuestionRepository = new SecurityQuestionRepository();
 
 export const biometricService = new BiometricService();
+export const barcodeScannerService = new BarcodeScannerService();
+export const fileDeliveryService = new FileDeliveryService();
 
 export const loginService = new LoginService(userRepository);
 export const setupSuperAdminService = new SetupSuperAdminService(
@@ -43,11 +49,18 @@ export const passwordRecoveryService = new PasswordRecoveryService(
 export const biometricSettingsService = new BiometricSettingsService(
   userRepository,
 );
+// Los productos y la configuración del inventario comparten repositorio: al
+// borrar una categoría hay que dejar sin agrupar a los productos que la usan,
+// y una unidad en uso no se puede borrar.
+const productRepository = new ProductRepository();
+
 export const inventorySettingsService = new InventorySettingsService(
   new ProductCategoryRepository(),
   new MeasurementUnitRepository(),
   new InventorySettingRepository(),
+  productRepository,
 );
+export const inventoryService = new InventoryService(productRepository);
 export const businessSettingsService = new BusinessSettingsService(
   new BusinessSettingRepository(),
 );

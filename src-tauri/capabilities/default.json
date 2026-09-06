@@ -3,5 +3,24 @@
 	"identifier": "default",
 	"description": "Capability for the main window",
 	"windows": ["main"],
-	"permissions": ["core:default", "opener:default", "sql:default",  "sql:allow-execute"]
+	"permissions": [
+		"core:default",
+		"opener:default",
+		"sql:default",
+		"sql:allow-execute",
+		"dialog:allow-save",
+		"fs:allow-appcache-write-recursive",
+		"fs:allow-appcache-read-recursive",
+		"fs:allow-write-file",
+		"fs:allow-mkdir",
+		{
+			"identifier": "fs:scope",
+			"allow": [
+				{ "path": "$APPCACHE/**" },
+				{ "path": "$DOWNLOAD/**" },
+				{ "path": "$DOCUMENT/**" },
+				{ "path": "$DESKTOP/**" }
+			]
+		}
+	]
 }

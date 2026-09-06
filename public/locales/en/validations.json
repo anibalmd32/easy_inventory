@@ -56,5 +56,17 @@
   "debt": {
     "term_invalid": "Enter a whole number between 0 and 365",
     "limit_invalid": "Enter an amount of 0 or more"
+  },
+  "product": {
+    "name_too_short": "The name must be at least 2 characters long",
+    "name_too_long": "The name must not exceed 80 characters",
+    "sku_too_long": "The code must not exceed 40 characters",
+    "unit_required": "Pick how the product is measured",
+    "price_invalid": "Enter an amount of 0 or more",
+    "price_too_big": "The amount can't be greater than 9,999,999",
+    "quantity_invalid": "Enter a quantity of 0 or more",
+    "quantity_too_big": "The quantity can't be greater than 9,999,999",
+    "photo_max_size": "The photo must not exceed 10 MB",
+    "photo_invalid_mime_type": "Invalid file type. Allowed: JPEG, PNG"
   }
 }

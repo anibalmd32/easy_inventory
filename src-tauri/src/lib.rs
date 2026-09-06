@@ -69,14 +69,26 @@ pub fn run() {
             sql: include_str!("../migrations/11_debt_settings.sql"),
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 12,
+            description: "create products with category, unit, prices, stock and photo",
+            sql: include_str!("../migrations/12_products.sql"),
+            kind: MigrationKind::Up,
+        },
     ];
     tauri::Builder::default()
         .setup(|_app| {
-            // El plugin biométrico solo existe en móvil; en escritorio ni
-            // siquiera se compila (ver el target en Cargo.toml).
+            // Estos plugins solo existen en móvil; en escritorio ni siquiera
+            // se compilan (ver el target en Cargo.toml).
             #[cfg(mobile)]
-            _app.handle()
-                .plugin(tauri_plugin_biometric::init())?;
+            {
+                _app.handle().plugin(tauri_plugin_biometric::init())?;
+                // Leer el código de barras de un producto con la cámara.
+                _app.handle()
+                    .plugin(tauri_plugin_barcode_scanner::init())?;
+                // Mandar el catálogo en PDF por WhatsApp, Telegram, etc.
+                _app.handle().plugin(tauri_plugin_sharekit::init())?;
+            }
             Ok(())
         })
         .plugin(
@@ -85,6 +97,9 @@ pub fn run() {
                 .build(),
         )
         .plugin(tauri_plugin_opener::init())
+        // Guardar el catálogo en PDF donde el usuario elija.
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -9,6 +9,7 @@ import type { PaymentMethodEntity } from "./entities/PaymentMethodEntity";
 import type { PermissionEntity } from "./entities/PermissionEntity";
 import type { PosSettingEntity } from "./entities/PosSettingEntity";
 import type { ProductCategoryEntity } from "./entities/ProductCategoryEntity";
+import type { ProductEntity } from "./entities/ProductEntity";
 import type { RoleEntity } from "./entities/RoleEntity";
 import type { RolePermissionEntity } from "./entities/RolePermissionEntity";
 import type { SecurityQuestionEntity } from "./entities/SecurityQuestionEntity";
@@ -33,6 +34,7 @@ export interface DatabaseSchema {
   measurement_unit: MeasurementUnitEntity & BaseTable;
   payment_method: PaymentMethodEntity & BaseTable;
   pos_setting: PosSettingEntity & BaseTable;
+  product: ProductEntity & BaseTable;
   product_category: ProductCategoryEntity & BaseTable;
   user: UserEntity & BaseTable;
   permission: PermissionEntity & BaseTable;

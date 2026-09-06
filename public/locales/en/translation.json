@@ -58,6 +58,77 @@
       "greeting": "Hi, {{name}}",
       "subtitle": "What would you like to do today?"
     },
+    "inventory": {
+      "subtitle_one": "{{count}} product",
+      "subtitle_other": "{{count}} products",
+      "noAccess": {
+        "title": "You can't access the inventory",
+        "body": "Ask the business owner to give you permission to see it."
+      },
+      "list": {
+        "add": "New",
+        "emptyTitle": "No products yet",
+        "emptyBody": "Add the first one to keep track of what you have and what you sell it for.",
+        "noResultsTitle": "Nothing found",
+        "noResultsBody": "Try another name, another category, or clear the filters.",
+        "clearFilters": "Clear filters",
+        "lowStock": "Running low",
+        "deleteTitle": "Delete this product?",
+        "deleteDescription": "\"{{name}}\" will leave the inventory. Invoices that already list it stay as they are."
+      },
+      "filters": {
+        "searchLabel": "Search product",
+        "searchPlaceholder": "Search by name or code",
+        "scan": "Scan code",
+        "categoryLabel": "Category",
+        "allCategories": "All categories",
+        "uncategorized": "No category",
+        "onlyLow": "Running low"
+      },
+      "form": {
+        "createTitle": "New product",
+        "editTitle": "Edit product",
+        "nameLabel": "Name",
+        "namePlaceholder": "Corn flour 1 kg",
+        "categoryLabel": "Category",
+        "categoryNone": "No category",
+        "unitLabel": "Measured in",
+        "unitPlaceholder": "Pick a unit",
+        "salePriceLabel": "Selling price ($)",
+        "costPriceLabel": "Your cost ($)",
+        "quantityLabel": "How many you have",
+        "minQuantityLabel": "Warn me when there are",
+        "minQuantityPlaceholder": "Use the general warning",
+        "skuLabel": "Barcode",
+        "skuPlaceholder": "Type it or scan it",
+        "scan": "Scan code",
+        "descriptionLabel": "Description (optional)",
+        "descriptionPlaceholder": "Brand, size, details…",
+        "photoLabel": "Photo (optional)",
+        "photoAdd": "Add photo",
+        "photoChange": "Change photo",
+        "photoRemove": "Remove",
+        "photoHint": "It's resized automatically so it doesn't take up space."
+      },
+      "catalog": {
+        "action": "Catalog",
+        "title": "PDF catalog",
+        "description": "Pick the products you want to send your customers. It uses what you see now, with the filters applied.",
+        "defaultTitle": "Product catalog",
+        "generatedAt": "Prices as of {{date}}",
+        "page": "Page {{current}} of {{total}}",
+        "rateNote": "Rate used: {{symbol}} {{rate}} per dollar",
+        "selectAll": "Select all",
+        "selectNone": "Clear selection",
+        "selectedCount": "{{count}} of {{total}} selected",
+        "share": "Share",
+        "save": "Save",
+        "shareTitle": "Product catalog",
+        "pdfFilter": "PDF document",
+        "success": "Done, your catalog is ready.",
+        "empty": "There are no products to put in the catalog with these filters."
+      }
+    },
     "profile": {
       "title": "My profile",
       "permissions": {
@@ -361,7 +432,8 @@
       "duplicate_unit_abbreviation": "That short form is already used by another unit.",
       "duplicate_payment_method": "You already have a payment method with that name.",
       "not_found": "That no longer exists. Reload the screen.",
-      "invalid_form": "Please check the form fields."
+      "invalid_form": "Please check the form fields.",
+      "unit_in_use": "You can't delete this unit: some products are measured with it."
     },
     "team": {
       "cannot_create_superadmin": "There can only be one owner and one already exists.",
@@ -377,6 +449,15 @@
       "image_failed": "We could not process that image. Try another one.",
       "invalid_form": "Please check the form fields.",
       "not_found": "We could not find your account. Please sign in again."
+    },
+    "inventory": {
+      "duplicate_product": "You already have a product with that name.",
+      "duplicate_sku": "That code is already used by another product.",
+      "not_found": "That product no longer exists. Reload the screen.",
+      "invalid_form": "Check the form fields.",
+      "unit_required": "Pick how the product is measured.",
+      "empty_catalog": "Select at least one product for the catalog.",
+      "catalog_failed": "The catalog couldn't be generated. Try again."
     }
   },
   "buttons": {

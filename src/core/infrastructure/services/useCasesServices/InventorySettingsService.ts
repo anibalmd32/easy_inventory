@@ -15,6 +15,7 @@ import {
 import type { InventorySettingRepository } from "../../repositories/InventorySettingRepository";
 import type { MeasurementUnitRepository } from "../../repositories/MeasurementUnitRepository";
 import type { ProductCategoryRepository } from "../../repositories/ProductCategoryRepository";
+import type { ProductRepository } from "../../repositories/ProductRepository";
 
 /**
  * Configuración del módulo de inventario: categorías, unidades de medida y el
@@ -28,6 +29,7 @@ export class InventorySettingsService {
     private categories: ProductCategoryRepository,
     private units: MeasurementUnitRepository,
     private settings: InventorySettingRepository,
+    private products: ProductRepository,
   ) {}
 
   // --- Categorías ---------------------------------------------------------
@@ -44,8 +46,14 @@ export class InventorySettingsService {
     await this.categories.update(id, this.validCategory(data));
   }
 
-  deleteCategory(id: number): Promise<void> {
-    return this.categories.softDelete(id);
+  /**
+   * Borrar una categoría no borra sus productos: los deja sin agrupar. Si se
+   * quedaran apuntando a la categoría borrada, el filtro ya no podría
+   * encontrarlos y desaparecerían del listado sin explicación.
+   */
+  async deleteCategory(id: number): Promise<void> {
+    await this.categories.softDelete(id);
+    await this.products.clearCategory(id);
   }
 
   // --- Unidades de medida -------------------------------------------------
@@ -62,8 +70,17 @@ export class InventorySettingsService {
     await this.units.update(id, this.validUnit(data));
   }
 
-  deleteUnit(id: number): Promise<void> {
-    return this.units.softDelete(id);
+  /**
+   * Una unidad en uso no se borra. A diferencia de la categoría, la unidad no
+   * se puede dejar vacía: "3" sin unidad no significa nada, así que primero
+   * hay que cambiarle la unidad a esos productos.
+   */
+  async deleteUnit(id: number): Promise<void> {
+    if (await this.products.isUnitInUse(id)) {
+      throw new CatalogError(CATALOG_ERROR_MESSAGES.unit_in_use);
+    }
+
+    await this.units.softDelete(id);
   }
 
   // --- Aviso de poca cantidad ---------------------------------------------

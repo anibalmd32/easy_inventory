@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Rutas que el FileProvider puede entregar a otras apps.
+
+  El plugin de compartir (sharekit) declara un provider con esta misma
+  autoridad, y en un choque así el recurso de la app gana sobre el de la
+  librería: por eso las rutas que necesita el catálogo en PDF tienen que estar
+  declaradas aquí. El PDF se escribe en la caché de la app antes de pasarlo a
+  la hoja de compartir.
+-->
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
   <external-path name="my_images" path="." />
   <cache-path name="my_cache_images" path="." />
+  <external-cache-path name="external_cache" path="." />
+  <files-path name="app_files" path="." />
+  <external-files-path name="external_files" path="." />
 </paths>

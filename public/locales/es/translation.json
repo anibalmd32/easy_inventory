@@ -58,6 +58,77 @@
       "greeting": "Hola, {{name}}",
       "subtitle": "¿Qué quieres hacer hoy?"
     },
+    "inventory": {
+      "subtitle_one": "{{count}} producto registrado",
+      "subtitle_other": "{{count}} productos registrados",
+      "noAccess": {
+        "title": "No tienes acceso al inventario",
+        "body": "Pídele al dueño del negocio que te dé permiso para verlo."
+      },
+      "list": {
+        "add": "Nuevo",
+        "emptyTitle": "Todavía no tienes productos",
+        "emptyBody": "Registra el primero para llevar la cuenta de lo que tienes y de a cuánto lo vendes.",
+        "noResultsTitle": "No encontramos nada",
+        "noResultsBody": "Prueba con otro nombre, otra categoría o quita los filtros.",
+        "clearFilters": "Quitar filtros",
+        "lowStock": "Se está acabando",
+        "deleteTitle": "¿Eliminar este producto?",
+        "deleteDescription": "\"{{name}}\" saldrá del inventario. Las facturas donde ya aparece no se tocan."
+      },
+      "filters": {
+        "searchLabel": "Buscar producto",
+        "searchPlaceholder": "Busca por nombre o código",
+        "scan": "Escanear código",
+        "categoryLabel": "Categoría",
+        "allCategories": "Todas las categorías",
+        "uncategorized": "Sin categoría",
+        "onlyLow": "Queda poco"
+      },
+      "form": {
+        "createTitle": "Nuevo producto",
+        "editTitle": "Editar producto",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Harina de maíz 1 kg",
+        "categoryLabel": "Categoría",
+        "categoryNone": "Sin categoría",
+        "unitLabel": "Se mide en",
+        "unitPlaceholder": "Elige una unidad",
+        "salePriceLabel": "Precio de venta ($)",
+        "costPriceLabel": "Te cuesta ($)",
+        "quantityLabel": "Cantidad que tienes",
+        "minQuantityLabel": "Avisar cuando queden",
+        "minQuantityPlaceholder": "El aviso general",
+        "skuLabel": "Código de barras",
+        "skuPlaceholder": "Escríbelo o escanéalo",
+        "scan": "Escanear código",
+        "descriptionLabel": "Descripción (opcional)",
+        "descriptionPlaceholder": "Marca, presentación, detalles…",
+        "photoLabel": "Foto (opcional)",
+        "photoAdd": "Agregar foto",
+        "photoChange": "Cambiar foto",
+        "photoRemove": "Quitar",
+        "photoHint": "Se reduce sola para no ocupar espacio de más."
+      },
+      "catalog": {
+        "action": "Catálogo",
+        "title": "Catálogo en PDF",
+        "description": "Marca los productos que quieres mandarle a tus clientes. Van los que ves ahora, con los filtros aplicados.",
+        "defaultTitle": "Catálogo de productos",
+        "generatedAt": "Precios al {{date}}",
+        "page": "Página {{current}} de {{total}}",
+        "rateNote": "Tasa usada: {{symbol}} {{rate}} por dólar",
+        "selectAll": "Marcar todos",
+        "selectNone": "Desmarcar todos",
+        "selectedCount": "{{count}} de {{total}} marcados",
+        "share": "Compartir",
+        "save": "Guardar",
+        "shareTitle": "Catálogo de productos",
+        "pdfFilter": "Documento PDF",
+        "success": "Listo, tu catálogo ya está generado.",
+        "empty": "No hay productos que llevar al catálogo con estos filtros."
+      }
+    },
     "profile": {
       "title": "Mi perfil",
       "permissions": {
@@ -361,7 +432,8 @@
       "duplicate_unit_abbreviation": "Ya usas esa abreviatura en otra unidad.",
       "duplicate_payment_method": "Ya tienes un método de pago con ese nombre.",
       "not_found": "Eso ya no existe. Vuelve a cargar la pantalla.",
-      "invalid_form": "Revisa los datos del formulario."
+      "invalid_form": "Revisa los datos del formulario.",
+      "unit_in_use": "No puedes borrar esta unidad: hay productos que se miden con ella."
     },
     "team": {
       "cannot_create_superadmin": "Solo puede haber un dueño y ya existe.",
@@ -377,6 +449,15 @@
       "image_failed": "No se pudo procesar la imagen. Prueba con otra.",
       "invalid_form": "Revisa los datos del formulario.",
       "not_found": "No se encontró tu cuenta. Vuelve a iniciar sesión."
+    },
+    "inventory": {
+      "duplicate_product": "Ya tienes un producto con ese nombre.",
+      "duplicate_sku": "Ya usas ese código en otro producto.",
+      "not_found": "Ese producto ya no existe. Vuelve a cargar la pantalla.",
+      "invalid_form": "Revisa los datos del formulario.",
+      "unit_required": "Elige en qué se mide el producto.",
+      "empty_catalog": "Marca al menos un producto para armar el catálogo.",
+      "catalog_failed": "No se pudo generar el catálogo. Vuelve a intentarlo."
     }
   },
   "buttons": {
