@@ -349,6 +349,127 @@
           "readOnly": "Los roles vienen definidos por la app y de momento no se pueden editar."
         }
       }
+    },
+    "invoicing": {
+      "subtitle": "Cobra rápido y lleva la cuenta del día.",
+      "noAccess": {
+        "title": "No tienes acceso a las ventas",
+        "body": "Pídele al dueño del negocio que te dé permiso para entrar."
+      },
+      "tabs": {
+        "sell": "Vender",
+        "today": "Hoy"
+      },
+      "cart": {
+        "searchLabel": "Buscar producto",
+        "searchPlaceholder": "Busca por nombre o código",
+        "scan": "Escanear código",
+        "add": "Agregar {{name}}",
+        "noResults": "No encontramos nada con eso.",
+        "noProducts": "Todavía no tienes productos para vender.",
+        "unknownCode": "Ese código no está en tu inventario.",
+        "empty": "Agrega lo que se lleva el cliente y aquí te sale la cuenta.",
+        "cannotSell": "No tienes permiso para cobrar. Puedes mirar las ventas del día.",
+        "quantity": "Cantidad",
+        "more": "Uno más",
+        "less": "Uno menos",
+        "remove": "Quitar",
+        "clear": "Vaciar",
+        "notEnough": "Solo te quedan {{available}} {{unit}}",
+        "shortWarning_one": "Hay 1 producto del que no te queda suficiente.",
+        "shortWarning_other": "Hay {{count}} productos de los que no te queda suficiente.",
+        "subtotal": "Suma",
+        "total": "Total",
+        "checkout": "Cobrar"
+      },
+      "checkout": {
+        "title": "Cobrar",
+        "toPay": "A pagar",
+        "noRate": "No tienes puesta la tasa del día, así que solo puedes cobrar en dólares.",
+        "methodLabel": "Forma de pago",
+        "amountLabel": "Cuánto entrega",
+        "referenceLabel": "Referencia",
+        "referencePlaceholder": "Referencia del pago (opcional)",
+        "addPayment": "Agregar otra forma de pago",
+        "removePayment": "Quitar esta forma de pago",
+        "received": "Recibido",
+        "change": "Vuelto",
+        "missing": "Falta",
+        "owed": "Queda debiendo",
+        "credit": "Se lo lleva fiado",
+        "creditNeedsCustomer": "Para fiar tienes que decir a quién.",
+        "confirm": "Confirmar cobro",
+        "confirmCredit": "Fiar y entregar"
+      },
+      "customers": {
+        "pickTitle": "¿A quién le vendes?",
+        "pickDescription": "La mayoría de las ventas no necesitan cliente.",
+        "searchLabel": "Buscar cliente",
+        "searchPlaceholder": "Nombre, cédula o teléfono",
+        "anonymous": "Sin cliente",
+        "choose": "Elegir",
+        "owes": "Debe",
+        "empty": "No encontramos a nadie con esos datos.",
+        "create": "Registrar cliente nuevo",
+        "createTitle": "Cliente nuevo",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "María Rodríguez",
+        "documentLabel": "Cédula o RIF",
+        "documentPlaceholder": "V-12345678 (opcional)",
+        "phoneLabel": "Teléfono",
+        "phonePlaceholder": "0412-1234567 (opcional)",
+        "notesLabel": "Nota",
+        "notesPlaceholder": "El del taller de la esquina (opcional)"
+      },
+      "list": {
+        "empty": "Todavía no has vendido nada hoy.",
+        "voided": "Anulada",
+        "credit": "Fiada",
+        "itemCount_one": "{{count}} cosa",
+        "itemCount_other": "{{count}} cosas",
+        "open": "Ver la venta {{number}}"
+      },
+      "cashUp": {
+        "title": "Cuánto llevas hoy",
+        "everyone": "Todos",
+        "mine": "Lo mío",
+        "sold_one": "{{count}} venta",
+        "sold_other": "{{count}} ventas",
+        "nothing": "Todavía no has cobrado nada.",
+        "change": "Vuelto entregado",
+        "credit": "Fiado sin cobrar",
+        "voided": "Ventas anuladas"
+      },
+      "receipt": {
+        "title": "Detalle de la venta",
+        "doneTitle": "¡Venta lista!",
+        "doneBody": "Ya descontamos la mercancía de tu inventario.",
+        "defaultTitle": "Recibo",
+        "voided": "*** ANULADA ***",
+        "dateTime": "Fecha",
+        "soldBy": "Atendió",
+        "customer": "Cliente",
+        "subtotal": "Suma",
+        "total": "TOTAL",
+        "paidWith": "Pagó con",
+        "change": "Vuelto",
+        "owed": "Queda debiendo",
+        "dueDate": "Paga antes del",
+        "rateNote": "Tasa usada: {{symbol}} {{rate}} por dólar",
+        "paperWidth": "Ancho del papel",
+        "share": "Enviar",
+        "save": "Guardar",
+        "shared": "Listo, ya lo enviamos.",
+        "shareTitle": "Recibo de compra",
+        "pdfFilter": "Documento PDF",
+        "newSale": "Empezar otra venta"
+      },
+      "void": {
+        "action": "Anular esta venta",
+        "title": "¿Anular esta venta?",
+        "description": "La venta {{number}} quedará marcada como anulada y la mercancía vuelve a tu inventario. El número no se reutiliza.",
+        "confirm": "Sí, anular"
+      }
     }
   },
   "inputs": {
@@ -458,6 +579,22 @@
       "unit_required": "Elige en qué se mide el producto.",
       "empty_catalog": "Marca al menos un producto para armar el catálogo.",
       "catalog_failed": "No se pudo generar el catálogo. Vuelve a intentarlo."
+    },
+    "sales": {
+      "empty_cart": "No has agregado nada todavía.",
+      "invalid_sale": "Revisa la venta: hay algo que no cuadra.",
+      "insufficient_payment": "Lo que entregó no alcanza para el total.",
+      "rate_required": "Para cobrar en bolívares tienes que poner la tasa del día.",
+      "credit_disabled": "Tu negocio tiene el fiado apagado en la configuración.",
+      "credit_customer_required": "Para fiar tienes que decir a quién.",
+      "debt_limit_reached": "Este cliente ya llegó al máximo que puede deber.",
+      "invoice_number_taken": "Ese número de factura ya está usado. Revísalo en la configuración.",
+      "sale_not_found": "No encontramos esa venta.",
+      "already_voided": "Esa venta ya estaba anulada.",
+      "receipt_failed": "No pudimos armar el recibo.",
+      "customer_not_found": "No encontramos ese cliente.",
+      "duplicate_customer_document": "Ya tienes un cliente con esa cédula.",
+      "invalid_customer": "Revisa los datos del cliente."
     }
   },
   "buttons": {

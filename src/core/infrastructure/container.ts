@@ -1,4 +1,5 @@
 import { BusinessSettingRepository } from "./repositories/BusinessSettingRepository";
+import { CustomerRepository } from "./repositories/CustomerRepository";
 import { DebtSettingRepository } from "./repositories/DebtSettingRepository";
 import { ExchangeRateRepository } from "./repositories/ExchangeRateRepository";
 import { InventorySettingRepository } from "./repositories/InventorySettingRepository";
@@ -8,6 +9,7 @@ import { PosSettingRepository } from "./repositories/PosSettingRepository";
 import { ProductCategoryRepository } from "./repositories/ProductCategoryRepository";
 import { ProductRepository } from "./repositories/ProductRepository";
 import { RoleRepository } from "./repositories/RoleRepository";
+import { SaleRepository } from "./repositories/SaleRepository";
 import { SecurityQuestionRepository } from "./repositories/SecurityQuestionRepository";
 import { UserRepository } from "./repositories/UserRepository";
 import { BarcodeScannerService } from "./services/sharedServices/BarcodeScannerService";
@@ -21,6 +23,7 @@ import { InventoryService } from "./services/useCasesServices/InventoryService";
 import { InventorySettingsService } from "./services/useCasesServices/InventorySettingsService";
 import { LoginService } from "./services/useCasesServices/LoginService";
 import { PasswordRecoveryService } from "./services/useCasesServices/PasswordRecoveryService";
+import { PointOfSaleService } from "./services/useCasesServices/PointOfSaleService";
 import { PosSettingsService } from "./services/useCasesServices/PosSettingsService";
 import { ProfileService } from "./services/useCasesServices/ProfileService";
 import { SetupSuperAdminService } from "./services/useCasesServices/SetupSuperAdminService";
@@ -69,8 +72,18 @@ export const posSettingsService = new PosSettingsService(
   new ExchangeRateRepository(),
   new PosSettingRepository(),
 );
+// El punto de venta necesita la tasa vigente y la configuración de fiado, que
+// ya tienen repositorio propio: se reutilizan en vez de duplicarlos.
+const debtSettingRepository = new DebtSettingRepository();
+
+export const pointOfSaleService = new PointOfSaleService(
+  new SaleRepository(),
+  new CustomerRepository(),
+  new ExchangeRateRepository(),
+  debtSettingRepository,
+);
 export const debtSettingsService = new DebtSettingsService(
-  new DebtSettingRepository(),
+  debtSettingRepository,
 );
 export const teamService = new TeamService(
   userRepository,

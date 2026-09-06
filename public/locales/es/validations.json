@@ -68,5 +68,23 @@
     "quantity_too_big": "La cantidad no puede ser mayor que 9.999.999",
     "photo_max_size": "La foto no debe exceder de 10 MB",
     "photo_invalid_mime_type": "Tipo de archivo no válido. Se permiten: JPEG, PNG"
+  },
+  "customer": {
+    "name_too_short": "El nombre necesita al menos 2 letras",
+    "name_too_long": "El nombre es demasiado largo",
+    "document_too_long": "La cédula es demasiado larga",
+    "phone_too_long": "El teléfono es demasiado largo",
+    "phone_invalid": "Ese teléfono no parece correcto",
+    "notes_too_long": "La nota es demasiado larga"
+  },
+  "sale": {
+    "quantity_invalid": "Escribe una cantidad mayor que cero",
+    "quantity_too_big": "Esa cantidad es demasiado grande",
+    "amount_invalid": "Escribe un monto mayor que cero",
+    "amount_too_big": "Ese monto es demasiado grande",
+    "method_required": "Elige una forma de pago",
+    "reference_too_long": "La referencia es demasiado larga",
+    "items_required": "Agrega al menos un producto",
+    "reason_too_long": "El motivo es demasiado largo"
   }
 }

@@ -16,6 +16,20 @@ import { violatesUniqueConstraint } from "./violatesUniqueConstraint";
 const NAME_COLUMN = "product.name";
 const SKU_COLUMN = "product.sku";
 
+/**
+ * Cómo se ve un producto en el buscador del punto de venta: lo justo para
+ * armar una línea del carrito. Sin foto, que es lo que pesa.
+ */
+export type ProductSaleRecord = {
+  id: number;
+  name: string;
+  sku: string | null;
+  sale_price: number;
+  cost_price: number;
+  quantity: number;
+  unit_abbreviation: string;
+};
+
 /** Cómo se ve un producto en la lista de selección del catálogo. */
 export type ProductOptionRecord = {
   id: number;
@@ -161,6 +175,68 @@ export class ProductRepository {
       .where((eb) => eb.and(buildConditions(filters)))
       .orderBy("product.name", "asc")
       .execute();
+  }
+
+  /**
+   * Los productos que puede vender el cajero, buscando por nombre o por
+   * código.
+   *
+   * Se limita en SQL porque el buscador consulta en cada tecla y en el
+   * mostrador solo caben unos pocos resultados en pantalla. La foto no entra:
+   * traerla en cada pulsación sería cargar megas de imágenes para nada.
+   */
+  async findForSale(
+    search: string,
+    limit: number,
+  ): Promise<ProductSaleRecord[]> {
+    const trimmed = search.trim();
+    const pattern = `%${trimmed}%`;
+
+    let query = db
+      .selectFrom("product")
+      .leftJoin(
+        "measurement_unit",
+        "measurement_unit.id",
+        "product.measurement_unit_id",
+      )
+      .select([
+        "product.id",
+        "product.name",
+        "product.sku",
+        "product.sale_price",
+        "product.cost_price",
+        "product.quantity",
+        sql<string>`ifnull(measurement_unit.abbreviation, '')`.as(
+          "unit_abbreviation",
+        ),
+      ])
+      .where("product.deleted_at", "is", null);
+
+    if (trimmed.length > 0) {
+      // El código entra en la búsqueda para poder pegar lo que da el escáner.
+      query = query.where((eb) =>
+        eb.and([
+          sql<SqlBool>`(product.name like ${pattern} or ifnull(product.sku, '') like ${pattern})`,
+        ]),
+      );
+    }
+
+    return query.orderBy("product.name", "asc").limit(limit).execute();
+  }
+
+  /**
+   * El producto cuyo código de barras se acaba de escanear. Coincidencia
+   * exacta: el escáner no se equivoca de dígito, y buscar "parecidos" haría
+   * que se cobrara otra cosa.
+   */
+  async findBySku(sku: string): Promise<ProductSaleRecord | null> {
+    const rows = await this.findForSale(sku, 20);
+
+    return (
+      rows.find(
+        (row) => (row.sku ?? "").toLowerCase() === sku.trim().toLowerCase(),
+      ) ?? null
+    );
   }
 
   /** Los productos elegidos para el catálogo, ya con su foto. */

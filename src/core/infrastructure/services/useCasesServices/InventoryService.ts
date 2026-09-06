@@ -13,6 +13,7 @@ import {
 import type {
   ProductOptionRecord,
   ProductRepository,
+  ProductSaleRecord,
 } from "../../repositories/ProductRepository";
 
 /**
@@ -34,6 +35,20 @@ export class InventoryService {
     filters: Pick<ProductFilters, "search" | "categoryId" | "onlyLow">,
   ): Promise<ProductOptionRecord[]> {
     return this.products.findOptions(filters);
+  }
+
+  /**
+   * Lo que el cajero puede añadir al carrito, buscando por nombre o por
+   * código. Vive aquí y no en el punto de venta para no repartir el SQL de los
+   * productos entre dos módulos.
+   */
+  searchForSale(search: string, limit: number): Promise<ProductSaleRecord[]> {
+    return this.products.findForSale(search, limit);
+  }
+
+  /** El producto de un código de barras recién escaneado, o `null`. */
+  findByCode(code: string): Promise<ProductSaleRecord | null> {
+    return this.products.findBySku(code);
   }
 
   /** Los productos elegidos, ya con su foto, listos para el PDF. */

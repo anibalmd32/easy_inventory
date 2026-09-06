@@ -1,6 +1,7 @@
 import * as v from "valibot";
 import { PRODUCT_VALIDATION_ERROR_MESSAGES } from "../../domain/enums/validationErrorMessages";
 import { MIME_TYPES } from "../../domain/helpers/mimeTypes";
+import { toAmount } from "./toAmount";
 
 /** Nombre del producto tal como lo canta el dueño: "Harina PAN 1 kg". */
 export const ProductNameSchema = v.pipe(
@@ -21,23 +22,6 @@ export const OptionalSkuSchema = v.pipe(
   v.maxLength(40, PRODUCT_VALIDATION_ERROR_MESSAGES.sku_too_long),
   v.transform((value) => (value.length === 0 ? null : value)),
 );
-
-/**
- * Convierte lo que escribe el usuario a número.
- *
- * En español la coma es el separador decimal y el punto el de los miles, así
- * que "1.250,75" tiene que llegar como 1250.75. Si no hay coma se deja el
- * punto tal cual: quien escribe "1.5" quiere uno con medio, no mil quinientos.
- */
-const toAmount = (value: string): number => {
-  const cleaned = value.replace(/\s/g, "");
-
-  return Number(
-    cleaned.includes(",")
-      ? cleaned.replace(/\./g, "").replace(",", ".")
-      : cleaned,
-  );
-};
 
 /**
  * Un importe en dólares. Admite vacío como 0: un producto puede registrarse

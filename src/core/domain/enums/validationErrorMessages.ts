@@ -67,6 +67,26 @@ export enum DEBT_VALIDATION_ERROR_MESSAGES {
   limit_invalid = "debt.limit_invalid",
 }
 
+export enum CUSTOMER_VALIDATION_ERROR_MESSAGES {
+  name_too_short = "customer.name_too_short",
+  name_too_long = "customer.name_too_long",
+  document_too_long = "customer.document_too_long",
+  phone_too_long = "customer.phone_too_long",
+  phone_invalid = "customer.phone_invalid",
+  notes_too_long = "customer.notes_too_long",
+}
+
+export enum SALE_VALIDATION_ERROR_MESSAGES {
+  quantity_invalid = "sale.quantity_invalid",
+  quantity_too_big = "sale.quantity_too_big",
+  amount_invalid = "sale.amount_invalid",
+  amount_too_big = "sale.amount_too_big",
+  method_required = "sale.method_required",
+  reference_too_long = "sale.reference_too_long",
+  items_required = "sale.items_required",
+  reason_too_long = "sale.reason_too_long",
+}
+
 export enum PRODUCT_VALIDATION_ERROR_MESSAGES {
   name_too_short = "product.name_too_short",
   name_too_long = "product.name_too_long",

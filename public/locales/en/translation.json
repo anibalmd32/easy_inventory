@@ -349,6 +349,127 @@
           "readOnly": "Roles are defined by the app and cannot be edited for now."
         }
       }
+    },
+    "invoicing": {
+      "subtitle": "Ring up sales fast and keep track of the day.",
+      "noAccess": {
+        "title": "You can't open sales",
+        "body": "Ask the business owner to give you permission."
+      },
+      "tabs": {
+        "sell": "Sell",
+        "today": "Today"
+      },
+      "cart": {
+        "searchLabel": "Search product",
+        "searchPlaceholder": "Search by name or code",
+        "scan": "Scan code",
+        "add": "Add {{name}}",
+        "noResults": "We didn't find anything for that.",
+        "noProducts": "You don't have any products to sell yet.",
+        "unknownCode": "That code isn't in your inventory.",
+        "empty": "Add what the customer is taking and the total shows up here.",
+        "cannotSell": "You can't take payments. You can still look at today's sales.",
+        "quantity": "Quantity",
+        "more": "One more",
+        "less": "One less",
+        "remove": "Remove",
+        "clear": "Empty",
+        "notEnough": "You only have {{available}} {{unit}} left",
+        "shortWarning_one": "There's 1 product you don't have enough of.",
+        "shortWarning_other": "There are {{count}} products you don't have enough of.",
+        "subtotal": "Sum",
+        "total": "Total",
+        "checkout": "Take payment"
+      },
+      "checkout": {
+        "title": "Take payment",
+        "toPay": "To pay",
+        "noRate": "You haven't set today's rate, so you can only charge in dollars.",
+        "methodLabel": "Payment method",
+        "amountLabel": "Amount handed over",
+        "referenceLabel": "Reference",
+        "referencePlaceholder": "Payment reference (optional)",
+        "addPayment": "Add another payment method",
+        "removePayment": "Remove this payment method",
+        "received": "Received",
+        "change": "Change",
+        "missing": "Missing",
+        "owed": "Still owes",
+        "credit": "Taking it on credit",
+        "creditNeedsCustomer": "To give credit you have to say who to.",
+        "confirm": "Confirm payment",
+        "confirmCredit": "Give credit and hand over"
+      },
+      "customers": {
+        "pickTitle": "Who are you selling to?",
+        "pickDescription": "Most sales don't need a customer.",
+        "searchLabel": "Search customer",
+        "searchPlaceholder": "Name, ID or phone",
+        "anonymous": "No customer",
+        "choose": "Choose",
+        "owes": "Owes",
+        "empty": "We didn't find anyone with those details.",
+        "create": "Add a new customer",
+        "createTitle": "New customer",
+        "nameLabel": "Name",
+        "namePlaceholder": "Maria Rodriguez",
+        "documentLabel": "ID or tax number",
+        "documentPlaceholder": "V-12345678 (optional)",
+        "phoneLabel": "Phone",
+        "phonePlaceholder": "0412-1234567 (optional)",
+        "notesLabel": "Note",
+        "notesPlaceholder": "The one from the workshop on the corner (optional)"
+      },
+      "list": {
+        "empty": "You haven't sold anything today yet.",
+        "voided": "Voided",
+        "credit": "On credit",
+        "itemCount_one": "{{count}} thing",
+        "itemCount_other": "{{count}} things",
+        "open": "Open sale {{number}}"
+      },
+      "cashUp": {
+        "title": "What you've taken today",
+        "everyone": "Everyone",
+        "mine": "Mine",
+        "sold_one": "{{count}} sale",
+        "sold_other": "{{count}} sales",
+        "nothing": "You haven't taken any payment yet.",
+        "change": "Change given",
+        "credit": "Credit not collected",
+        "voided": "Voided sales"
+      },
+      "receipt": {
+        "title": "Sale details",
+        "doneTitle": "Sale done!",
+        "doneBody": "We already took the goods off your inventory.",
+        "defaultTitle": "Receipt",
+        "voided": "*** VOIDED ***",
+        "dateTime": "Date",
+        "soldBy": "Served by",
+        "customer": "Customer",
+        "subtotal": "Sum",
+        "total": "TOTAL",
+        "paidWith": "Paid with",
+        "change": "Change",
+        "owed": "Still owes",
+        "dueDate": "Pay before",
+        "rateNote": "Rate used: {{symbol}} {{rate}} per dollar",
+        "paperWidth": "Paper width",
+        "share": "Send",
+        "save": "Save",
+        "shared": "Done, we sent it.",
+        "shareTitle": "Purchase receipt",
+        "pdfFilter": "PDF document",
+        "newSale": "Start another sale"
+      },
+      "void": {
+        "action": "Void this sale",
+        "title": "Void this sale?",
+        "description": "Sale {{number}} will be marked as voided and the goods go back to your inventory. The number is not reused.",
+        "confirm": "Yes, void it"
+      }
     }
   },
   "inputs": {
@@ -458,6 +579,22 @@
       "unit_required": "Pick how the product is measured.",
       "empty_catalog": "Select at least one product for the catalog.",
       "catalog_failed": "The catalog couldn't be generated. Try again."
+    },
+    "sales": {
+      "empty_cart": "You haven't added anything yet.",
+      "invalid_sale": "Check the sale: something doesn't add up.",
+      "insufficient_payment": "What they handed over doesn't cover the total.",
+      "rate_required": "To charge in bolivares you have to set today's rate.",
+      "credit_disabled": "Your business has credit turned off in settings.",
+      "credit_customer_required": "To give credit you have to say who to.",
+      "debt_limit_reached": "This customer already owes as much as you allow.",
+      "invoice_number_taken": "That invoice number is already used. Check it in settings.",
+      "sale_not_found": "We couldn't find that sale.",
+      "already_voided": "That sale was already voided.",
+      "receipt_failed": "We couldn't build the receipt.",
+      "customer_not_found": "We couldn't find that customer.",
+      "duplicate_customer_document": "You already have a customer with that ID.",
+      "invalid_customer": "Check the customer's details."
     }
   },
   "buttons": {
